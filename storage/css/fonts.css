@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'Agfa_Rotis_Sans_Serif_ExBd';
+    src: local('AgfaRotisSansSerifExtraBold'),
+        url('AgfaRotisSansSerifExtraBold.woff2') format('woff2'),
+        url('AgfaRotisSansSerifExtraBold.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Agfa_Rotis_Sans_Serif_Bold';
+    src:url('https://certificados.test/fonts/AgfaRotisSansSerif-Bold.woff2') format('woff2'),
+        url('https://certificados.test/fonts/AgfaRotisSansSerif-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Agfa_Rotis_Sans_Serif';
+    src: local('/fontsAgfaRotisSansSerif'),
+        url('AgfaRotisSansSerif.woff2') format('woff2'),
+        url('AgfaRotisSansSerif.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}

@@ -1,0 +1,14 @@
+sudo docker run -p 8090:80 --name melab \
+-e ROOTSERVER=/var/www/html \
+-e SERVERURL="Aqui ip del servidor local":8090 \
+-e SERVERPROTOCOLO="http:// o https" \
+-e DBHOST="ip del servidor de base de datos" \
+-e DBNAME="Nombre de la base de datos" \
+-e DBUSER="Usuario de la base de datos" \
+-e DBPASS="Contraseña de la base de datos" \
+-e EMAILSERVERTYPE=smtp \
+-e EMAILSERVERNAME=smtp.office365.com \
+-e EMAILSERVERPORT=587 \
+-e EMAILUSER="correo uniandes" \
+-e EMAILPASSWORD="Contraseña correo" \
+docker.pkg.github.com/uniandesdsit/docker-sw--melab/melab:1.0.3
