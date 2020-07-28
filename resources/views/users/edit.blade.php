@@ -116,17 +116,6 @@
                 <hr />
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="row">
-                      <label class="col-md-3 col-form-label">{{ __('Profesión') }}</label>
-                      <div class="col-md-9">
-                        <div class="form-group{{ $errors->has('profesion') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('profesion') ? ' is-invalid' : '' }}" name="profesion" id="input-profesion" type="text" placeholder="{{ __('Profesión') }}" value="{{ old('profesion', $user->profesion) }}" aria-required="true"/>
-                          @if ($errors->has('profesion'))
-                            <span id="profesion-error" class="error text-danger" for="input-profesion">{{ $errors->first('profesion') }}</span>
-                          @endif
-                        </div>
-                      </div>
-                    </div>
                   </div>
                   <div class="col-md-6">
                     <div class="row">

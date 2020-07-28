@@ -26,7 +26,7 @@
                 <div class="row">
                   <div class="col-12 text-right">
                     <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar usuario') }}</a>
-                    <a href="{{ route('user.create') }}" class="btn btn-sm btn-secondary">{{ __('Cargar usuarios') }}</a>
+                    <a href="{{ route('user.masivo') }}" class="btn btn-sm btn-success">{{ __('Cargar usuarios') }}</a>
                   </div>
                   <div class="col-12 text-right">
                     
@@ -42,7 +42,22 @@
                         {{ __('Email') }}
                       </th>
                       <th>
-                        {{ __('Documento de Identidad') }}
+                          {{ __('Documento') }}
+                      </th>
+                      <th>
+                          {{ __('Cargo') }}
+                      </th>
+                      <th>
+                          {{ __('Tipo de Contrato') }}
+                      </th>
+                      <th>
+                          {{ __('Unidad/Facultad') }}
+                      </th>
+                      <th>
+                          {{ __('Celular') }}
+                      </th>
+                      <th>
+                          {{ __('Dirección') }}
                       </th>
                       <th class="text-right">
                         {{ __('Acciones') }}
@@ -55,10 +70,25 @@
                             {{ $user->name }} {{ $user->name2 }} {{ $user->apellido }} {{ $user->apellido2 }}
                           </td>
                           <td>
-                            {{ $user->email }}
+                          {{ $user->email }}
                           </td>
                           <td>
-                            {{ $user->tipo_doc }} {{ $user->documento }}
+                          {{ $user->documento }}
+                          </td>
+                          <td>
+                          {{ $user->cargo }}
+                          </td>
+                          <td>
+                          {{ $user->tipo_contrato }}
+                          </td>
+                          <td>
+                            To.do
+                          </td>
+                          <td>
+                          {{ $user->celular }}
+                          </td>
+                          <td>
+                          {{ $user->direccion }}{{ $user->direccion2 }}
                           </td>
                           <td class="td-actions text-right">
 

@@ -13,70 +13,70 @@ class CaracterizacionTableSeeder extends Seeder
      */
     public function run()
     {
+
         DB::table('caracterizacion')->insert([
-            'pegunta1' => '1',
-            'unidad_id' => '1',
-            'name' => 'Leandro',
-            'email' => 'le.moreno910@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('h}-ezWGst*57q+r!'),
-            'created_at' => now(),
-            'updated_at' => now()
+            'pregunta1'=> 'si',
+            'pregunta2'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+            'horaEntrada'=> '8:00 AM',
+            'horaSalida'=> '12:00 PM',
+            'pregunta3'=> 'Sabado',
+            'pregunta4'=> 'No',
+            'viabilidad'=> 'Consultar con jefatura servicio médico y SST',
+            'revision1'=> ' Servicio Médico y Seguridad y Salud en el trabajo',
+            'revision2'=> 'Revisión ',
+            'observacion'=> '',
+            'notas'=> '',
+            'envio'=> '',
+            'user_id' => '3' 
         ]);
 
         DB::table('caracterizacion')->insert([
-            'pegunta1' => '1',
-            'unidad_id' => '1',
-            'name' => 'Laura',
-            'name2' => 'Camila',
-            'apellido' => 'Reyes',
-            'apellido2' => 'Garcia',
-            'email' => 'lc.reyes@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('h}-ezWGst*57q+r!'),
-            'created_at' => now(),
-            'updated_at' => now()
+            'pregunta1'=> 'si',
+            'pregunta2'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+            'horaEntrada'=> '12:00 PM',
+            'horaSalida'=> '4:00 PM',
+            'pregunta3'=> 'Sabado',
+            'pregunta4'=> 'No',
+            'viabilidad'=> 'Viable trabajo presencial',
+            'revision1'=> ' Servicio Médico y Seguridad y Salud en el trabajo',
+            'revision2'=> 'Revisión ',
+            'observacion'=> '',
+            'notas'=> '',
+            'envio'=> '',
+            'user_id' => '4'
         ]);
 
-        DB::table('caracterizacion')->insert([
-            'pegunta1' => '1',
-            'unidad_id' => '1',
-            'name' => 'Paula',
-            'name2' => 'Alejandra',
-            'apellido' => 'Gonzalez',
-            'apellido2' => 'Montoya',
-            'email' => 'p.gonzalezm@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('h}-ezWGst*57q+r!'),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('caracterizacion')->insert([
-            'pegunta1' => '1',
-            'unidad_id' => '1',
-            'name' => 'Andres',
-            'name2' => '',
-            'apellido' => 'Gonzalez',
-            'apellido2' => 'Bernal',
-            'email' => 'ca.gonzalezb1@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('h}-ezWGst*57q+r!'),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
 
         DB::table('caracterizacion')->insert([
-            'pegunta1' => '1',
-            'unidad_id' => '1',
-            'name' => 'Paola',
-            'name2' => 'Alejandra',
-            'apellido' => 'Estrella',
-            'apellido2' => 'Bolaños',
-            'email' => 'p-estrel@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('h}-ezWGst*57q+r!'),
-            'created_at' => now(),
-            'updated_at' => now()
+            'pregunta1'=> 'si',
+            'pregunta2'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+            'horaEntrada'=> '12:00 PM',
+            'horaSalida'=> '4:00 PM',
+            'pregunta3'=> 'Sabado',
+            'pregunta4'=> 'No',
+            'viabilidad'=> 'Trabajo en casa y consultar a ',
+            'revision1'=> ' Servicio Médico y Seguridad y Salud en el trabajo',
+            'revision2'=> 'Revisión ',
+            'observacion'=> '',
+            'notas'=> '',
+            'envio'=> '',
+            'user_id' => '5'  
+       ]);
+
+       DB::table('caracterizacion')->insert([
+            'pregunta1'=> 'si',
+            'pregunta2'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+            'horaEntrada'=> '8:00 AM',
+            'horaSalida'=> '12:00 PM',
+            'pregunta3'=> 'Sabado',
+            'pregunta4'=> 'No',
+            'viabilidad'=> 'Viable trabajo presencial',
+            'revision1'=> ' Servicio Médico y Seguridad y Salud en el trabajo',
+            'revision2'=> 'Revisión ',
+            'observacion'=> '',
+            'notas'=> '',
+            'envio'=> '',
+            'user_id' => '6'  
         ]);
     }
 }

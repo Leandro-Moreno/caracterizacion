@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('tipo_contrato')->nullable();
             $table->string('celular')->nullable();
             $table->string('direccion')->nullable();
+            $table->string('direccion2')->nullable();
             $table->biginteger('unidad_id')->unsigned();
             $table->foreign('unidad_id')->references('id')->on('unidades');
             $table->string('tipo_persona')->nullable();

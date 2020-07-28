@@ -18,10 +18,6 @@ class CaracterizacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Firma $model)
-    {
-        return view('caracterizacion.create', ['firmas' => $model->all()]);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -29,7 +25,7 @@ class CaracterizacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EventoRequest $request, Evento $model)
+    public function store(CaracterizacionRequest $request, Caracterizacion $model)
     {
         $model->create(
             [
@@ -43,7 +39,7 @@ class CaracterizacionController extends Controller
             ]
         );
 
-        return redirect()->route('caracterizacion')->withStatus(__('Evento creado con éxito.'));
+        return redirect()->route('caracterizacion')->withStatus(__('Caracterizacion creado con éxito.'));
     }
 
 

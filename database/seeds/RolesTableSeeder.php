@@ -21,7 +21,19 @@ class RolesTableSeeder extends Seeder
       $user->save();
 
       $user = new Rol();
-      $user->nombre="asistente";
+      $user->nombre="decano";
+      $user->save();
+
+      $user = new Rol();
+      $user->nombre="secretario";
+      $user->save();
+
+      $user = new Rol();
+      $user->nombre="servicio medico";
+      $user->save();
+
+      $user = new Rol();
+      $user->nombre="usuario";
       $user->save();
     }
 }

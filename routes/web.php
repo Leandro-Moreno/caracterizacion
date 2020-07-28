@@ -26,16 +26,9 @@ Route::post('register', function () { return redirect('home'); });
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
-Route::group(['middleware' => 'auth'], function () {
 
-	Route::resource('eventos', 'Eventos\EventoController')->names([
-    	'index' => 'eventos',
-    	'create' => 'eventos.create',
-    	'show' => 'eventos.show',
-    	'edit' => 'eventos.edit',
-    	'update' => 'eventos.update',
-    	'destroy' => 'eventos.destroy',
-	])->middleware('administrador');
+
+Route::group(['middleware' => 'auth'], function () {
 
 	Route::resource('caracterizacion', 'Caracterizacion\CaracterizacionController')->names([
     	'index' => 'caracterizacion',
@@ -44,8 +37,13 @@ Route::group(['middleware' => 'auth'], function () {
     	'edit' => 'caracterizacion.edit',
     	'update' => 'caracterizacion.update',
 		'destroy' => 'caracterizacion.destroy',
-		'massive_create' => 'massivecaracterizacion.createm',
 	])->middleware('administrador');
+
+	Route::post('importar/usuario', 'Caracterizacion\CaracterizacionController@To.do')->middleware('auth')->name('user.import');
+	Route::get('user/masivo', 'UserController@importForm')->middleware('auth')->name('user.masivo');
+	Route::post('user/create/{id}', 'UserController@storeMUser')->middleware('auth')->name('user.storecontroller');
+
+	Route::get('exportar/usuario', 'Caracterizacion\CaracterizacionController@To.do')->middleware('auth')->name('user.export');
 
 	Route::resource('asistentes', 'Eventos\AsistenteController')->names([
     	'index' => 'asistentes',
@@ -54,12 +52,6 @@ Route::group(['middleware' => 'auth'], function () {
     	'edit' => 'asistentes.edit',
     	'destroy' => 'asistentes.destroy',
 	])->middleware('administrador');
-
-  Route::resource('firmas', 'Eventos\FirmaController')->names([
-      'index' => 'firmas',
-      'create' => 'firmas.create',
-      'edit' => 'firmas.edit'
-  ])->middleware('administrador');
 
   Route::resource('correo', 'CorreoController')->names([
       'index' => 'correo',

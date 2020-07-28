@@ -100,14 +100,14 @@
         </a>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-6">
-          <a class="" href="{{ route('firmas') }}">
+          <a class="" href="">
           <div class="card card-stats">
             <div class="card-header card-header-success card-header-icon">
               <div class="card-icon">
                 <i class="material-icons">create</i>
               </div>
               <p class="card-category">{{ __('Administrar') }}</p>
-              <h4 class="card-title">{{ __('Firmas') }}
+              <h4 class="card-title">{{ __('') }}
               </h4>
             </div>
             <div class="card-footer">
@@ -116,16 +116,7 @@
                   <table class="table">
 
                       <tbody>
-                  @foreach($firmas as $firma)
-                  <tr>
-                    <th scope="row">{{$loop->iteration}}</th>
-                    <td>{{$firma->nombre}}</td>
-                    <td class="td-actions text-right"><a rel="tooltip" class="" href="{{ route('firmas.edit', $firma) }}" data-original-title="" title="">
-                      <i class="material-icons">edit</i>
-                      <div class="ripple-container"></div>
-                    </a></td>
-                  </tr>
-                  @endforeach
+                  
                 </tbody>
               </table>
               </div>

@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <form method="post" action="{{ route('user.store') }}" autocomplete="off" class="form-horizontal">
+          <form method="post" action="{{ route('user.storecontroller', 'id') }}" autocomplete="off" class="form-horizontal">
             @csrf
             @method('post')
 
@@ -120,6 +120,29 @@
                   </div>
                 </div>
                 <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Unidad/Facultad') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('unidad') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('unidad') ? ' is-invalid' : '' }}" name="unidad" id="input-unidad" type="text" placeholder="{{ __('unidad o facultad') }}" value="{{ old('unidad') }}" aria-required="true"/>
+                      @if ($errors->has('unidad'))
+                        <span id="unidad-error" class="error text-danger" for="input-unidad">{{ $errors->first('unidad') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Tipo de Contrato') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('tipo_contrato') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('tipo_contrato') ? ' is-invalid' : '' }}" name="tipo_contrato" id="input-tipo_contrato" type="text" placeholder="{{ __('Tipo de contrato') }}" value="{{ old('tipo_contrato') }}" aria-required="true"/>
+                      @if ($errors->has('tipo_contrato'))
+                        <span id="tipo_contrato-error" class="error text-danger" for="input-tipo_contrato">{{ $errors->first('tipo_contrato') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
                   <label class="col-sm-2 col-form-label">{{ __('Celular') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('celular') ? ' has-danger' : '' }}">
@@ -142,38 +165,27 @@
                   </div>
                 </div>
                 <div class="row">
-                  <label class="col-sm-2 col-form-label">{{ __('Medio') }}</label>
+                  <label class="col-sm-2 col-form-label">{{ __('Barrio') }}</label>
                   <div class="col-sm-7">
-                    <div class="form-group{{ $errors->has('medio') ? ' has-danger' : '' }}">
-                      <input class="form-control{{ $errors->has('medio') ? ' is-invalid' : '' }}" name="medio" id="input-medio" type="text" placeholder="{{ __('Medio') }}" value="{{ old('medio') }}" aria-required="true"/>
-                      @if ($errors->has('medio'))
-                        <span id="medio-error" class="error text-danger" for="input-medio">{{ $errors->first('medio') }}</span>
+                    <div class="form-group{{ $errors->has('barrio') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('barrio') ? ' is-invalid' : '' }}" name="barrio" id="input-barrio" type="text" placeholder="{{ __('Barrio') }}" value="{{ old('barrio') }}" aria-required="true"/>
+                      @if ($errors->has('barrio'))
+                        <span id="barrio-error" class="error text-danger" for="input-barrio">{{ $errors->first('barrio') }}</span>
                       @endif
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <label class="col-sm-2 col-form-label">{{ __('Tipo persona') }}</label>
+                  <label class="col-sm-2 col-form-label">{{ __('Localidad') }}</label>
                   <div class="col-sm-7">
-                    <div class="form-group{{ $errors->has('tipo_persona') ? ' has-danger' : '' }}">
-                      <input class="form-control{{ $errors->has('tipo_persona') ? ' is-invalid' : '' }}" name="tipo_persona" id="input-tipo_persona" type="text" placeholder="{{ __('Tipo persona') }}" value="{{ old('tipo_persona') }}" aria-required="true"/>
-                      @if ($errors->has('tipo_persona'))
-                        <span id="tipo_persona-error" class="error text-danger" for="input-tipo_persona">{{ $errors->first('tipo_persona') }}</span>
+                    <div class="form-group{{ $errors->has('localidad') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('localidad') ? ' is-invalid' : '' }}" name="localidad" id="input-localidad" type="text" placeholder="{{ __('Localidad') }}" value="{{ old('localidad') }}" aria-required="true"/>
+                      @if ($errors->has('localidad'))
+                        <span id="localidad-error" class="error text-danger" for="input-localidad">{{ $errors->first('localidad') }}</span>
                       @endif
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <label class="col-sm-2 col-form-label">{{ __('Asistencia minima') }}</label>
-                  <div class="col-sm-7">
-                    <div class="form-group{{ $errors->has('asistencia_minima') ? ' has-danger' : '' }}">
-                      <input class="form-control{{ $errors->has('asistencia_minima') ? ' is-invalid' : '' }}" name="asistencia_minima" id="input-asistencia_minima" type="text" placeholder="{{ __('Tipo persona') }}" value="{{ old('asistencia_minima') }}" aria-required="true"/>
-                      @if ($errors->has('asistencia_minima'))
-                        <span id="asistencia_minima-error" class="error text-danger" for="input-asistencia_minima">{{ $errors->first('asistencia_minima') }}</span>
-                      @endif
-                    </div>
-                  </div>
-                </div>
+                </div>          
               <div class="card-footer ml-auto mr-auto">
                 <button type="submit" class="btn btn-primary">{{ __('Agregar usuario') }}</button>
               </div>

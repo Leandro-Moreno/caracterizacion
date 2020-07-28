@@ -13,8 +13,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'rol_id' => '1',
-            'unidad_id' => '1',
+            'rol_id' => '6',
+            'unidad_id' => '11',
             'name' => 'Leandro',
             'email' => 'le.moreno910@uniandes.edu.co',
             'email_verified_at' => now(),
@@ -22,41 +22,11 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
+        
         DB::table('users')->insert([
             'rol_id' => '1',
-            'unidad_id' => '1',
-            'name' => 'Laura',
-            'name2' => 'Camila',
-            'apellido' => 'Reyes',
-            'apellido2' => 'Garcia',
-            'email' => 'lc.reyes@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('h}-ezWGst*57q+r!'),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('users')->insert([
-            'rol_id' => '1',
-            'unidad_id' => '1',
-            'name' => 'Paula',
-            'name2' => 'Alejandra',
-            'apellido' => 'Gonzalez',
-            'apellido2' => 'Montoya',
-            'email' => 'p.gonzalezm@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('h}-ezWGst*57q+r!'),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('users')->insert([
-            'rol_id' => '1',
-            'unidad_id' => '1',
+            'unidad_id' => '11',
             'name' => 'Andres',
-            'name2' => '',
-            'apellido' => 'Gonzalez',
-            'apellido2' => 'Bernal',
             'email' => 'ca.gonzalezb1@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('h}-ezWGst*57q+r!'),
@@ -65,17 +35,89 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'rol_id' => '1',
+            'rol_id' => '6',
             'unidad_id' => '1',
-            'name' => 'Paola',
-            'name2' => 'Alejandra',
-            'apellido' => 'Estrella',
-            'apellido2' => 'Bolaños',
-            'email' => 'p-estrel@uniandes.edu.co',
+            'name' => 'Daniela',
+            'name2' => '',
+            'cargo' => 'Analista',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Temporal',
+            'apellido' => 'Reyes',
+            'apellido2' => '',
+            'documento' => '313546841', 
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => 'La Candelaria | Candelaria',
+            'email' => 'daniela@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('h}-ezWGst*57q+r!'),
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        DB::table('users')->insert([
+            'rol_id' => '6',
+            'unidad_id' => '1',
+            'name' => 'Camilo',
+            'name2' => '',
+            'cargo' => 'Secretario',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Temporal',
+            'apellido' => 'Reyes',
+            'apellido2' => '',
+            'documento' => '313546841', 
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => 'La Candelaria | Candelaria',
+            'email' => 'camilo@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('h}-ezWGst*57q+r!'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'rol_id' => '6',
+            'unidad_id' => '1',
+            'name' => 'Fabian',
+            'name2' => '',
+            'cargo' => 'Asistente',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Planta',
+            'apellido' => 'Garcia',
+            'apellido2' => '',
+            'documento' => '313546841', 
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => 'La Candelaria | Candelaria',
+            'email' => 'fabian@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('h}-ezWGst*57q+r!'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'rol_id' => '6',
+            'unidad_id' => '1',
+            'name' => 'Andres',
+            'name2' => '',
+            'cargo' => 'Ingeniero',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Planta',
+            'apellido' => 'Garcia',
+            'apellido2' => '',
+            'documento' => '313546841', 
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => 'La Candelaria | Candelaria',
+            'email' => 'andres@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('h}-ezWGst*57q+r!'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        
     }
 }

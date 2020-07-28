@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'eventos', 'titlePage' => __('Eventos')])
+@extends('layouts.app', ['activePage' => 'caracterizacion', 'titlePage' => __('Caracterización')])
 
 @section('content')
   <div class="content">
@@ -25,7 +25,7 @@
                 @endif
                 <div class="row">
                   <div class="col-12 text-right">
-                    <a href="{{ route('eventos.create') }}" class="btn btn-sm btn-primary">{{ __('Añadir evento') }}</a>
+                    <a href="{{ route('caracterizacion.create') }}" class="btn btn-sm btn-primary">{{ __('Añadir Caracterización') }}</a>
                   </div>
                 </div>
                 <div class="table-responsive">
@@ -35,13 +35,19 @@
                           {{ __('Nombre') }}
                       </th>
                       <th>
-                        {{ __('Fecha') }}
+                        {{ __('Facultad') }}
                       </th>
                       <th>
-                        {{ __('Duración') }}
+                        {{ __('Indispensable') }}
+                      </th>
+                      <th>
+                        {{ __('Viabilidad por caracterizacón') }}
+                      </th>
+                      <th>
+                        {{ __('Estado') }}
                       </th>
                       <th class="text-right">
-                        {{ __('Acción') }}
+                        {{ __('Accion') }}
                       </th>
                     </thead>
                     <tbody>
@@ -57,11 +63,11 @@
                             {{ $dato->hora }}
                           </td>
                           <td class="td-actions text-right">
-                              <form action="{{ route('eventos.destroy', $dato) }}" method="post">
+                              <form action="{{ route('caracterizacion.destroy', $dato) }}" method="post">
                                   @csrf
                                   @method('delete')
 
-                                  <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('eventos.edit', $dato) }}" data-original-title="" title="">
+                                  <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('caracterizacion.edit', $dato) }}" data-original-title="" title="">
                                     <i class="material-icons">edit</i>
                                     <div class="ripple-container"></div>
                                   </a>

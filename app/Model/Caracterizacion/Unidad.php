@@ -19,7 +19,7 @@ class Unidad extends Model
 
     public function unidad()
     {
-        return $this->belongsTo('App\Model\Caracterizacion\Caracterizacion', 'unidad_id');
+        return $this->belongsTo('App\Model\User', 'unidad_id');
     }
     
 }

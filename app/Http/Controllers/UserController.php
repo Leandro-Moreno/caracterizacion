@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
+use App\Model\Caracterizacion\Unidad;
 use App\Rol;
 
 class UserController extends Controller
@@ -38,7 +39,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $unidad = Unidad::all();
+        return view('users.create', compact('unidad'));
     }
 
     /**
@@ -48,11 +50,17 @@ class UserController extends Controller
      * @param  \App\User  $model
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(UserRequest $request, User $model)
-    {
+    public function store(UserRequest $request)
+    {   
+        dd($request);
         $model->create($request->merge(['password' => Hash::make($request->get('password'))])->all());
 
         return redirect()->route('user.index')->withStatus(__('User successfully created.'));
+    }
+    public function storeMUser(UserRequest $request)
+    {   
+        dd($request);
+        return view('users.imports.create');
     }
 
     /**
@@ -96,5 +104,9 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('user.index')->withStatus(__('User successfully deleted.'));
+    }
+    public function importForm( )
+    {
+        return view('users.imports.create');
     }
 }
