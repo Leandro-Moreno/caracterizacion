@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'rol_id', 'name','name2', 'apellido', 'apellido2', 'email', 'tipo_doc', 'documento', 'profesion', 'cargo', 'celular', 'direccion', 'medio', 'tipo_persona', 'uso_datos', 'uso_imagen', 'asistencia_minima', 'password',
+        'rol_id', 'name','name2', 'apellido', 'apellido2', 'email', 'tipo_doc', 'documento', 'profesion', 'cargo', 'tipo_contrato','celular', 'direccion', 'uso_datos', 'uso_imagen', 'password','unidad_id'
     ];
 
     /**
@@ -46,6 +46,10 @@ class User extends Authenticatable
     public function rol()
     {
         return $this->belongsTo('App\Rol', 'rol_id');
+    }
+    public function unidad()
+    {
+        return $this->belongsTo('App\Caracterizacion', 'unidad_id');
     }
 
 }

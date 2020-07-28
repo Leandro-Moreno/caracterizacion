@@ -82,6 +82,7 @@
   ),
   'agfa_rotis_sans_serif_exbd' => array(
     'normal' => $fontDir . '/a64f66aab8d8488ea60344e98b1e6b53',
+    '500' => $fontDir . '/agfa-rotis-sans-serif-exbd-500_a7e211a8080c2a5fac42f37347f86a24',
   ),
   'agfa_rotis_sans_serif' => array(
     'normal' => $fontDir . '/7954c1bedb3ba143af15ebda1d52a585',
@@ -90,9 +91,10 @@
     'bold' => $fontDir . '/34ca037c226ee0db09e5f109d2ec708b',
   ),
   'daxbold' => array(
-    'bold' => $fontDir . '/46293132d995d9e223bdf02fc853e3b9',
+    'bold' => $fontDir . '/daxbold-bold_4604360d50d62eeeec014c5eafdb91e6',
   ),
   'daxmedium' => array(
     'normal' => $fontDir . '/ff0d7d362df07e5dcaac2fae7afeb11a',
+    '500' => $fontDir . '/daxmedium-500_2b4add3cddd8dd2e310f197b387c0390',
   ),
 ) ?>

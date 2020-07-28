@@ -26,14 +26,14 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('tipo_doc')->nullable();
             $table->integer('documento')->nullable();
-            $table->string('profesion')->nullable();
             $table->string('cargo')->nullable();
+            $table->string('tipo_contrato')->nullable();
             $table->string('celular')->nullable();
             $table->string('direccion')->nullable();
-            $table->string('medio')->nullable();
+            $table->biginteger('unidad_id')->unsigned();
+            $table->foreign('unidad_id')->references('id')->on('unidades');
             $table->string('tipo_persona')->nullable();
             $table->string('uso_datos')->nullable();          
-            $table->string('asistencia_minima')->nullable();
             $table->rememberToken();
             $table->timestamps();
             /*

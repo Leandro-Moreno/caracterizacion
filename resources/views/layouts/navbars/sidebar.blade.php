@@ -13,39 +13,21 @@
             <p>{{ __('Inicio') }}</p>
         </a>
       </li>
-      <li class="nav-item{{ $activePage == 'certificados' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('certificados') }}">
-          <i class="material-icons">picture_as_pdf</i>
-            <p>{{ __('Mis Certificados') }}</p>
-        </a>
-      </li>
+      
       @if (Auth::user()->rol_id <= 2)
       <li class="nav-item {{ ($activePage == 'eventos' || $activePage == 'asistentes'|| $activePage == 'user-management'|| $activePage == 'firmas') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#Eventos" aria-expanded="{{ ($activePage == 'eventos' || $activePage == 'asistentes'|| $activePage == 'user-management'|| $activePage == 'firmas') ? 'true' : 'false' }}">
             <i class="material-icons">supervised_user_circle</i>
-          <p>{{ __('Administrar Eventos') }}
+          <p>{{ __('Caracterización Usuarios') }}
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse {{ ($activePage == 'eventos' || $activePage == 'asistentes'|| $activePage == 'user-management'|| $activePage == 'firmas') ? ' show' : '' }}" id="Eventos">
+        <div class="collapse {{ ($activePage == 'caracterizacion' || $activePage == 'asistentes'|| $activePage == 'user-management'|| $activePage == 'firmas') ? ' show' : '' }}" id="Eventos">
           <ul class="nav">
-            <li class="nav-item{{ $activePage == 'eventos' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('eventos') }}">
+            <li class="nav-item{{ $activePage == 'caracterizacion' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('caracterizacion') }}">
                 <i class="material-icons">next_week</i>
-                  <p>{{ __('Eventos') }}</p>
-              </a>
-            </li>
-
-            <li class="nav-item{{ $activePage == 'asistentes' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('asistentes') }}">
-                <i class="material-icons">how_to_reg</i>
-                  <p>{{ __('Asistencia') }}</p>
-              </a>
-            </li>
-            <li class="nav-item{{ $activePage == 'firmas' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('firmas') }}">
-                <i class="material-icons">create</i>
-                  <p>{{ __('firmas') }}</p>
+                  <p>{{ __('Caracterización') }}</p>
               </a>
             </li>
             <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
@@ -54,7 +36,12 @@
                   <p>{{ __('Administrar usuarios') }}</p>
               </a>
             </li>
-
+            <li class="nav-item{{ $activePage == 'asistentes' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('asistentes') }}">
+                <i class="material-icons">how_to_reg</i>
+                  <p>{{ __('Reportes') }}</p>
+              </a>
+            </li>
           </ul>
         </div>
       </li>
@@ -93,7 +80,6 @@
         </div>
       </li>
       @endif
-
       <li class="nav-item d-xl-none">
         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
 

@@ -7,8 +7,8 @@
         <div class="col-md-12">
             <div class="card">
               <div class="card-header card-header-primary">
-                <h4 class="card-title ">{{ __('Eventos') }}</h4>
-                <p class="card-category"> {{ __('Aquí puedes gestionar tus eventos') }}</p>
+                <h4 class="card-title ">{{ __('Caracterización') }}</h4>
+                <p class="card-category"> {{ __('Aquí puedes gestionar tus caractizar tus usuarios') }}</p>
               </div>
               <div class="card-body">
                 @if (session('status'))

@@ -37,6 +37,16 @@ Route::group(['middleware' => 'auth'], function () {
     	'destroy' => 'eventos.destroy',
 	])->middleware('administrador');
 
+	Route::resource('caracterizacion', 'Caracterizacion\CaracterizacionController')->names([
+    	'index' => 'caracterizacion',
+    	'create' => 'caracterizacion.create',
+    	'show' => 'caracterizacion.show',
+    	'edit' => 'caracterizacion.edit',
+    	'update' => 'caracterizacion.update',
+		'destroy' => 'caracterizacion.destroy',
+		'massive_create' => 'massivecaracterizacion.createm',
+	])->middleware('administrador');
+
 	Route::resource('asistentes', 'Eventos\AsistenteController')->names([
     	'index' => 'asistentes',
     	'create' => 'asistentes.create',

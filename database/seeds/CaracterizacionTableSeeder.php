@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use App\Model\Caracterizacion\Caracterizacion;
 
-class UsersTableSeeder extends Seeder
+
+class CaracterizacionTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,8 +13,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'rol_id' => '1',
+        DB::table('caracterizacion')->insert([
+            'pegunta1' => '1',
             'unidad_id' => '1',
             'name' => 'Leandro',
             'email' => 'le.moreno910@uniandes.edu.co',
@@ -23,8 +24,8 @@ class UsersTableSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        DB::table('users')->insert([
-            'rol_id' => '1',
+        DB::table('caracterizacion')->insert([
+            'pegunta1' => '1',
             'unidad_id' => '1',
             'name' => 'Laura',
             'name2' => 'Camila',
@@ -37,8 +38,8 @@ class UsersTableSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        DB::table('users')->insert([
-            'rol_id' => '1',
+        DB::table('caracterizacion')->insert([
+            'pegunta1' => '1',
             'unidad_id' => '1',
             'name' => 'Paula',
             'name2' => 'Alejandra',
@@ -50,8 +51,8 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        DB::table('users')->insert([
-            'rol_id' => '1',
+        DB::table('caracterizacion')->insert([
+            'pegunta1' => '1',
             'unidad_id' => '1',
             'name' => 'Andres',
             'name2' => '',
@@ -64,8 +65,8 @@ class UsersTableSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        DB::table('users')->insert([
-            'rol_id' => '1',
+        DB::table('caracterizacion')->insert([
+            'pegunta1' => '1',
             'unidad_id' => '1',
             'name' => 'Paola',
             'name2' => 'Alejandra',

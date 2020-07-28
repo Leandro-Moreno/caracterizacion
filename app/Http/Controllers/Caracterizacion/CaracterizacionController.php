@@ -1,22 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Eventos;
+namespace App\Http\Controllers\Caracterizacion;
 
-use Illuminate\Http\File;
-use App\Model\Eventos\Firma;
-use App\Model\Eventos\Evento;
-use Illuminate\Http\Request;
-use App\Http\Requests\EventoRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Model\Caracterizacion\Caracterizacion;
 
-class EventoController extends Controller
+class CaracterizacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Evento $model)
+    public function index(Caracterizacion $model)
     {
         return view('caracterizacion.index', ['datos' => $model->paginate(15)]);
     }
