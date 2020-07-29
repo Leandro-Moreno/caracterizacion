@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use App\Model\Caracterizacion\Unidad;
 use App\Rol;
+use Auth;
 
 class UserController extends Controller
 {
@@ -50,17 +51,28 @@ class UserController extends Controller
      * @param  \App\User  $model
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(UserRequest $request)
+    public function storeUser(Request $request)
     {   
-        dd($request);
-        $model->create($request->merge(['password' => Hash::make($request->get('password'))])->all());
-
-        return redirect()->route('user.index')->withStatus(__('User successfully created.'));
-    }
-    public function storeMUser(UserRequest $request)
-    {   
-        dd($request);
-        return view('users.imports.create');
+        $user = new User;
+        $user->rol_id = $request->rol;
+        $user->name = $request->name; 
+        $user->name = $request->name  ; 
+        $user->name2 = $request->name2; 
+        $user->apellido = $request->apellido; 
+        $user->apellido2 = $request->apellido2 ; 
+        $user->email = $request->email;
+        $user->tipo_doc = $request->tipo_doc ; 
+        $user->documento = $request->documento; 
+        $user->cargo = $request->cargo; 
+        $user->password = Hash::make($request->documento); 
+        //$model->create($request->merge(['password' => Hash::make($request->)])->all());
+        $user->tipo_contrato = $request->tipo_contrato ; 
+        $user->celular = $request->celular; 
+        $user->direccion = $request->direccion ; 
+        $user->direccion2 = $request->barrio.','.$request->localidad; 
+        $user->unidad_id = $request->unidad ; 
+        dd(Auth::user());
+        return redirect()->route('user.index')->withStatus(__('Usuario Creado correctamente.'));
     }
 
     /**
@@ -69,9 +81,10 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\View\View
      */
-    public function edit(User $user, Rol $model)
+    public function edit(User $user, Rol $model )
     {
-        return view('users.edit', compact('user'), ['roles' => $model->all()]);
+        $unidad = Unidad::all();
+        return view('users.edit', compact('user'), ['roles' => $model->all()], ['unidades' => $model->all()]);
     }
 
     /**
@@ -81,7 +94,7 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UserRequest $request, User  $user)
+    public function update(Request $request, User  $user)
     {
         $user->update(
             $request->merge(['password' => Hash::make($request->get('password'))])

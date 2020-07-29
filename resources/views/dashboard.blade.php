@@ -27,9 +27,9 @@
         @endif
 
         @if (Auth::user()->rol_id <= 2)
-        @if($eventos->count() > 0)
+       
         <div class="col-lg-4 col-md-6 col-sm-6">
-          <a class="" href="{{ route('eventos') }}">
+          <a class="" href="">
           <div class="card card-stats">
             <div class="card-header card-header-primary card-header-icon">
               <div class="card-icon">
@@ -45,16 +45,16 @@
                   <table class="table">
 
                       <tbody>
-                  @foreach($eventos as $evento)
+                 
                   <tr>
-                    <th scope="row">{{$loop->iteration}}</th>
-                    <td>{{$evento->nombre}}</td>
-                    <td class="td-actions text-right"><a rel="tooltip" class="" href="{{ route('eventos.edit', $evento) }}" data-original-title="" title="">
+                    <th scope="row">loop here</th>
+                    <td>name here</td>
+                    <td class="td-actions text-right"><a rel="tooltip" class="" href="" data-original-title="" title="">
                       <i class="material-icons">edit</i>
                       <div class="ripple-container"></div>
                     </a></td>
                   </tr>
-                  @endforeach
+
                 </tbody>
               </table>
               </div>
@@ -63,7 +63,7 @@
           </div>
           </a>
         </div>
-        @endif
+        
         <div class="col-lg-4 col-md-6 col-sm-6">
           <a class="" href="{{ route('asistentes') }}">
           <div class="card card-stats">

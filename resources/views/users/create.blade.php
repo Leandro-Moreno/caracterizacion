@@ -5,10 +5,8 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <form method="post" action="{{ route('user.storecontroller', 'id') }}" autocomplete="off" class="form-horizontal">
+          <form method="POST" action="{{ route('createuser') }}" autocomplete="off" class="form-horizontal">
             @csrf
-            @method('post')
-
             <div class="card ">
               <div class="card-header card-header-primary">
                 <h4 class="card-title">{{ __('Agregar usuario') }}</h4>
@@ -98,17 +96,6 @@
                   </div>
                 </div>
                 <div class="row">
-                  <label class="col-sm-2 col-form-label">{{ __('Profesión') }}</label>
-                  <div class="col-sm-7">
-                    <div class="form-group{{ $errors->has('profesion') ? ' has-danger' : '' }}">
-                      <input class="form-control{{ $errors->has('profesion') ? ' is-invalid' : '' }}" name="profesion" id="input-profesion" type="text" placeholder="{{ __('Profesión') }}" value="{{ old('profesion') }}" aria-required="true"/>
-                      @if ($errors->has('profesion'))
-                        <span id="profesion-error" class="error text-danger" for="input-profesion">{{ $errors->first('profesion') }}</span>
-                      @endif
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
                   <label class="col-sm-2 col-form-label">{{ __('Cargo') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('cargo') ? ' has-danger' : '' }}">
@@ -182,6 +169,17 @@
                       <input class="form-control{{ $errors->has('localidad') ? ' is-invalid' : '' }}" name="localidad" id="input-localidad" type="text" placeholder="{{ __('Localidad') }}" value="{{ old('localidad') }}" aria-required="true"/>
                       @if ($errors->has('localidad'))
                         <span id="localidad-error" class="error text-danger" for="input-localidad">{{ $errors->first('localidad') }}</span>
+                      @endif
+                    </div>
+                  </div>
+                </div>   
+                <div class="row">
+                  <label class="col-sm-2 col-form-label">{{ __('Rol') }}</label>
+                  <div class="col-sm-7">
+                    <div class="form-group{{ $errors->has('rol') ? ' has-danger' : '' }}">
+                      <input class="form-control{{ $errors->has('rol') ? ' is-invalid' : '' }}" name="rol" id="input-rol" type="text" placeholder="{{ __('rol') }}" value="{{ old('rol') }}" aria-required="true"/>
+                      @if ($errors->has('rol'))
+                        <span id="rol-error" class="error text-danger" for="input-rol">{{ $errors->first('rol') }}</span>
                       @endif
                     </div>
                   </div>

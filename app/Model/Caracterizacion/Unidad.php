@@ -17,9 +17,6 @@ class Unidad extends Model
         'nombre_unidad', 'dependecia'
     ];
 
-    public function unidad()
-    {
-        return $this->belongsTo('App\Model\User', 'unidad_id');
-    }
+
     
 }

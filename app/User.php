@@ -49,7 +49,7 @@ class User extends Authenticatable
     }
     public function unidad()
     {
-        return $this->belongsTo('App\Caracterizacion', 'unidad_id');
+        return $this->belongsTo('App\Model\Caracterizacion\Unidad', 'unidad_id');
     }
 
 }

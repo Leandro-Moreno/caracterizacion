@@ -39,10 +39,12 @@ Route::group(['middleware' => 'auth'], function () {
 		'destroy' => 'caracterizacion.destroy',
 	])->middleware('administrador');
 
-	Route::post('importar/usuario', 'Caracterizacion\CaracterizacionController@To.do')->middleware('auth')->name('user.import');
-	Route::get('user/masivo', 'UserController@importForm')->middleware('auth')->name('user.masivo');
-	Route::post('user/create/{id}', 'UserController@storeMUser')->middleware('auth')->name('user.storecontroller');
+	Route::post('nuevo/usuario', 'UserController@storeUser')->name('createuser')->middleware('auth');
 
+	Route::post('importar/usuario', 'Caracterizacion\CaracterizacionController@To.do')->middleware('auth')->name('user.import');
+
+	Route::get('user/masivo', 'UserController@importForm')->middleware('auth')->name('user.masivo');
+	
 	Route::get('exportar/usuario', 'Caracterizacion\CaracterizacionController@To.do')->middleware('auth')->name('user.export');
 
 	Route::resource('asistentes', 'Eventos\AsistenteController')->names([
@@ -83,3 +85,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
+
+
+
+
+
+
+
+
+
+
