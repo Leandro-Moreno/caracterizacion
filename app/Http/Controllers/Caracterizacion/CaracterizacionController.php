@@ -9,6 +9,9 @@ use App\User;
 use App\Model\Caracterizacion\Unidad;
 use Illuminate\Support\Facades\DB;
 
+use App\Imports\UsersImport;//TODO: cambiar users por caracterizacion
+use Maatwebsite\Excel\Facades\Excel;
+
 class CaracterizacionController extends Controller
 {
     public function index(Caracterizacion $model)
@@ -28,8 +31,8 @@ class CaracterizacionController extends Controller
         //->where('users.rol_id', [2,3,4,5,6])
         ->get();
 
-    
-        $unidades = Unidad::all(); 
+
+        $unidades = Unidad::all();
         return view('caracterizacion.create', compact('user', 'unidades'));
     }
 
@@ -97,5 +100,13 @@ class CaracterizacionController extends Controller
     public function destroy(Evento $evento)
     {
         echo "En construcción";
+    }
+    public function importar(){
+      return view('caracterizacion.import');
+    }
+    public function importarCrear(){
+      $caracterizacion = Excel::import(new UsersImport, request()->file('caracterizacion'));
+      dd($caracterizacion);
+      return back();
     }
 }
