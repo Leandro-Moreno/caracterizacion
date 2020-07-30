@@ -1,10 +1,4 @@
 <div class="sidebar" data-color="orange" data-background-color="white" data-image="{{ asset('material') }}/img/sidebar-1.jpg">
-  <!--
-      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-      Tip 2: you can also add an image using data-image tag
-  -->
-
   <div class="sidebar-wrapper">
     <ul class="nav">
       <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
@@ -13,16 +7,16 @@
             <p>{{ __('Inicio') }}</p>
         </a>
       </li>
-      
+
       @if (Auth::user()->rol_id <= 2)
-      <li class="nav-item {{ ($activePage == 'eventos' || $activePage == 'asistentes'|| $activePage == 'user-management'|| $activePage == 'firmas') ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#Eventos" aria-expanded="{{ ($activePage == 'eventos' || $activePage == 'asistentes'|| $activePage == 'user-management'|| $activePage == 'firmas') ? 'true' : 'false' }}">
+      <li class="nav-item {{ ($activePage == 'eventos' ||  $activePage == 'user-management'|| $activePage == 'firmas') ? ' active' : '' }}">
+        <a class="nav-link" data-toggle="collapse" href="#Eventos" aria-expanded="{{ ($activePage == 'eventos' ||  $activePage == 'user-management'|| $activePage == 'firmas') ? 'true' : 'false' }}">
             <i class="material-icons">supervised_user_circle</i>
           <p>{{ __('Caracterización Usuarios') }}
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse {{ ($activePage == 'caracterizacion' || $activePage == 'asistentes'|| $activePage == 'user-management'|| $activePage == 'firmas') ? ' show' : '' }}" id="Eventos">
+        <div class="collapse {{ ($activePage == 'caracterizacion' ||  $activePage == 'user-management'|| $activePage == 'firmas') ? ' show' : '' }}" id="Eventos">
           <ul class="nav">
             <li class="nav-item{{ $activePage == 'caracterizacion' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('caracterizacion') }}">
@@ -36,8 +30,8 @@
                   <p>{{ __('Administrar usuarios') }}</p>
               </a>
             </li>
-            <li class="nav-item{{ $activePage == 'asistentes' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('asistentes') }}">
+            <li class="nav-item{{ $activePage == 'user' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('user.index') }}">
                 <i class="material-icons">how_to_reg</i>
                   <p>{{ __('Reportes') }}</p>
               </a>

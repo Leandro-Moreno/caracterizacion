@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        
+
         DB::table('users')->insert([
             'rol_id' => '1',
             'unidad_id' => '11',
@@ -38,13 +38,11 @@ class UsersTableSeeder extends Seeder
             'rol_id' => '6',
             'unidad_id' => '1',
             'name' => 'Daniela',
-            'name2' => '',
             'cargo' => 'Analista',
             'unidad_id' => '25',
             'tipo_contrato' => 'Temporal',
             'apellido' => 'Reyes',
-            'apellido2' => '',
-            'documento' => '313546841', 
+            'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
             'direccion2' => 'La Candelaria | Candelaria',
@@ -59,13 +57,11 @@ class UsersTableSeeder extends Seeder
             'rol_id' => '6',
             'unidad_id' => '1',
             'name' => 'Camilo',
-            'name2' => '',
             'cargo' => 'Secretario',
             'unidad_id' => '25',
             'tipo_contrato' => 'Temporal',
             'apellido' => 'Reyes',
-            'apellido2' => '',
-            'documento' => '313546841', 
+            'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
             'direccion2' => 'La Candelaria | Candelaria',
@@ -80,13 +76,11 @@ class UsersTableSeeder extends Seeder
             'rol_id' => '6',
             'unidad_id' => '1',
             'name' => 'Fabian',
-            'name2' => '',
             'cargo' => 'Asistente',
             'unidad_id' => '25',
             'tipo_contrato' => 'Planta',
             'apellido' => 'Garcia',
-            'apellido2' => '',
-            'documento' => '313546841', 
+            'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
             'direccion2' => 'La Candelaria | Candelaria',
@@ -121,13 +115,11 @@ class UsersTableSeeder extends Seeder
             'rol_id' => '6',
             'unidad_id' => '1',
             'name' => 'Andres',
-            'name2' => '',
             'cargo' => 'Ingeniero',
             'unidad_id' => '25',
             'tipo_contrato' => 'Planta',
             'apellido' => 'Garcia',
-            'apellido2' => '',
-            'documento' => '313546841', 
+            'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
             'direccion2' => 'La Candelaria | Candelaria',
@@ -138,6 +130,6 @@ class UsersTableSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        
+
     }
 }
