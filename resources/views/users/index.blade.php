@@ -26,10 +26,9 @@
                 <div class="row">
                   <div class="col-12 text-right">
                     <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar usuario') }}</a>
-                    <a href="{{ route('user.masivo') }}" class="btn btn-sm btn-success">{{ __('Cargar usuarios') }}</a>
                   </div>
                   <div class="col-12 text-right">
-                    
+
                   </div>
                 </div>
                 <div class="table-responsive">
