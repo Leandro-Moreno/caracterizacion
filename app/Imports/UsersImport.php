@@ -15,6 +15,28 @@ class UsersImport implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {
+      dd($row);
+      /*
+      "" => 1
+ "facultad" => "FACULTAD DE MEDICINA"
+ "dependencia" => "FACULTAD DE MEDICINA"
+ "cargo" => "INGENIERO"
+ "nombre" => "andres"
+ "tipo_de_contrato" => "Planta"
+ "por_responsabilidades_es_indispensable_su_trabajo_presencial" => "si"
+ "por_que" => null
+ "hora_de_entrada" => 0.33333333333333
+ "hora_de_salida" => 0.5
+ "dias_laborales" => "Sábado"
+ "trabajo_en_casa" => "NO"
+ "viabilidad_por_caracterizacion" => "Consultar con jefatura servicio médico y SST"
+ "observacion_cambios_de_estado" => null
+ "notas_comentarios_ma_andrea_leyva" => null
+ "envio_de_consentimiento" => null
+ "correo_electronico" => "correo1@uniandes.edu.co"
+ "direccion_acual" => null
+ "barrio" => null
+ "localidad" => null*/
         $usuario = User::where('email', $row['correo_electronico'])->first();
 
         if ($usuario) {
@@ -22,12 +44,9 @@ class UsersImport implements ToModel, WithHeadingRow
         }
 
         return new User([
-
             'rol_id'   => 3,
-            'name' => $row['primer_nombre'],
-            'name2'=> $row['segundo_nombre'],
-            'apellido' => $row['primer_apellido'],
-            'apellido2'=> $row['segundo_apellido'],
+            'name' => $row['nombre'],
+            'apellido' => $row['apellido'],
             'email' => $row['correo_electronico'],
             'tipo_doc' => $row['tipo_de_identificacion'],
             'documento' => $row['no_identificacion'],

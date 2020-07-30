@@ -41,9 +41,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::post('nuevo/usuario', 'UserController@storeUser')->name('createuser')->middleware('auth');
 
-	Route::post('importar/usuario', 'Caracterizacion\CaracterizacionController@To.do')->middleware('auth')->name('user.import');
 
-	Route::get('user/masivo', 'UserController@importForm')->middleware('auth')->name('user.masivo');
+  Route::get('importar/caracterizacion', 'Caracterizacion\CaracterizacionController@importar')->middleware('auth')->name('caracterizacion.importar');
+	Route::post('importar/caracterizacion', 'Caracterizacion\CaracterizacionController@importarCrear')->middleware('auth')->name('caracterizacion.importarCrear');
+
 
 	Route::get('exportar/usuario', 'Caracterizacion\CaracterizacionController@To.do')->middleware('auth')->name('user.export');
 
