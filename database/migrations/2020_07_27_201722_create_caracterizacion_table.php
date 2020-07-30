@@ -17,16 +17,16 @@ class CreateCaracterizacionTable extends Migration
             $table->bigIncrements('id');
             $table->string('pregunta1');
             $table->string('pregunta2');
-            $table->dateTime('horaEntrada');
-            $table->dateTime('horaSalida');
+            $table->time('horaEntrada');
+            $table->time('horaSalida');
             $table->string('pregunta3');
             $table->string('pregunta4');
-            $table->string('viabilidad');
-            $table->string('revision1');
-            $table->string('revision2');
-            $table->string('observacion');
-            $table->string('notas');
-            $table->string('envio');
+            $table->string('viabilidad')->nullable();;
+            $table->string('revision1')->nullable();;
+            $table->string('revision2')->nullable();;
+            $table->string('observacion')->nullable();;
+            $table->string('notas')->nullable();;
+            $table->string('envio')->nullable();;
             $table->biginteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 

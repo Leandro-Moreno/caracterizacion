@@ -31,30 +31,58 @@
                 <div class="table-responsive">
                   <table class="table">
                     <thead class=" text-primary">
+                    <th>
+                        {{ __('Nombres') }}
+                      </th>
                       <th>
-                          {{ __('Nombre') }}
+                        {{ __('Email') }}
                       </th>
                       <th>
                         {{ __('Facultad') }}
                       </th>
-                      <th>
-                        {{ __('Indispensable') }}
+                    <th>
+                        {{ __('Indispensable trabajo presencial') }}
                       </th>
                       <th>
-                        {{ __('Viabilidad por caracterizacón') }}
+                        {{ __('Cargo') }}
                       </th>
                       <th>
-                        {{ __('Estado') }}
+                        {{ __('Hora de Entrada') }}
                       </th>
+                      <th>
+                        {{ __('Hora de Salida') }}
+                      </th>
+                      <th>
+                        {{ __('Viabilidad') }}
+                      </th>
+                      <th>
+                        {{ __('Revision departamento Medico y Seguridad en el trabajo') }}
+                      </th>
+                      <th>
+                        {{ __('Revisión Telemedicina') }}
+                      </th>
+                      <th>
+                        {{ __('Observación') }}
+                      </th> 
+                      <th>
+                        {{ __('Notas/Comentarios') }}
+                      </th> 
+                      <th>
+                        {{ __('Observación') }}
+                      </th> 
+                      <th>
+                        {{ __('Envio Consetimiento') }}
+                      </th> 
                       <th class="text-right">
                         {{ __('Accion') }}
                       </th>
                     </thead>
                     <tbody>
-                      @foreach($datos as $dato)
+                      @foreach($caracterizaciones as $dato)
                         <tr>
                           <td>
-                            {{ $dato->nombre }}
+                    {{dd($dato)}}
+                            {{ $dato->nombres }}
                           </td>
                           <td>
                             {{ $dato->fecha }}

@@ -82,7 +82,13 @@
                           {{ $user->tipo_contrato }}
                           </td>
                           <td>
-                            To.do
+                          @if ($unidades)
+                            @foreach($unidades as $unidad)
+                              @if($user->unidad_id == $unidad->id)
+                                {{ $unidad->nombre_unidad }}
+                              @endif
+                            @endforeach
+                          @endif
                           </td>
                           <td>
                           {{ $user->celular }}

@@ -96,6 +96,26 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('users')->insert([
+            'rol_id' => '2',
+            'unidad_id' => '1',
+            'name' => 'Dil',
+            'name2' => '',
+            'cargo' => 'Secretario',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Temporal',
+            'apellido' => 'Reyes',
+            'apellido2' => '',
+            'documento' => '313546841', 
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => 'La Candelaria | Candelaria',
+            'email' => 'dil@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('h}-ezWGst*57q+r!'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
 
         DB::table('users')->insert([
             'rol_id' => '6',
