@@ -26,9 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $asistencia =  User::orderBy('id','desc')
-        ->limit(5)
-        ->get();
+
         $eventos =  Evento::orderBy('id','desc')
         ->limit(5)
         ->get();
@@ -37,7 +35,6 @@ class HomeController extends Controller
         ->get();
         return view('dashboard' ,[
           'eventos' => $eventos,
-          'asistencia'  =>  $asistencia,
           'firmas'  =>  $firmas
         ]);
     }
