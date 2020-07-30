@@ -3,6 +3,8 @@
 namespace App\Imports;
 
 use App\User;
+use App\Model\Caracterizacion\Unidad;
+use App\Model\Caracterizacion\Caracterizacion;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
@@ -15,52 +17,49 @@ class UsersImport implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {
-      dd($row);
-      /*
-      "" => 1
- "facultad" => "FACULTAD DE MEDICINA"
- "dependencia" => "FACULTAD DE MEDICINA"
- "cargo" => "INGENIERO"
- "nombre" => "andres"
- "tipo_de_contrato" => "Planta"
- "por_responsabilidades_es_indispensable_su_trabajo_presencial" => "si"
- "por_que" => null
- "hora_de_entrada" => 0.33333333333333
- "hora_de_salida" => 0.5
- "dias_laborales" => "Sábado"
- "trabajo_en_casa" => "NO"
- "viabilidad_por_caracterizacion" => "Consultar con jefatura servicio médico y SST"
- "observacion_cambios_de_estado" => null
- "notas_comentarios_ma_andrea_leyva" => null
- "envio_de_consentimiento" => null
- "correo_electronico" => "correo1@uniandes.edu.co"
- "direccion_acual" => null
- "barrio" => null
- "localidad" => null*/
+      // dd($row);
+
         $usuario = User::where('email', $row['correo_electronico'])->first();
 
-        if ($usuario) {
-            return null;
+        if (  ! $usuario  ) {
+          $unidad = Unidad::where('nombre_unidad',$row['facultad'])->first();
+          $usuario  = new User([
+              'rol_id'   => 3,
+              'name' => $row['nombre'],
+              'apellido' => isset($row['apellido'])?$row['apellido']:'',
+              'email' => $row['correo_electronico'],
+              'tipo_doc' => isset($row['tipo_de_identificacion'])?$row['tipo_de_identificacion']:'',
+              'documento' => isset($row['no_identificacion'])?$row['no_identificacion']:0,
+              'dependencia' => $row['dependencia'],
+              'cargo' => $row['cargo'],
+              'celular' => isset($row['celular'])?$row['celular']:'',
+              'direccion' => $row['direccion_acual'],
+              'tipo_contrato' => $row['tipo_de_contrato'],
+              'barrio' => $row['barrio'],
+              'localidad' => $row['localidad'],
+              'unidad_id' => $unidad->id,
+              'password' => 'x'
+
+          ]);
         }
-
-        return new User([
-            'rol_id'   => 3,
-            'name' => $row['nombre'],
-            'apellido' => $row['apellido'],
-            'email' => $row['correo_electronico'],
-            'tipo_doc' => $row['tipo_de_identificacion'],
-            'documento' => $row['no_identificacion'],
-            'profesion' => $row['profesion'],
-            'cargo' => $row['cargo'],
-            'celular' => $row['telefonos_de_contacto_celular'],
-            'direccion' => $row['direccion_de_correspondencia'],
-            'medio' => $row['medio_por_el_cual_se_entero'],
-            'tipo_persona'=> $row['tipo_de_persona_externoestudiante_uniandes_empleado_uniandes_egresado_uniandes'],
-            'uso_datos' => $row['aceptacion_de_uso_de_datos'],
-            'asistencia_minima' => $row['cumple_con_asistencia_minima'],
-            'password' => 'x'
-
+        $usuario->save();
+        $caracterizacion  = new Caracterizacion([
+          'user_id'=>$usuario->id,
+          'por_responsabilidades_es_indispensable_su_trabajo_presencial' => $row['por_responsabilidades_es_indispensable_su_trabajo_presencial'],
+          'por_que' => $row['por_que'],
+          'horaEntrada' => $row['hora_de_entrada']*2400,
+          'horaSalida' => $row['hora_de_salida']*2400,
+          'trabajo_en_casa' => $row['trabajo_en_casa'],
+          'dias_laborales'  =>  $row['dias_laborales'],
+          'viabilidad_por_caracterizacion' => $row['viabilidad_por_caracterizacion'],
+          'revision1' => isset($row['revision1']) ? $row['revision1'] : '',
+          'revision2' => isset($row['revision2']) ? $row['revision2'] : '',
+          'observacion_cambios_de_estado' => $row['observacion_cambios_de_estado'],
+          'notas_comentarios_ma_andrea_leyva' => $row['notas_comentarios_ma_andrea_leyva'],
+          'envio_de_consentimiento' => $row['envio_de_consentimiento']
         ]);
+        return $caracterizacion;
+
     }
 
     public function rules(): array

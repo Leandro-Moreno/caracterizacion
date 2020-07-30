@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->biginteger('rol_id')->unsigned(); //TODO: eliminar el rol_id... se debe mantener la relacion de roles_users
@@ -25,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('tipo_doc')->nullable();
             $table->integer('documento')->nullable();
             $table->string('cargo')->nullable();
+            $table->string('dependencia')->nullable();
             $table->string('tipo_contrato')->nullable();
             $table->string('celular')->nullable();
             $table->string('direccion')->nullable();
