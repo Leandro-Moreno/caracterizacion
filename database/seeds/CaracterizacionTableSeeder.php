@@ -17,8 +17,8 @@ class CaracterizacionTableSeeder extends Seeder
         DB::table('caracterizacion')->insert([
             'pregunta1'=> 'si',
             'pregunta2'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-            'horaEntrada'=> '8:00 AM',
-            'horaSalida'=> '12:00 PM',
+            'horaEntrada'=> '8:00',
+            'horaSalida'=> '12:00',
             'pregunta3'=> 'Sabado',
             'pregunta4'=> 'No',
             'viabilidad'=> 'Consultar con jefatura servicio médico y SST',
@@ -33,8 +33,8 @@ class CaracterizacionTableSeeder extends Seeder
         DB::table('caracterizacion')->insert([
             'pregunta1'=> 'si',
             'pregunta2'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-            'horaEntrada'=> '12:00 PM',
-            'horaSalida'=> '4:00 PM',
+            'horaEntrada'=> '12:00',
+            'horaSalida'=> '4:00',
             'pregunta3'=> 'Sabado',
             'pregunta4'=> 'No',
             'viabilidad'=> 'Viable trabajo presencial',
@@ -50,8 +50,8 @@ class CaracterizacionTableSeeder extends Seeder
         DB::table('caracterizacion')->insert([
             'pregunta1'=> 'si',
             'pregunta2'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-            'horaEntrada'=> '12:00 PM',
-            'horaSalida'=> '4:00 PM',
+            'horaEntrada'=> '12:00',
+            'horaSalida'=> '4:00',
             'pregunta3'=> 'Sabado',
             'pregunta4'=> 'No',
             'viabilidad'=> 'Trabajo en casa y consultar a ',
@@ -66,8 +66,8 @@ class CaracterizacionTableSeeder extends Seeder
        DB::table('caracterizacion')->insert([
             'pregunta1'=> 'si',
             'pregunta2'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-            'horaEntrada'=> '8:00 AM',
-            'horaSalida'=> '12:00 PM',
+            'horaEntrada'=> '8:00',
+            'horaSalida'=> '12:00',
             'pregunta3'=> 'Sabado',
             'pregunta4'=> 'No',
             'viabilidad'=> 'Viable trabajo presencial',

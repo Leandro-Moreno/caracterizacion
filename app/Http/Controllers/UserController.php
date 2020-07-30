@@ -21,7 +21,8 @@ class UserController extends Controller
      */
     public function index(User $model)
     {
-        return view('users.index', ['users' => $model->paginate(15)]);
+        $unidades = Unidad::all();
+        return view('users.index', ['users' => $model->paginate(15)], compact('unidades'));
     }
 
     /**
@@ -67,12 +68,13 @@ class UserController extends Controller
         $user->documento = $request->documento; 
         $user->cargo = $request->cargo; 
         $user->password = Hash::make($request->documento); 
-        //$model->create($request->merge(['password' => Hash::make($request->)])->all());
         $user->tipo_contrato = $request->tipo_contrato ; 
         $user->celular = $request->celular; 
         $user->direccion = $request->direccion ; 
         $user->direccion2 = $request->barrio.','.$request->localidad; 
         $user->unidad_id = $request->unidad ; 
+        $user->save();
+        
         return redirect()->route('user.index')->withStatus(__('Usuario Creado correctamente.'));
     }
 

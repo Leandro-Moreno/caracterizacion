@@ -14,9 +14,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class CaracterizacionController extends Controller
 {
-    public function index(Caracterizacion $model)
+    public function index()
     {
-        return view('caracterizacion.index', ['datos' => $model->paginate(15)]);
+        $caracterizaciones = Caracterizacion::all(); 
+        dd($caracterizaciones);
+        return view('caracterizacion.index', compact('caracterizaciones'));
     }
 
     /**
@@ -30,10 +32,11 @@ class CaracterizacionController extends Controller
         $user = DB::table('users')
         //->where('users.rol_id', [2,3,4,5,6])
         ->get();
-
-
-        $unidades = Unidad::all();
-        return view('caracterizacion.create', compact('user', 'unidades'));
+        $sendingUser = User::where('rol_id','=',2)->get();    
+        $unidades = Unidad::all(); 
+        
+        
+        return view('caracterizacion.create', compact('user', 'unidades','sendingUser'));
     }
 
     /**
@@ -42,21 +45,55 @@ class CaracterizacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CaracterizacionRequest $request, Caracterizacion $model)
+    public function store(Request $request, Caracterizacion $model )
     {
+        
+        if ($request->pregunta1 == null){
+            $pregunta1 = 0;
+        }else{
+            $pregunta1 = $request->pregunta1;
+        }
+        dd($request);
+        
         $model->create(
             [
-                'estado' => $request->estado,
-                'nombre' => $request->nombre,
-                'descripcion' => $request->descripcion,
-                'firma_id' => $request->firma,
-                'firma2_id' => $request->firma2,
-                'fecha' => $request->fecha,
-                'hora' => $request->hora,
+                'pregunta1' => $pregunta1,
+                'pregunta2' => $request->pregunta2,
+                'horaEntrada' => $request->hora_entrada,
+                'horaSalida' => $request->hora_salida,
+                'pregunta3' => $request->viabilidad,
+                'pregunta4' => $request->viabilidad_caracterizacion,
+                'viabilidad' => $request->viabiliadad,
+                'revision1' => $request->revision1,
+                'revision2' => $request->revision2,
+                'observacion' => $request->observacion,
+                'notas' => $request->notas,
+                'envio' => $request->envio,
             ]
-        );
 
-        return redirect()->route('caracterizacion')->withStatus(__('Caracterizacion creado con éxito.'));
+        );
+        $user = New User();
+        $user->rol_id = 6;
+        $user->name = $request->nombre; 
+        $user->name = $request->name  ; 
+        $user->name2 = $request->name2; 
+        $user->apellido = $request->apellido; 
+        $user->apellido2 = $request->apellido2 ; 
+        $user->email = $request->email;
+        $user->tipo_doc = $request->tipo_doc ; 
+        $user->documento = $request->documento; 
+        $user->cargo = $request->cargo; 
+        $user->password = Hash::make($request->documento); 
+        $user->tipo_contrato = $request->tipo_contrato ; 
+        $user->celular = $request->celular; 
+        $user->direccion = $request->direccion ; 
+        $user->direccion2 = $request->barrio.','.$request->localidad; 
+        $user->unidad_id = $request->unidad ; 
+        $user->save();
+
+
+
+        return redirect()->route('caracterizacion')->withStatus(__('Caracterizacion creada con éxito.'));
     }
 
 
