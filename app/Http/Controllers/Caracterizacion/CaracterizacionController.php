@@ -17,7 +17,6 @@ class CaracterizacionController extends Controller
     public function index()
     {
         $caracterizaciones = Caracterizacion::all(); 
-        dd($caracterizaciones);
         return view('caracterizacion.index', compact('caracterizaciones'));
     }
 
