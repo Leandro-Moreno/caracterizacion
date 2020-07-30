@@ -68,9 +68,6 @@
                         {{ __('Notas/Comentarios') }}
                       </th> 
                       <th>
-                        {{ __('Observación') }}
-                      </th> 
-                      <th>
                         {{ __('Envio Consetimiento') }}
                       </th> 
                       <th class="text-right">
@@ -81,14 +78,43 @@
                       @foreach($caracterizaciones as $dato)
                         <tr>
                           <td>
-                    {{dd($dato)}}
-                            {{ $dato->nombres }}
+                            {{ $dato->user->name }} {{ $dato->user->apellido }}
                           </td>
                           <td>
-                            {{ $dato->fecha }}
+                            {{ $dato->user->email }}
                           </td>
                           <td>
-                            {{ $dato->hora }}
+                            {{ $dato->user->unidad_id }}
+                          </td>
+                          <td>
+                            {{ $dato->trabajo_en_casa }}
+                          </td>
+                          <td>
+                            {{ $dato->user->cargo }}
+                          </td>
+                          <td>
+                            {{ $dato->horaEntrada }}
+                          </td>
+                          <td>
+                            {{ $dato->horaSalida }}
+                          </td>
+                          <td>
+                            {{ $dato->viabilidad_por_caracterizacion }}
+                          </td>
+                          <td>
+                            {{ $dato->revision1 }}
+                          </td>
+                          <td>
+                            {{ $dato->revision2 }}
+                          </td>
+                          <td>
+                            {{ $dato->observacion_cambios_de_estado }}
+                          </td>
+                          <td>
+                            {{ $dato->notas_comentarios_ma_andrea_leyva }}
+                          </td>
+                          <td>
+                            {{ $dato->envio_de_consentimiento }}
                           </td>
                           <td class="td-actions text-right">
                               <form action="{{ route('caracterizacion.destroy', $dato) }}" method="post">

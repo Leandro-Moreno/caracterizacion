@@ -99,19 +99,21 @@ class CaracterizacionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Eventos\Evento  $evento
+     * @param  \App\Model\Caracterizacion\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Evento $evento, Firma $model)
+    public function edit(Caracterizacion $caracterizacion, User $model)
     {
-        return view('caracterizacion.edit', compact('evento'), ['firmas' => $model->all()]);
+        $unidades = Unidad::all();
+        $sendingUser = User::where('rol_id','=',2)->get(); 
+        return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'sendingUser'), ['user' => $model->all()]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Eventos\Evento  $evento
+     * @param  \App\Model\Caracterizacion\Evento  $evento
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Evento $evento)
@@ -130,7 +132,7 @@ class CaracterizacionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Eventos\Evento  $evento
+     * @param  \App\Model\Caracterizacion\Evento  $evento
      * @return \Illuminate\Http\Response
      */
     public function destroy(Evento $evento)

@@ -16,6 +16,10 @@ class Caracterizacion extends Model
     protected $fillable = [
         'user_id','por_responsabilidades_es_indispensable_su_trabajo_presencial','por_que', 'horaEntrada', 'horaSalida', 'dias_laborales','trabajo_en_casa', 'viabilidad_por_caracterizacion','revision1', 'revision2', 'observacion_cambios_de_estado', 'notas_comentarios_ma_andrea_leyva', 'envio_de_consentimiento', 'envio'
     ];
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 }
 /*
 'user_id'=>$usuario->id,
