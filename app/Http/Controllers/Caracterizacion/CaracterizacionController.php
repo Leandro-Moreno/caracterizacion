@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Caracterizacion;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Caracterizacion\Caracterizacion;
+use App\User;
+use App\Model\Caracterizacion\Unidad;
+use Illuminate\Support\Facades\DB;
 
 class CaracterizacionController extends Controller
 {
@@ -18,6 +21,17 @@ class CaracterizacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
+        //Cambiar la consulta según los estados y roles. COSULTA PRUEBA.
+        $user = DB::table('users')
+        //->where('users.rol_id', [2,3,4,5,6])
+        ->get();
+
+    
+        $unidades = Unidad::all(); 
+        return view('caracterizacion.create', compact('user', 'unidades'));
+    }
 
     /**
      * Store a newly created resource in storage.

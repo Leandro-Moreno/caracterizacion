@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Model\Caracterizacion\Unidad;
 use App\Rol;
 use Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
@@ -36,7 +38,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new user
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\View\View    
      */
     public function create()
     {
@@ -71,7 +73,6 @@ class UserController extends Controller
         $user->direccion = $request->direccion ; 
         $user->direccion2 = $request->barrio.','.$request->localidad; 
         $user->unidad_id = $request->unidad ; 
-        dd(Auth::user());
         return redirect()->route('user.index')->withStatus(__('Usuario Creado correctamente.'));
     }
 
