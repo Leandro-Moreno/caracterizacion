@@ -46,51 +46,38 @@ class CaracterizacionController extends Controller
      */
     public function store(Request $request, Caracterizacion $model )
     {
-        
-        if ($request->pregunta1 == null){
-            $pregunta1 = 0;
-        }else{
-            $pregunta1 = $request->pregunta1;
-        }
-        dd($request);
-        
         $model->create(
             [
-                'pregunta1' => $pregunta1,
-                'pregunta2' => $request->pregunta2,
-                'horaEntrada' => $request->hora_entrada,
+                'por_responsabilidades_es_indispensable_su_trabajo_presencial' => $por_responsabilidades_es_indispensable_su_trabajo_presencial,
+                'por_que' => $request->por_que,
+                'horaEntrada' => $request->horaEntrada,
                 'horaSalida' => $request->hora_salida,
-                'pregunta3' => $request->viabilidad,
-                'pregunta4' => $request->viabilidad_caracterizacion,
-                'viabilidad' => $request->viabiliadad,
+                'trabajo_en_casa' => $request->trabajo_en_casa,
+                'dias_laborales' => $request->dias_laborales,
+                'viabilidad_por_caracterizacion' => $request->viabilidad_por_caracterizacion,
                 'revision1' => $request->revision1,
                 'revision2' => $request->revision2,
-                'observacion' => $request->observacion,
-                'notas' => $request->notas,
-                'envio' => $request->envio,
+                'observacion_cambios_de_estado' => $request->observacion_cambios_de_estado,
+                'notas_comentarios_ma_andrea_leyva' => $request->notas_comentarios_ma_andrea_leyva,
+                'envio_de_consentimiento' => $request->envio_de_consentimiento,
             ]
 
         );
         $user = New User();
-        $user->rol_id = 6;
-        $user->name = $request->nombre; 
-        $user->name = $request->name  ; 
-        $user->name2 = $request->name2; 
+        $user->rol_id = 3;
+        $user->name = $request->name; 
         $user->apellido = $request->apellido; 
-        $user->apellido2 = $request->apellido2 ; 
         $user->email = $request->email;
         $user->tipo_doc = $request->tipo_doc ; 
         $user->documento = $request->documento; 
         $user->cargo = $request->cargo; 
-        $user->password = Hash::make($request->documento); 
-        $user->tipo_contrato = $request->tipo_contrato ; 
         $user->celular = $request->celular; 
         $user->direccion = $request->direccion ; 
+        $user->tipo_contrato = $request->tipo_contrato ; 
         $user->direccion2 = $request->barrio.','.$request->localidad; 
         $user->unidad_id = $request->unidad ; 
+        $user->password = Hash::make($request->documento); 
         $user->save();
-
-
 
         return redirect()->route('caracterizacion')->withStatus(__('Caracterizacion creada con éxito.'));
     }
@@ -106,7 +93,8 @@ class CaracterizacionController extends Controller
     {
         $unidades = Unidad::all();
         $sendingUser = User::where('rol_id','=',2)->get(); 
-        return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'sendingUser'), ['user' => $model->all()]);
+        $users = User::all();
+        return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'users' ,'sendingUser'), ['user' => $model->all()]);
     }
 
     /**
@@ -116,17 +104,45 @@ class CaracterizacionController extends Controller
      * @param  \App\Model\Caracterizacion\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Evento $evento)
-    {
-        $evento->nombre = $request->nombre;
-        $evento->estado = $request->estado;
-        $evento->descripcion = $request->descripcion;
-        $evento->firma_id = $request->firma;
-        $evento->firma2_id = $request->firma2;
-        $evento->fecha = $request->fecha;
-        $evento->hora = $request->hora;
-        $evento->save();
-        return redirect()->route('caracterizacion')->withStatus(__('Evento actualizado con éxito.'));
+    public function update(Request $request, Caracterizacion $caracterizacion)
+    {     
+
+        dd($request);
+
+        $caracterizacion->create(
+            [
+                'por_responsabilidades_es_indispensable_su_trabajo_presencial' => $request->por_responsabilidades_es_indispensable_su_trabajo_presencial,
+                'por_que' => $request->por_que,
+                'horaEntrada' => $request->hora_entrada,
+                'horaSalida' => $request->hora_salida,
+                'trabajo_en_casa' => $request->trabajo_en_casa,
+                'dias_laborales' => $request->dias_laborales,
+                'viabilidad_por_caracterizacion' => $request->viabilidad_por_caracterizacion,
+                'revision1' => $request->revision1,
+                'revision2' => $request->revision2,
+                'observacion_cambios_de_estado' => $request->observacion_cambios_de_estado,
+                'notas_comentarios_ma_andrea_leyva' => $request->notas_comentarios_ma_andrea_leyva,
+                'envio_de_consentimiento' => $request->envio_de_consentimiento,
+            ]
+
+        );
+        $user = New User();
+        $user->rol_id = 3;
+        $user->name = $request->name; 
+        $user->apellido = $request->apellido; 
+        $user->email = $request->email;
+        $user->tipo_doc = $request->tipo_doc ; 
+        $user->documento = $request->documento; 
+        $user->cargo = $request->cargo; 
+        $user->celular = $request->celular; 
+        $user->direccion = $request->direccion ; 
+        $user->tipo_contrato = $request->tipo_contrato ; 
+        $user->direccion2 = $request->barrio.','.$request->localidad; 
+        $user->unidad_id = $request->unidad ; 
+        $user->password = Hash::make($request->documento); 
+        $user->save();
+
+        return redirect()->route('caracterizacion')->withStatus(__('Usuario actualizado con éxito.'));
     }
 
     /**

@@ -56,10 +56,12 @@
                                     <div class="form-group{{ $errors->has('unidad_id') ? ' has-danger' : '' }}">
                                     <select class="form-control{{ $errors->has('unidad_id') ? ' is-invalid' : '' }}" id="input-rol" required="true" aria-required="true" name="unidad_id">
                                        <option value="">Seleccionar</option>
-                                    @if ($unidades)
-                                            @foreach($unidades as $unidad)
-                                                <option value="{{ $unidad->id }}">{{ $unidad->nombre_unidad }}</option>
-                                            @endforeach
+                                      @if ($users)
+                                          @foreach($unidades as $unidad )
+                                                @foreach($users as $user)
+                                                    <option value="{{ $unidad->id }}" {{ $unidad->id ==  $user->unidad_id ? 'selected="selected"' : '' }}>{{ $unidad->nombre_unidad }}</option>
+                                                @endforeach
+                                          @endforeach
                                         @endif
                                     </select>
                                     </div>
@@ -70,7 +72,7 @@
                                     <label class="col-sm-2 col-form-label">{{ __('Dependencia') }}</label>
                                     <div class="col-sm-4">
                                       <div class="form-group{{ $errors->has('dependencia') ? ' has-danger' : '' }}">
-                                          <textarea class="form-control{{ $errors->has('dependencia') ? ' is-invalid' : '' }}" name="dependencia" id="input-dependencia" type="" placeholder="{{ __('Dependencia') }}" value="{{ old('dependencia') }}"  rows="1" required>{{ old('deondencia') }}</textarea>
+                                          <textarea class="form-control{{ $errors->has('dependencia') ? ' is-invalid' : '' }}" name="dependencia" id="input-dependencia" type="" placeholder="{{ __('Dependencia') }}" value="{{ old('dependencia',  '') }}"  rows="1" required>{{ old('deondencia') }}</textarea>
                                           @if ($errors->has('dependencia'))
                                           <span id="dependencia-error" class="error text-danger" for="input-dependencia">{{ $errors->first('dependencia') }}</span>
                                           @endif
@@ -81,7 +83,7 @@
                                        <label class="col-md-2 col-form-label">{{ __('Cargo') }}</label>
                                        <div class="col-md-4">
                                           <div class="form-group{{ $errors->has('cargo') ? ' has-danger' : '' }}">
-                                             <input class="form-control{{ $errors->has('cargo') ? ' is-invalid' : '' }}" name="cargo" id="input-cargo" type="text" placeholder="{{ __('Cargo') }}" value="" aria-required="true"/>
+                                             <input class="form-control{{ $errors->has('cargo') ? ' is-invalid' : '' }}" name="cargo" id="input-cargo" type="text" placeholder="{{ __('Cargo') }}" value="{{old('cargo', $user->cargo)}}" aria-required="true"/>
                                              @if ($errors->has('cargo'))
                                              <span id="cargo-error" class="error text-danger" for="input-cargo">{{ $errors->first('cargo') }}</span>
                                              @endif
@@ -92,7 +94,7 @@
                                        <label class="col-sm-2 col-form-label">{{ __('Nombres') }}</label>
                                        <div class="col-sm-4">
                                           <div class="form-group{{ $errors->has('nombre') ? ' has-danger' : '' }}">
-                                             <input class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" id="input-nombre" type="text" placeholder="{{ __('Nombre') }}" value="{{ old('nombre') }}" required="true" aria-required="true"/>
+                                             <input class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" id="input-nombre" type="text" placeholder="{{ __('Nombre') }}" value="{{  old('nombre', $user->name.' '.$user->apellido) }}" required="true" aria-required="true"/>
                                              @if ($errors->has('nombre'))
                                              <span id="nombre-error" class="error text-danger" for="input-nombre">{{ $errors->first('nombre') }}</span>
                                              @endif
@@ -103,7 +105,7 @@
                                        <label class="col-sm-2 col-form-label">{{ __('Email') }}</label>
                                        <div class="col-sm-4">
                                           <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-                                             <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" id="input-email" type="text" placeholder="{{ __('email') }}" value="{{ old('email') }}" required="true" aria-required="true"/>
+                                             <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" id="input-email" type="text" placeholder="{{ __('email') }}" value="{{ old('email' , $user->email) }}" required="true" aria-required="true"/>
                                              @if ($errors->has('email'))
                                              <span id="email-error" class="error text-danger" for="input-email">{{ $errors->first('email') }}</span>
                                              @endif
@@ -114,7 +116,7 @@
                                        <label class="col-md-2 col-form-label">{{ __('Documento') }}</label>
                                        <div class="col-md-4">
                                           <div class="form-group{{ $errors->has('documento') ? ' has-danger' : '' }}">
-                                             <input class="form-control{{ $errors->has('documento') ? ' is-invalid' : '' }}" name="documento" id="input-documento" type="text" placeholder="{{ __('Documento') }}" value="" aria-required="true"/>
+                                             <input class="form-control{{ $errors->has('documento') ? ' is-invalid' : '' }}" name="documento" id="input-documento" type="text" placeholder="{{ __('Documento') }}" value="{{old('documento' , $user->documento)}}" aria-required="true"/>
                                              @if ($errors->has('documento'))
                                              <span id="documento-error" class="error text-danger" for="input-documento">{{ $errors->first('documento') }}</span>
                                              @endif
@@ -125,7 +127,7 @@
                                        <label class="col-md-2 col-form-label">{{ __('Tipo de Contrato') }}</label>
                                        <div class="col-md-4">
                                           <div class="form-group{{ $errors->has('tipo_contrato') ? ' has-danger' : '' }}">
-                                             <input class="form-control{{ $errors->has('tipo_contrato') ? ' is-invalid' : '' }}" name="tipo_contrato" id="input-tipo_contrato" type="text" placeholder="{{ __('Tipo de Contrato') }}" value="" aria-required="true"/>
+                                             <input class="form-control{{ $errors->has('tipo_contrato') ? ' is-invalid' : '' }}" name="tipo_contrato" id="input-tipo_contrato" type="text" placeholder="{{ __('Tipo de Contrato') }}" value="{{ old('tipo_contrto' , $user->tipo_contrato)}}" aria-required="true"/>
                                              @if ($errors->has('tipo_contrato'))
                                              <span id="tipo_contrato-error" class="error text-danger" for="input-tipo_contrato">{{ $errors->first('tipo_contrato') }}</span>
                                              @endif
@@ -136,7 +138,7 @@
                                     <label class="col-sm-2 col-form-label">{{ __('Dirección') }}</label>
                                     <div class="col-sm-4">
                                       <div class="form-group{{ $errors->has('direccion') ? ' has-danger' : '' }}">
-                                          <textarea class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}" name="direccion" id="input-direccion" type="" placeholder="{{ __('Dirección') }}" value="{{ old('direccion') }}"  rows="1" required>{{ old('direccion') }}</textarea>
+                                          <textarea class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}" name="direccion" id="input-direccion" type="" placeholder="{{ __('Dirección') }}" value="{{ old('direccion', $user->direccion) }}"  rows="1" required>{{ old('direccion', $user->direccion) }}</textarea>
                                           @if ($errors->has('direccion'))
                                           <span id="direccion-error" class="error text-danger" for="input-direccion">{{ $errors->first('direccion') }}</span>
                                           @endif
@@ -147,7 +149,7 @@
                                     <label class="col-sm-2 col-form-label">{{ __('Barrio') }}</label>
                                     <div class="col-sm-4">
                                       <div class="form-group{{ $errors->has('direccion2') ? ' has-danger' : '' }}">
-                                          <textarea class="form-control{{ $errors->has('direccion2') ? ' is-invalid' : '' }}" name="direccionb" id="input-direccion2" type="" placeholder="{{ __('Barrio') }}" value="{{ old('barrio') }}"  rows="1" required>{{ old('direccion2') }}</textarea>
+                                          <textarea class="form-control{{ $errors->has('direccion2') ? ' is-invalid' : '' }}" name="direccionb" id="input-direccion2" type="" placeholder="{{ __('Barrio') }}" value="{{ old('barrio' ,$user->direccion2) }}"  rows="1" required>{{ old('direccion2',$user->direccion2) }}</textarea>
                                           @if ($errors->has('direccion2'))
                                           <span id="direccion2-error" class="error text-danger" for="input-direccion2">{{ $errors->first('direccion2') }}</span>
                                           @endif
@@ -158,7 +160,7 @@
                                     <label class="col-sm-2 col-form-label">{{ __('Localidad') }}</label>
                                     <div class="col-sm-4">
                                       <div class="form-group{{ $errors->has('direccion2') ? ' has-danger' : '' }}">
-                                          <textarea class="form-control{{ $errors->has('direccion2') ? ' is-invalid' : '' }}" name="direccionl" id="input-direccion2" type="" placeholder="{{ __('Localidad') }}" value="{{ old('direccion2') }}"  rows="1" required>{{ old('direccion2') }}</textarea>
+                                          <textarea class="form-control{{ $errors->has('direccion2') ? ' is-invalid' : '' }}" name="direccionl" id="input-direccion2" type="" placeholder="{{ __('Localidad') }}" value="{{ old('direccion2',$user->direccion2) }}"  rows="1" required>{{ old('direccion2' ,$user->direccion2) }}</textarea>
                                           @if ($errors->has('direccion2'))
                                           <span id="direccion2-error" class="error text-danger" for="input-direccion2">{{ $errors->first('direccion2') }}</span>
                                           @endif
@@ -168,15 +170,15 @@
                               <div class="row">
                                  <label class="col-sm-2 col-form-label">{{ __('¿Por responsabilidades es indispensable su trabajo presencial?') }}</label>
                                  <div class="col-sm-4">
-                                    <div class="form-group{{ $errors->has('pregunta1') ? ' has-danger' : '' }}">
+                                    <div class="form-group{{ $errors->has('por_responsabilidades_es_indispensable_su_trabajo_presencial') ? ' has-danger' : '' }}">
                                        <div class="togglebutton">
                                           <label>
-                                          <input name="pregunta1" type="checkbox" checked="" value="1">{{ old('pregunta1', 1) }}</input>
+                                          <input name="por_responsabilidades_es_indispensable_su_trabajo_presencial" type="checkbox"  value="{{ $caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial}}"  {{ $caracterizacion->envio_de_consentimiento === 'Si' ? 'checked="checked"' : '' }}>{{ old('por_responsabilidades_es_indispensable_su_trabajo_presencial',  $caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial) }}</input>         
                                           <span class="toggle"></span>
                                           </label>
                                        </div>
-                                       @if ($errors->has('pregunta1'))
-                                       <span id="pregunta1-error" class="error text-danger" for="input-pregunta1">{{ $errors->first('pregunta1') }}</span>
+                                       @if ($errors->has('por_responsabilidades_es_indispensable_su_trabajo_presencial'))
+                                       <span id="por_responsabilidades_es_indispensable_su_trabajo_presencial-error" class="error text-danger" for="input-por_responsabilidades_es_indispensable_su_trabajo_presencial">{{ $errors->first('por_responsabilidades_es_indispensable_su_trabajo_presencial') }}</span>
                                        @endif
                                     </div>
                                  </div>
@@ -184,10 +186,10 @@
                               <div class="row">
                                  <label class="col-sm-2 col-form-label">{{ __('¿Por qué?') }}</label>
                                  <div class="col-sm-4">
-                                    <div class="form-group{{ $errors->has('pregunta2') ? ' has-danger' : '' }}">
-                                       <textarea class="form-control{{ $errors->has('pregunta2') ? ' is-invalid' : '' }}" name="pregunta2" id="input-pregunta2" type="" placeholder="{{ __('¿Por qué?') }}" value="{{ old('pregunta2') }}"  rows="4" required>{{ old('pregunta2') }}</textarea>
-                                       @if ($errors->has('pregunta2'))
-                                       <span id="pregunta2-error" class="error text-danger" for="input-pregunta2">{{ $errors->first('pregunta2') }}</span>
+                                    <div class="form-group{{ $errors->has('por_que') ? ' has-danger' : '' }}">
+                                       <textarea class="form-control{{ $errors->has('por_que') ? ' is-invalid' : '' }}" name="por_que" id="input-por_que" type="" placeholder="{{ __('¿Por qué?') }}" value="{{ old('por_que', $caracterizacion->por_que) }}"  rows="4" required>{{ old('por_que', $caracterizacion->por_que) }}</textarea>
+                                       @if ($errors->has('por_que'))
+                                       <span id="por_que-error" class="error text-danger" for="input-por_que">{{ $errors->first('por_que') }}</span>
                                        @endif
                                     </div>
                                  </div>
@@ -196,7 +198,7 @@
                                  <label class="col-sm-2 col-form-label" for="input-hora">{{ __('Hora de Entrada') }}</label>
                                  <div class="col-sm-4">
                                  <div class="form-group">
-                                    <input class="form-control" name="hora_entrada" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora') }}"  />
+                                    <input class="form-control" name="hora_entrada" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora', $caracterizacion->horaEntrada) }}"  />
                                  </div>
                                  </div>
                               </div>
@@ -204,7 +206,7 @@
                                  <label class="col-sm-2 col-form-label" for="input-hora">{{ __('Hora de Salida') }}</label>
                                  <div class="col-sm-4">
                                  <div class="form-group">
-                                    <input class="form-control" name="hora_salida" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora') }}"  />
+                                    <input class="form-control" name="hora_salida" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora', $caracterizacion->horaSalida) }}"  />
                                  </div>
                                  </div>
                               </div>
@@ -214,12 +216,12 @@
                                           <div class="form-group{{ $errors->has('dias_laborales') ? ' has-danger' : '' }}">
                                              <select class="form-control{{ $errors->has('dias_laborales') ? ' is-invalid' : '' }}" id="input-dias_laborales" required="true" aria-required="true" rows="3" name="dias_laborales" multiple>
                                                 <option value="{{ old('dias_laborales') }}" disabled selected>Seleccionar</option>
-                                                <option value="1">Lunes </option>
-                                                <option value="2">Martes</option>
-                                                <option value="3">Miercoles</option>
-                                                <option value="4">Jueves</option>
-                                                <option value="5">Viernes</option>
-                                                <option value="5">Sabado</option>
+                                                <option value="1" @if($caracterizacion->dias_laborales == '1') selected  @endif >Lunes </option>
+                                                <option value="2" @if($caracterizacion->dias_laborales == '2') selected  @endif >Martes</option>
+                                                <option value="3" @if($caracterizacion->dias_laborales == '3') selected  @endif >Miercoles</option>
+                                                <option value="4" @if($caracterizacion->dias_laborales == '4') selected  @endif >Jueves</option>
+                                                <option value="5" @if($caracterizacion->dias_laborales == '5') selected  @endif >Viernes</option>
+                                                <option value="6"  @if($caracterizacion->dias_laborales == '6') selected  @endif >Sabado</option>
                                              </select>
                                           </div>
                                        </div>
@@ -230,14 +232,15 @@
                             <div class="row">
                                        <label class="col-sm-2 col-form-label">{{ __('Viabilidad por caracterización') }}</label>
                                        <div class="col-sm-5">
-                                          <div class="form-group{{ $errors->has('viabilidad') ? ' has-danger' : '' }}">
-                                             <select class="form-control{{ $errors->has('viabilidad') ? ' is-invalid' : '' }}" id="input-viabilidad" required="true" aria-required="true" name="viabilidad_caracterizacion">
-                                                <option value="{{ old('viabilidad') }}">Seleccionar</option>
-                                                <option value="1">Consultar con jefatura servicio médico y SST</option>
-                                                <option value="2">Viable trabajo presencial</option>
-                                                <option value="3">Trabajo en casa y consultar a telemedicina</option>
-                                                <option value="4">Trabajo en casa</option>
-                                                <option value="5">Sin clasificación</option>
+                                          <div class="form-group{{ $errors->has('viabilidad_por_caracterizacion') ? ' has-danger' : '' }}">
+                                             <select class="form-control{{ $errors->has('viabilidad_por_caracterizacion') ? ' is-invalid' : '' }}" id="input-viabilidad_por_caracterizacion" required="true" aria-required="true" name="viabilidad_por_caracterizacion_caracterizacion">
+                                                <option value="{{ old('viabilidad_por_caracterizacion') }}"disabled selected>Seleccionar</option>
+                                                
+                                                <option value="1" @if($caracterizacion->viabilidad_por_caracterizacion == 'Consultar con jefatura servicio médico y SST') selected  @endif >Consultar con jefatura servicio médico y SST</option>
+                                                <option value="2" @if($caracterizacion->viabilidad_por_caracterizacion == 'Viable trabajo presencial') selected  @endif >Viable trabajo presencial</option>
+                                                <option value="3" @if($caracterizacion->viabilidad_por_caracterizacion == 'Viable trabajo presencial') selected  @endif >Trabajo en casa y consultar a telemedicina</option>
+                                                <option value="4" @if($caracterizacion->viabilidad_por_caracterizacion == 'Trabajo en casa y consultar a telemedicina') selected  @endif >Trabajo en casa</option>
+                                                <option value="5" @if($caracterizacion->viabilidad_por_caracterizacion == 'Trabajo en casa') selected  @endif >Sin clasificación</option>
                                              </select>
                                           </div>
                                        </div>
@@ -246,7 +249,7 @@
                                  <label class="col-sm-2 col-form-label">{{ __('Revisión Departamento Medico y Seguridad en el trabajo') }}</label>
                                  <div class="col-sm-4">
                                     <div class="form-group{{ $errors->has('revision1') ? ' has-danger' : '' }}">
-                                       <textarea class="form-control{{ $errors->has('revision1') ? ' is-invalid' : '' }}" name="revision1" id="input-revision1" type="" placeholder="{{ __('Revisión Departamento Medico y Seguridad en el trabajo') }}" value="{{ old('revision1') }}"  rows="4" required>{{ old('revision1') }}</textarea>
+                                       <textarea class="form-control{{ $errors->has('revision1') ? ' is-invalid' : '' }}" name="revision1" id="input-revision1" type="" placeholder="{{ __('Revisión Departamento Medico y Seguridad en el trabajo') }}" value="{{ old('revision1', $caracterizacion->revision1) }}"  rows="4" required>{{ old('revision1', $caracterizacion->revision1) }}</textarea>
                                        @if ($errors->has('revision1'))
                                        <span id="revision1-error" class="error text-danger" for="input-revision1">{{ $errors->first('revision1') }}</span>
                                        @endif
@@ -257,7 +260,7 @@
                                  <label class="col-sm-2 col-form-label">{{ __('Revisión Telemedicina') }}</label>
                                  <div class="col-sm-4">
                                     <div class="form-group{{ $errors->has('revision2') ? ' has-danger' : '' }}">
-                                       <textarea class="form-control{{ $errors->has('revision2') ? ' is-invalid' : '' }}" name="revision2" id="input-revision2" type="" placeholder="{{ __('Revisión Telemedicina') }}" value="{{ old('revision2') }}"  rows="3" required>{{ old('revision2') }}</textarea>
+                                       <textarea class="form-control{{ $errors->has('revision2') ? ' is-invalid' : '' }}" name="revision2" id="input-revision2" type="" placeholder="{{ __('Revisión Telemedicina') }}" value="{{ old('revision2'  , $caracterizacion->revision2) }}"  rows="3" required>{{ old('revision2' , $caracterizacion->revision2) }}</textarea>
                                        @if ($errors->has('revision2'))
                                        <span id="revision2-error" class="error text-danger" for="input-revision2">{{ $errors->first('revision2') }}</span>
                                        @endif
@@ -267,10 +270,10 @@
                               <div class="row">
                                  <label class="col-sm-2 col-form-label">{{ __('Observación') }}</label>
                                  <div class="col-sm-4">
-                                    <div class="form-group{{ $errors->has('observacion') ? ' has-danger' : '' }}">
-                                       <textarea class="form-control{{ $errors->has('observacion') ? ' is-invalid' : '' }}" name="observacion" id="input-observacion" type="" placeholder="{{ __('Observación') }}" value="{{ old('observacion') }}"  rows="3" required>{{ old('observacion') }}</textarea>
-                                       @if ($errors->has('observacion'))
-                                       <span id="observacion-error" class="error text-danger" for="input-observacion">{{ $errors->first('observacion') }}</span>
+                                    <div class="form-group{{ $errors->has('observacion_cambios_de_estado') ? ' has-danger' : '' }}">
+                                       <textarea class="form-control{{ $errors->has('observacion_cambios_de_estado') ? ' is-invalid' : '' }}" name="observacion_cambios_de_estado" id="input-observacion_cambios_de_estado" type="" placeholder="{{ __('Observación') }}" value="{{ old('observacion_cambios_de_estado', $caracterizacion->observacion_cambios_de_estado) }}"  rows="3" required>{{ old('observacion_cambios_de_estado', $caracterizacion->observacion_cambios_de_estado) }}</textarea>
+                                       @if ($errors->has('observacion_cambios_de_estado'))
+                                       <span id="observacion_cambios_de_estado-error" class="error text-danger" for="input-observacion_cambios_de_estado">{{ $errors->first('observacion_cambios_de_estado') }}</span>
                                        @endif
                                     </div>
                                  </div>
@@ -280,31 +283,30 @@
                            <div class="row">
                                  <label class="col-sm-2 col-form-label">{{ __('Notas/Comentarios') }}</label>
                                  <div class="col-sm-4">
-                                    <div class="form-group{{ $errors->has('notas') ? ' has-danger' : '' }}">
-                                       <textarea class="form-control{{ $errors->has('notas') ? ' is-invalid' : '' }}" name="notas" id="input-notas" type="" placeholder="{{ __('Notas/Comentarios') }}" value="{{ old('notas') }}"  rows="3" required>{{ old('notas') }}</textarea>
-                                       @if ($errors->has('notas'))
-                                       <span id="notas-error" class="error text-danger" for="input-notas">{{ $errors->first('notas') }}</span>
+                                    <div class="form-group{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' has-danger' : '' }}">
+                                       <textarea class="form-control{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' is-invalid' : '' }}" name="notas_comentarios_ma_andrea_leyva" id="input-notas_comentarios_ma_andrea_leyva" type="" placeholder="{{ __('Notas / Comentarios') }}" value="{{ old('notas_comentarios_ma_andrea_leyva', $caracterizacion->notas_comentarios_ma_andrea_leyva)}}"  rows="3" required>{{ old('notas_comentarios_ma_andrea_leyva', $caracterizacion->notas_comentarios_ma_andrea_leyva)}}</textarea>
+                                       @if ($errors->has('notas_comentarios_ma_andrea_leyva'))
+                                       <span id="notas_comentarios_ma_andrea_leyva-error" class="error text-danger" for="input-notas_comentarios_ma_andrea_leyva">{{ $errors->first('notas_comentarios_ma_andrea_leyva') }}</span>
                                        @endif
                                     </div>
                                  </div>
                               </div>
                            <div class="row">
                                  <label class="col-sm-2 col-form-label">{{ __('Envío del consentimiento') }}</label>
-                                 <div class="col-sm-4">
-                                    <div class="form-group{{ $errors->has('envio') ? ' has-danger' : '' }}">
+                                 <div class="col-sm-4">                                    <div class="form-group{{ $errors->has('envio_de_consentimiento') ? ' has-danger' : '' }}">
                                        <div class="togglebutton">
                                           <label>
-                                          <input name="envio" type="checkbox" checked="" value="1">{{ old('envio', 1) }}</input>
+                                          <input name="envio_de_consentimiento" type="checkbox"  value="{{ $caracterizacion->envio_de_consentimiento}}" {{ $caracterizacion->envio_de_consentimiento === 'Si' ? 'checked="checked"' : '' }}>{{ old('envio_de_consentimiento', $caracterizacion->envio_de_consentimiento) }}</input>
                                           <span class="toggle"></span>
                                           </label>
                                        </div>
-                                       @if ($errors->has('envio'))
-                                       <span id="envio-error" class="error text-danger" for="input-envio">{{ $errors->first('envio') }}</span>
+                                       @if ($errors->has('envio_de_consentimiento'))
+                                       <span id="envio_de_consentimiento-error" class="error text-danger" for="input-envio_de_consentimiento">{{ $errors->first('envio_de_consentimiento') }}</span>
                                        @endif
                                     </div>
                                  </div>
                               </div>
-                              <div class="row">
+                              <!--div class="row">
                                        <label class="col-sm-2 col-form-label">{{ __('Usuario que envía el consentimiento') }}</label>
                                        <div class="col-sm-5">
                                           <div class="form-group{{ $errors->has('userSender') ? ' has-danger' : '' }}">
@@ -312,19 +314,20 @@
                                                 <option value="">Seleccionar</option>
                                                 @if ($sendingUser)
                                                    @foreach($sendingUser as $userSend)
-                                                         <option value="{{ $userSend->id }}">{{ $userSend->name }} {{ $userSend->name2 }} {{ $userSend->apellido }} {{ $userSend->apellido2 }}</option>
+                                                         <option  value="{{ $userSend->id }}"@if($userSend->id == 'Trabajo en casa') selected  @endif >{{ $userSend->name }} {{ $userSend->name2 }} {{ $userSend->apellido }} {{ $userSend->apellido2 }}</option>
+                                                         <option  value="{{ $userSend->id }}" >{{ $userSend->name }} {{ $userSend->name2 }} {{ $userSend->apellido }} {{ $userSend->apellido2 }}</option>
                                                    @endforeach
                                                  @endif
                                              </select>
                                           </div>
                                        </div>
-                              </div>
+                              </div-->
                            </div>
                         </div>
                      </div>
                </div>
                <div class="card-footer ml-auto mr-auto">
-                  <button type="submit" class="btn btn-primary">{{ __('Añadir Caracterización') }}</button>
+                  <button type="submit" class="btn btn-primary">{{ __('Guardar Caracterización') }}</button>
                </div>
          </div>
           </form>
