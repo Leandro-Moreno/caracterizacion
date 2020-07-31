@@ -106,13 +106,15 @@ class CaracterizacionController extends Controller
      */
     public function update(Request $request, Caracterizacion $caracterizacion)
     {     
-
+        if($request->por_responsabilidades_es_indispensable_su_trabajo_presencial == null){
+            $request->por_responsabilidades_es_indispensable_su_trabajo_presencial = 'No' ;  
+        }
         dd($request);
-
         $caracterizacion->create(
             [
                 'por_responsabilidades_es_indispensable_su_trabajo_presencial' => $request->por_responsabilidades_es_indispensable_su_trabajo_presencial,
                 'por_que' => $request->por_que,
+                
                 'horaEntrada' => $request->hora_entrada,
                 'horaSalida' => $request->hora_salida,
                 'trabajo_en_casa' => $request->trabajo_en_casa,
@@ -124,7 +126,7 @@ class CaracterizacionController extends Controller
                 'notas_comentarios_ma_andrea_leyva' => $request->notas_comentarios_ma_andrea_leyva,
                 'envio_de_consentimiento' => $request->envio_de_consentimiento,
             ]
-
+           
         );
         $user = New User();
         $user->rol_id = 3;

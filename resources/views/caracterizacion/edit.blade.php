@@ -173,7 +173,7 @@
                                     <div class="form-group{{ $errors->has('por_responsabilidades_es_indispensable_su_trabajo_presencial') ? ' has-danger' : '' }}">
                                        <div class="togglebutton">
                                           <label>
-                                          <input name="por_responsabilidades_es_indispensable_su_trabajo_presencial" type="checkbox"  value="{{ $caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial}}"  {{ $caracterizacion->envio_de_consentimiento === 'Si' ? 'checked="checked"' : '' }}>{{ old('por_responsabilidades_es_indispensable_su_trabajo_presencial',  $caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial) }}</input>         
+                                          <input name="por_responsabilidades_es_indispensable_su_trabajo_presencial" type="checkbox"  value="{{$caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial}}"  {{ $caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial === 'Si' ? 'checked="checked"' : '' }}>{{ $caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial}}</input>         
                                           <span class="toggle"></span>
                                           </label>
                                        </div>
@@ -225,6 +225,22 @@
                                              </select>
                                           </div>
                                        </div>
+                              </div>
+                              <div class="row">
+                                 <label class="col-sm-2 col-form-label">{{ __('Trabajo en casa') }}</label>
+                                 <div class="col-sm-4">
+                                    <div class="form-group{{ $errors->has('trabajo_en_casa') ? ' has-danger' : '' }}">
+                                       <div class="togglebutton">
+                                          <label>
+                                          <input name="trabajo_en_casa" type="checkbox"  value="{{$caracterizacion->trabajo_en_casa}}"  @if($caracterizacion->trabajo_en_casa == 'Si') checked @endif>{{$caracterizacion->trabajo_en_casa}}</input>         
+                                          <span class="toggle"></span>
+                                          </label>
+                                       </div>
+                                       @if ($errors->has('trabajo_en_casa'))
+                                       <span id="trabajo_en_casa-error" class="error text-danger" for="input-trabajo_en_casa">{{ $errors->first('trabajo_en_casa') }}</span>
+                                       @endif
+                                    </div>
+                                 </div>
                               </div>
                             </div>
                             <!--Tab Centro Meidco-->
@@ -296,7 +312,7 @@
                                  <div class="col-sm-4">                                    <div class="form-group{{ $errors->has('envio_de_consentimiento') ? ' has-danger' : '' }}">
                                        <div class="togglebutton">
                                           <label>
-                                          <input name="envio_de_consentimiento" type="checkbox"  value="{{ $caracterizacion->envio_de_consentimiento}}" {{ $caracterizacion->envio_de_consentimiento === 'Si' ? 'checked="checked"' : '' }}>{{ old('envio_de_consentimiento', $caracterizacion->envio_de_consentimiento) }}</input>
+                                          <input name="envio_de_consentimiento" type="checkbox"  value="{{$caracterizacion->envio_de_consentimiento}}" {{ $caracterizacion->envio_de_consentimiento === 'Si' ? 'checked="checked"' : '' }}>{{  $caracterizacion->envio_de_consentimiento }}</input>
                                           <span class="toggle"></span>
                                           </label>
                                        </div>
@@ -344,7 +360,7 @@
     }
       $("#estadoTogg").prop( "checked" )?$( "#toggContenido" ).text("No activo"):$( "#toggContenido" ).text("Activo");
 
-      });
+      });a
 
   </script>
   @endpush
