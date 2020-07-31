@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Caracterizacion\Caracterizacion;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 use App\Model\Caracterizacion\Unidad;
 use Illuminate\Support\Facades\DB;
 
@@ -38,6 +39,9 @@ class CaracterizacionController extends Controller
         return view('caracterizacion.create', compact('user', 'unidades','sendingUser'));
     }
 
+    
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -46,11 +50,35 @@ class CaracterizacionController extends Controller
      */
     public function store(Request $request, Caracterizacion $model )
     {
+        
+        $user = New User();
+        $user->rol_id = 3;
+        $user->name = $request->nombre; 
+        $user->apellido = $request->nombre; 
+        $user->email = $request->email;
+        $user->tipo_doc = $request->tipo_doc ; 
+        $user->documento = $request->documento; 
+        $user->cargo = $request->cargo; 
+        $user->celular = $request->celular; 
+        $user->direccion = $request->direccion ; 
+        $user->tipo_contrato = $request->tipo_contrato ; 
+        $user->direccion2 = $request->barrio.','.$request->localidad; 
+        $user->unidad_id = $request->unidad_id ; 
+        $user->password = Hash::make($request->documento); 
+        $user->save();
+        if($request->por_responsabilidades_es_indispensable_su_trabajo_presencial == null){
+            $request->por_responsabilidades_es_indispensable_su_trabajo_presencial = "No"; 
+        }
+        if($request->trabajo_en_casa == null){
+            $request->trabajo_en_casa = "No"; 
+        }
+        $last = DB::table('users')->latest()->first();
+
         $model->create(
             [
-                'por_responsabilidades_es_indispensable_su_trabajo_presencial' => $por_responsabilidades_es_indispensable_su_trabajo_presencial,
+                'por_responsabilidades_es_indispensable_su_trabajo_presencial' => $request->por_responsabilidades_es_indispensable_su_trabajo_presencial,
                 'por_que' => $request->por_que,
-                'horaEntrada' => $request->horaEntrada,
+                'horaEntrada' => $request->hora_entrada,
                 'horaSalida' => $request->hora_salida,
                 'trabajo_en_casa' => $request->trabajo_en_casa,
                 'dias_laborales' => $request->dias_laborales,
@@ -60,24 +88,11 @@ class CaracterizacionController extends Controller
                 'observacion_cambios_de_estado' => $request->observacion_cambios_de_estado,
                 'notas_comentarios_ma_andrea_leyva' => $request->notas_comentarios_ma_andrea_leyva,
                 'envio_de_consentimiento' => $request->envio_de_consentimiento,
+                'user_id' => $last->id
             ]
 
         );
-        $user = New User();
-        $user->rol_id = 3;
-        $user->name = $request->name; 
-        $user->apellido = $request->apellido; 
-        $user->email = $request->email;
-        $user->tipo_doc = $request->tipo_doc ; 
-        $user->documento = $request->documento; 
-        $user->cargo = $request->cargo; 
-        $user->celular = $request->celular; 
-        $user->direccion = $request->direccion ; 
-        $user->tipo_contrato = $request->tipo_contrato ; 
-        $user->direccion2 = $request->barrio.','.$request->localidad; 
-        $user->unidad_id = $request->unidad ; 
-        $user->password = Hash::make($request->documento); 
-        $user->save();
+        
 
         return redirect()->route('caracterizacion')->withStatus(__('Caracterizacion creada con éxito.'));
     }

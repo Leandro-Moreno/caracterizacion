@@ -54,10 +54,11 @@ Route::group(['middleware' => 'auth'], function () {
       'update' => 'correo.update',
   ])->middleware('administrador');
 
-
+  
   Route::get('admin/profile', 'UserController@admin')->name('user.admin')->middleware('administrador');
-
+  
 });
+Route::get('caracterizacion/{id}/crear', 'userController@createCaracterizacion')->name('caracterizacion.ucreate');
 
 
 Route::group(['middleware' => 'auth'], function () {

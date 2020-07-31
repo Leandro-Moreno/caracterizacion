@@ -92,8 +92,12 @@
                           <td class="td-actions text-right">
 
 
-                                  <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('user.edit', $user) }}" data-original-title="" title="">
+                                  <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('user.edit', $user) }}" data-original-title="" title="Editar usuario">
                                     <i class="material-icons">edit</i>
+                                    <div class="ripple-container"></div>
+                                  </a>
+                                  <a rel="tooltip" class="btn btn-primary btn-link" href="{{ route('caracterizacion.ucreate', $user) }}" data-original-title="" title="Editar/Crear Caracterización">
+                                  <i class="material-icons">next_week</i>
                                     <div class="ripple-container"></div>
                                   </a>
 

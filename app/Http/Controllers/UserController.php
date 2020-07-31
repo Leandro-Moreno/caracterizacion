@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -54,6 +55,20 @@ class UserController extends Controller
      * @param  \App\User  $model
      * @return \Illuminate\Http\RedirectResponse
      */
+    public function createCaracterizacion($id)
+    {
+        
+        //Cambiar la consulta según los estados y roles. COSULTA PRUEBA.
+        $userCaracterizacion = User::find($id);
+        $user = DB::table('users')
+        //->where('users.rol_id', [2,3,4,5,6])
+        ->get();
+        $sendingUser = User::where('rol_id','=',2)->get();    
+        $unidades = Unidad::all(); 
+        
+        
+        return view('caracterizacion.createwithuser', compact('user', 'unidades','sendingUser', 'userCaracterizacion'));
+    }
     public function storeUser(Request $request)
     {   
         $user = new User;
