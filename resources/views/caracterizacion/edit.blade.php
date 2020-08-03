@@ -248,15 +248,15 @@
                             <div class="row">
                                        <label class="col-sm-2 col-form-label">{{ __('Viabilidad por caracterización') }}</label>
                                        <div class="col-sm-5">
-                                          <div class="form-group{{ $errors->has('viabilidad_por_caracterizacion') ? ' has-danger' : '' }}">
-                                             <select class="form-control{{ $errors->has('viabilidad_por_caracterizacion') ? ' is-invalid' : '' }}" id="input-viabilidad_por_caracterizacion" required="true" aria-required="true" name="viabilidad_por_caracterizacion_caracterizacion">
-                                                <option value="{{ old('viabilidad_por_caracterizacion') }}"disabled selected>Seleccionar</option>
+                                          <div class="form-group{{ $errors->has('viabilidad_caracterizacion') ? ' has-danger' : '' }}">
+                                             <select class="form-control{{ $errors->has('viabilidad_caracterizacion') ? ' is-invalid' : '' }}" id="input-viabilidad_caracterizacion" required="true" aria-required="true" name="viabilidad_caracterizacion_caracterizacion">
+                                                <option value="{{ old('viabilidad_caracterizacion') }}"disabled selected>Seleccionar</option>
 
-                                                <option value="1" @if($caracterizacion->viabilidad_por_caracterizacion == 'Consultar con jefatura servicio médico y SST') selected  @endif >Consultar con jefatura servicio médico y SST</option>
-                                                <option value="2" @if($caracterizacion->viabilidad_por_caracterizacion == 'Viable trabajo presencial') selected  @endif >Viable trabajo presencial</option>
-                                                <option value="3" @if($caracterizacion->viabilidad_por_caracterizacion == 'Viable trabajo presencial') selected  @endif >Trabajo en casa y consultar a telemedicina</option>
-                                                <option value="4" @if($caracterizacion->viabilidad_por_caracterizacion == 'Trabajo en casa y consultar a telemedicina') selected  @endif >Trabajo en casa</option>
-                                                <option value="5" @if($caracterizacion->viabilidad_por_caracterizacion == 'Trabajo en casa') selected  @endif >Sin clasificación</option>
+                                                <option value="1" @if($caracterizacion->viabilidad_caracterizacion == 'Consultar con jefatura servicio médico y SST') selected  @endif >Consultar con jefatura servicio médico y SST</option>
+                                                <option value="2" @if($caracterizacion->viabilidad_caracterizacion == 'Viable trabajo presencial') selected  @endif >Viable trabajo presencial</option>
+                                                <option value="3" @if($caracterizacion->viabilidad_caracterizacion == 'Viable trabajo presencial') selected  @endif >Trabajo en casa y consultar a telemedicina</option>
+                                                <option value="4" @if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa y consultar a telemedicina') selected  @endif >Trabajo en casa</option>
+                                                <option value="5" @if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa') selected  @endif >Sin clasificación</option>
                                              </select>
                                           </div>
                                        </div>

@@ -99,7 +99,7 @@
                             {{ $dato->horaSalida }}
                           </td>
                           <td>
-                            {{ $dato->viabilidad_por_caracterizacion }}
+                            {{ $dato->viabilidad_caracterizacion }}
                           </td>
                           <td>
                             {{ $dato->revision1 }}
