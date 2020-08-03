@@ -51,5 +51,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Model\Caracterizacion\Unidad', 'unidad_id');
     }
+    public function buscarUsuarioPorCorreo( $correo = 'correo@uniandes.edu.co'){
 
+      return $this::where('email', $correo)->first();
+    }
 }

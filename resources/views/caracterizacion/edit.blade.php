@@ -173,7 +173,7 @@
                                     <div class="form-group{{ $errors->has('por_responsabilidades_es_indispensable_su_trabajo_presencial') ? ' has-danger' : '' }}">
                                        <div class="togglebutton">
                                           <label>
-                                          <input name="por_responsabilidades_es_indispensable_su_trabajo_presencial" type="checkbox"  value="{{$caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial}}"  {{ $caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial === 'Si' ? 'checked="checked"' : '' }}>{{ $caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial}}</input>         
+                                          <input name="por_responsabilidades_es_indispensable_su_trabajo_presencial" type="checkbox"  value="{{$caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial}}"  {{ $caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial === 'Si' ? 'checked="checked"' : '' }}>{{ $caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial}}</input>
                                           <span class="toggle"></span>
                                           </label>
                                        </div>
@@ -232,7 +232,7 @@
                                     <div class="form-group{{ $errors->has('trabajo_en_casa') ? ' has-danger' : '' }}">
                                        <div class="togglebutton">
                                           <label>
-                                          <input name="trabajo_en_casa" type="checkbox"  value="{{$caracterizacion->trabajo_en_casa}}"  @if($caracterizacion->trabajo_en_casa == 'Si') checked @endif>{{$caracterizacion->trabajo_en_casa}}</input>         
+                                          <input name="trabajo_en_casa" type="checkbox"  value="{{$caracterizacion->trabajo_en_casa}}"  @if($caracterizacion->trabajo_en_casa == 'Si') checked @endif>{{$caracterizacion->trabajo_en_casa}}</input>
                                           <span class="toggle"></span>
                                           </label>
                                        </div>
@@ -251,7 +251,7 @@
                                           <div class="form-group{{ $errors->has('viabilidad_por_caracterizacion') ? ' has-danger' : '' }}">
                                              <select class="form-control{{ $errors->has('viabilidad_por_caracterizacion') ? ' is-invalid' : '' }}" id="input-viabilidad_por_caracterizacion" required="true" aria-required="true" name="viabilidad_por_caracterizacion_caracterizacion">
                                                 <option value="{{ old('viabilidad_por_caracterizacion') }}"disabled selected>Seleccionar</option>
-                                                
+
                                                 <option value="1" @if($caracterizacion->viabilidad_por_caracterizacion == 'Consultar con jefatura servicio médico y SST') selected  @endif >Consultar con jefatura servicio médico y SST</option>
                                                 <option value="2" @if($caracterizacion->viabilidad_por_caracterizacion == 'Viable trabajo presencial') selected  @endif >Viable trabajo presencial</option>
                                                 <option value="3" @if($caracterizacion->viabilidad_por_caracterizacion == 'Viable trabajo presencial') selected  @endif >Trabajo en casa y consultar a telemedicina</option>
