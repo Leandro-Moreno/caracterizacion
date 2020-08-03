@@ -12,169 +12,172 @@ class UnidadesTableSeeder extends Seeder
      */
     public function run()
     {
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="FACULTADES";
-      //$unidad->dependecia="";
-      $unidad->save();
 
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="AUDITORÍA INTERNA";
-      //$unidad->dependecia="";
-      $unidad->save();
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'FACULTADES',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'AUDITORÍA INTERNA',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'CENTRO DE ÉTICA',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'CIDER',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'CONECTA-TE',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'DECANATURA DE ESTUDIANTES',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'DIR GESTIÓN HUMANA Y ORGANIZACIONAL',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'DIRECCIÓN CAMPUS SOSTENIBLE',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'DIRECCIÓN DE ADMISIONES Y REGISTRO',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'DIRECCIÓN DE EDUCACIÓN CONTINUA',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'DIRECCIÓN DE PLANEACIÓN Y EVALUACIÓN',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'DIRECCIÓN DE SERVICIOS DE INFORMACIÓN Y TECNOLOGÍA',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'DIRECCIÓN FINANCIERA',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'DIRECCIÓN SERVICIOS ADMINISTRATIVOS',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'DIRECCIÓN SERVICIOS CAMPUS',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'ESCUELA DE GOBIERNO',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'FACULTAD DE ADMINISTRACIÓN',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'FACULTAD DE ARQUITECTURA Y DISEÑO',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'FACULTAD DE ARTES Y HUMANIDADES',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'FACULTAD DE CIENCIAS',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'FACULTAD DE CIENCIAS SOCIALES',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'FACULTAD DE DERECHO',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'FACULTAD DE ECONOMÍA',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'FACULTAD DE EDUCACIÓN',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'FACULTAD DE INGENIERÍA',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'FACULTAD DE MEDICINA',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'RECTORÍA',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'SECRETARÍA GENERAL',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'SISTEMA DE BIBLIOTECAS',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'VICERRECTORÍA ACADÉMICA',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'VICERRECTORÍA DE DESARROLLO Y EGRESADOS',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'VICERRECTORÍA INVESTIGACIÓN Y CREACIÓN',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
+      DB::table('unidades')->insert([
+          'nombre_unidad'=> 'VICERRECTORÍA SERVICIOS Y SOSTENIBILIDAD',
+          'created_at' => now(),
+          'updated_at' => now()
+      ]);
 
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="CENTRO DE ÉTICA";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="CIDER";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="CONECTA-TE";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="DECANATURA DE ESTUDIANTES";
-      //$unidad->dependecia="";
-      $unidad->save();
-      
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="DIR GESTIÓN HUMANA Y ORGANIZACIONAL";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="DIRECCIÓN CAMPUS SOSTENIBLE";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="DIRECCIÓN DE ADMISIONES Y REGISTRO";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="DIRECCIÓN DE EDUCACIÓN CONTINUA";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="DIRECCIÓN DE PLANEACIÓN Y EVALUACIÓN";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="DIRECCIÓN DE SERVICIOS DE INFORMACIÓN Y TECNOLOGÍA";
-      //$unidad->dependecia="";
-      $unidad->save();
-      
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="DIRECCIÓN FINANCIERA";
-      //$unidad->dependecia="";
-      $unidad->save();
-      
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="DIRECCIÓN SERVICIOS ADMINISTRATIVOS";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="DIRECCIÓN SERVICIOS CAMPUS";
-      //$unidad->dependecia="";
-      $unidad->save();
-      
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="ESCUELA DE GOBIERNO";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="FACULTAD DE ADMINISTRACIÓN";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="FACULTAD DE ARQUITECTURA Y DISEÑO";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="FACULTAD DE ARTES Y HUMANIDADES";
-      //$unidad->dependecia="";
-      $unidad->save();
-      
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="FACULTAD DE CIENCIAS";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="FACULTAD DE CIENCIAS SOCIALES";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="FACULTAD DE DERECHO";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="FACULTAD DE ECONOMÍA";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="FACULTAD DE EDUCACIÓN";
-      //$unidad->dependecia="";
-      $unidad->save();
-      
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="FACULTAD DE INGENIERÍA";
-      //$unidad->dependecia="";
-      $unidad->save();
-      
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="FACULTAD DE MEDICINA";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="RECTORÍA";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="SECRETARÍA GENERAL";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="SISTEMA DE BIBLIOTECAS";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="VICERRECTORÍA ACADÉMICA";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="VICERRECTORÍA DE DESARROLLO Y EGRESADOS";
-      //$unidad->dependecia="";
-      $unidad->save();
-      
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="VICERRECTORÍA INVESTIGACIÓN Y CREACIÓN";
-      //$unidad->dependecia="";
-      $unidad->save();
-
-      $unidad = new Unidad();
-      $unidad->nombre_unidad="VICERRECTORÍA SERVICIOS Y SOSTENIBILIDAD";
-      //$unidad->dependecia="";
-      $unidad->save();
     }
 }

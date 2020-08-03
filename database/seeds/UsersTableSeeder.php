@@ -13,18 +13,18 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'rol_id' => '6',
+            'rol_id' => '5',
             'unidad_id' => '11',
             'name' => 'Leandro',
             'email' => 'le.moreno910@uniandes.edu.co',
             'email_verified_at' => now(),
-            'password' => Hash::make('h}-ezWGst*57q+r!'),
+            'password' => Hash::make('111111'),
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('users')->insert([
-            'rol_id' => '1',
+            'rol_id' => '5',
             'unidad_id' => '11',
             'name' => 'Andres',
             'email' => 'ca.gonzalezb1@uniandes.edu.co',
@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'rol_id' => '6',
+            'rol_id' => '1',
             'unidad_id' => '1',
             'name' => 'Daniela',
             'cargo' => 'Analista',
@@ -54,7 +54,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'rol_id' => '6',
+            'rol_id' => '1',
             'unidad_id' => '1',
             'name' => 'Camilo',
             'cargo' => 'Secretario',
@@ -73,7 +73,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'rol_id' => '6',
+            'rol_id' => '1',
             'unidad_id' => '1',
             'name' => 'Fabian',
             'cargo' => 'Asistente',
@@ -98,7 +98,7 @@ class UsersTableSeeder extends Seeder
             'unidad_id' => '25',
             'tipo_contrato' => 'Temporal',
             'apellido' => 'Reyes',
-            'documento' => '313546841', 
+            'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
             'direccion2' => 'La Candelaria | Candelaria',
@@ -110,7 +110,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'rol_id' => '6',
+            'rol_id' => '2',
             'unidad_id' => '1',
             'name' => 'Andres',
             'cargo' => 'Ingeniero',

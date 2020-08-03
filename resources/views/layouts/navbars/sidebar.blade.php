@@ -8,9 +8,9 @@
         </a>
       </li>
 
-      @if (Auth::user()->rol_id <= 2)
-      <li class="nav-item {{ ($activePage == 'eventos' ||  $activePage == 'user-management'|| $activePage == 'firmas') ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#Eventos" aria-expanded="{{ ($activePage == 'eventos' ||  $activePage == 'user-management'|| $activePage == 'firmas') ? 'true' : 'false' }}">
+      @if (Auth::user()->rol_id >= 2)
+      <li class="nav-item {{ ( $activePage == 'user-management') ? ' active' : '' }}">
+        <a class="nav-link" data-toggle="collapse" href="#Eventos" aria-expanded="{{ (  $activePage == 'user-management') ? 'true' : 'false' }}">
             <i class="material-icons">supervised_user_circle</i>
           <p>{{ __('Caracterización Usuarios') }}
             <b class="caret"></b>

@@ -42,8 +42,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('nuevo/usuario', 'UserController@storeUser')->name('createuser')->middleware('auth');
 
 
-  Route::get('importar/caracterizacion', 'Caracterizacion\CaracterizacionController@importar')->middleware('auth')->name('caracterizacion.importar');
-	Route::post('importar/caracterizacion', 'Caracterizacion\CaracterizacionController@importarCrear')->middleware('auth')->name('caracterizacion.importarCrear');
+  Route::get('importar/caracterizacion', 'Caracterizacion\CaracterizacionController@importar')->middleware('administrador')->name('caracterizacion.importar');
+	Route::post('importar/caracterizacion', 'Caracterizacion\CaracterizacionController@importarCrear')->middleware('administrador')->name('caracterizacion.importarCrear');
 
 
 	Route::get('exportar/usuario', 'Caracterizacion\CaracterizacionController@To.do')->middleware('auth')->name('user.export');
@@ -54,11 +54,11 @@ Route::group(['middleware' => 'auth'], function () {
       'update' => 'correo.update',
   ])->middleware('administrador');
 
-  
+
   Route::get('admin/profile', 'UserController@admin')->name('user.admin')->middleware('administrador');
-  
+  Route::get('caracterizacion/{id}/crear', 'userController@createCaracterizacion')->name('caracterizacion.ucreate');
+
 });
-Route::get('caracterizacion/{id}/crear', 'userController@createCaracterizacion')->name('caracterizacion.ucreate');
 
 
 Route::group(['middleware' => 'auth'], function () {

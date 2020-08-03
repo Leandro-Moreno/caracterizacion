@@ -6,7 +6,7 @@
       <div class="row">
         @if (Auth::user()->rol_id == 3)
         <div class="col-lg-4 col-md-6 col-sm-6">
-          <a class="nav-link" href="{{ route('certificados') }}">
+          <a class="nav-link" href="{{ route('/') }}">
           <div class="card card-stats">
             <div class="card-header card-header-primary card-header-icon">
               <div class="card-icon">
@@ -63,7 +63,7 @@
           </div>
           </a>
         </div>
-        
+
         <div class="col-lg-4 col-md-6 col-sm-6">
           <a class="" href="">
           <div class="card card-stats">

@@ -16,8 +16,8 @@ class Administrador
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->rol_id > 2) {
-            return redirect('error404');
+        if (Auth::user()->rol_id < 4) {
+            return redirect('/');
         }
         return $next($request);
     }

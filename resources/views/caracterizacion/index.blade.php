@@ -63,13 +63,13 @@
                       </th>
                       <th>
                         {{ __('Observación') }}
-                      </th> 
+                      </th>
                       <th>
                         {{ __('Notas/Comentarios') }}
-                      </th> 
+                      </th>
                       <th>
-                        {{ __('Envio Consetimiento') }}
-                      </th> 
+                        {{ __('Envio Consentimiento') }}
+                      </th>
                       <th class="text-right">
                         {{ __('Accion') }}
                       </th>
@@ -84,7 +84,7 @@
                             {{ $dato->user->email }}
                           </td>
                           <td>
-                            {{ $dato->user->unidad_id }}
+                            {{ $dato->user->unidad->nombre_unidad }}
                           </td>
                           <td>
                             {{ $dato->trabajo_en_casa }}
