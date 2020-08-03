@@ -91,7 +91,7 @@ class CaracterizacionController extends Controller
                 'observacion_cambios_de_estado' => $request->observacion_cambios_de_estado,
                 'notas_comentarios_ma_andrea_leyva' => $request->notas_comentarios_ma_andrea_leyva,
                 'envio_de_consentimiento' => $request->envio_de_consentimiento,
-                'user_id' => $user->id;
+                'user_id' => $user->id,
             ]
 
         );
