@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use App\Model\Caracterizacion\Unidad;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use App\Imports\UsersImport;//TODO: cambiar users por caracterizacion
 use Maatwebsite\Excel\Facades\Excel;
@@ -17,8 +18,17 @@ class CaracterizacionController extends Controller
 {
     public function index()
     {
+
+        $caracterizaciones;
         $caracterizaciones = Caracterizacion::all();
-        return view('caracterizacion.index', compact('caracterizaciones'));
+        $user = Auth::user();
+        if($user->rol_id < 3){
+          $caracterizaciones  = $caracterizaciones->filter(function ($value, $key){
+            $user = Auth::user();
+            return $value->user->unidad_id == $user->unidad_id;
+          });
+        }
+        return view('caracterizacion.index', ['caracterizaciones' => $caracterizaciones->paginate(15)] );
     }
 
     /**

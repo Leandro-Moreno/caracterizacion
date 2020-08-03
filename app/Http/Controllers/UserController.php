@@ -34,13 +34,13 @@ class UserController extends Controller
      */
     public function Admin(User $model)
     {
-        return view('users.admin', ['users' => $model->where('rol_id',1)->get()]);
+        return view('users.admin', ['users' => $model->whereIn('rol_id',[2,3,4,5])->get()]);
     }
 
     /**
      * Show the form for creating a new user
      *
-     * @return \Illuminate\View\View    
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -57,39 +57,37 @@ class UserController extends Controller
      */
     public function createCaracterizacion($id)
     {
-        
+
         //Cambiar la consulta según los estados y roles. COSULTA PRUEBA.
         $userCaracterizacion = User::find($id);
         $user = DB::table('users')
         //->where('users.rol_id', [2,3,4,5,6])
         ->get();
-        $sendingUser = User::where('rol_id','=',2)->get();    
-        $unidades = Unidad::all(); 
-        
-        
+        $sendingUser = User::where('rol_id','=',2)->get();
+        $unidades = Unidad::all();
         return view('caracterizacion.createwithuser', compact('user', 'unidades','sendingUser', 'userCaracterizacion'));
     }
     public function storeUser(Request $request)
-    {   
+    {
         $user = new User;
         $user->rol_id = $request->rol;
-        $user->name = $request->name; 
-        $user->name = $request->name  ; 
-        $user->name2 = $request->name2; 
-        $user->apellido = $request->apellido; 
-        $user->apellido2 = $request->apellido2 ; 
+        $user->name = $request->name;
+        $user->name = $request->name  ;
+        $user->name2 = $request->name2;
+        $user->apellido = $request->apellido;
+        $user->apellido2 = $request->apellido2 ;
         $user->email = $request->email;
-        $user->tipo_doc = $request->tipo_doc ; 
-        $user->documento = $request->documento; 
-        $user->cargo = $request->cargo; 
-        $user->password = Hash::make($request->documento); 
-        $user->tipo_contrato = $request->tipo_contrato ; 
-        $user->celular = $request->celular; 
-        $user->direccion = $request->direccion ; 
-        $user->direccion2 = $request->barrio.','.$request->localidad; 
-        $user->unidad_id = $request->unidad ; 
+        $user->tipo_doc = $request->tipo_doc ;
+        $user->documento = $request->documento;
+        $user->cargo = $request->cargo;
+        $user->password = Hash::make($request->documento);
+        $user->tipo_contrato = $request->tipo_contrato ;
+        $user->celular = $request->celular;
+        $user->direccion = $request->direccion ;
+        $user->direccion2 = $request->barrio.','.$request->localidad;
+        $user->unidad_id = $request->unidad ;
         $user->save();
-        
+
         return redirect()->route('user.index')->withStatus(__('Usuario Creado correctamente.'));
     }
 

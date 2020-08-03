@@ -35,10 +35,13 @@
                           {{ __('Nombre') }}
                       </th>
                       <th>
-                        {{ __('Email') }}
+                        {{ __('Rol') }}
                       </th>
                       <th>
-                        {{ __('Documento de Identidad') }}
+                        {{ __('Facultad') }}
+                      </th>
+                      <th>
+                        {{ __('Email') }}
                       </th>
                       <th class="text-right">
                         {{ __('Acciones') }}
@@ -51,10 +54,13 @@
                             {{ $user->name }} {{ $user->name2 }} {{ $user->apellido }} {{ $user->apellido2 }}
                           </td>
                           <td>
-                            {{ $user->email }}
+                            {{ $user->rol_id }}. {{ $user->rol->nombre }}
                           </td>
                           <td>
-                            {{ $user->tipo_doc }} {{ $user->documento }}
+                            {{ $user->unidad->nombre_unidad }}
+                          </td>
+                          <td>
+                            {{ $user->email }}
                           </td>
                           <td class="td-actions text-right">
 

@@ -138,4 +138,5 @@
       </div>
     </div>
   </div>
+  {{ $caracterizaciones->links() }}
 @endsection
