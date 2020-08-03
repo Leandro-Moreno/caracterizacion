@@ -69,9 +69,9 @@ class CaracterizacionController extends Controller
         $user->unidad_id = $request->unidad_id ;
         $user->password = Hash::make($request->documento);
         $user->save();
-        
-        if($request->por_responsabilidades_es_indispensable_su_trabajo_presencial == null){
-            $request->por_responsabilidades_es_indispensable_su_trabajo_presencial = "No";
+
+        if($request->indispensable_presencial == null){
+            $request->indispensable_presencial = "No";
         }
         if($request->trabajo_en_casa == null){
             $request->trabajo_en_casa = "No";
@@ -79,7 +79,7 @@ class CaracterizacionController extends Controller
 
         $model->create(
             [
-                'por_responsabilidades_es_indispensable_su_trabajo_presencial' => $request->por_responsabilidades_es_indispensable_su_trabajo_presencial,
+                'indispensable_presencial' => $request->indispensable_presencial,
                 'por_que' => $request->por_que,
                 'horaEntrada' => $request->hora_entrada,
                 'horaSalida' => $request->hora_salida,
@@ -126,14 +126,14 @@ class CaracterizacionController extends Controller
     {
       $user = New User();
       $user = is_null( $user->buscarUsuarioPorCorreo( $request->email ) )? $user : $user->buscarUsuarioPorCorreo( $request->email ) ;
-        if($request->por_responsabilidades_es_indispensable_su_trabajo_presencial == null){
-            $request->por_responsabilidades_es_indispensable_su_trabajo_presencial = 'No' ;
+        if($request->indispensable_presencial == null){
+            $request->indispensable_presencial = 'No' ;
         }
         dd($request);
         //TODO: crear funcion update. Primero se crea/actuliza el usuario. luego la caracterizacion para tener el id
         $caracterizacion->create(
             [
-                'por_responsabilidades_es_indispensable_su_trabajo_presencial' => $request->por_responsabilidades_es_indispensable_su_trabajo_presencial,
+                'indispensable_presencial' => $request->indispensable_presencial,
                 'por_que' => $request->por_que,
 
                 'horaEntrada' => $request->hora_entrada,

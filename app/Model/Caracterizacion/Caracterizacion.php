@@ -14,7 +14,7 @@ class Caracterizacion extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id','por_responsabilidades_es_indispensable_su_trabajo_presencial','por_que', 'horaEntrada', 'horaSalida', 'dias_laborales','trabajo_en_casa', 'viabilidad_por_caracterizacion','revision1', 'revision2', 'observacion_cambios_de_estado', 'notas_comentarios_ma_andrea_leyva', 'envio_de_consentimiento', 'envio'
+        'user_id','indispensable_presencial','por_que', 'horaEntrada', 'horaSalida', 'dias_laborales','trabajo_en_casa', 'viabilidad_por_caracterizacion','revision1', 'revision2', 'observacion_cambios_de_estado', 'notas_comentarios_ma_andrea_leyva', 'envio_de_consentimiento', 'envio'
     ];
     public function user()
     {
@@ -23,7 +23,7 @@ class Caracterizacion extends Model
 }
 /*
 'user_id'=>$usuario->id,
-'por_responsabilidades_es_indispensable_su_trabajo_presencial' => $row['por_responsabilidades_es_indispensable_su_trabajo_presencial'],
+'indispensable_presencial' => $row['indispensable_presencial'],
 'por_que' => $row['por_que'],
 'horaEntrada' => $row['hora_de_entrada'],
 'horaEntrada' => $row['hora_de_salida'],

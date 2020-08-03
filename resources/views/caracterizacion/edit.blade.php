@@ -170,15 +170,15 @@
                               <div class="row">
                                  <label class="col-sm-2 col-form-label">{{ __('¿Por responsabilidades es indispensable su trabajo presencial?') }}</label>
                                  <div class="col-sm-4">
-                                    <div class="form-group{{ $errors->has('por_responsabilidades_es_indispensable_su_trabajo_presencial') ? ' has-danger' : '' }}">
+                                    <div class="form-group{{ $errors->has('indispensable_presencial') ? ' has-danger' : '' }}">
                                        <div class="togglebutton">
                                           <label>
-                                          <input name="por_responsabilidades_es_indispensable_su_trabajo_presencial" type="checkbox"  value="{{$caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial}}"  {{ $caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial === 'Si' ? 'checked="checked"' : '' }}>{{ $caracterizacion->por_responsabilidades_es_indispensable_su_trabajo_presencial}}</input>
+                                          <input name="indispensable_presencial" type="checkbox"  value="{{$caracterizacion->indispensable_presencial}}"  {{ $caracterizacion->indispensable_presencial === 'Si' ? 'checked="checked"' : '' }}>{{ $caracterizacion->indispensable_presencial}}</input>
                                           <span class="toggle"></span>
                                           </label>
                                        </div>
-                                       @if ($errors->has('por_responsabilidades_es_indispensable_su_trabajo_presencial'))
-                                       <span id="por_responsabilidades_es_indispensable_su_trabajo_presencial-error" class="error text-danger" for="input-por_responsabilidades_es_indispensable_su_trabajo_presencial">{{ $errors->first('por_responsabilidades_es_indispensable_su_trabajo_presencial') }}</span>
+                                       @if ($errors->has('indispensable_presencial'))
+                                       <span id="indispensable_presencial-error" class="error text-danger" for="input-indispensable_presencial">{{ $errors->first('indispensable_presencial') }}</span>
                                        @endif
                                     </div>
                                  </div>

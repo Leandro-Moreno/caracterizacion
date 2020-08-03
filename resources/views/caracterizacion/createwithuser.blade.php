@@ -158,15 +158,15 @@
                               <div class="row">
                                  <label class="col-sm-2 col-form-label">{{ __('¿Por responsabilidades es indispensable su trabajo presencial?') }}</label>
                                  <div class="col-sm-4">
-                                    <div class="form-group{{ $errors->has('por_responsabilidades_es_indispensable_su_trabajo_presencial') ? ' has-danger' : '' }}">
+                                    <div class="form-group{{ $errors->has('indispensable_presencial') ? ' has-danger' : '' }}">
                                        <div class="togglebutton">
                                           <label>
-                                          <input name="por_responsabilidades_es_indispensable_su_trabajo_presencial" type="checkbox" checked="" value="1">{{ old('por_responsabilidades_es_indispensable_su_trabajo_presencial', 1) }}</input>
+                                          <input name="indispensable_presencial" type="checkbox" checked="" value="1">{{ old('indispensable_presencial', 1) }}</input>
                                           <span class="toggle"></span>
                                           </label>
                                        </div>
-                                       @if ($errors->has('por_responsabilidades_es_indispensable_su_trabajo_presencial'))
-                                       <span id="por_responsabilidades_es_indispensable_su_trabajo_presencial-error" class="error text-danger" for="input-por_responsabilidades_es_indispensable_su_trabajo_presencial">{{ $errors->first('pregunta1') }}</span>
+                                       @if ($errors->has('indispensable_presencial'))
+                                       <span id="indispensable_presencial-error" class="error text-danger" for="input-indispensable_presencial">{{ $errors->first('pregunta1') }}</span>
                                        @endif
                                     </div>
                                  </div>

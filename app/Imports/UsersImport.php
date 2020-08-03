@@ -45,7 +45,7 @@ class UsersImport implements ToModel, WithHeadingRow
         $usuario->save();
         $caracterizacion  = new Caracterizacion([
           'user_id'=>$usuario->id,
-          'por_responsabilidades_es_indispensable_su_trabajo_presencial' => $row['por_responsabilidades_es_indispensable_su_trabajo_presencial'],
+          'indispensable_presencial' => $row['indispensable_presencial'],
           'por_que' => $row['por_que'],
           'horaEntrada' => $row['hora_de_entrada']*2400,
           'horaSalida' => $row['hora_de_salida']*2400,

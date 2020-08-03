@@ -17,7 +17,7 @@ class CreateCaracterizacionTable extends Migration
             $table->bigIncrements('id');
             $table->biginteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('por_responsabilidades_es_indispensable_su_trabajo_presencial');
+            $table->string('indispensable_presencial');
             $table->string('por_que')->nullable();
             $table->time('horaEntrada');
             $table->time('horaSalida');
