@@ -18,14 +18,13 @@ class CaracterizacionController extends Controller
 {
     public function index()
     {
-
         $caracterizaciones;
         $caracterizaciones = Caracterizacion::all();
         $user = Auth::user();
         if($user->rol_id < 3){
-          $caracterizaciones  = $caracterizaciones->filter(function ($value, $key){
+          $caracterizaciones  = $caracterizaciones->filter(function ($caracterizacion, $key){
             $user = Auth::user();
-            return $value->user->unidad_id == $user->unidad_id;
+            return $caracterizacion->user->unidad_id == $user->unidad_id;
           });
         }
         return view('caracterizacion.index', ['caracterizaciones' => $caracterizaciones->paginate(15)] );

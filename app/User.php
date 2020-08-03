@@ -38,6 +38,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function caracterizaciones()
+    {
+        return $this->hasMany("App\Model\Caracterizacion\Caracterizacion");
+    }
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new CustomResetPasswordNotification($token));
