@@ -18,7 +18,7 @@ class CaracterizacionPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->rol_id == 2;
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class CaracterizacionPolicy
      */
     public function view(User $user, Caracterizacion $caracterizacion)
     {
-        //
+        return true;
     }
 
     /**
@@ -65,7 +65,7 @@ class CaracterizacionPolicy
      */
     public function delete(User $user, Caracterizacion $caracterizacion)
     {
-        //
+        return true;
     }
 
     /**
@@ -77,7 +77,7 @@ class CaracterizacionPolicy
      */
     public function restore(User $user, Caracterizacion $caracterizacion)
     {
-        //
+        return true;
     }
 
     /**
@@ -89,7 +89,7 @@ class CaracterizacionPolicy
      */
     public function forceDelete(User $user, Caracterizacion $caracterizacion)
     {
-        //
+        return true;
     }
 
 
@@ -102,6 +102,6 @@ class CaracterizacionPolicy
      */
     public function oe(User $user)
     {
-        return false;
+        return true;
     }
 }

@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
     	'edit' => 'caracterizacion.edit',
     	'update' => 'caracterizacion.update',
 		'destroy' => 'caracterizacion.destroy',
-	])->middleware('administrador');
+	]);
 
 	Route::post('nuevo/usuario', 'UserController@storeUser')->name('createuser')->middleware('auth');
 

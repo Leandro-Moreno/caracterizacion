@@ -18,7 +18,7 @@ class CaracterizacionController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Caracterizacion::class, 'Caracterizacion');
+        $this->authorizeResource(Caracterizacion::class);
     }
 
     public function index()
