@@ -23,11 +23,13 @@
                     </div>
                   </div>
                 @endif
+                @can('create', App\Model\Caracterizacion\Caracterizacion::class)
                 <div class="row">
                   <div class="col-12 text-right">
                     <a href="{{ route('caracterizacion.create') }}" class="btn btn-sm btn-primary">{{ __('Añadir Caracterización') }}</a>
                   </div>
                 </div>
+                @endcan
                 <div class="table-responsive">
                   <table class="table">
                     <thead class=" text-primary">
@@ -116,6 +118,7 @@
                           <td>
                             {{ $dato->envio_de_consentimiento }}
                           </td>
+                          @can('update', $dato)
                           <td class="td-actions text-right">
                               <form action="{{ route('caracterizacion.destroy', $dato) }}" method="post">
                                   @csrf
@@ -127,6 +130,7 @@
                                   </a>
                               </form>
                           </td>
+                          @endcan
                         </tr>
                       @endforeach
                     </tbody>

@@ -16,6 +16,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class CaracterizacionController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Caracterizacion::class, 'Caracterizacion');
+    }
+
     public function index()
     {
         $caracterizaciones;
@@ -188,6 +193,7 @@ class CaracterizacionController extends Controller
         echo "En construcción";
     }
     public function importar(){
+      $this->authorize('oe', Caracterizacion::Class);
       return view('caracterizacion.import');
     }
     public function importarCrear(){
