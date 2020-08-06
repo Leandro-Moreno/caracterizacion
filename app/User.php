@@ -60,4 +60,10 @@ class User extends Authenticatable
 
       return $this::where('email', $correo)->first();
     }
+
+    public function scopeBuscarpor($query, $tipo, $buscar) {
+    	if ( ($tipo) && ($buscar) ) {
+    		return $query->where($tipo,'like',"%$buscar%");
+    	}
+    }
 }

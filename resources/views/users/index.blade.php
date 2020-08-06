@@ -24,11 +24,23 @@
                   </div>
                 @endif
                 <div class="row">
-                  <div class="col-12 text-right">
-                    <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar usuario') }}</a>
+                  <div class="text-right col-6">
+                      <form class="form-inline ">
+                          <select name="tipo" class="form-control mr-sm-2" id="exampleFormControlSelect1">
+                            <option disabled selected>Buscar por...</option>
+                            <option value="name">Nombres</option>
+                            <option value="apellido">Apellidos</option>
+                            <option value="documento">Documento</option>
+                            <option value="cargo">Cargo</option>
+                            <option value="nombre_unidad">Unidad/ Facultad</option>
+                            <option value="email">Correo Uniandes</option>
+                          </select>
+                            <input name="buscarpor" class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                    </form>
                   </div>
                   <div class="col-12 text-right">
-
+                    <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar usuario') }}</a>
                   </div>
                 </div>
                 <div class="table-responsive">

@@ -65,6 +65,11 @@ class CaracterizacionController extends Controller
     public function store(Request $request, Caracterizacion $model )
     {
 
+        
+        $validatedData = $request->validate([
+            'cargo' => 'required|unique:posts|max:2',
+        ]);
+
         $user = New User();
         $user = is_null( $user->buscarUsuarioPorCorreo( $request->email ) )? $user : $user->buscarUsuarioPorCorreo( $request->email ) ;
         if( isset($user->name) ){
@@ -100,8 +105,6 @@ class CaracterizacionController extends Controller
                 'trabajo_en_casa' => $request->trabajo_en_casa,
                 'dias_laborales' => $request->dias_laborales,
                 'viabilidad_caracterizacion' => $request->viabilidad_caracterizacion,
-                'revision1' => $request->revision1,
-                'revision2' => $request->revision2,
                 'observacion_cambios_de_estado' => $request->observacion_cambios_de_estado,
                 'notas_comentarios_ma_andrea_leyva' => $request->notas_comentarios_ma_andrea_leyva,
                 'envio_de_consentimiento' => $request->envio_de_consentimiento,
@@ -143,20 +146,20 @@ class CaracterizacionController extends Controller
         if($request->indispensable_presencial == null){
             $request->indispensable_presencial = 'No' ;
         }
-        dd($request);
+        if($request->trabajo_en_casa == null){
+            $request->trabajo_en_casa = 'No' ;
+        }
+        
         //TODO: crear funcion update. Primero se crea/actuliza el usuario. luego la caracterizacion para tener el id
         $caracterizacion->create(
             [
                 'indispensable_presencial' => $request->indispensable_presencial,
                 'por_que' => $request->por_que,
-
                 'horaEntrada' => $request->hora_entrada,
                 'horaSalida' => $request->hora_salida,
                 'trabajo_en_casa' => $request->trabajo_en_casa,
                 'dias_laborales' => $request->dias_laborales,
                 'viabilidad_caracterizacion' => $request->viabilidad_caracterizacion,
-                'revision1' => $request->revision1,
-                'revision2' => $request->revision2,
                 'observacion_cambios_de_estado' => $request->observacion_cambios_de_estado,
                 'notas_comentarios_ma_andrea_leyva' => $request->notas_comentarios_ma_andrea_leyva,
                 'envio_de_consentimiento' => $request->envio_de_consentimiento,

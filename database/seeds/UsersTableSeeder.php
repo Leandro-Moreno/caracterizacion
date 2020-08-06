@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder
             'apellido' => 'Gonzalez',
             'email' => 'ca.gonzalezb1@uniandes.edu.co',
             'email_verified_at' => now(),
-            'password' => Hash::make('h}-ezWGst*57q+r!'),
+            'password' => Hash::make('casco'),
             'created_at' => now(),
             'updated_at' => now()
         ]);

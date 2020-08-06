@@ -24,8 +24,6 @@ class CreateCaracterizacionTable extends Migration
             $table->string('dias_laborales');
             $table->string('trabajo_en_casa');
             $table->string('viabilidad_caracterizacion')->nullable();
-            $table->string('revision1')->nullable();
-            $table->string('revision2')->nullable();
             $table->string('observacion_cambios_de_estado')->nullable();
             $table->string('notas_comentarios_ma_andrea_leyva')->nullable();
             $table->string('envio_de_consentimiento')->nullable();

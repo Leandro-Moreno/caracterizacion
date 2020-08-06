@@ -20,10 +20,19 @@ class UserController extends Controller
      * @param  \App\User  $model
      * @return \Illuminate\View\View
      */
-    public function index(User $model)
+    public function index(Request $request,User $model)
     {
+       // dd($request);
+
+        $buscar = $request->get('buscarpor');
+
+        $tipo = $request->get('tipo');
+
+        $users = User::buscarpor($tipo, $buscar)->paginate(5);
+
         $unidades = Unidad::all();
-        return view('users.index', ['users' => $model->paginate(15)], compact('unidades'));
+        
+        return view('users.index', compact('unidades', 'users'));
     }
 
     /**

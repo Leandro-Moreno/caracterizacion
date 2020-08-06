@@ -58,12 +58,6 @@
                         {{ __('Viabilidad') }}
                       </th>
                       <th>
-                        {{ __('Revision departamento Medico y Seguridad en el trabajo') }}
-                      </th>
-                      <th>
-                        {{ __('Revisión Telemedicina') }}
-                      </th>
-                      <th>
                         {{ __('Observación') }}
                       </th>
                       <th>
@@ -102,12 +96,6 @@
                           </td>
                           <td>
                             {{ $dato->viabilidad_caracterizacion }}
-                          </td>
-                          <td>
-                            {{ $dato->revision1 }}
-                          </td>
-                          <td>
-                            {{ $dato->revision2 }}
                           </td>
                           <td>
                             {{ $dato->observacion_cambios_de_estado }}

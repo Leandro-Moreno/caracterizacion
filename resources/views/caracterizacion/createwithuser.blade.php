@@ -233,28 +233,6 @@
                                        </div>
                               </div>
                               <div class="row">
-                                 <label class="col-sm-2 col-form-label">{{ __('Revisión Departamento Medico y Seguridad en el trabajo') }}</label>
-                                 <div class="col-sm-4">
-                                    <div class="form-group{{ $errors->has('revision1') ? ' has-danger' : '' }}">
-                                       <textarea class="form-control{{ $errors->has('revision1') ? ' is-invalid' : '' }}" name="revision1" id="input-revision1" type="" placeholder="{{ __('Revisión Departamento Medico y Seguridad en el trabajo') }}" value="{{ old('revision1') }}"  rows="4" required>{{ old('revision1') }}</textarea>
-                                       @if ($errors->has('revision1'))
-                                       <span id="revision1-error" class="error text-danger" for="input-revision1">{{ $errors->first('revision1') }}</span>
-                                       @endif
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="row">
-                                 <label class="col-sm-2 col-form-label">{{ __('Revisión Telemedicina') }}</label>
-                                 <div class="col-sm-4">
-                                    <div class="form-group{{ $errors->has('revision2') ? ' has-danger' : '' }}">
-                                       <textarea class="form-control{{ $errors->has('revision2') ? ' is-invalid' : '' }}" name="revision2" id="input-revision2" type="" placeholder="{{ __('Revisión Telemedicina') }}" value="{{ old('revision2') }}"  rows="3" required>{{ old('revision2') }}</textarea>
-                                       @if ($errors->has('revision2'))
-                                       <span id="revision2-error" class="error text-danger" for="input-revision2">{{ $errors->first('revision2') }}</span>
-                                       @endif
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="row">
                                  <label class="col-sm-2 col-form-label">{{ __('Observación') }}</label>
                                  <div class="col-sm-4">
                                     <div class="form-group{{ $errors->has('observacion') ? ' has-danger' : '' }}">
