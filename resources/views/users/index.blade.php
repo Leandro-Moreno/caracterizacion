@@ -1,7 +1,7 @@
 @extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('Gestión de usuarios')])
 
 @section('content')
-  <div class="content">
+  <div id="app" class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -25,6 +25,7 @@
                 @endif
                 <div class="row">
                   <div class="col-12 text-right">
+                    <buscar-component></buscar-component>
                     <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar usuario') }}</a>
                   </div>
                   <div class="col-12 text-right">
