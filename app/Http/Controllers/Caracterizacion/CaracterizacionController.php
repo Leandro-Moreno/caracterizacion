@@ -201,9 +201,9 @@ class CaracterizacionController extends Controller
     {
       // $this->authorize('oe');
       $results = (new Search())
-    ->registerModel(Caracterizacion::class, ['user_id'])
+    ->registerModel(Caracterizacion::class, ['viabilidad_caracterizacion'])
     ->search($request->input('query'));
-    dd($results);
+  
     return response()->json($results);
     }
 }

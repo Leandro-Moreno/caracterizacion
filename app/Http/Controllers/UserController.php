@@ -154,7 +154,7 @@ class UserController extends Controller
     {
       // $this->authorize('oe');
       $results = (new Search())
-    ->registerModel(User::class, ['name', 'apellido','documento','dependencia'])
+    ->registerModel(User::class, ['name', 'apellido','documento'])
     ->search($request->input('query'));
     // dd($results);
     return response()->json($results);

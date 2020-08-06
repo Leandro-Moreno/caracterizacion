@@ -22,6 +22,7 @@ window.Vue = require('vue');
 
 
 Vue.component('buscar-component', require('./components/buscarUsuarioComponent.vue').default);
+Vue.component('buscarcaracterizacion-component', require('./components/buscarCaracterizacionComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

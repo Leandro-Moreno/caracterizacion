@@ -1,7 +1,7 @@
 @extends('layouts.app', ['activePage' => 'caracterizacion', 'titlePage' => __('Caracterización')])
 
 @section('content')
-  <div class="content">
+  <div id="app" class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -10,6 +10,7 @@
                 <h4 class="card-title ">{{ __('Caracterización') }}</h4>
                 <p class="card-category"> {{ __('Aquí puedes gestionar tus caractizar tus usuarios') }}</p>
               </div>
+              <buscarcaracterizacion-component></buscarcaracterizacion-component>
               <div class="card-body">
                 @if (session('status'))
                   <div class="row">

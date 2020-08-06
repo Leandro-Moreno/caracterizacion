@@ -59,6 +59,12 @@ class User extends Authenticatable implements Searchable
 
       return $this::where('email', $correo)->first();
     }
+
+    public function scopeBuscarpor($query, $tipo, $buscar) {
+    	if ( ($tipo) && ($buscar) ) {
+    		return $query->where($tipo,'like',"%$buscar%");
+        }
+    }
     public function getSearchResult(): SearchResult
     {
        $url = route('user.edit', $this->id);
