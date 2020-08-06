@@ -64,12 +64,6 @@ class CaracterizacionController extends Controller
      */
     public function store(Request $request, Caracterizacion $model )
     {
-
-        
-        $validatedData = $request->validate([
-            'cargo' => 'required|unique:posts|max:2',
-        ]);
-
         $user = New User();
         $user = is_null( $user->buscarUsuarioPorCorreo( $request->email ) )? $user : $user->buscarUsuarioPorCorreo( $request->email ) ;
         if( isset($user->name) ){
@@ -124,12 +118,12 @@ class CaracterizacionController extends Controller
      * @param  \App\Model\Caracterizacion\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Caracterizacion $caracterizacion, User $model)
+    public function edit(Caracterizacion $caracterizacion)
     {
         $unidades = Unidad::all();
         $sendingUser = User::where('rol_id','=',2)->get();
-        $users = User::all();
-        return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'users' ,'sendingUser'), ['user' => $model->all()]);
+        $user = User::find($caracterizacion->user->id);
+        return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'user' ,'sendingUser'));
     }
 
     /**
@@ -141,46 +135,40 @@ class CaracterizacionController extends Controller
      */
     public function update(Request $request, Caracterizacion $caracterizacion)
     {
-      $user = New User();
-      $user = is_null( $user->buscarUsuarioPorCorreo( $request->email ) )? $user : $user->buscarUsuarioPorCorreo( $request->email ) ;
         if($request->indispensable_presencial == null){
             $request->indispensable_presencial = 'No' ;
         }
         if($request->trabajo_en_casa == null){
             $request->trabajo_en_casa = 'No' ;
         }
-        
-        //TODO: crear funcion update. Primero se crea/actuliza el usuario. luego la caracterizacion para tener el id
-        $caracterizacion->create(
-            [
-                'indispensable_presencial' => $request->indispensable_presencial,
-                'por_que' => $request->por_que,
-                'horaEntrada' => $request->hora_entrada,
-                'horaSalida' => $request->hora_salida,
-                'trabajo_en_casa' => $request->trabajo_en_casa,
-                'dias_laborales' => $request->dias_laborales,
-                'viabilidad_caracterizacion' => $request->viabilidad_caracterizacion,
-                'observacion_cambios_de_estado' => $request->observacion_cambios_de_estado,
-                'notas_comentarios_ma_andrea_leyva' => $request->notas_comentarios_ma_andrea_leyva,
-                'envio_de_consentimiento' => $request->envio_de_consentimiento,
-            ]
-
-        );
-        $user = New User();
+        $user = User::find($caracterizacion->user_id);
         $user->rol_id = 3;
-        $user->name = $request->name;
-        $user->apellido = $request->apellido;
-        $user->email = $request->email;
-        $user->tipo_doc = $request->tipo_doc ;
-        $user->documento = $request->documento;
         $user->cargo = $request->cargo;
         $user->celular = $request->celular;
         $user->direccion = $request->direccion ;
         $user->tipo_contrato = $request->tipo_contrato ;
-        $user->direccion2 = $request->barrio.','.$request->localidad;
-        $user->unidad_id = $request->unidad ;
+        $user->direccion2 = $request->direccionb.",".$request->direccionl;
+        $user->unidad_id = $request->unidad_id;
         $user->password = Hash::make($request->documento);
         $user->save();
+        
+        $caracterizacion = Caracterizacion::find($caracterizacion->id);
+        $caracterizacion->dependencia = $request->dependencia ;
+        $caracterizacion->indispensable_presencial = $request->indispensable_presencial ;
+        $caracterizacion->por_que = $request->por_que ;
+        $caracterizacion->horaEntrada = $request->hora_entrada ;
+        $caracterizacion->horaSalida = $request->hora_salida ;
+        $caracterizacion->trabajo_en_casa = $request->trabajo_en_casa ;
+        $caracterizacion->dias_laborales = $request->dias_laborales ;
+        $caracterizacion->viabilidad_caracterizacion = $request->viabilidad_caracterizacion ;
+        $caracterizacion->observacion_cambios_de_estado = $request->observacion_cambios_de_estado ;
+        $caracterizacion->notas_comentarios_ma_andrea_leyva = $request->notas_comentarios_ma_andrea_leyva ;
+        $caracterizacion->envio_de_consentimiento = $request->envio_de_consentimiento ;
+        $caracterizacion->save();
+            
+
+      
+
 
         return redirect()->route('caracterizacion')->withStatus(__('Usuario actualizado con éxito.'));
     }

@@ -14,7 +14,7 @@ class Unidad extends Model
      * @var array
      */
     protected $fillable = [
-        'nombre_unidad', 'dependecia'
+        'nombre_unidad'
     ];
 
 

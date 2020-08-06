@@ -14,12 +14,6 @@
                 <h4 class="card-title">{{ __('Editar Caracterización') }}</h4>
                 <p class="card-category"></p>
               </div>
-              <div class="card-body ">
-                <div class="row">
-                  <div class="col-md-12 text-right">
-                      <a href="{{ route('caracterizacion') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
-                  </div>
-                </div>
                 <div class="card-body ">
                      <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#empleado" aria-controls="empleado" role="tab" data-toggle="tab" class="btn btn-sm btn-primary">Empleado</a></li>
@@ -56,13 +50,12 @@
                                     <div class="form-group{{ $errors->has('unidad_id') ? ' has-danger' : '' }}">
                                     <select class="form-control{{ $errors->has('unidad_id') ? ' is-invalid' : '' }}" id="input-rol" required="true" aria-required="true" name="unidad_id">
                                        <option value="">Seleccionar</option>
-                                      @if ($users)
+                                      @if ($user)
                                           @foreach($unidades as $unidad )
-                                                @foreach($users as $user)
                                                     <option value="{{ $unidad->id }}" {{ $unidad->id ==  $user->unidad_id ? 'selected="selected"' : '' }}>{{ $unidad->nombre_unidad }}</option>
-                                                @endforeach
                                           @endforeach
                                         @endif
+                                        
                                     </select>
                                     </div>
                                  </div>
@@ -72,7 +65,7 @@
                                     <label class="col-sm-2 col-form-label">{{ __('Dependencia') }}</label>
                                     <div class="col-sm-4">
                                       <div class="form-group{{ $errors->has('dependencia') ? ' has-danger' : '' }}">
-                                          <textarea class="form-control{{ $errors->has('dependencia') ? ' is-invalid' : '' }}" name="dependencia" id="input-dependencia" type="" placeholder="{{ __('Dependencia') }}" value="{{ old('dependencia',  '') }}"  rows="1" required>{{ old('deondencia') }}</textarea>
+                                          <textarea class="form-control{{ $errors->has('dependencia') ? ' is-invalid' : '' }}" name="dependencia" id="input-dependencia" type="" placeholder="{{ __('Dependencia') }}" value="{{ old('dependencia',  $caracterizacion->dependencia) }}"  rows="1" required>{{ old('dependencia',  $caracterizacion->dependencia)}}</textarea>
                                           @if ($errors->has('dependencia'))
                                           <span id="dependencia-error" class="error text-danger" for="input-dependencia">{{ $errors->first('dependencia') }}</span>
                                           @endif
@@ -86,39 +79,6 @@
                                              <input class="form-control{{ $errors->has('cargo') ? ' is-invalid' : '' }}" name="cargo" id="input-cargo" type="text" placeholder="{{ __('Cargo') }}" value="{{old('cargo', $user->cargo)}}" aria-required="true"/>
                                              @if ($errors->has('cargo'))
                                              <span id="cargo-error" class="error text-danger" for="input-cargo">{{ $errors->first('cargo') }}</span>
-                                             @endif
-                                          </div>
-                                       </div>
-                              </div>
-                              <div class="row">
-                                       <label class="col-sm-2 col-form-label">{{ __('Nombres') }}</label>
-                                       <div class="col-sm-4">
-                                          <div class="form-group{{ $errors->has('nombre') ? ' has-danger' : '' }}">
-                                             <input class="form-control{{ $errors->has('nombre') ? ' is-invalid' : '' }}" name="nombre" id="input-nombre" type="text" placeholder="{{ __('Nombre') }}" value="{{  old('nombre', $user->name.' '.$user->apellido) }}" required="true" aria-required="true"/>
-                                             @if ($errors->has('nombre'))
-                                             <span id="nombre-error" class="error text-danger" for="input-nombre">{{ $errors->first('nombre') }}</span>
-                                             @endif
-                                          </div>
-                                       </div>
-                              </div>
-                              <div class="row">
-                                       <label class="col-sm-2 col-form-label">{{ __('Email') }}</label>
-                                       <div class="col-sm-4">
-                                          <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-                                             <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" id="input-email" type="text" placeholder="{{ __('email') }}" value="{{ old('email' , $user->email) }}" required="true" aria-required="true"/>
-                                             @if ($errors->has('email'))
-                                             <span id="email-error" class="error text-danger" for="input-email">{{ $errors->first('email') }}</span>
-                                             @endif
-                                          </div>
-                                       </div>
-                              </div>
-                              <div class="row">
-                                       <label class="col-md-2 col-form-label">{{ __('Documento') }}</label>
-                                       <div class="col-md-4">
-                                          <div class="form-group{{ $errors->has('documento') ? ' has-danger' : '' }}">
-                                             <input class="form-control{{ $errors->has('documento') ? ' is-invalid' : '' }}" name="documento" id="input-documento" type="text" placeholder="{{ __('Documento') }}" value="{{old('documento' , $user->documento)}}" aria-required="true"/>
-                                             @if ($errors->has('documento'))
-                                             <span id="documento-error" class="error text-danger" for="input-documento">{{ $errors->first('documento') }}</span>
                                              @endif
                                           </div>
                                        </div>
@@ -232,7 +192,7 @@
                                     <div class="form-group{{ $errors->has('trabajo_en_casa') ? ' has-danger' : '' }}">
                                        <div class="togglebutton">
                                           <label>
-                                          <input name="trabajo_en_casa" type="checkbox"  value="{{$caracterizacion->trabajo_en_casa}}"  @if($caracterizacion->trabajo_en_casa == 'Si') checked @endif>{{$caracterizacion->trabajo_en_casa}}</input>
+                                          <input id="estadoTogg" name="trabajo_en_casa" type="checkbox"  value="{{$caracterizacion->trabajo_en_casa}}"  @if($caracterizacion->trabajo_en_casa == 'Si') checked @endif>{{$caracterizacion->trabajo_en_casa}}</input>
                                           <span class="toggle"></span>
                                           </label>
                                        </div>
@@ -274,18 +234,18 @@
                               </div>
                            </div>
                            <div role="tabpanel" class="tab-pane" id="ghdo">
-                           <div class="row">
+                              <div class="row">
                                  <label class="col-sm-2 col-form-label">{{ __('Notas/Comentarios') }}</label>
-                                 <div class="col-sm-4">
-                                    <div class="form-group{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' has-danger' : '' }}">
-                                       <textarea class="form-control{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' is-invalid' : '' }}" name="notas_comentarios_ma_andrea_leyva" id="input-notas_comentarios_ma_andrea_leyva" type="" placeholder="{{ __('Notas / Comentarios') }}" value="{{ old('notas_comentarios_ma_andrea_leyva', $caracterizacion->notas_comentarios_ma_andrea_leyva)}}"  rows="3" required>{{ old('notas_comentarios_ma_andrea_leyva', $caracterizacion->notas_comentarios_ma_andrea_leyva)}}</textarea>
-                                       @if ($errors->has('notas_comentarios_ma_andrea_leyva'))
-                                       <span id="notas_comentarios_ma_andrea_leyva-error" class="error text-danger" for="input-notas_comentarios_ma_andrea_leyva">{{ $errors->first('notas_comentarios_ma_andrea_leyva') }}</span>
-                                       @endif
+                                    <div class="col-sm-4">
+                                       <div class="form-group{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' has-danger' : '' }}">
+                                          <textarea class="form-control{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' is-invalid' : '' }}" name="notas_comentarios_ma_andrea_leyva" id="input-notas_comentarios_ma_andrea_leyva" type="" placeholder="{{ __('Notas / Comentarios') }}" value="{{ old('notas_comentarios_ma_andrea_leyva', $caracterizacion->notas_comentarios_ma_andrea_leyva)}}"  rows="3" required>{{ old('notas_comentarios_ma_andrea_leyva', $caracterizacion->notas_comentarios_ma_andrea_leyva)}}</textarea>
+                                          @if ($errors->has('notas_comentarios_ma_andrea_leyva'))
+                                          <span id="notas_comentarios_ma_andrea_leyva-error" class="error text-danger" for="input-notas_comentarios_ma_andrea_leyva">{{ $errors->first('notas_comentarios_ma_andrea_leyva') }}</span>
+                                          @endif
+                                       </div>
                                     </div>
-                                 </div>
                               </div>
-                           <div class="row">
+                              <div class="row">
                                  <label class="col-sm-2 col-form-label">{{ __('Envío del consentimiento') }}</label>
                                  <div class="col-sm-4">                                    <div class="form-group{{ $errors->has('envio_de_consentimiento') ? ' has-danger' : '' }}">
                                        <div class="togglebutton">
@@ -300,22 +260,6 @@
                                     </div>
                                  </div>
                               </div>
-                              <!--div class="row">
-                                       <label class="col-sm-2 col-form-label">{{ __('Usuario que envía el consentimiento') }}</label>
-                                       <div class="col-sm-5">
-                                          <div class="form-group{{ $errors->has('userSender') ? ' has-danger' : '' }}">
-                                             <select class="form-control{{ $errors->has('userSender') ? ' is-invalid' : '' }}" id="input-userSender" required="true" aria-required="true" name="userSender">
-                                                <option value="">Seleccionar</option>
-                                                @if ($sendingUser)
-                                                   @foreach($sendingUser as $userSend)
-                                                         <option  value="{{ $userSend->id }}"@if($userSend->id == 'Trabajo en casa') selected  @endif >{{ $userSend->name }} {{ $userSend->name2 }} {{ $userSend->apellido }} {{ $userSend->apellido2 }}</option>
-                                                         <option  value="{{ $userSend->id }}" >{{ $userSend->name }} {{ $userSend->name2 }} {{ $userSend->apellido }} {{ $userSend->apellido2 }}</option>
-                                                   @endforeach
-                                                 @endif
-                                             </select>
-                                          </div>
-                                       </div>
-                              </div-->
                            </div>
                         </div>
                      </div>

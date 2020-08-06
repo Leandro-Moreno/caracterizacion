@@ -16,6 +16,7 @@ class CaracterizacionTableSeeder extends Seeder
 
         DB::table('caracterizacion')->insert([
             'indispensable_presencial'=> 'Si',
+            'dependencia' => 'Uniandes',
             'por_que'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
             'horaEntrada'=> '8:00',
             'horaSalida'=> '12:00',
@@ -30,6 +31,7 @@ class CaracterizacionTableSeeder extends Seeder
 
         DB::table('caracterizacion')->insert([
             'indispensable_presencial'=> 'si',
+            'dependencia' => 'Uniandes',
             'por_que'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
             'horaEntrada'=> '12:00',
             'horaSalida'=> '4:00',
@@ -45,6 +47,7 @@ class CaracterizacionTableSeeder extends Seeder
 
         DB::table('caracterizacion')->insert([
             'indispensable_presencial'=> 'si',
+            'dependencia' => 'Uniandes',
             'por_que'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
             'horaEntrada'=> '12:00',
             'horaSalida'=> '4:00',
@@ -59,6 +62,7 @@ class CaracterizacionTableSeeder extends Seeder
 
        DB::table('caracterizacion')->insert([
             'indispensable_presencial'=> 'si',
+            'dependencia' => 'Uniandes',
             'por_que'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
             'horaEntrada'=> '8:00',
             'horaSalida'=> '12:00',

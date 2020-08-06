@@ -17,6 +17,7 @@ class CreateCaracterizacionTable extends Migration
             $table->bigIncrements('id');
             $table->biginteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('dependencia')->nullable();
             $table->string('indispensable_presencial');
             $table->string('por_que')->nullable();
             $table->time('horaEntrada');
