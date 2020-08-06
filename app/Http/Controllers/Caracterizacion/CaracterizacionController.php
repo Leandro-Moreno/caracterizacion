@@ -64,23 +64,22 @@ class CaracterizacionController extends Controller
      */
     public function store(Request $request, Caracterizacion $model )
     {
-        $user = New User();
-        $user = is_null( $user->buscarUsuarioPorCorreo( $request->email ) )? $user : $user->buscarUsuarioPorCorreo( $request->email ) ;
-        if( isset($user->name) ){
-          $user->name = $request->nombre;
-          $user->apellido = $request->nombre;
-          $user->email = $request->email;
-        }
-        $user->rol_id = 3;
+
+        $user = new User;
+        $user->rol_id = 1;
+        
+        $user->name = $request->nombre;
+        $user->apellido = $request->nombre;
         $user->tipo_doc = $request->tipo_doc ;
+        $user->celular = $request->celular ;
         $user->documento = $request->documento;
         $user->cargo = $request->cargo;
-        $user->celular = $request->celular;
-        $user->direccion = $request->direccion ;
+        $user->email = $request->email;
         $user->tipo_contrato = $request->tipo_contrato ;
-        $user->direccion2 = $request->barrio.','.$request->localidad;
+        $user->direccion = $request->direccion ;
+        $user->direccion2 = $request->direccionb.",".$request->direccionl;
         $user->unidad_id = $request->unidad_id ;
-        $user->password = Hash::make($request->documento);
+        $user->password = Hash::make('caracterizacion');
         $user->save();
 
         if($request->indispensable_presencial == null){
@@ -89,23 +88,26 @@ class CaracterizacionController extends Controller
         if($request->trabajo_en_casa == null){
             $request->trabajo_en_casa = "No";
         }
-
-        $model->create(
-            [
-                'indispensable_presencial' => $request->indispensable_presencial,
-                'por_que' => $request->por_que,
-                'horaEntrada' => $request->hora_entrada,
-                'horaSalida' => $request->hora_salida,
-                'trabajo_en_casa' => $request->trabajo_en_casa,
-                'dias_laborales' => $request->dias_laborales,
-                'viabilidad_caracterizacion' => $request->viabilidad_caracterizacion,
-                'observacion_cambios_de_estado' => $request->observacion_cambios_de_estado,
-                'notas_comentarios_ma_andrea_leyva' => $request->notas_comentarios_ma_andrea_leyva,
-                'envio_de_consentimiento' => $request->envio_de_consentimiento,
-                'user_id' => $user->id,
-            ]
-
-        );
+        if($request->envio_de_consentimiento == null){
+            $request->envio_de_consentimiento = "No";
+        }
+        $lastUser = User::all();
+        $lastUser_id = $lastUser->last();
+       
+        $caracterizacion = new Caracterizacion;
+        $caracterizacion->user_id = $lastUser_id->id ;
+        $caracterizacion->dependencia = $request->dependencia ;
+        $caracterizacion->indispensable_presencial = $request->indispensable_presencial ;
+        $caracterizacion->por_que = $request->por_que ;
+        $caracterizacion->horaEntrada = $request->hora_entrada ;
+        $caracterizacion->horaSalida = $request->hora_salida ;
+        $caracterizacion->trabajo_en_casa = $request->trabajo_en_casa ;
+        $caracterizacion->dias_laborales = $request->dias_laborales ;
+        $caracterizacion->viabilidad_caracterizacion = $request->viabilidad_caracterizacion ;
+        $caracterizacion->observacion_cambios_de_estado = $request->observacion_cambios_de_estado ;
+        $caracterizacion->notas_comentarios_ma_andrea_leyva = $request->notas_comentarios_ma_andrea_leyva ;
+        $caracterizacion->envio_de_consentimiento = $request->envio_de_consentimiento ;
+        $caracterizacion->save();
 
 
         return redirect()->route('caracterizacion')->withStatus(__('Caracterizacion creada con éxito.'));
@@ -142,14 +144,13 @@ class CaracterizacionController extends Controller
             $request->trabajo_en_casa = 'No' ;
         }
         $user = User::find($caracterizacion->user_id);
-        $user->rol_id = 3;
+        $user->rol_id = 1;
         $user->cargo = $request->cargo;
-        $user->celular = $request->celular;
         $user->direccion = $request->direccion ;
         $user->tipo_contrato = $request->tipo_contrato ;
         $user->direccion2 = $request->direccionb.",".$request->direccionl;
         $user->unidad_id = $request->unidad_id;
-        $user->password = Hash::make($request->documento);
+        $user->password = Hash::make('caracterizacion');
         $user->save();
         
         $caracterizacion = Caracterizacion::find($caracterizacion->id);
@@ -176,12 +177,13 @@ class CaracterizacionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Caracterizacion\Evento  $evento
+     * @param  \App\Model\Caracterizacion\Caracterizacion  $caracterizacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Evento $evento)
+    public function destroy(Caracterizacion $caracterizacion)
     {
-        echo "En construcción";
+        $caracterizacion->delete();
+        return redirect()->route('caracterizacion')->withStatus(__('Usuario actualizado con éxito.'));
     }
     public function importar(){
       $this->authorize('oe', Caracterizacion::Class);
