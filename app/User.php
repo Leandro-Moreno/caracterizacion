@@ -7,7 +7,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\CustomResetPasswordNotification;
 
-class User extends Authenticatable
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
+
+class User extends Authenticatable implements Searchable
 {
     use Notifiable;
 
@@ -38,10 +41,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function caracterizaciones()
-    {
-        return $this->hasMany("App\Model\Caracterizacion\Caracterizacion");
-    }
 
     public function sendPasswordResetNotification($token)
     {
@@ -60,10 +59,13 @@ class User extends Authenticatable
 
       return $this::where('email', $correo)->first();
     }
-
-    public function scopeBuscarpor($query, $tipo, $buscar) {
-    	if ( ($tipo) && ($buscar) ) {
-    		return $query->where($tipo,'like',"%$buscar%");
-    	}
+    public function getSearchResult(): SearchResult
+    {
+       $url = route('user.edit', $this->id);
+       return new SearchResult($this, $this->name . " " . $this->apellido, $url);
+    }
+    public function caracterizacion()
+    {
+        return $this->hasOne('App\Model\Caracterizacion\Caracterizacion');
     }
 }

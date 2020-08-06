@@ -15,6 +15,7 @@ class CaracterizacionTableSeeder extends Seeder
     {
 
         DB::table('caracterizacion')->insert([
+            'user_id' => '1',
             'indispensable_presencial'=> 'Si',
             'dependencia' => 'Uniandes',
             'por_que'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
@@ -30,6 +31,7 @@ class CaracterizacionTableSeeder extends Seeder
         ]);
 
         DB::table('caracterizacion')->insert([
+            'user_id' => '2',
             'indispensable_presencial'=> 'si',
             'dependencia' => 'Uniandes',
             'por_que'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
@@ -46,6 +48,7 @@ class CaracterizacionTableSeeder extends Seeder
 
 
         DB::table('caracterizacion')->insert([
+            'user_id' => '3',
             'indispensable_presencial'=> 'si',
             'dependencia' => 'Uniandes',
             'por_que'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
@@ -61,6 +64,7 @@ class CaracterizacionTableSeeder extends Seeder
        ]);
 
        DB::table('caracterizacion')->insert([
+            'user_id' => '4',
             'indispensable_presencial'=> 'si',
             'dependencia' => 'Uniandes',
             'por_que'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',

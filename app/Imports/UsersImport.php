@@ -43,21 +43,28 @@ class UsersImport implements ToModel, WithHeadingRow
           ]);
         }
         $usuario->save();
-        $caracterizacion  = new Caracterizacion([
-          'user_id'=>$usuario->id,
-          'indispensable_presencial' => $row['por_responsabilidades_es_indispensable_su_trabajo_presencial'],
-          'por_que' => $row['por_que'],
-          'horaEntrada' => $row['hora_de_entrada']*2400,
-          'horaSalida' => $row['hora_de_salida']*2400,
-          'trabajo_en_casa' => $row['trabajo_en_casa'],
-          'dias_laborales'  =>  $row['dias_laborales'],
-          'viabilidad_caracterizacion' => $row['viabilidad_por_caracterizacion'],
-          'revision1' => isset($row['revision1']) ? $row['revision1'] : '',
-          'revision2' => isset($row['revision2']) ? $row['revision2'] : '',
-          'observacion_cambios_de_estado' => $row['observacion_cambios_de_estado'],
-          'notas_comentarios_ma_andrea_leyva' => $row['notas_comentarios_ma_andrea_leyva'],
-          'envio_de_consentimiento' => $row['envio_de_consentimiento']
-        ]);
+
+        $caracterizacion = $usuario->caracterizacion;
+
+        if( is_null(  $caracterizacion ) )
+        {
+          $caracterizacion  = new Caracterizacion([
+            'user_id' => $usuario->id,
+            'indispensable_presencial' => $row['por_responsabilidades_es_indispensable_su_trabajo_presencial'],
+            'por_que' => $row['por_que'],
+            'horaEntrada' => $row['hora_de_entrada']*2400,
+            'horaSalida' => $row['hora_de_salida']*2400,
+            'trabajo_en_casa' => $row['trabajo_en_casa'],
+            'dias_laborales'  =>  $row['dias_laborales'],
+            'viabilidad_caracterizacion' => $row['viabilidad_por_caracterizacion'],
+            'revision1' => isset($row['revision1']) ? $row['revision1'] : '',
+            'revision2' => isset($row['revision2']) ? $row['revision2'] : '',
+            'observacion_cambios_de_estado' => $row['observacion_cambios_de_estado'],
+            'notas_comentarios_ma_andrea_leyva' => $row['notas_comentarios_ma_andrea_leyva'],
+            'envio_de_consentimiento' => $row['envio_de_consentimiento']
+          ]);
+        }
+
         return $caracterizacion;
 
     }

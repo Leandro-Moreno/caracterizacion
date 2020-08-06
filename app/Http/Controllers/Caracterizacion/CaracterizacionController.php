@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Imports\UsersImport;//TODO: cambiar users por caracterizacion
 use Maatwebsite\Excel\Facades\Excel;
 
+
+use Spatie\Searchable\Search;
+
 class CaracterizacionController extends Controller
 {
     public function __construct()
@@ -193,5 +196,14 @@ class CaracterizacionController extends Controller
       $caracterizacion = Excel::import(new UsersImport, request()->file('caracterizacion'));
       dd($caracterizacion);
       return back();
+    }
+    public function busqueda(Request $request)
+    {
+      // $this->authorize('oe');
+      $results = (new Search())
+    ->registerModel(Caracterizacion::class, ['user_id'])
+    ->search($request->input('query'));
+    dd($results);
+    return response()->json($results);
     }
 }

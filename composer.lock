@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b817c2e487ee13638648b3e95f74b96",
+    "content-hash": "25ef4736e6ffd682b53959ea4aec421a",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -3369,6 +3369,61 @@
             ],
             "description": "Microsoft Azure OAuth2 Provider for Laravel Socialite",
             "time": "2020-04-30T23:01:40+00:00"
+        },
+        {
+            "name": "spatie/laravel-searchable",
+            "version": "1.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-searchable.git",
+                "reference": "0311e498893cacfd6ccd160ce049a4e5bb3305c9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-searchable/zipball/0311e498893cacfd6ccd160ce049a4e5bb3305c9",
+                "reference": "0311e498893cacfd6ccd160ce049a4e5bb3305c9",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "~5.8.0|^6.0|^7.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "larapack/dd": "^1.0",
+                "orchestra/testbench": "~3.8.0|^4.0|^5.0",
+                "phpunit/phpunit": "^7.5|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Searchable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Vanderbist",
+                    "email": "alex@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Pragmatically search through models and other sources",
+            "homepage": "https://github.com/spatie/laravel-searchable",
+            "keywords": [
+                "laravel-searchable",
+                "spatie"
+            ],
+            "time": "2020-04-29T22:34:57+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
