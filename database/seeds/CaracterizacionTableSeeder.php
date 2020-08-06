@@ -15,6 +15,7 @@ class CaracterizacionTableSeeder extends Seeder
     {
 
         DB::table('caracterizacion')->insert([
+            'user_id' => '1',
             'indispensable_presencial'=> 'Si',
             'por_que'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
             'horaEntrada'=> '8:00',
@@ -26,11 +27,11 @@ class CaracterizacionTableSeeder extends Seeder
             'revision2'=> 'Lorem ipsum dolor sit amet, consectetur',
             'observacion_cambios_de_estado'=> 'Lorem ipsum dolor sit amet',
             'notas_comentarios_ma_andrea_leyva'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-            'envio_de_consentimiento'=> 'Si',
-            'user_id' => '2' 
+            'envio_de_consentimiento'=> 'Si'
         ]);
 
         DB::table('caracterizacion')->insert([
+            'user_id' => '2',
             'indispensable_presencial'=> 'si',
             'por_que'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
             'horaEntrada'=> '12:00',
@@ -42,12 +43,12 @@ class CaracterizacionTableSeeder extends Seeder
             'revision2'=> 'Lorem ipsum dolor sit amet, consectetur',
             'observacion_cambios_de_estado'=> 'Lorem ipsum dolor sit amet',
             'notas_comentarios_ma_andrea_leyva'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-            'envio_de_consentimiento'=> 'Si',
-            'user_id' => '2'
+            'envio_de_consentimiento'=> 'Si'
         ]);
 
 
         DB::table('caracterizacion')->insert([
+            'user_id' => '3',
             'indispensable_presencial'=> 'si',
             'por_que'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
             'horaEntrada'=> '12:00',
@@ -59,11 +60,11 @@ class CaracterizacionTableSeeder extends Seeder
             'revision2'=> 'Lorem ipsum dolor sit amet, consectetur',
             'observacion_cambios_de_estado'=> 'Lorem ipsum dolor sit amet',
             'notas_comentarios_ma_andrea_leyva'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-            'envio_de_consentimiento'=> 'Si',
-            'user_id' => '2'  
+            'envio_de_consentimiento'=> 'Si'
        ]);
 
        DB::table('caracterizacion')->insert([
+            'user_id' => '4',
             'indispensable_presencial'=> 'si',
             'por_que'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
             'horaEntrada'=> '8:00',
@@ -75,8 +76,7 @@ class CaracterizacionTableSeeder extends Seeder
             'revision2'=> 'Lorem ipsum dolor sit amet, consectetur',
             'observacion_cambios_de_estado'=> 'Lorem ipsum dolor sit amet',
             'notas_comentarios_ma_andrea_leyva'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-            'envio_de_consentimiento'=> 'Si',
-            'user_id' => '2'  
+            'envio_de_consentimiento'=> 'Si'
         ]);
     }
 }

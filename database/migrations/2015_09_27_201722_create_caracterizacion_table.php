@@ -15,7 +15,7 @@ class CreateCaracterizacionTable extends Migration
     {
         Schema::create('caracterizacion', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->biginteger('user_id')->unsigned();
+            $table->biginteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('indispensable_presencial');
             $table->string('por_que')->nullable();

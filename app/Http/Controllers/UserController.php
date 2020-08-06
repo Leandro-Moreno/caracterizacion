@@ -11,6 +11,8 @@ use App\Rol;
 use Auth;
 use Illuminate\Support\Facades\DB;
 
+use Spatie\Searchable\Search;
+
 
 class UserController extends Controller
 {
@@ -137,5 +139,15 @@ class UserController extends Controller
     public function importForm( )
     {
         return view('users.imports.create');
+    }
+
+    public function busqueda(Request $request)
+    {
+      // $this->authorize('oe');
+      $results = (new Search())
+    ->registerModel(User::class, ['name', 'apellido','documento','dependencia'])
+    ->search($request->input('query'));
+    // dd($results);
+    return response()->json($results);
     }
 }
