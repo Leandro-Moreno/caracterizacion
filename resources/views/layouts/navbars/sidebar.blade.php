@@ -7,8 +7,7 @@
             <p>{{ __('Inicio') }}</p>
         </a>
       </li>
-
-      @if (Auth::user()->rol_id >= 2)
+      @can('view', App\Model\Caracterizacion\Caracterizacion::class)
       <li class="nav-item {{ ( $activePage == 'user-management') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#Eventos" aria-expanded="{{ (  $activePage == 'user-management') ? 'true' : 'false' }}">
             <i class="material-icons">supervised_user_circle</i>
@@ -18,27 +17,42 @@
         </a>
         <div class="collapse {{ ($activePage == 'caracterizacion' ||  $activePage == 'user-management'|| $activePage == 'firmas') ? ' show' : '' }}" id="Eventos">
           <ul class="nav">
+          @can('view', App\Model\Caracterizacion\Caracterizacion::class)
             <li class="nav-item{{ $activePage == 'caracterizacion' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('caracterizacion') }}">
                 <i class="material-icons">next_week</i>
                   <p>{{ __('Caracterización') }}</p>
               </a>
             </li>
+          @endcan
+          @can('view', App\User::class)
             <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('user.index') }}">
                 <i class="material-icons">supervisor_account</i>
                   <p>{{ __('Administrar usuarios') }}</p>
               </a>
             </li>
-            <li class="nav-item{{ $activePage == 'user' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('user.index') }}">
+            @endcan
+            @can('importar', App\Model\Caracterizacion\Caracterizacion::class)
+            <li class="nav-item{{ $activePage == 'users-management' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('caracterizacion.importar') }}">
+                <i class="material-icons">import_export</i>
+                  <p>{{ __('Importar / Exportar') }}</p>
+              </a>
+            </li>
+            @endcan
+            @can('view', App\Model\Reporte\Reporte::class)
+            <li class="nav-item{{ $activePage == 'reporte' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('reporte') }}">
                 <i class="material-icons">how_to_reg</i>
                   <p>{{ __('Reportes') }}</p>
               </a>
             </li>
+            @endcan
           </ul>
         </div>
       </li>
+      @endcan
 
 
 
@@ -58,22 +72,17 @@
               </a>
             </li>
 
-            <li class="nav-item{{ $activePage == 'correo' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('correo') }}">
-                <i class="material-icons">email</i>
-                <p> {{ __('Configuración de Correo') }} </p>
-              </a>
-            </li>
+            @can('view', App\User::class)
             <li class="nav-item{{ $activePage == 'admin-management' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('user.admin') }}">
                 <i class="material-icons">security</i>
                   <p>{{ __('Mostrar Administradores') }}</p>
               </a>
             </li>
+            @endcan
           </ul>
         </div>
       </li>
-      @endif
       <li class="nav-item d-xl-none">
         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
 

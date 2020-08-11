@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'certificados', 'titlePage' => __('Certificados')])
+@extends('layouts.app', ['activePage' => 'Reportes', 'titlePage' => __('Reportes')])
 
 @section('content')
   <div class="content">
@@ -7,8 +7,8 @@
         <div class="col-md-12">
             <div class="card">
               <div class="card-header card-header-primary">
-                <h4 class="card-title ">{{ __('Certificados') }}</h4>
-                <p class="card-category"> {{ __('Aquí puedes gestionar tus certificados') }}</p>
+                <h4 class="card-title ">{{ __('Reportes') }}</h4>
+                <p class="card-category"> {{ __('Aquí puedes gestionar tus reportes') }}</p>
               </div>
               <div class="card-body">
                 @if (session('status'))
@@ -54,25 +54,25 @@
                       </th>
                     </thead>
                     <tbody>
-                      @foreach($datos as $dato)
+                      
                         <tr>
                           <td>
-                            {{ $dato->eventos->nombre }}
+                            
                           </td>
                           <td>
-                            {{ $dato->eventos->fecha }}
+                            
                           </td>
                           <td>
-                            {{ $dato->eventos->hora }} Horas
+                            Horas
                           </td>
                           <td class="td-actions text-right">
-                            <a rel="tooltip" class="btn btn-success btn-link" href="{{ url('certificados/'.$dato->evento_id.'/'.Auth::user()->id) }}" data-original-title="" title="">
+                            <a rel="tooltip" class="btn btn-success btn-link" href="{{ url('certificados/'.'/'.Auth::user()->id) }}" data-original-title="" title="">
                               <i class="material-icons">cloud_download</i> DESCARGAR
                               <div class="ripple-container"></div>
                             </a>
                           </td>
                         </tr>
-                      @endforeach
+              
                     </tbody>
                   </table>
                 </div>

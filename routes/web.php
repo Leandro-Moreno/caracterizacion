@@ -54,6 +54,14 @@ Route::group(['middleware' => 'auth'], function () {
       'update' => 'correo.update',
   ])->middleware('administrador');
 
+  Route::resource('reporte', 'Reporte\ReporteController')->names([
+	'index' => 'reporte',
+	'create' => 'reporte.create',
+	'show' => 'reporte.show',
+	'edit' => 'reporte.edit',
+	'update' => 'reporte.update',
+	'destroy' => 'reporte.destroy',
+]);
 
   Route::get('admin/profile', 'UserController@admin')->name('user.admin')->middleware('administrador');
   Route::get('caracterizacion/{id}/crear', 'userController@createCaracterizacion')->name('caracterizacion.ucreate');

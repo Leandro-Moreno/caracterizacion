@@ -189,7 +189,6 @@ class CaracterizacionController extends Controller
         return redirect()->route('caracterizacion')->withStatus(__('Usuario actualizado con éxito.'));
     }
     public function importar(){
-      $this->authorize('oe', Caracterizacion::Class);
       return view('caracterizacion.import');
     }
     public function importarCrear(){

@@ -24,12 +24,14 @@
                   </div>
                 @endif
                 <div class="row">
-                  <div class="col-12 text-right">
-                    <buscar-component></buscar-component>
-                    <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar usuario') }}</a>
-                  </div>
-                  <div class="col-12 text-right">
-                    <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar usuario') }}</a>
+                    
+                  <div class="col-12">
+                    <div class="col-6 text-right">
+                      <buscar-component></buscar-component>
+                    </div>
+                    <div  class="col-12 text-right">
+                      <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar usuario') }}</a>
+                    </div>
                   </div>
                 </div>
                 <div class="table-responsive">
@@ -65,6 +67,8 @@
                     </thead>
                     <tbody>
                       @foreach($users as $user)
+                    <?php $userview = $user;  ?>
+                      @can('viewbyRol', $userview)
                         <tr>
                           <td>
                             {{ $user->name }}  {{ $user->apellido }}
@@ -97,14 +101,17 @@
                                     <i class="material-icons">edit</i>
                                     <div class="ripple-container"></div>
                                   </a>
+                                  @can('updateu', App\Model\Caracterizacion\Caracterizacion::class)
                                   <a rel="tooltip" class="btn btn-primary btn-link" href="{{ route('caracterizacion.ucreate', $user) }}" data-original-title="" title="Editar/Crear Caracterización">
                                   <i class="material-icons">next_week</i>
                                     <div class="ripple-container"></div>
                                   </a>
+                                  @endcan
 
 
                           </td>
                         </tr>
+                        @endcan
                       @endforeach
                     </tbody>
                   </table>

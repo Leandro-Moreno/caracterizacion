@@ -19,7 +19,12 @@ class CaracterizacionPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
+            Response::allow();
+            return true;  
+        }
+        Response::deny('You do not own this Caracterizacion.');
+        return false;
     }
 
     /**
@@ -31,11 +36,13 @@ class CaracterizacionPolicy
      */
     public function view(User $user)
     {
-        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3){
+
+        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
+           
             Response::allow();
             return true;  
         }
-        Response::deny('You do not own this post.');
+        Response::deny('You do not own this Caracterizacion.');
         return false;
 
         
@@ -50,7 +57,12 @@ class CaracterizacionPolicy
     public function create(User $user)
     {
       
-        return true;
+        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
+            Response::allow();
+            return true;  
+        }
+        Response::deny('You do not own this Caracterizacion.');
+        return false;
     }
 
     /**
@@ -60,9 +72,27 @@ class CaracterizacionPolicy
      * @param  \App\App\Model\Caracterizacion\Caracterizacion  $caracterizacion
      * @return mixed
      */
-    public function update(User $user, Caracterizacion $caracterizacion)
+    public function update(User $user , $envio)
     {
-        return true;
+        $unidaduser = User::find($envio->user_id);
+        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
+            if($unidaduser->unidad_id == $user->unidad_id || $user->rol_id == 5 ||  $user->rol_id == 4 || $user->rol_id == 3 ){
+                Response::allow();
+                return true;  
+            }
+        }
+        Response::deny('You do not own this Caracterizacion.');
+        return false;
+    }
+    public function updateu(User $user )
+    {
+
+        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
+            Response::allow();
+                return true;  
+        }
+        Response::deny('You do not own this Caracterizacion.');
+        return false;
     }
 
     /**
@@ -109,8 +139,13 @@ class CaracterizacionPolicy
      * @param  \App\App\Model\Caracterizacion\Caracterizacion  $caracterizacion
      * @return mixed
      */
-    public function oe(User $user)
+    public function importar(User $user)
     {
-        return true;
+        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3){
+            Response::allow();
+            return true;  
+        }
+        Response::deny('You do not own this Caracterizacion.');
+        return false;
     }
 }

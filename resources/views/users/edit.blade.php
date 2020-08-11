@@ -135,6 +135,9 @@
                         <div class="form-group{{ $errors->has('unidad_id') ? ' has-danger' : '' }}">
                           <select class="form-control{{ $errors->has('unidad_id') ? ' is-invalid' : '' }}" id="input-rol" required="true" aria-required="true" name="unidad_id">
                             <option value="{{ $user->unidad_id }}">{{$user->unidad->nombre_unidad}}</option>
+                            @foreach($unidades as $unidad)
+                              <option value="{{ $unidad->id }}">{{ $unidad->nombre_unidad }}</option>
+                            @endforeach
                           </select>
                         </div>
                       </div>
@@ -217,19 +220,23 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div>          
                   <div class="col-md-6">
+                  @can('updateRol', App\User::class)
                     <div class="row">
                       <label class="col-sm-3 col-form-label">{{ __('Rol') }}</label>
                       <div class="col-sm-9">
                         <div class="form-group{{ $errors->has('rol_id') ? ' has-danger' : '' }}">
                           <select class="form-control{{ $errors->has('rol_id') ? ' is-invalid' : '' }}" id="input-rol" required="true" aria-required="true" name="rol_id">
-                            <option value="{{ $user->rol_id }}">{{$user->rol->nombre}}</option>
-                          </select>
-                    
+                                <option value="{{ $user->rol_id }}">{{$user->rol->nombre}}</option>
+                                    @foreach($roles as $rol)
+                                              <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+                                    @endforeach
+                          </select>   
+                        </div>
                       </div>
                     </div>
-                </div>
+                  @endcan
               </div>
               <div class="card-footer ml-auto mr-auto">
                 <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>

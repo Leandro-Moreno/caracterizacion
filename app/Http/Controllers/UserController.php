@@ -30,7 +30,7 @@ class UserController extends Controller
 
         $tipo = $request->get('tipo');
 
-        $users = User::buscarpor($tipo, $buscar)->paginate(5);
+        $users = User::buscarpor($tipo, $buscar)->paginate(10);
 
         $unidades = Unidad::all();
         
@@ -110,8 +110,8 @@ class UserController extends Controller
      */
     public function edit(User $user, Rol $model )
     {
-        $unidad = Unidad::all();
-        return view('users.edit', compact('user'), ['roles' => $model->all()], ['unidades' => $model->all()]);
+        $unidades  = Unidad::all();
+        return view('users.edit', compact('user', 'unidades'), ['roles' => $model->all()], ['unidades' => $model->all()]);
     }
 
     /**
