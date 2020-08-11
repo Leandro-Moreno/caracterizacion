@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Model\Caracterizacion\Caracterizacion;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class CaracterizacionPolicy
 {
@@ -28,9 +29,16 @@ class CaracterizacionPolicy
      * @param  \App\App\Model\Caracterizacion\Caracterizacion  $caracterizacion
      * @return mixed
      */
-    public function view(User $user, Caracterizacion $caracterizacion)
+    public function view(User $user)
     {
-        return true;
+        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3){
+            Response::allow();
+            return true;  
+        }
+        Response::deny('You do not own this post.');
+        return false;
+
+        
     }
 
     /**

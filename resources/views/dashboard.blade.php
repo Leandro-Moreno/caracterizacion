@@ -6,8 +6,8 @@
       <div class="row">
         
 
-        @if (Auth::user()->rol_id <= 5)
 
+      @can('view', App\Model\Caracterizacion\Caracterizacion::class)
         <div class="col-lg-4 col-md-6 col-sm-6">
           <a class="" href="">
           <div class="card card-stats">
@@ -23,7 +23,6 @@
               <div class="stats col-xl-12">
                 <div class="table-responsive">
                   <table class="table">
-
                       <tbody>
 
                   <tr>
@@ -47,7 +46,7 @@
           </div>
           </a>
         </div>
-
+      @endcan
         <div class="col-lg-4 col-md-6 col-sm-6">
           <a class="" href="">
           <div class="card card-stats">
@@ -83,8 +82,7 @@
           </div>
         </a>
         </div>
-        @endif
-        @if (Auth::user()->rol_id == 5)
+
         <div class="col-lg-4 col-md-6 col-sm-6">
           <a class="nav-link" href="{{ route('home') }}">
           <div class="card card-stats">
@@ -104,7 +102,7 @@
           </div>
           </a>
         </div>
-        @endif
+
 
 
       </div>
