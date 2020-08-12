@@ -25,7 +25,6 @@ class UserController extends Controller
      */
     public function index(Request $request,User $model)
     {
-       // dd($request);
 
         $buscar = $request->get('buscarpor');
 

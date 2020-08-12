@@ -28,7 +28,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'role:Facultad'] ], function () {
 
 	Route::resource('caracterizacion', 'Caracterizacion\CaracterizacionController')->names([
     	'index' => 'caracterizacion',
@@ -42,31 +42,32 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('nuevo/usuario', 'UserController@storeUser')->name('createuser')->middleware('auth');
 
 
-  Route::get('importar/caracterizacion', 'Caracterizacion\CaracterizacionController@importar')->middleware('administrador')->name('caracterizacion.importar');
+  	Route::get('importar/caracterizacion', 'Caracterizacion\CaracterizacionController@importar')->middleware('administrador')->name('caracterizacion.importar');
 	Route::post('importar/caracterizacion', 'Caracterizacion\CaracterizacionController@importarCrear')->middleware('administrador')->name('caracterizacion.importarCrear');
 
 
 	Route::get('exportar/usuario', 'Caracterizacion\CaracterizacionController@To.do')->middleware('auth')->name('user.export');
 
 
-  Route::resource('correo', 'CorreoController')->names([
-      'index' => 'correo',
-      'update' => 'correo.update',
-  ])->middleware('administrador');
+	Route::resource('correo', 'CorreoController')->names([
+		'index' => 'correo',
+		'update' => 'correo.update',
+	])->middleware('administrador');
 
-  Route::resource('reporte', 'Reporte\ReporteController')->names([
-	'index' => 'reporte',
-	'create' => 'reporte.create',
-	'show' => 'reporte.show',
-	'edit' => 'reporte.edit',
-	'update' => 'reporte.update',
-	'destroy' => 'reporte.destroy',
-]);
+	Route::resource('reporte', 'Reporte\ReporteController')->names([
+		'index' => 'reporte',
+		'create' => 'reporte.create',
+		'show' => 'reporte.show',
+		'edit' => 'reporte.edit',
+		'update' => 'reporte.update',
+		'destroy' => 'reporte.destroy',
+	]);
 
-  Route::get('admin/profile', 'UserController@admin')->name('user.admin')->middleware('administrador');
-  Route::get('caracterizacion/{id}/crear', 'userController@createCaracterizacion')->name('caracterizacion.ucreate');
+	Route::get('admin/profile', 'UserController@admin')->name('user.admin')->middleware('administrador');
+	Route::get('caracterizacion/{id}/crear', 'userController@createCaracterizacion')->name('caracterizacion.ucreate');
 
 });
+
 Route::get('busqueda/caracterizacion', 'Caracterizacion\CaracterizacionController@busqueda')->name('buscarCaracterizacion');
 Route::get('busqueda/usuario', 'UserController@busqueda')->name('buscarUsuario');
 
