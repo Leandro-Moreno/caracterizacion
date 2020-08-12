@@ -12,63 +12,261 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+
+        #SAdministradores
         DB::table('users')->insert([
-            'rol_id' => '1',
+            'rol_id' => '5',
+            'estado_id' => '1',
+            'unidad_id' => '11',
             'name' => 'Leandro',
+            'apellido' => 'Moreno',
             'email' => 'le.moreno910@uniandes.edu.co',
             'email_verified_at' => now(),
-            'password' => Hash::make('h}-ezWGst*57q+r!'),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('users')->insert([
-            'rol_id' => '1',
-            'name' => 'Laura',
-            'name2' => 'Camila',
-            'apellido' => 'Reyes',
-            'apellido2' => 'Garcia',
-            'email' => 'lc.reyes@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('h}-ezWGst*57q+r!'),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        DB::table('users')->insert([
-            'rol_id' => '1',
-            'name' => 'Paula',
-            'name2' => 'Alejandra',
-            'apellido' => 'Gonzalez',
-            'apellido2' => 'Montoya',
-            'email' => 'p.gonzalezm@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('h}-ezWGst*57q+r!'),
+            'password' => Hash::make('111111'),
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
-            'rol_id' => '1',
+            'rol_id' => '5',
+            'estado_id' => '1',
+            'unidad_id' => '11',
             'name' => 'Andres',
-            'name2' => '',
             'apellido' => 'Gonzalez',
-            'apellido2' => 'Bernal',
             'email' => 'ca.gonzalezb1@uniandes.edu.co',
             'email_verified_at' => now(),
-            'password' => Hash::make('h}-ezWGst*57q+r!'),
+            'password' => Hash::make('casco'),
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
+        #Empleado
         DB::table('users')->insert([
             'rol_id' => '1',
-            'name' => 'Paola',
-            'name2' => 'Alejandra',
-            'apellido' => 'Estrella',
-            'apellido2' => 'Bolaños',
-            'email' => 'p-estrel@uniandes.edu.co',
+            'estado_id' => '1',
+            'unidad_id' => '1',
+            'name' => 'Daniela',
+            'cargo' => 'Analista',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Temporal',
+            'apellido' => 'Reyes',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => '##########',
+            'email' => 'daniela@uniandes.edu.co',
             'email_verified_at' => now(),
-            'password' => Hash::make('h}-ezWGst*57q+r!'),
+            'password' => Hash::make('empleado'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('users')->insert([
+            'rol_id' => '1',
+            'estado_id' => '1',
+            'unidad_id' => '1',
+            'name' => 'Camilo',
+            'cargo' => 'Secretario',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Temporal',
+            'apellido' => 'Reyes',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => '##########',
+            'email' => 'camilo@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('empleado'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('users')->insert([
+            'rol_id' => '1',
+            'estado_id' => '1',
+            'unidad_id' => '1',
+            'name' => 'Fabian',
+            'cargo' => 'Asistente',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Planta',
+            'apellido' => 'Garcia',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => '############',
+            'email' => 'fabian@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('empleado'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        #Facultad
+        DB::table('users')->insert([
+            'rol_id' => '2',
+            'estado_id' => '1',
+            'unidad_id' => '1',
+            'name' => 'Decano Facultad',
+            'cargo' => 'Decano',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Temporal',
+            'apellido' => 'Reyes',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => '##########',
+            'email' => 'facultad@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('facultad'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('users')->insert([
+            'rol_id' => '2',
+            'estado_id' => '1',
+            'unidad_id' => '1',
+            'name' => 'Andres Facultad',
+            'cargo' => 'Ingeniero',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Planta',
+            'apellido' => 'Garcia',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => '##########',
+            'email' => 'andresf@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('facultad'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('users')->insert([
+            'rol_id' => '2',
+            'estado_id' => '1',
+            'unidad_id' => '1',
+            'name' => 'Daniela Facultad',
+            'cargo' => 'Analista',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Temporal',
+            'apellido' => 'Reyes',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => '##########',
+            'email' => 'danielaf@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('facultad'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        #Servicios Salud   
+        DB::table('users')->insert([
+            'rol_id' => '3',
+            'estado_id' => '1',
+            'unidad_id' => '1',
+            'name' => 'Camilo Servicio Salud',
+            'cargo' => '',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Temporal',
+            'apellido' => 'Reyes',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => '##########',
+            'email' => 'camilos@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('serviciosalud'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('users')->insert([
+            'rol_id' => '3',
+            'estado_id' => '1',
+            'unidad_id' => '15',
+            'name' => 'Fabian Servicio Salud',
+            'cargo' => 'Asistente',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Planta',
+            'apellido' => 'Garcia',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => '##########',
+            'email' => 'fabianserviciosalud@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('serviciosalud'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('users')->insert([
+            'rol_id' => '2',
+            'estado_id' => '1',
+            'unidad_id' => '1',
+            'name' => 'Dil Servicio Salud',
+            'cargo' => 'Enfermera',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Temporal',
+            'apellido' => 'Reyes',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => '##########',
+            'email' => 'dilserviciosalud@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('serviciosalud'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        #Servicios Campus
+        DB::table('users')->insert([
+            'rol_id' => '4',
+            'estado_id' => '1',
+            'unidad_id' => '19',
+            'name' => 'Andres Servicios Campus',
+            'cargo' => 'Ingeniero',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Planta',
+            'apellido' => 'Garcia',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => '##########',
+            'email' => 'andresserviciocampus@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('serviciocampus'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('users')->insert([
+            'rol_id' => '4',
+            'estado_id' => '1',
+            'unidad_id' => '19',
+            'name' => 'Daniela Servicios Campus',
+            'cargo' => '',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Temporal',
+            'apellido' => 'Reyes',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => '##########',
+            'email' => 'danielaserviciocampus@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('serviciocampus'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('users')->insert([
+            'rol_id' => '4',
+            'estado_id' => '1',
+            'unidad_id' => '19',
+            'name' => 'Camilo Servicios Campus',
+            'cargo' => '',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Temporal',
+            'apellido' => 'Reyes',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'direccion2' => '##########',
+            'email' => 'camiloserviciocampus@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('serviciocampus'),
             'created_at' => now(),
             'updated_at' => now()
         ]);

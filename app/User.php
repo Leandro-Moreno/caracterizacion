@@ -7,7 +7,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\CustomResetPasswordNotification;
 
-class User extends Authenticatable
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
+
+class User extends Authenticatable implements Searchable
 {
     use Notifiable;
 
@@ -17,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'rol_id', 'name','name2', 'apellido', 'apellido2', 'email', 'tipo_doc', 'documento', 'profesion', 'cargo', 'celular', 'direccion', 'medio', 'tipo_persona', 'uso_datos', 'uso_imagen', 'asistencia_minima', 'password',
+        'estado_id', 'rol_id', 'name', 'apellido', 'email', 'tipo_doc', 'documento', 'profesion', 'cargo', 'tipo_contrato','celular', 'direccion','direccion2', 'uso_datos', 'uso_imagen', 'password','unidad_id','barrio','localidad'
     ];
 
     /**
@@ -38,6 +41,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new CustomResetPasswordNotification($token));
@@ -47,5 +51,31 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Rol', 'rol_id');
     }
+    public function estado()
+    {
+        return $this->belongsTo('App\Model\Estado', 'estado_id');
+    }
+    public function unidad()
+    {
+        return $this->belongsTo('App\Model\Caracterizacion\Unidad', 'unidad_id');
+    }
+    public function buscarUsuarioPorCorreo( $correo = 'correo@uniandes.edu.co'){
 
+      return $this::where('email', $correo)->first();
+    }
+
+    public function scopeBuscarpor($query, $tipo, $buscar) {
+    	if ( ($tipo) && ($buscar) ) {
+    		return $query->where($tipo,'like',"%$buscar%");
+        }
+    }
+    public function getSearchResult(): SearchResult
+    {
+       $url = route('user.edit', $this->id);
+       return new SearchResult($this, $this->name . " " . $this->apellido, $url);
+    }
+    public function caracterizacion()
+    {
+        return $this->hasOne('App\Model\Caracterizacion\Caracterizacion');
+    }
 }

@@ -14,7 +14,7 @@
                 <h4 class="card-title">{{ __('Editar usuario') }}</h4>
                 <p class="card-category"></p>
               </div>
-              <div class="card-body ">
+              <div class="card-body">
                 <div class="row">
                   <div class="col-md-12 text-right">
                       <a href="{{ route('user.index') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
@@ -117,19 +117,6 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="row">
-                      <label class="col-md-3 col-form-label">{{ __('Profesión') }}</label>
-                      <div class="col-md-9">
-                        <div class="form-group{{ $errors->has('profesion') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('profesion') ? ' is-invalid' : '' }}" name="profesion" id="input-profesion" type="text" placeholder="{{ __('Profesión') }}" value="{{ old('profesion', $user->profesion) }}" aria-required="true"/>
-                          @if ($errors->has('profesion'))
-                            <span id="profesion-error" class="error text-danger" for="input-profesion">{{ $errors->first('profesion') }}</span>
-                          @endif
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="row">
                       <label class="col-md-3 col-form-label">{{ __('Cargo') }}</label>
                       <div class="col-md-9">
                         <div class="form-group{{ $errors->has('cargo') ? ' has-danger' : '' }}">
@@ -143,12 +130,27 @@
                   </div>
                   <div class="col-md-6">
                     <div class="row">
-                      <label class="col-md-3 col-form-label">{{ __('Celular') }}</label>
+                      <label class="col-sm-3 col-form-label">{{ __('Facultad/Unidad') }}</label>
+                      <div class="col-sm-7">
+                        <div class="form-group{{ $errors->has('unidad_id') ? ' has-danger' : '' }}">
+                          <select class="form-control{{ $errors->has('unidad_id') ? ' is-invalid' : '' }}" id="input-rol" required="true" aria-required="true" name="unidad_id">
+                            <option value="{{ $user->unidad_id }}">{{$user->unidad->nombre_unidad}}</option>
+                            @foreach($unidades as $unidad)
+                              <option value="{{ $unidad->id }}">{{ $unidad->nombre_unidad }}</option>
+                            @endforeach
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <label class="col-md-3 col-form-label">{{ __('Dependecia') }}</label>
                       <div class="col-md-9">
-                        <div class="form-group{{ $errors->has('celular') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" id="input-celular" type="number" placeholder="{{ __('Celular') }}" value="{{ old('celular', $user->celular) }}" aria-required="true"/>
-                          @if ($errors->has('celular'))
-                            <span id="celular-error" class="error text-danger" for="input-celular">{{ $errors->first('celular') }}</span>
+                        <div class="form-group{{ $errors->has('dependencia') ? ' has-danger' : '' }}">
+                          <input class="form-control{{ $errors->has('dependencia') ? ' is-invalid' : '' }}" name="dependencia" id="input-dependencia" type="text" placeholder="{{ __('Dependencia') }}" value="{{ old('dependencia', $user->dependencia) }}" aria-required="true"/>
+                          @if ($errors->has('dependencia'))
+                            <span id="dependencia-error" class="error text-danger" for="input-dependencia">{{ $errors->first('dependencia') }}</span>
                           @endif
                         </div>
                       </div>
@@ -169,12 +171,12 @@
                   </div>
                   <div class="col-md-6">
                     <div class="row">
-                      <label class="col-md-3 col-form-label">{{ __('Medio') }}</label>
+                      <label class="col-md-3 col-form-label">{{ __('Celular') }}</label>
                       <div class="col-md-9">
-                        <div class="form-group{{ $errors->has('medio') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('medio') ? ' is-invalid' : '' }}" name="medio" id="input-medio" type="text" placeholder="{{ __('Medio') }}" value="{{ old('medio', $user->medio) }}" aria-required="true"/>
-                          @if ($errors->has('medio'))
-                            <span id="medio-error" class="error text-danger" for="input-medio">{{ $errors->first('medio') }}</span>
+                        <div class="form-group{{ $errors->has('celular') ? ' has-danger' : '' }}">
+                          <input class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" id="input-celular" type="number" placeholder="{{ __('Celular') }}" value="{{ old('celular', $user->celular) }}" aria-required="true"/>
+                          @if ($errors->has('celular'))
+                            <span id="celular-error" class="error text-danger" for="input-celular">{{ $errors->first('celular') }}</span>
                           @endif
                         </div>
                       </div>
@@ -182,12 +184,12 @@
                   </div>
                   <div class="col-md-6">
                     <div class="row">
-                      <label class="col-md-3 col-form-label">{{ __('Tipo persona') }}</label>
+                      <label class="col-md-3 col-form-label">{{ __('Barrio') }}</label>
                       <div class="col-md-9">
-                        <div class="form-group{{ $errors->has('tipo_persona') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('tipo_persona') ? ' is-invalid' : '' }}" name="tipo_persona" id="input-tipo_persona" type="text" placeholder="{{ __('Tipo persona') }}" value="{{ old('tipo_persona', $user->tipo_persona) }}" aria-required="true"/>
-                          @if ($errors->has('tipo_persona'))
-                            <span id="tipo_persona-error" class="error text-danger" for="input-tipo_persona">{{ $errors->first('tipo_persona') }}</span>
+                        <div class="form-group{{ $errors->has('direccion2') ? ' has-danger' : '' }}">
+                          <input class="form-control{{ $errors->has('direccion2') ? ' is-invalid' : '' }}" name="direccion2" id="input-direccion2" type="text" placeholder="{{ __('Direccion') }}" value="{{ old('direccion2', $user->direccion2) }}" aria-required="true"/>
+                          @if ($errors->has('direccion2'))
+                            <span id="direccion2-error" class="error text-danger" for="input-direccion2">{{ $errors->first('direccion2') }}</span>
                           @endif
                         </div>
                       </div>
@@ -195,37 +197,62 @@
                   </div>
                   <div class="col-md-6">
                     <div class="row">
-                      <label class="col-md-3 col-form-label">{{ __('Asistencia minima') }}</label>
+                      <label class="col-md-3 col-form-label">{{ __('Localidad') }}</label>
                       <div class="col-md-9">
-                        <div class="form-group{{ $errors->has('asistencia_minima') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('asistencia_minima') ? ' is-invalid' : '' }}" name="asistencia_minima" id="input-asistencia_minima" type="text" placeholder="{{ __('Tipo persona') }}" value="{{ old('asistencia_minima', $user->asistencia_minima) }}" aria-required="true"/>
-                          @if ($errors->has('asistencia_minima'))
-                            <span id="asistencia_minima-error" class="error text-danger" for="input-asistencia_minima">{{ $errors->first('asistencia_minima') }}</span>
+                        <div class="form-group{{ $errors->has('direccion2') ? ' has-danger' : '' }}">
+                          <input class="form-control{{ $errors->has('direccion2') ? ' is-invalid' : '' }}" name="direccion2" id="input-direccion2" type="text" placeholder="{{ __('Direccion') }}" value="{{ old('direccion2', $user->direccion2) }}" aria-required="true"/>
+                          @if ($errors->has('direccion2'))
+                            <span id="direccion2-error" class="error text-danger" for="input-direccion2">{{ $errors->first('direccion2') }}</span>
                           @endif
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <label class="col-sm-2 col-form-label">{{ __('Rol') }}</label>
-                    <div class="col-sm-7">
-                      <div class="form-group{{ $errors->has('rol_id') ? ' has-danger' : '' }}">
-                        <select class="form-control{{ $errors->has('rol_id') ? ' is-invalid' : '' }}" id="input-rol" required="true" aria-required="true" name="rol_id">
-                          <option value="{{ $user->rol_id }}">{{$user->rol->nombre}}</option>
-                          @foreach($roles as $firma )
-                          <option value="{{ $firma->id }}">{{ $firma->nombre }}</option>
-                          @endforeach
-                        </select>
-                        @if ($errors->has('firma2'))
-                        <span id="firma-error" class="error text-danger" for="input-firma">{{ $errors->first('firma2') }}</span>
-                        @endif
+                    <div class="row">
+                      <label class="col-md-3 col-form-label">{{ __('Tipo Contrato') }}</label>
+                      <div class="col-md-9">
+                        <div class="form-group{{ $errors->has('tipo_contrato') ? ' has-danger' : '' }}">
+                          <input class="form-control{{ $errors->has('tipo_contrato') ? ' is-invalid' : '' }}" name="tipo_contrato" id="input-tipo_contrato" type="text" placeholder="{{ __('Tipo Contrato') }}" value="{{ old('tipo_contrato', $user->tipo_contrato) }}" aria-required="true"/>
+                          @if ($errors->has('tipo_contrato'))
+                            <span id="tipo_contrato-error" class="error text-danger" for="input-tipo_contrato">{{ $errors->first('tipo_contrato') }}</span>
+                          @endif
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-
-
-
+                  </div> 
+                  <div class="col-md-6">
+                        <div class="row">
+                              <label class="col-sm-3 col-form-label">{{ __('Estado') }}</label>
+                            <div class="col-sm-9">
+                              <div class="form-group{{ $errors->has('estado_id') ? ' has-danger' : '' }}">
+                                <select class="form-control{{ $errors->has('estado_id') ? ' is-invalid' : '' }}" id="input-estado" required="true" aria-required="true" name="estado_id">
+                                    <option value="{{ $user->estado_id }}" >{{$user->estado->nombre}}</option>
+                                    @foreach($estados as $estado)
+                                      <option value="{{ $estado->id }}">{{ $estado->nombre }}</option>
+                                    @endforeach
+                                </select>     
+                              </div>
+                            </div>
+                        </div>
+                    </div>         
+                    @can('updateByRol', App\User::class)
+                      <div class="col-md-6">
+                          <div class="row">
+                            <label class="col-sm-3 col-form-label">{{ __('Rol') }}</label>
+                            <div class="col-sm-9">
+                                <div class="form-group{{ $errors->has('rol_id') ? ' has-danger' : '' }}">
+                                  <select class="form-control{{ $errors->has('rol_id') ? ' is-invalid' : '' }}" id="input-rol" required="true" aria-required="true" name="rol_id">
+                                        <option value="{{ $user->rol_id }}">{{$user->rol->nombre}}</option>
+                                            @foreach($roles as $rol)
+                                         <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+                                            @endforeach
+                                  </select>   
+                              </div>
+                          </div>
+                      </div>
+                    @endcan
+                    
               </div>
               <div class="card-footer ml-auto mr-auto">
                 <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>

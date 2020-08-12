@@ -1,7 +1,7 @@
 @extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('Gestión de usuarios')])
 
 @section('content')
-  <div class="content">
+  <div id="app" class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -24,8 +24,14 @@
                   </div>
                 @endif
                 <div class="row">
-                  <div class="col-12 text-right">
-                    <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar usuario') }}</a>
+                    
+                  <div class="col-12">
+                    <div class="col-6 text-right">
+                      <buscar-component></buscar-component>
+                    </div>
+                    <div  class="col-12 text-right">
+                      <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar usuario') }}</a>
+                    </div>
                   </div>
                 </div>
                 <div class="table-responsive">
@@ -38,7 +44,25 @@
                         {{ __('Email') }}
                       </th>
                       <th>
-                        {{ __('Documento de Identidad') }}
+                          {{ __('Documento') }}
+                      </th>
+                      <th>
+                          {{ __('Cargo') }}
+                      </th>
+                      <th>
+                          {{ __('Tipo de Contrato') }}
+                      </th>
+                      <th>
+                          {{ __('Unidad/Facultad') }}
+                      </th>
+                      <th>
+                          {{ __('Celular') }}
+                      </th>
+                      <th>
+                          {{ __('Dirección') }}
+                      </th>
+                      <th>
+                          {{ __('Estado') }}
                       </th>
                       <th class="text-right">
                         {{ __('Acciones') }}
@@ -46,27 +70,54 @@
                     </thead>
                     <tbody>
                       @foreach($users as $user)
+                    <?php $userview = $user;  ?>
+                      @can('viewbyRol', $userview)
                         <tr>
                           <td>
-                            {{ $user->name }} {{ $user->name2 }} {{ $user->apellido }} {{ $user->apellido2 }}
+                            {{ $user->name }}  {{ $user->apellido }}
                           </td>
                           <td>
-                            {{ $user->email }}
+                          {{ $user->email }}
                           </td>
                           <td>
-                            {{ $user->tipo_doc }} {{ $user->documento }}
+                          {{ $user->documento }}
+                          </td>
+                          <td>
+                          {{ $user->cargo }}
+                          </td>
+                          <td>
+                          {{ $user->tipo_contrato }}
+                          </td>
+                          <td>
+                            {{ $user->unidad->nombre_unidad }}
+                          </td>
+                          <td>
+                          {{ $user->celular }}
+                          </td>
+                          <td>
+                          {{ $user->direccion }}{{ $user->direccion2 }}
+                          </td>
+                          <td>
+                          {{ $user->estado->nombre }}
                           </td>
                           <td class="td-actions text-right">
 
 
-                                  <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('user.edit', $user) }}" data-original-title="" title="">
+                                  <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('user.edit', $user) }}" data-original-title="" title="Editar usuario">
                                     <i class="material-icons">edit</i>
                                     <div class="ripple-container"></div>
                                   </a>
+                                  @can('updateu', App\Model\Caracterizacion\Caracterizacion::class)
+                                  <a rel="tooltip" class="btn btn-primary btn-link" href="{{ route('caracterizacion.ucreate', $user) }}" data-original-title="" title="Editar/Crear Caracterización">
+                                  <i class="material-icons">next_week</i>
+                                    <div class="ripple-container"></div>
+                                  </a>
+                                  @endcan
 
 
                           </td>
                         </tr>
+                        @endcan
                       @endforeach
                     </tbody>
                   </table>

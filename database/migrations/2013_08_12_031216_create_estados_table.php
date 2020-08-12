@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AgregarColumnaEvEventos extends Migration
+class CreateEstadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class AgregarColumnaEvEventos extends Migration
      */
     public function up()
     {
-        Schema::table('ev_eventos', function (Blueprint $table) {
-          $table->biginteger('firma2_id')->unsigned()->default(1);
-
-
-          $table->foreign('firma2_id')->references('id')->on('ev_firmas');
+        Schema::create('estados', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('nombre');
+            $table->timestamps();
         });
     }
 
@@ -28,8 +27,6 @@ class AgregarColumnaEvEventos extends Migration
      */
     public function down()
     {
-        Schema::table('ev_eventos', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('estados');
     }
 }

@@ -18,7 +18,7 @@ class EventoController extends Controller
      */
     public function index(Evento $model)
     {
-        return view('eventos.index', ['datos' => $model->paginate(15)]);
+        return view('caracterizacion.index', ['datos' => $model->paginate(15)]);
     }
 
     /**
@@ -28,7 +28,7 @@ class EventoController extends Controller
      */
     public function create(Firma $model)
     {
-        return view('eventos.create', ['firmas' => $model->all()]);
+        return view('caracterizacion.create', ['firmas' => $model->all()]);
     }
 
     /**
@@ -51,7 +51,7 @@ class EventoController extends Controller
             ]
         );
 
-        return redirect()->route('eventos')->withStatus(__('Evento creado con éxito.'));
+        return redirect()->route('caracterizacion')->withStatus(__('Evento creado con éxito.'));
     }
 
 
@@ -63,7 +63,7 @@ class EventoController extends Controller
      */
     public function edit(Evento $evento, Firma $model)
     {
-        return view('eventos.edit', compact('evento'), ['firmas' => $model->all()]);
+        return view('caracterizacion.edit', compact('evento'), ['firmas' => $model->all()]);
     }
 
     /**
@@ -83,7 +83,7 @@ class EventoController extends Controller
         $evento->fecha = $request->fecha;
         $evento->hora = $request->hora;
         $evento->save();
-        return redirect()->route('eventos')->withStatus(__('Evento actualizado con éxito.'));
+        return redirect()->route('caracterizacion')->withStatus(__('Evento actualizado con éxito.'));
     }
 
     /**

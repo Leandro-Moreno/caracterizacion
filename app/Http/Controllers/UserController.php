@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+
 use App\User;
-use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use App\Model\Caracterizacion\Unidad;
+use App\Model\Estado;
 use App\Rol;
+use Auth;
+use Illuminate\Support\Facades\DB;
+
+use Spatie\Searchable\Search;
+
 
 class UserController extends Controller
 {
@@ -15,9 +23,19 @@ class UserController extends Controller
      * @param  \App\User  $model
      * @return \Illuminate\View\View
      */
-    public function index(User $model)
+    public function index(Request $request,User $model)
     {
-        return view('users.index', ['users' => $model->paginate(15)]);
+       // dd($request);
+
+        $buscar = $request->get('buscarpor');
+
+        $tipo = $request->get('tipo');
+
+        $users = User::buscarpor($tipo, $buscar)->paginate(10);
+
+        $unidades = Unidad::all();
+        
+        return view('users.index', compact('unidades', 'users'));
     }
 
     /**
@@ -28,7 +46,7 @@ class UserController extends Controller
      */
     public function Admin(User $model)
     {
-        return view('users.admin', ['users' => $model->where('rol_id',1)->get()]);
+        return view('users.admin', ['users' => $model->whereIn('rol_id',[2,3,4,5])->get()]);
     }
 
     /**
@@ -38,7 +56,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $unidades = Unidad::all();
+        $roles = Rol::all();
+        $estados = Estado::all();
+        $unidad = Unidad::all();
+        return view('users.create', compact('unidad', 'unidades' , 'estados', 'roles'));
     }
 
     /**
@@ -48,11 +70,41 @@ class UserController extends Controller
      * @param  \App\User  $model
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(UserRequest $request, User $model)
+    public function createCaracterizacion($id)
     {
-        $model->create($request->merge(['password' => Hash::make($request->get('password'))])->all());
 
-        return redirect()->route('user.index')->withStatus(__('User successfully created.'));
+        //Cambiar la consulta según los estados y roles. COSULTA PRUEBA.
+        $userCaracterizacion = User::find($id);
+        $user = DB::table('users')
+        //->where('users.rol_id', [2,3,4,5,6])
+        ->get();
+        $sendingUser = User::where('rol_id','=',2)->get();
+        $unidades = Unidad::all();
+        return view('caracterizacion.createwithuser', compact('user', 'unidades','sendingUser', 'userCaracterizacion'));
+    }
+    public function storeUser(Request $request)
+    {
+        $user = new User;
+        $user->rol_id = $request->rol;
+        $user->estado_id = $request->estado;
+        $user->name = $request->name;
+        $user->name = $request->name  ;
+        $user->name2 = $request->name2;
+        $user->apellido = $request->apellido;
+        $user->apellido2 = $request->apellido2 ;
+        $user->email = $request->email;
+        $user->tipo_doc = $request->tipo_doc ;
+        $user->documento = $request->documento;
+        $user->cargo = $request->cargo;
+        $user->password = Hash::make($request->documento);
+        $user->tipo_contrato = $request->tipo_contrato ;
+        $user->celular = $request->celular;
+        $user->direccion = $request->direccion ;
+        $user->direccion2 = $request->barrio.','.$request->localidad;
+        $user->unidad_id = $request->unidad ;
+        $user->save();
+
+        return redirect()->route('user.index')->withStatus(__('Usuario Creado correctamente.'));
     }
 
     /**
@@ -61,9 +113,11 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\View\View
      */
-    public function edit(User $user, Rol $model)
+    public function edit(User $user, Rol $model )
     {
-        return view('users.edit', compact('user'), ['roles' => $model->all()]);
+        $unidades = Unidad::all();
+        $estados = Estado::all();
+        return view('users.edit', compact('user', 'unidades', 'estados'), ['roles' => $model->all()], ['unidades' => $model->all()]);
     }
 
     /**
@@ -73,14 +127,16 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UserRequest $request, User  $user)
+    public function update(Request $request, User  $user)
     {
+
         $user->update(
             $request->merge(['password' => Hash::make($request->get('password'))])
-                ->except(
-                    [$request->get('password') ? '' : 'password']
-        )
-        );
+            ->except(
+                [$request->get('password') ? '' : 'password']
+                )
+            );
+            
 
         return redirect()->route('user.index')->withStatus(__('Usuario actualizado correctamente.'));
     }
@@ -96,5 +152,19 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('user.index')->withStatus(__('User successfully deleted.'));
+    }
+    public function importForm( )
+    {
+        return view('users.imports.create');
+    }
+
+    public function busqueda(Request $request)
+    {
+      // $this->authorize('oe');
+      $results = (new Search())
+    ->registerModel(User::class, ['name', 'apellido','documento'])
+    ->search($request->input('query'));
+    // dd($results);
+    return response()->json($results);
     }
 }

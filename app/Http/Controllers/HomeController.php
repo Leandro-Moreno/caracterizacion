@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Model\Eventos\Firma;
-use App\Model\Eventos\Evento;
-use App\Model\Eventos\Asistente;
+use App\Model\Caracterizacion\Caracterizacion;
 
 class HomeController extends Controller
 {
@@ -26,19 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $asistencia =  User::orderBy('id','desc')
-        ->limit(5)
-        ->get();
-        $eventos =  Evento::orderBy('id','desc')
-        ->limit(5)
-        ->get();
-        $firmas =  Firma::orderBy('id','desc')
-        ->limit(5)
-        ->get();
-        return view('dashboard' ,[
-          'eventos' => $eventos,
-          'asistencia'  =>  $asistencia,
-          'firmas'  =>  $firmas
-        ]);
+        $ultimos_usuarios = User::whereIn('rol_id', [1,2] )->get();
+        $envio_consentimiento = Caracterizacion::where('envio_de_consentimiento' , '=' , 'No')->get();
+        return view('dashboard', compact('ultimos_usuarios', 'envio_consentimiento'), ['ultimos_usuarios' => $ultimos_usuarios->paginate(3)]);
     }
 }
