@@ -14,7 +14,7 @@
                 <h4 class="card-title">{{ __('Editar usuario') }}</h4>
                 <p class="card-category"></p>
               </div>
-              <div class="card-body ">
+              <div class="card-body">
                 <div class="row">
                   <div class="col-md-12 text-right">
                       <a href="{{ route('user.index') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
@@ -220,23 +220,39 @@
                         </div>
                       </div>
                     </div>
-                  </div>          
+                  </div> 
                   <div class="col-md-6">
-                  @can('updateRol', App\User::class)
-                    <div class="row">
-                      <label class="col-sm-3 col-form-label">{{ __('Rol') }}</label>
-                      <div class="col-sm-9">
-                        <div class="form-group{{ $errors->has('rol_id') ? ' has-danger' : '' }}">
-                          <select class="form-control{{ $errors->has('rol_id') ? ' is-invalid' : '' }}" id="input-rol" required="true" aria-required="true" name="rol_id">
-                                <option value="{{ $user->rol_id }}">{{$user->rol->nombre}}</option>
-                                    @foreach($roles as $rol)
-                                              <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+                        <div class="row">
+                              <label class="col-sm-3 col-form-label">{{ __('Estado') }}</label>
+                            <div class="col-sm-9">
+                              <div class="form-group{{ $errors->has('estado_id') ? ' has-danger' : '' }}">
+                                <select class="form-control{{ $errors->has('estado_id') ? ' is-invalid' : '' }}" id="input-estado" required="true" aria-required="true" name="estado_id">
+                                    <option value="{{ $user->estado_id }}" >{{$user->estado->nombre}}</option>
+                                    @foreach($estados as $estado)
+                                      <option value="{{ $estado->id }}">{{ $estado->nombre }}</option>
                                     @endforeach
-                          </select>   
+                                </select>     
+                              </div>
+                            </div>
                         </div>
+                    </div>         
+                    @can('updateByRol', App\User::class)
+                      <div class="col-md-6">
+                          <div class="row">
+                            <label class="col-sm-3 col-form-label">{{ __('Rol') }}</label>
+                            <div class="col-sm-9">
+                                <div class="form-group{{ $errors->has('rol_id') ? ' has-danger' : '' }}">
+                                  <select class="form-control{{ $errors->has('rol_id') ? ' is-invalid' : '' }}" id="input-rol" required="true" aria-required="true" name="rol_id">
+                                        <option value="{{ $user->rol_id }}">{{$user->rol->nombre}}</option>
+                                            @foreach($roles as $rol)
+                                         <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+                                            @endforeach
+                                  </select>   
+                              </div>
+                          </div>
                       </div>
-                    </div>
-                  @endcan
+                    @endcan
+                    
               </div>
               <div class="card-footer ml-auto mr-auto">
                 <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>

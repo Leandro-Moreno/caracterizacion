@@ -22,6 +22,16 @@ class UserPolicy
     }
 
 
+    public function updateByRol(User $user)
+    {    
+        if($user->rol_id == 5 || $user->rol_id == 4){
+                Response::allow();
+                return true;  
+        }
+        Response::deny('You do not own this Caracterizacion.');
+        return false;
+    }
+
     public function viewbyRol(User $user, $userview)
     {    
         if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){

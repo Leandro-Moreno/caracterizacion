@@ -17,8 +17,8 @@
                 <div class="card-body ">
                      <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#empleado" aria-controls="empleado" role="tab" data-toggle="tab" class="btn btn-sm btn-primary">Empleado</a></li>
-                        <li role="presentation"><a href="#centro" aria-controls="centro" role="tab" data-toggle="tab" class="btn btn-sm btn-danger">Centro Medico</a></li>
-                        <li role="presentation"><a href="#ghdo" aria-controls="ghdo" role="tab" data-toggle="tab" class="btn btn-sm btn-success" >GHDO</a></li>
+                        @can('editTab' , App\Model\Caracterizacion\Caracterizacion::class)<li role="presentation"><a href="#centro" aria-controls="centro" role="tab" data-toggle="tab" class="btn btn-sm btn-danger">Centro Medico</a></li>@endcan
+                        @can('editTab' , App\Model\Caracterizacion\Caracterizacion::class)<li role="presentation"><a href="#ghdo" aria-controls="ghdo" role="tab" data-toggle="tab" class="btn btn-sm btn-success" >GHDO</a></li>@endcan
                      </ul>
                      <div class="row">
                         <div class="col-md-12 text-right">
@@ -133,8 +133,9 @@
                                     <div class="form-group{{ $errors->has('indispensable_presencial') ? ' has-danger' : '' }}">
                                        <div class="togglebutton">
                                           <label>
-                                          <input name="indispensable_presencial" type="checkbox"  value="{{$caracterizacion->indispensable_presencial}}"  {{ $caracterizacion->indispensable_presencial === 'Si' ? 'checked="checked"' : '' }}>{{ $caracterizacion->indispensable_presencial}}</input>
+                                          <input name="indispensable_presencial" type="checkbox"  id="repTogg" value="{{$caracterizacion->indispensable_presencial}}"  {{ $caracterizacion->indispensable_presencial === 'Si' ? 'checked="checked"' : '' }}>{{ $caracterizacion->indispensable_presencial}}</input>
                                           <span class="toggle"></span>
+                                          <span id="toggContenidoinds">{{ $caracterizacion->indispensable_presencial === 'Si' ? "Activo":"No activo" }}</span>
                                           </label>
                                        </div>
                                        @if ($errors->has('indispensable_presencial'))
@@ -192,8 +193,9 @@
                                     <div class="form-group{{ $errors->has('trabajo_en_casa') ? ' has-danger' : '' }}">
                                        <div class="togglebutton">
                                           <label>
-                                          <input id="estadoTogg" name="trabajo_en_casa" type="checkbox"  value="{{$caracterizacion->trabajo_en_casa}}"  @if($caracterizacion->trabajo_en_casa == 'Si') checked @endif>{{$caracterizacion->trabajo_en_casa}}</input>
+                                          <input id="trabajo_en_casa" name="trabajo_en_casa" type="checkbox"  value="{{$caracterizacion->trabajo_en_casa}}"  @if($caracterizacion->trabajo_en_casa == 'Si') checked @endif>{{$caracterizacion->trabajo_en_casa}}</input>
                                           <span class="toggle"></span>
+                                          <span id="toggTrabajo">{{ $caracterizacion->trabajo_en_casa == 'Si' ? "Si":"No" }}</span>
                                           </label>
                                        </div>
                                        @if ($errors->has('trabajo_en_casa'))
@@ -212,11 +214,11 @@
                                              <select class="form-control{{ $errors->has('viabilidad_caracterizacion') ? ' is-invalid' : '' }}" id="input-viabilidad_caracterizacion" required="true" aria-required="true" name="viabilidad_caracterizacion_caracterizacion">
                                                 <option value="{{ old('viabilidad_caracterizacion') }}"disabled selected>Seleccionar</option>
 
-                                                <option value="1" @if($caracterizacion->viabilidad_caracterizacion == 'Consultar con jefatura servicio médico y SST') selected  @endif >Consultar con jefatura servicio médico y SST</option>
-                                                <option value="2" @if($caracterizacion->viabilidad_caracterizacion == 'Viable trabajo presencial') selected  @endif >Viable trabajo presencial</option>
-                                                <option value="3" @if($caracterizacion->viabilidad_caracterizacion == 'Viable trabajo presencial') selected  @endif >Trabajo en casa y consultar a telemedicina</option>
-                                                <option value="4" @if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa y consultar a telemedicina') selected  @endif >Trabajo en casa</option>
-                                                <option value="5" @if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa') selected  @endif >Sin clasificación</option>
+                                                <option value="1" @if($caracterizacion->viabilidad_caracterizacion === 'Consultar con jefatura servicio médico y SST') selected  @endif >Consultar con jefatura servicio médico y SST</option>
+                                                <option value="2" @if($caracterizacion->viabilidad_caracterizacion === 'Viable trabajo presencial') selected  @endif >Viable trabajo presencial</option>
+                                                <option value="3" @if($caracterizacion->viabilidad_caracterizacion === 'Viable trabajo presencial') selected  @endif >Trabajo en casa y consultar a telemedicina</option>
+                                                <option value="4" @if($caracterizacion->viabilidad_caracterizacion === 'Trabajo en casa y consultar a telemedicina') selected  @endif >Trabajo en casa</option>
+                                                <option value="5" @if($caracterizacion->viabilidad_caracterizacion === 'Trabajo en casa') selected  @endif >Sin clasificación</option>
                                              </select>
                                           </div>
                                        </div>
@@ -250,8 +252,9 @@
                                  <div class="col-sm-4">                                    <div class="form-group{{ $errors->has('envio_de_consentimiento') ? ' has-danger' : '' }}">
                                        <div class="togglebutton">
                                           <label>
-                                          <input name="envio_de_consentimiento" type="checkbox"  value="{{$caracterizacion->envio_de_consentimiento}}" {{ $caracterizacion->envio_de_consentimiento === 'Si' ? 'checked="checked"' : '' }}>{{  $caracterizacion->envio_de_consentimiento }}</input>
+                                          <input id="#envio-consentimiento-togg" name="envio_de_consentimiento" type="checkbox"  value="{{$caracterizacion->envio_de_consentimiento}}" {{ $caracterizacion->envio_de_consentimiento === 'Si' ? 'checked="checked"' : '' }}>{{  $caracterizacion->envio_de_consentimiento }}</input>
                                           <span class="toggle"></span>
+                                          <span id="toggEnvio">{{ $caracterizacion->envio_de_consentimiento === 'Si' ? "Activo":"No activo" }}</span>
                                           </label>
                                        </div>
                                        @if ($errors->has('envio_de_consentimiento'))
@@ -277,12 +280,10 @@
   <script type="text/javascript">
 
   $(".toggle").click(function(e){
-    if($("#estadoTogg").prop( "checked" )){
-
-    }
-      $("#estadoTogg").prop( "checked" )?$( "#toggContenido" ).text("No activo"):$( "#toggContenido" ).text("Activo");
-
-      });a
+      $("#repTogg").prop( "checked" )?$( "#toggContenidoinds" ).text("No Indispensable"):$( "#toggContenidoinds" ).text("Si");
+      $("#trabajo_en_casa").prop( "checked" )?$( "#toggTrabajo" ).text("No"):$( "#toggTrabajo" ).text("Si");
+      $("#envio-consentimiento-togg").prop( "checked" )?$( "#toggEnvio" ).text("No Envío"):$( "#toggEnvio" ).text("Si Envío");
+   });
 
   </script>
   @endpush

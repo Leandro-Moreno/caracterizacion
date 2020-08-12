@@ -20,7 +20,7 @@ class User extends Authenticatable implements Searchable
      * @var array
      */
     protected $fillable = [
-        'rol_id', 'name', 'apellido', 'email', 'tipo_doc', 'documento', 'profesion', 'cargo', 'tipo_contrato','celular', 'direccion','direccion2', 'uso_datos', 'uso_imagen', 'password','unidad_id','barrio','localidad'
+        'estado_id', 'rol_id', 'name', 'apellido', 'email', 'tipo_doc', 'documento', 'profesion', 'cargo', 'tipo_contrato','celular', 'direccion','direccion2', 'uso_datos', 'uso_imagen', 'password','unidad_id','barrio','localidad'
     ];
 
     /**
@@ -50,6 +50,10 @@ class User extends Authenticatable implements Searchable
     public function rol()
     {
         return $this->belongsTo('App\Rol', 'rol_id');
+    }
+    public function estado()
+    {
+        return $this->belongsTo('App\Model\Estado', 'estado_id');
     }
     public function unidad()
     {

@@ -61,6 +61,9 @@
                       <th>
                           {{ __('Dirección') }}
                       </th>
+                      <th>
+                          {{ __('Estado') }}
+                      </th>
                       <th class="text-right">
                         {{ __('Acciones') }}
                       </th>
@@ -93,6 +96,9 @@
                           </td>
                           <td>
                           {{ $user->direccion }}{{ $user->direccion2 }}
+                          </td>
+                          <td>
+                          {{ $user->estado->nombre }}
                           </td>
                           <td class="td-actions text-right">
 

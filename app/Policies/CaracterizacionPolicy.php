@@ -84,6 +84,30 @@ class CaracterizacionPolicy
         Response::deny('You do not own this Caracterizacion.');
         return false;
     }
+
+    public function editTab(User $user)
+    {
+        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 ){
+                Response::allow();
+                return true;  
+
+        }
+        Response::deny('You do not own this Caracterizacion.');
+        return false;
+    }
+
+    public function createTab(User $user)
+    {
+        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 ){
+                Response::allow();
+                return true;  
+
+        }
+        Response::deny('You do not own this Caracterizacion.');
+        return false;
+    }
+
+
     public function updateu(User $user )
     {
 
@@ -141,7 +165,7 @@ class CaracterizacionPolicy
      */
     public function importar(User $user)
     {
-        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3){
+        if($user->rol_id == 5 || $user->rol_id == 4){
             Response::allow();
             return true;  
         }

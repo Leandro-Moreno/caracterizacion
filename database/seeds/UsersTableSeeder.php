@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
         #SAdministradores
         DB::table('users')->insert([
             'rol_id' => '5',
+            'estado_id' => '1',
             'unidad_id' => '11',
             'name' => 'Leandro',
             'apellido' => 'Moreno',
@@ -27,6 +28,7 @@ class UsersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'rol_id' => '5',
+            'estado_id' => '1',
             'unidad_id' => '11',
             'name' => 'Andres',
             'apellido' => 'Gonzalez',
@@ -39,6 +41,7 @@ class UsersTableSeeder extends Seeder
         #Empleado
         DB::table('users')->insert([
             'rol_id' => '1',
+            'estado_id' => '1',
             'unidad_id' => '1',
             'name' => 'Daniela',
             'cargo' => 'Analista',
@@ -57,6 +60,7 @@ class UsersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'rol_id' => '1',
+            'estado_id' => '1',
             'unidad_id' => '1',
             'name' => 'Camilo',
             'cargo' => 'Secretario',
@@ -75,6 +79,7 @@ class UsersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'rol_id' => '1',
+            'estado_id' => '1',
             'unidad_id' => '1',
             'name' => 'Fabian',
             'cargo' => 'Asistente',
@@ -94,6 +99,7 @@ class UsersTableSeeder extends Seeder
         #Facultad
         DB::table('users')->insert([
             'rol_id' => '2',
+            'estado_id' => '1',
             'unidad_id' => '1',
             'name' => 'Decano Facultad',
             'cargo' => 'Decano',
@@ -112,6 +118,7 @@ class UsersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'rol_id' => '2',
+            'estado_id' => '1',
             'unidad_id' => '1',
             'name' => 'Andres Facultad',
             'cargo' => 'Ingeniero',
@@ -130,6 +137,7 @@ class UsersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'rol_id' => '2',
+            'estado_id' => '1',
             'unidad_id' => '1',
             'name' => 'Daniela Facultad',
             'cargo' => 'Analista',
@@ -149,6 +157,7 @@ class UsersTableSeeder extends Seeder
         #Servicios Salud   
         DB::table('users')->insert([
             'rol_id' => '3',
+            'estado_id' => '1',
             'unidad_id' => '1',
             'name' => 'Camilo Servicio Salud',
             'cargo' => '',
@@ -167,6 +176,7 @@ class UsersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'rol_id' => '3',
+            'estado_id' => '1',
             'unidad_id' => '15',
             'name' => 'Fabian Servicio Salud',
             'cargo' => 'Asistente',
@@ -185,6 +195,7 @@ class UsersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'rol_id' => '2',
+            'estado_id' => '1',
             'unidad_id' => '1',
             'name' => 'Dil Servicio Salud',
             'cargo' => 'Enfermera',
@@ -204,6 +215,7 @@ class UsersTableSeeder extends Seeder
         #Servicios Campus
         DB::table('users')->insert([
             'rol_id' => '4',
+            'estado_id' => '1',
             'unidad_id' => '19',
             'name' => 'Andres Servicios Campus',
             'cargo' => 'Ingeniero',
@@ -222,6 +234,7 @@ class UsersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'rol_id' => '4',
+            'estado_id' => '1',
             'unidad_id' => '19',
             'name' => 'Daniela Servicios Campus',
             'cargo' => '',
@@ -240,6 +253,7 @@ class UsersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert([
             'rol_id' => '4',
+            'estado_id' => '1',
             'unidad_id' => '19',
             'name' => 'Camilo Servicios Campus',
             'cargo' => '',

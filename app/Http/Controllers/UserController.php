@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Model\Caracterizacion\Unidad;
+use App\Model\Estado;
 use App\Rol;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -55,8 +56,11 @@ class UserController extends Controller
      */
     public function create()
     {
+        $unidades = Unidad::all();
+        $roles = Rol::all();
+        $estados = Estado::all();
         $unidad = Unidad::all();
-        return view('users.create', compact('unidad'));
+        return view('users.create', compact('unidad', 'unidades' , 'estados', 'roles'));
     }
 
     /**
@@ -82,6 +86,7 @@ class UserController extends Controller
     {
         $user = new User;
         $user->rol_id = $request->rol;
+        $user->estado_id = $request->estado;
         $user->name = $request->name;
         $user->name = $request->name  ;
         $user->name2 = $request->name2;
@@ -110,8 +115,9 @@ class UserController extends Controller
      */
     public function edit(User $user, Rol $model )
     {
-        $unidades  = Unidad::all();
-        return view('users.edit', compact('user', 'unidades'), ['roles' => $model->all()], ['unidades' => $model->all()]);
+        $unidades = Unidad::all();
+        $estados = Estado::all();
+        return view('users.edit', compact('user', 'unidades', 'estados'), ['roles' => $model->all()], ['unidades' => $model->all()]);
     }
 
     /**
@@ -123,12 +129,14 @@ class UserController extends Controller
      */
     public function update(Request $request, User  $user)
     {
+
         $user->update(
             $request->merge(['password' => Hash::make($request->get('password'))])
-                ->except(
-                    [$request->get('password') ? '' : 'password']
-        )
-        );
+            ->except(
+                [$request->get('password') ? '' : 'password']
+                )
+            );
+            
 
         return redirect()->route('user.index')->withStatus(__('Usuario actualizado correctamente.'));
     }

@@ -116,10 +116,6 @@
                                     <i class="material-icons">edit</i>
                                     <div class="ripple-container"></div>
                                   </a>
-                                  <a rel="tooltip" class="btn btn-danger btn-link" href="{{ route('caracterizacion.destroy', $dato) }}" data-original-title="" title="">
-                                    <i class="material-icons">delete</i>
-                                    <div class="ripple-container"></div>
-                                  </a>
                               </form>
                           </td>
                           @endcan
