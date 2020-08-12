@@ -55,7 +55,7 @@
                                                     <option value="{{ $unidad->id }}" {{ $unidad->id ==  $user->unidad_id ? 'selected="selected"' : '' }}>{{ $unidad->nombre_unidad }}</option>
                                           @endforeach
                                         @endif
-                                        
+
                                     </select>
                                     </div>
                                  </div>
@@ -223,6 +223,7 @@
                                           </div>
                                        </div>
                               </div>
+                              
                               <div class="row">
                                  <label class="col-sm-2 col-form-label">{{ __('Observación') }}</label>
                                  <div class="col-sm-4">
