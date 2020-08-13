@@ -43,15 +43,12 @@ class CaracterizacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $user)
     {
-        //Cambiar la consulta según los estados y roles. COSULTA PRUEBA.
-        $user = DB::table('users')
-        //->where('users.rol_id', [2,3,4,5,6])
-        ->get();
+      $user_id =array_key_first( $user->request->all() );
+        $user = User::where('id','=',$user_id)->first();
         $sendingUser = User::where('rol_id','=',2)->get();
         $unidades = Unidad::all();
-
 
         return view('caracterizacion.create', compact('user', 'unidades','sendingUser'));
     }
