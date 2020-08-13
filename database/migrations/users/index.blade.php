@@ -72,7 +72,7 @@
                                   </button>
                               </form>
                             @else
-                              <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('profile.edit') }}" data-original-title="" title="">
+                              <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('profile.index') }}" data-original-title="" title="">
                                 <i class="material-icons">edit</i>
                                 <div class="ripple-container"></div>
                               </a>

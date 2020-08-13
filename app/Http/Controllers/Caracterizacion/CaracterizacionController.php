@@ -22,10 +22,14 @@ class CaracterizacionController extends Controller
     public function __construct()
     {
         $this->authorizeResource(Caracterizacion::class);
+      
+
+        
     }
 
     public function index()
     {
+
         $caracterizaciones;
         $caracterizaciones = Caracterizacion::all();
         $user = Auth::user();
@@ -204,5 +208,14 @@ class CaracterizacionController extends Controller
     ->search($request->input('query'));
   
     return response()->json($results);
+    }
+
+    public function chart()
+    {
+      $result = \DB::table('caracterizacion')
+                  ->where('indispensable_presencial','=','Si')
+                  ->orderBy('viabilidad_caracterizacion', 'ASC')
+                  ->get();
+      return response()->json($result);
     }
 }

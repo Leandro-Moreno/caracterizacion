@@ -29,9 +29,11 @@
                     <div class="col-6 text-right">
                       <buscar-component></buscar-component>
                     </div>
+                    @can('create' , App\Model\Caracterizacion\Caracterizacion::class)
                     <div  class="col-12 text-right">
                       <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar usuario') }}</a>
                     </div>
+                    @endcan
                     <div class="col-12 text-right">
                     <select id="field" class="form-control mr-sm-3" name="field">
                         <option disabled selected >Seleccione...</option>
