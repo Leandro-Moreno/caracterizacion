@@ -84,6 +84,7 @@ class UserController extends Controller
     }
     public function storeUser(Request $request)
     {
+      
         $user = new User;
         $user->rol_id = $request->rol;
         $user->estado_id = $request->estado;

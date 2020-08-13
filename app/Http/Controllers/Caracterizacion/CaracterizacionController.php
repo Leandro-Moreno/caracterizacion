@@ -64,7 +64,8 @@ class CaracterizacionController extends Controller
      */
     public function store(Request $request, Caracterizacion $model )
     {
-
+      $data = Input::all();
+      dd($data);
         $user = User::Where('email','=',$request->email)->first();
         $user->name = $request->nombre;
         $user->apellido = $request->nombre;
