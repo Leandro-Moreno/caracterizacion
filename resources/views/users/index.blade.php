@@ -26,7 +26,7 @@
                 <div class="row">
                 <form class="form-inline">
                   <div class="col-12">
-                    <div class="input-group">
+                  <div class="input-group">
                       <buscar-component></buscar-component>
                       <span class="input-group-btn">
                         <button class="btn btn-primary" style="background:#2e91a9" type="button" data-toggle="collapse" data-target="#busqueda-avanzada" aria-expanded="false" aria-controls="collapseExample">

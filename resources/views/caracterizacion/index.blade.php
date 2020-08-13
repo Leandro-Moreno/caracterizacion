@@ -141,7 +141,7 @@
                           $color = $datoc[1];
                           
                           ?>
-                          <td class="cp" style="background-color: {{$color}} ; color:white "  >
+                          <td style="background-color: {{$color}} ; color:black">
                             {{ $datoc[0]}}
                           </td>
                           <td>
