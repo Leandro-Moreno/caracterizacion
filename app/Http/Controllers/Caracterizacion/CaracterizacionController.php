@@ -70,7 +70,7 @@ class CaracterizacionController extends Controller
 
         $user = new User;
         $user->rol_id = 1;
-        
+
         $user->name = $request->nombre;
         $user->apellido = $request->nombre;
         $user->tipo_doc = $request->tipo_doc ;
@@ -96,7 +96,7 @@ class CaracterizacionController extends Controller
         }
         $lastUser = User::all();
         $lastUser_id = $lastUser->last();
-       
+
         $caracterizacion = new Caracterizacion;
         $caracterizacion->user_id = $lastUser_id->id ;
         $caracterizacion->dependencia = $request->dependencia ;
@@ -155,7 +155,7 @@ class CaracterizacionController extends Controller
         $user->unidad_id = $request->unidad_id;
         $user->password = Hash::make('caracterizacion');
         $user->save();
-        
+
         $caracterizacion = Caracterizacion::find($caracterizacion->id);
         $caracterizacion->dependencia = $request->dependencia ;
         $caracterizacion->indispensable_presencial = $request->indispensable_presencial ;
@@ -169,9 +169,9 @@ class CaracterizacionController extends Controller
         $caracterizacion->notas_comentarios_ma_andrea_leyva = $request->notas_comentarios_ma_andrea_leyva ;
         $caracterizacion->envio_de_consentimiento = $request->envio_de_consentimiento ;
         $caracterizacion->save();
-            
 
-      
+
+
 
 
         return redirect()->route('caracterizacion')->withStatus(__('Usuario actualizado con éxito.'));
@@ -200,9 +200,8 @@ class CaracterizacionController extends Controller
     {
       // $this->authorize('oe');
       $results = (new Search())
-    ->registerModel(Caracterizacion::class, ['viabilidad_caracterizacion'])
+    ->registerModel(User::class, ['name', 'apellido','documento','email'])
     ->search($request->input('query'));
-  
     return response()->json($results);
     }
 }

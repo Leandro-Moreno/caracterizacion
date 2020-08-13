@@ -65,10 +65,10 @@ Route::group(['middleware' => 'auth'], function () {
 
   Route::get('admin/profile', 'UserController@admin')->name('user.admin')->middleware('administrador');
   Route::get('caracterizacion/{id}/crear', 'userController@createCaracterizacion')->name('caracterizacion.ucreate');
+  Route::get('busqueda/caracterizacion', 'Caracterizacion\CaracterizacionController@busqueda')->name('buscarCaracterizacion')->middleware('administrador');
+  Route::get('busqueda/usuario', 'UserController@busqueda')->name('buscarUsuario')->middleware('administrador');
 
 });
-Route::get('busqueda/caracterizacion', 'Caracterizacion\CaracterizacionController@busqueda')->name('buscarCaracterizacion');
-Route::get('busqueda/usuario', 'UserController@busqueda')->name('buscarUsuario');
 
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('user', 'UserController', ['except' => ['show']]);
