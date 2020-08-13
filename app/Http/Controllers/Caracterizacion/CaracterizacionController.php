@@ -26,7 +26,7 @@ class CaracterizacionController extends Controller
 
     public function index(Request $request)
     {
-      
+
       $viable_trabajo_presencial = '|#A9D08E'; //
       $consultar_jefatura_servicio_médico_sst = '|#FFFF99'; //
       $trabajo_casa_consultar_telemedicina = '|#CC99FF'; //
@@ -46,19 +46,19 @@ class CaracterizacionController extends Controller
         if($user->rol_id < 3){
           foreach ($caracterizaciones as $caracterizacion){
             if($caracterizacion->viabilidad_caracterizacion == 'Consultar con jefatura servicio médico y SST'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$viable_trabajo_presencial; 
+              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$viable_trabajo_presencial;
             }
             if($caracterizacion->viabilidad_caracterizacion == 'Viable trabajo presencial'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$consultar_jefatura_servicio_médico_sst; 
+              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$consultar_jefatura_servicio_médico_sst;
             }
             if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa y consultar a telemedicina'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa_consultar_telemedicina; 
+              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa_consultar_telemedicina;
             }
             if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa; 
+              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa;
             }
             if($caracterizacion->viabilidad_caracterizacion == 'Sin clasificación'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$sin_clasificación; 
+              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$sin_clasificación;
             }
           }
           $caracterizaciones  = $caracterizaciones->filter(function ($caracterizacion, $key){
@@ -66,22 +66,22 @@ class CaracterizacionController extends Controller
             return $caracterizacion->user->unidad_id == $user->unidad_id;
           });
         }
-      
+
         foreach ($caracterizaciones as $caracterizacion){
           if($caracterizacion->viabilidad_caracterizacion == 'Consultar con jefatura servicio médico y SST'){
-            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$viable_trabajo_presencial; 
+            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$viable_trabajo_presencial;
           }
           if($caracterizacion->viabilidad_caracterizacion == 'Viable trabajo presencial'){
-            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$consultar_jefatura_servicio_médico_sst; 
+            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$consultar_jefatura_servicio_médico_sst;
           }
           if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa y consultar a telemedicina'){
-            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa_consultar_telemedicina; 
+            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa_consultar_telemedicina;
           }
           if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa'){
-            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa; 
+            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa;
           }
           if($caracterizacion->viabilidad_caracterizacion == 'Sin clasificación'){
-            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$sin_clasificación; 
+            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$sin_clasificación;
           }
         }
         return view('caracterizacion.index', compact('buscar', 'resultado_caracterizacion'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
@@ -166,7 +166,6 @@ class CaracterizacionController extends Controller
      */
     public function edit(Caracterizacion $caracterizacion)
     {
-      dd($caracterizacion);
         $unidades = Unidad::all();
         $sendingUser = User::where('rol_id','=',2)->get();
         $user = User::where('id','=',$caracterizacion->user->id)->first();
