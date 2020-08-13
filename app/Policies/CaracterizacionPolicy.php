@@ -6,6 +6,7 @@ use App\Model\Caracterizacion\Caracterizacion;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class CaracterizacionPolicy
 {
@@ -19,9 +20,9 @@ class CaracterizacionPolicy
      */
     public function viewAny(User $user)
     {
-        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
+        if($user->rol_id >= 2){
             Response::allow();
-            return true;  
+            return true;
         }
         Response::deny('You do not own this Caracterizacion.');
         return false;
@@ -36,14 +37,12 @@ class CaracterizacionPolicy
      */
     public function view(User $user)
     {
-        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
-            Response::allow();
-            return true;  
+        if($user->rol_id >= 2){
+            return Response::allow();
         }
-        Response::deny('You do not own this Caracterizacion.');
-        return false;
+        return Response::deny('You do not own this Caracterizacion.');
 
-        
+
     }
 
     /**
@@ -54,9 +53,9 @@ class CaracterizacionPolicy
      */
     public function create(User $user)
     {
-        if($user->rol_id == 5 || $user->rol_id == 4 ||  $user->rol_id == 2){
+        if($user->rol_id >= 4 ||  $user->rol_id == 2){
             Response::allow();
-            return true;  
+            return true;
         }
         Response::deny('You do not own this Caracterizacion.');
         return false;
@@ -69,24 +68,22 @@ class CaracterizacionPolicy
      * @param  \App\App\Model\Caracterizacion\Caracterizacion  $caracterizacion
      * @return mixed
      */
-    public function update(User $user , $envio)
+    public function update(User $user)
     {
-        $unidaduser = User::find($envio->user_id);
-        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
-            if($unidaduser->unidad_id == $user->unidad_id || $user->rol_id == 5 ||  $user->rol_id == 4 || $user->rol_id == 3 ){
-                Response::allow();
-                return true;  
+        $unidaduser = Auth::user();
+        if($unidaduser->rol_id >= 2){
+            if( ( $unidaduser->unidad_id == $user->unidad_id ) || ( $user->rol_id >= 3 ) ){
+                return Response::allow();
             }
         }
-        Response::deny('You do not own this Caracterizacion.');
-        return false;
+        return Response::deny('You do not own this Caracterizacion.');
     }
 
     public function editTab(User $user)
     {
-        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 ){
+        if($user->rol_id >= 2 ){
                 Response::allow();
-                return true;  
+                return true;
 
         }
         Response::deny('You do not own this Caracterizacion.');
@@ -95,9 +92,9 @@ class CaracterizacionPolicy
 
     public function createTab(User $user)
     {
-        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 ){
+        if($user->rol_id >= 3 ){
                 Response::allow();
-                return true;  
+                return true;
 
         }
         Response::deny('You do not own this Caracterizacion.');
@@ -108,9 +105,9 @@ class CaracterizacionPolicy
     public function updateu(User $user )
     {
 
-        if($user->rol_id == 5 || $user->rol_id == 4 ||  $user->rol_id == 2){
+        if($user->rol_id >= 4 ||  $user->rol_id == 2){
             Response::allow();
-                return true;  
+                return true;
         }
         Response::deny('You do not own this Caracterizacion.');
         return false;
@@ -164,7 +161,7 @@ class CaracterizacionPolicy
     {
         if($user->rol_id == 5 || $user->rol_id == 4){
             Response::allow();
-            return true;  
+            return true;
         }
         Response::deny('You do not own this Caracterizacion.');
         return false;

@@ -45,7 +45,7 @@ class CaracterizacionController extends Controller
      */
     public function create(Request $user)
     {
-      $user_id =array_key_first( $user->request->all() );
+        $user_id =array_key_first( $user->request->all() );
         $user = User::where('id','=',$user_id)->first();
         $sendingUser = User::where('rol_id','=',2)->get();
         $unidades = Unidad::all();
@@ -64,8 +64,6 @@ class CaracterizacionController extends Controller
      */
     public function store(Request $request, Caracterizacion $model )
     {
-      $data = Input::all();
-      dd($data);
         $user = User::Where('email','=',$request->email)->first();
         $user->name = $request->nombre;
         $user->apellido = $request->nombre;
