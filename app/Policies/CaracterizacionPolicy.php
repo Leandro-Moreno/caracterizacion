@@ -69,6 +69,24 @@ class CaracterizacionPolicy
      * @param  \App\App\Model\Caracterizacion\Caracterizacion  $caracterizacion
      * @return mixed
      */
+
+
+    public function updateDato(User $user , $dato)
+    {
+        
+        $unidaduser = User::find($dato->user_id);
+        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
+            if($unidaduser->unidad_id == $user->unidad_id || $user->rol_id == 5 ||  $user->rol_id == 4 || $user->rol_id == 3 ){
+                Response::allow();
+               
+                return true;  
+            }
+        }
+        Response::deny('You do not own this Caracterizacion.');
+        return false;
+    }
+
+
     public function update(User $user , $envio)
     {
         $unidaduser = User::find($envio->user_id);
@@ -80,6 +98,16 @@ class CaracterizacionPolicy
         }
         Response::deny('You do not own this Caracterizacion.');
         return false;
+    }
+
+    public function viewByRole(User $user){
+        if($user->rol_id == 5 || $user->rol_id == 4 ){
+            Response::allow();
+            return true;  
+        }
+    Response::deny('You do not own this Caracterizacion.');
+    return false;
+
     }
 
     public function editTab(User $user)

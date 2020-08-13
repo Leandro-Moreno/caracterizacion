@@ -8,19 +8,20 @@
                @csrf
                @method('post')
                <div class="card ">
-                  <div class="card-header card-header-primary">
-                     <h4 class="card-title">{{ __('Añadir Caracterización') }}</h4>
-                     <p class="card-category"></p>
+               <div class="card-header card-header-primary">
+                    <h4 class="card-title">{{ __('Crear Caracterización de ') . $userCaracterizacion->name . " " . $userCaracterizacion->apellido }}</h4>
+                    <p class="card-category">{{ __('Correo')}}: {{$userCaracterizacion->email}}</p>
+                    <p class="card-category">{{ __('Facultad')}}:{{$userCaracterizacion->unidad->nombre_unidad}}</p>
                   </div>
                   <div class="card-body ">
                      <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#empleado" aria-controls="empleado" role="tab" data-toggle="tab" class="btn btn-sm btn-primary">Empleado</a></li>
-                        <li role="presentation"><a href="#centro" aria-controls="centro" role="tab" data-toggle="tab" class="btn btn-sm btn-danger">Centro Medico</a></li>
-                        <li role="presentation"><a href="#ghdo" aria-controls="ghdo" role="tab" data-toggle="tab" class="btn btn-sm btn-success" >GHDO</a></li>
+                        @can('createTab' , App\Model\Caracterizacion\Caracterizacion::class)<li role="presentation"><a href="#centro" aria-controls="centro" role="tab" data-toggle="tab" class="btn btn-sm btn-danger">Centro Medico</a></li>@endcan
+                        @can('createTab' , App\Model\Caracterizacion\Caracterizacion::class)<li role="presentation"><a href="#ghdo" aria-controls="ghdo" role="tab" data-toggle="tab" class="btn btn-sm btn-success" >GHDO</a></li>@endcan
                      </ul>
                      <div class="row">
                         <div class="col-md-12 text-right">
-                           <a href="{{ route('caracterizacion') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
+                           <a href="{{ route('caracterizacion.index') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
                         </div>
                      </div>
                      @if ($errors->any())

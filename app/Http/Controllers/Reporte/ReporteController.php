@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Reporte;
 
 use App\Model\Reporte\Reporte;
 use Illuminate\Http\Request;
+use App\Model\Caracterizacion\Caracterizacion;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class ReporteController extends Controller
 {
@@ -15,7 +17,37 @@ class ReporteController extends Controller
      */
     public function index()
     {
-        return view('reporte.index');
+        $caracterizaciones;
+        $caracterizaciones = Caracterizacion::all();
+        $user = Auth::user();
+        if($user->rol_id < 3){
+          $caracterizaciones  = $caracterizaciones->filter(function ($caracterizacion, $key){
+            $user = Auth::user();
+            return $caracterizacion->user->unidad_id == $user->unidad_id;
+          });
+        }
+
+        return view('reporte.index', ['caracterizaciones' => $caracterizaciones->paginate(15)]);
+    }
+
+    /**
+     * Display a listing of the resource graph.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function grafico()
+    {
+        $caracterizaciones;
+        $caracterizaciones = Caracterizacion::all();
+        $user = Auth::user();
+        if($user->rol_id < 3){
+          $caracterizaciones  = $caracterizaciones->filter(function ($caracterizacion, $key){
+            $user = Auth::user();
+            return $caracterizacion->user->unidad_id == $user->unidad_id;
+          });
+        }
+
+        return view('reporte.grafico', ['caracterizaciones' => $caracterizaciones->paginate(15)]);
     }
 
     /**

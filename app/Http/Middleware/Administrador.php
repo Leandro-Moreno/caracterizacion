@@ -16,7 +16,10 @@ class Administrador
      */
     public function handle($request, Closure $next)
     {
+
+
         if (Auth::user()->rol_id < 2) {
+            dd(Auth::user()->rol_id);
             return redirect('home');
         }
         return $next($request);

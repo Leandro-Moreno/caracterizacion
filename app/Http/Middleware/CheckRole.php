@@ -19,7 +19,6 @@ class CheckRole
     public function handle($request, Closure $next, ... $roles)
     { 
         foreach($roles as $role){
-
             #Validacion para usuarios Superadmin/Servicios Campus-GHDO/
             if (Auth::user()->rol->nombre == $role) {
                 //dd(Auth::user()->rol->nombre , $role, $roles);

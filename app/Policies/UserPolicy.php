@@ -86,11 +86,11 @@ class UserPolicy
         if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
             if($ultimousuario->unidad_id == $user->unidad_id || $user->rol_id == 5 || $user->rol_id == 4 ){
                 Response::allow();
-                return true;  
+                return false;  
             }
         }
         Response::deny('You do not own this Caracterizacion.');
-        return false;
+        return true;
     }
 
     /**
