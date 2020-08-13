@@ -121,7 +121,7 @@
                                     <div class="ripple-container"></div>
                                   </a>
                                   @can('updateu', App\Model\Caracterizacion\Caracterizacion::class)
-                                  <a rel="tooltip" class="btn btn-primary btn-link" href="{{ route('caracterizacion.ucreate', $user) }}" data-original-title="" title="Editar/Crear Caracterización">
+                                  <a rel="tooltip" class="btn btn-primary btn-link" href="{{ isset( $user->caracterizacion ) ? route('caracterizacion.edit', $user->caracterizacion->id) : route('caracterizacion.ucreate', $user) }}" data-original-title="" title="Editar/Crear Caracterización">
                                   <i class="material-icons">next_week</i>
                                     <div class="ripple-container"></div>
                                   </a>

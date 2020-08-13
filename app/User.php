@@ -71,7 +71,11 @@ class User extends Authenticatable implements Searchable
     }
     public function getSearchResult(): SearchResult
     {
-       $url = route('user.edit', $this->id);
+      // $urlEdit = route('user.edit', $this->id);
+      $url = route('caracterizacion.create', $this->id);
+      if( isset($this->caracterizacion) ){
+        $url = route('caracterizacion.edit', $this->caracterizacion->id);
+      }
        return new SearchResult($this, $this->name . " " . $this->apellido, $url);
     }
     public function caracterizacion()

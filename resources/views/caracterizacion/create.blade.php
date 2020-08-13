@@ -9,8 +9,9 @@
                @method('post')
                <div class="card ">
                   <div class="card-header card-header-primary">
-                     <h4 class="card-title">{{ __('Añadir Caracterización') }}</h4>
-                     <p class="card-category"></p>
+                    <h4 class="card-title">{{ __('Crear Caracterización de ') . $user->name . " " . $user->apellido }}</h4>
+                    <p class="card-category">{{ __('Correo')}}: {{$user->email}}</p>
+                    <p class="card-category">{{ __('Facultad')}}:{{$user->unidad->nombre_unidad}}</p>
                   </div>
                   <div class="card-body ">
                      <ul class="nav nav-tabs" role="tablist">

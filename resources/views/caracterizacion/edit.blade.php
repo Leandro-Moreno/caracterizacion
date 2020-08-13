@@ -8,11 +8,11 @@
           <form method="post" action="{{ route('caracterizacion.update', $caracterizacion) }}" autocomplete="off" class="form-horizontal" enctype="multipart/form-data">
             @csrf
             @method('put')
-
             <div class="card ">
               <div class="card-header card-header-primary">
-                <h4 class="card-title">{{ __('Editar Caracterización') }}</h4>
-                <p class="card-category"></p>
+                <h4 class="card-title">{{ __('Editar Caracterización de ') . $user->name . " " . $user->apellido }}</h4>
+                <p class="card-category">{{ __('Correo')}}: {{$user->email}}</p>
+                <p class="card-category">{{ __('Facultad')}}:{{$user->unidad->nombre_unidad}}</p>
               </div>
                 <div class="card-body ">
                      <ul class="nav nav-tabs" role="tablist">
@@ -55,7 +55,7 @@
                                                     <option value="{{ $unidad->id }}" {{ $unidad->id ==  $user->unidad_id ? 'selected="selected"' : '' }}>{{ $unidad->nombre_unidad }}</option>
                                           @endforeach
                                         @endif
-                                        
+
                                     </select>
                                     </div>
                                  </div>
@@ -223,6 +223,7 @@
                                           </div>
                                        </div>
                               </div>
+
                               <div class="row">
                                  <label class="col-sm-2 col-form-label">{{ __('Observación') }}</label>
                                  <div class="col-sm-4">

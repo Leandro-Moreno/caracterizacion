@@ -10,7 +10,6 @@
                 <h4 class="card-title ">{{ __('Caracterización') }}</h4>
                 <p class="card-category"> {{ __('Aquí puedes gestionar tus caractizar tus usuarios') }}</p>
               </div>
-              <buscarcaracterizacion-component></buscarcaracterizacion-component>
               <div class="card-body">
                 @if (session('status'))
                   <div class="row">
@@ -48,8 +47,14 @@
                 @endif
                 @can('create', App\Model\Caracterizacion\Caracterizacion::class)
                 <div class="row">
-                  <div class="col-12 text-right">
-                    <a href="{{ route('caracterizacion.create') }}" class="btn btn-sm btn-primary">{{ __('Añadir Caracterización') }}</a>
+
+                  <div class="col-12">
+                    <div class="col-6 text-right">
+                      <buscar-component></buscar-component>
+                    </div>
+                    <div  class="col-12 text-right">
+                      <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar Caracterizacion') }}</a>
+                    </div>
                   </div>
                 </div>
                 @endcan

@@ -33,7 +33,7 @@ class UserController extends Controller
         $users = User::buscarpor($tipo, $buscar)->paginate(10);
 
         $unidades = Unidad::all();
-        
+
         return view('users.index', compact('unidades', 'users'));
     }
 
@@ -83,6 +83,7 @@ class UserController extends Controller
     }
     public function storeUser(Request $request)
     {
+      
         $user = new User;
         $user->rol_id = $request->rol;
         $user->estado_id = $request->estado;
@@ -135,7 +136,7 @@ class UserController extends Controller
                 [$request->get('password') ? '' : 'password']
                 )
             );
-            
+
 
         return redirect()->route('user.index')->withStatus(__('Usuario actualizado correctamente.'));
     }
@@ -159,11 +160,16 @@ class UserController extends Controller
 
     public function busqueda(Request $request)
     {
-      // $this->authorize('oe');
       $results = (new Search())
-    ->registerModel(User::class, ['name', 'apellido','documento'])
+    ->registerModel(User::class, ['name', 'apellido','documento','email'])
     ->search($request->input('query'));
-    // dd($results);
+      $user = Auth::user();
+      if( $user->rol_id == 2){
+        $results = $results->filter(function( $value, $key){
+          $user = Auth::user();
+          return $value->searchable->unidad_id == $user->unidad_id;
+        });
+      }
     return response()->json($results);
     }
 }
