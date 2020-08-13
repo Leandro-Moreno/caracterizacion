@@ -16,12 +16,16 @@ class CheckRole
      * @return mixed
      */
 
-    public function handle($request, Closure $next, $role)
-    {
+    public function handle($request, Closure $next, ... $roles)
+    { 
+        foreach($roles as $role){
 
-        if (Auth::user()->rol->nombre) {
-            return redirect('home');
+            #Validacion para usuarios Superadmin/Servicios Campus-GHDO/
+            if (Auth::user()->rol->nombre == $role) {
+                //dd(Auth::user()->rol->nombre , $role, $roles);
+                return $next($request);
+            }
         }
-    return $next($request);
+        return redirect('home');
     }
 }

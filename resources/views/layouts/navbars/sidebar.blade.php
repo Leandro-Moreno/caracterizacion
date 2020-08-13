@@ -19,7 +19,7 @@
           <ul class="nav">
           @can('view', App\Model\Caracterizacion\Caracterizacion::class)
             <li class="nav-item{{ $activePage == 'caracterizacion' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('caracterizacion') }}">
+              <a class="nav-link" href="{{ route('caracterizacion.index') }}">
                 <i class="material-icons">next_week</i>
                   <p>{{ __('Caracterización') }}</p>
               </a>
@@ -66,7 +66,7 @@
         <div class="collapse {{ ($activePage == 'profile' || $activePage == 'correo'|| $activePage == 'admin-management') ? ' show' : '' }}" id="Configuracion">
           <ul class="nav">
             <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('profile.edit') }}">
+              <a class="nav-link" href="{{ route('profile.index') }}">
                 <i class="material-icons">person</i>
                 <p> {{ __('Perfil') }} </p>
               </a>

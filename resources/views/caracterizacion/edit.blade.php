@@ -22,7 +22,7 @@
                      </ul>
                      <div class="row">
                         <div class="col-md-12 text-right">
-                           <a href="{{ route('caracterizacion') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
+                           <a href="{{ route('caracterizacion.index') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
                         </div>
                      </div>
                      @if ($errors->any())
