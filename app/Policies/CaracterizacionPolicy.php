@@ -36,9 +36,7 @@ class CaracterizacionPolicy
      */
     public function view(User $user)
     {
-
         if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
-           
             Response::allow();
             return true;  
         }
@@ -56,8 +54,7 @@ class CaracterizacionPolicy
      */
     public function create(User $user)
     {
-      
-        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
+        if($user->rol_id == 5 || $user->rol_id == 4 ||  $user->rol_id == 2){
             Response::allow();
             return true;  
         }
@@ -111,7 +108,7 @@ class CaracterizacionPolicy
     public function updateu(User $user )
     {
 
-        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
+        if($user->rol_id == 5 || $user->rol_id == 4 ||  $user->rol_id == 2){
             Response::allow();
                 return true;  
         }

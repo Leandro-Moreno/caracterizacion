@@ -25,7 +25,6 @@ class UserController extends Controller
      */
     public function index(Request $request,User $model)
     {
-       // dd($request);
 
         $buscar = $request->get('buscarpor');
 
@@ -84,6 +83,7 @@ class UserController extends Controller
     }
     public function storeUser(Request $request)
     {
+      
         $user = new User;
         $user->rol_id = $request->rol;
         $user->estado_id = $request->estado;

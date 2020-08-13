@@ -56,7 +56,7 @@ class CaracterizacionTableSeeder extends Seeder
             'horaSalida'=> '4:00',
             'dias_laborales'=> '6',
             'trabajo_en_casa'=> 'No',
-            'viabilidad_caracterizacion'=> 'Trabajo en casa y consultar a ',
+            'viabilidad_caracterizacion'=> 'Trabajo en casa y consultar a telemedicina',
             'observacion_cambios_de_estado'=> 'Lorem ipsum dolor sit amet',
             'notas_comentarios_ma_andrea_leyva'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
             'envio_de_consentimiento'=> 'No',

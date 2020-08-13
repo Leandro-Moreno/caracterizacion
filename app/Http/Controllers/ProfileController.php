@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use App\Model\Caracterizacion\Unidad;
+use App\Rol;
+use App\Model\Estado;
+use App\User;
+use Auth;
 /**
  * ProfileController Class Doc Comment
  *
@@ -22,6 +28,23 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+
+    public function index(Request $request,User $model)
+    {
+
+        $buscar = $request->get('buscarpor');
+
+        $tipo = $request->get('tipo');
+
+        $user = Auth::user();
+        $users = User::buscarpor($tipo, $buscar)->paginate(10);
+
+        $unidades = Unidad::all();
+        return view('profile.index', compact('unidades', 'users', 'user'));
+    }
+
+
     public function edit()
     {
         return view('profile.edit');
