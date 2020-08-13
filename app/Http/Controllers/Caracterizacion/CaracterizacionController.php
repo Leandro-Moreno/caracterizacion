@@ -43,15 +43,12 @@ class CaracterizacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $user)
     {
-        //Cambiar la consulta según los estados y roles. COSULTA PRUEBA.
-        $user = DB::table('users')
-        //->where('users.rol_id', [2,3,4,5,6])
-        ->get();
+      $user_id =array_key_first( $user->request->all() );
+        $user = User::where('id','=',$user_id)->first();
         $sendingUser = User::where('rol_id','=',2)->get();
         $unidades = Unidad::all();
-
 
         return view('caracterizacion.create', compact('user', 'unidades','sendingUser'));
     }
@@ -68,9 +65,7 @@ class CaracterizacionController extends Controller
     public function store(Request $request, Caracterizacion $model )
     {
 
-        $user = new User;
-        $user->rol_id = 1;
-        
+        $user = User::Where('email','=',$request->email)->first();
         $user->name = $request->nombre;
         $user->apellido = $request->nombre;
         $user->tipo_doc = $request->tipo_doc ;
@@ -94,11 +89,9 @@ class CaracterizacionController extends Controller
         if($request->envio_de_consentimiento == null){
             $request->envio_de_consentimiento = "No";
         }
-        $lastUser = User::all();
-        $lastUser_id = $lastUser->last();
-       
+
         $caracterizacion = new Caracterizacion;
-        $caracterizacion->user_id = $lastUser_id->id ;
+        $caracterizacion->user_id = $user->id ;
         $caracterizacion->dependencia = $request->dependencia ;
         $caracterizacion->indispensable_presencial = $request->indispensable_presencial ;
         $caracterizacion->por_que = $request->por_que ;
@@ -127,7 +120,7 @@ class CaracterizacionController extends Controller
     {
         $unidades = Unidad::all();
         $sendingUser = User::where('rol_id','=',2)->get();
-        $user = User::find($caracterizacion->user->id);
+        $user = User::where('id','=',$caracterizacion->user->id)->first();
         return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'user' ,'sendingUser'));
     }
 
@@ -146,17 +139,14 @@ class CaracterizacionController extends Controller
         if($request->trabajo_en_casa == null){
             $request->trabajo_en_casa = 'No' ;
         }
-        $user = User::find($caracterizacion->user_id);
-        $user->rol_id = 1;
+        $user = User::where('id','=',$caracterizacion->user_id)->first();
         $user->cargo = $request->cargo;
         $user->direccion = $request->direccion ;
         $user->tipo_contrato = $request->tipo_contrato ;
         $user->direccion2 = $request->direccionb.",".$request->direccionl;
         $user->unidad_id = $request->unidad_id;
-        $user->password = Hash::make('caracterizacion');
         $user->save();
-        
-        $caracterizacion = Caracterizacion::find($caracterizacion->id);
+
         $caracterizacion->dependencia = $request->dependencia ;
         $caracterizacion->indispensable_presencial = $request->indispensable_presencial ;
         $caracterizacion->por_que = $request->por_que ;
@@ -169,11 +159,6 @@ class CaracterizacionController extends Controller
         $caracterizacion->notas_comentarios_ma_andrea_leyva = $request->notas_comentarios_ma_andrea_leyva ;
         $caracterizacion->envio_de_consentimiento = $request->envio_de_consentimiento ;
         $caracterizacion->save();
-            
-
-      
-
-
         return redirect()->route('caracterizacion')->withStatus(__('Usuario actualizado con éxito.'));
     }
 
@@ -193,16 +178,14 @@ class CaracterizacionController extends Controller
     }
     public function importarCrear(){
       $caracterizacion = Excel::import(new UsersImport, request()->file('caracterizacion'));
-      dd($caracterizacion);
+      // dd($caracterizacion);
       return back();
     }
     public function busqueda(Request $request)
     {
-      // $this->authorize('oe');
       $results = (new Search())
-    ->registerModel(Caracterizacion::class, ['viabilidad_caracterizacion'])
-    ->search($request->input('query'));
-  
-    return response()->json($results);
+              ->registerModel(User::class, ['name', 'apellido','documento','email'])
+              ->search($request->input('query'));
+      return response()->json($results);
     }
 }
