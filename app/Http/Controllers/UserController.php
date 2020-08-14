@@ -25,13 +25,15 @@ class UserController extends Controller
      */
     public function index(Request $request,User $model)
     {
-        $unidad = $request->get('unidad');
-        $rol = $request->get('rol');
-        $estado = $request->get('estado');
 
-        $users = User::buscarpor($unidad, $rol, $estado)->paginate(10);
-        
-        dd($users);
+        if (Auth::user()->rol_id >= 2){
+            $unidad = $request->get('unidad');
+            $rol = $request->get('rol');
+            $estado = $request->get('estado');
+    
+            $users = User::buscarpor( $unidad, $rol )->paginate(10);
+
+        }
 
         $unidades = Unidad::all();
 

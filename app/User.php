@@ -64,9 +64,9 @@ class User extends Authenticatable implements Searchable
       return $this::where('email', $correo)->first();
     }
 
-    public function scopeBuscarpor($query, $unidad, $rol, $estado ) {
+    public function scopeBuscarpor($query, $unidad, $rol ) {
         if (($unidad) &&  ($rol) && ($estado)){
-            return $query->where('estado_id', 'like', "%$estado%");
+            return $query->select('estado_id')->where('estado_id', '=', $estado)->get();
         }
     }
 
