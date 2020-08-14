@@ -31,4 +31,10 @@ class Caracterizacion extends Model implements Searchable
       return $this->belongsTo('App\User');
 
     }
+    public function scopeBuscarpor($query, $unidad, $role, $estado) {
+    	if ( ($unidad) && ($role) && ($estado) ) {
+        dd($query, $unidad);
+    		return $query->where($tipo,'like',"%$buscar%");
+    	}
+    }
 }

@@ -11,7 +11,7 @@
               <p class="card-category"> {{ __('Su rol no le permite editar esta pagina.') }}</p>
             </div>
             <div class="card-body">
-              hola
+              Sin permisos :(
             </div>
             </div>
             </div>

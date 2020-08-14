@@ -79,9 +79,40 @@ class CaracterizacionPolicy
         return Response::deny('You do not own this Caracterizacion.');
     }
 
+    public function viewByRole(User $user){
+        if($user->rol_id == 5 || $user->rol_id == 4 ){
+            Response::allow();
+            return true;
+        }
+    Response::deny('You do not own this Caracterizacion.');
+    return false;
+
+    }
+
     public function editTab(User $user)
     {
         if($user->rol_id >= 2 ){
+                Response::allow();
+                return true;
+
+        }
+        Response::deny('You do not own this Caracterizacion.');
+        return false;
+    }
+
+    public function editPestañaGHDO(User $user)
+    {
+        if($user->rol_id >= 4 ){
+                Response::allow();
+                return true;
+
+        }
+        Response::deny('You do not own this Caracterizacion.');
+        return false;
+    }
+    public function editPestañaSalud(User $user)
+    {
+        if($user->rol_id >= 3 ){
                 Response::allow();
                 return true;
 
