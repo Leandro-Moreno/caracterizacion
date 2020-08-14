@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\CustomResetPasswordNotification;
-
+use \DB;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 
@@ -64,11 +64,12 @@ class User extends Authenticatable implements Searchable
       return $this::where('email', $correo)->first();
     }
 
-    public function scopeBuscarpor($query, $tipo, $buscar) {
-    	if ( ($tipo) && ($buscar) ) {
-    		return $query->where($tipo,'like',"%$buscar%");
+    public function scopeBuscarpor($query, $unidad, $rol ) {
+        if (($unidad) &&  ($rol) && ($estado)){
+            return $query->select('estado_id')->where('estado_id', '=', $estado)->get();
         }
     }
+
     public function getSearchResult(): SearchResult
     {
       // $urlEdit = route('user.edit', $this->id);

@@ -45,10 +45,20 @@ class ProfileController extends Controller
     }
 
 
-    public function edit()
+         /**
+     * Show the form for editing the specified user
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\View\View
+     */
+    public function edit(User $user, Rol $model )
     {
-        return view('profile.edit');
+        $unidades = Unidad::all();
+        $estados = Estado::all();
+        $user = Auth::user();
+        return view('profile.edit', compact('user', 'unidades', 'estados'), ['roles' => $model->all()], ['unidades' => $model->all()]);
     }
+
 
     /**
      * Actualiza el perfil

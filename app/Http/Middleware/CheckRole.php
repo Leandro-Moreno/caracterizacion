@@ -21,8 +21,8 @@ class CheckRole
         foreach($roles as $role){
             #Validacion para usuarios Superadmin/Servicios Campus-GHDO/
             if (Auth::user()->rol->nombre == $role) {
-                //dd(Auth::user()->rol->nombre , $role, $roles);
-                return $next($request);
+               
+               return $next($request);
             }
         }
         return redirect('home');

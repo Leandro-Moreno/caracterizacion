@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <form method="put" action="{{ route('caracterizacion.update', $caracterizacion) }}" autocomplete="off" class="form-horizontal" enctype="multipart/form-data">
+          <form method="put" action="" autocomplete="off" class="form-horizontal" novalidate enctype="multipart/form-data">
             @csrf
             @method('put')
             <div class="card ">
@@ -22,7 +22,7 @@
                      </ul>
                      <div class="row">
                         <div class="col-md-12 text-right">
-                           <a href="{{ route('caracterizacion.index') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
+                           <a href="{{ route('caracterizacion') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
                         </div>
                      </div>
                      @if ($errors->any())
@@ -53,7 +53,7 @@
                      </div>
                </div>
                <div class="card-footer ml-auto mr-auto">
-                  <button type="submit" class="btn btn-primary">{{ __('Guardar Caracterización') }}</button>
+                  <button type="button" class="btn btn-primary">{{ __('Guardar Caracterización n') }}</button>
                </div>
          </div>
           </form>

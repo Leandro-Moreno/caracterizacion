@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\Caracterizacion\Caracterizacion;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\Model\Caracterizacion\Unidad;
 
 class ReporteController extends Controller
 {
@@ -24,7 +25,7 @@ class ReporteController extends Controller
         $trabajo_casa = '|#9BC2E6'; //
         $sin_clasificación = '|#FFFFFF';   //
 
-
+        $unidades = Unidad::all();
         $caracterizaciones;
         $caracterizaciones = Caracterizacion::all();
         $user = Auth::user();
@@ -69,7 +70,7 @@ class ReporteController extends Controller
             }
           }
 
-        return view('reporte.index', ['caracterizaciones' => $caracterizaciones->paginate(15)]);
+        return view('reporte.index', compact('unidades'), ['caracterizaciones' => $caracterizaciones->paginate(15)]);
     }
 
     /**

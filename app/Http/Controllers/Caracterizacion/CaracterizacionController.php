@@ -21,70 +21,31 @@ class CaracterizacionController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Caracterizacion::class);
+       // $this->authorizeResource(Caracterizacion::class);
+
     }
 
     public function index(Request $request)
     {
-
-      $viable_trabajo_presencial = '|#A9D08E'; //
-      $consultar_jefatura_servicio_médico_sst = '|#FFFF99'; //
-      $trabajo_casa_consultar_telemedicina = '|#CC99FF'; //
-      $trabajo_casa = '|#9BC2E6'; //
-      $sin_clasificación = '|#FFFFFF';   //
-
       $buscar = "";
-      $estado = $request->get('estado');
-      $role = $request->get('role');
-      $unidad = $request->get('unidad');
-
-      $resultado_caracterizacion = Caracterizacion::buscarpor($estado, $role, $unidad)->paginate(10);
-
-      $caracterizaciones;
+      $unidades = Unidad::all();
+      if( null !==  $request->get('estado') ){
+        $estado = $request->get('estado');
+        $role = $request->get('role');
+        $unidad = $request->get('unidad');
+        $caracterizaciones = Caracterizacion::buscarpor($estado, $role, $unidad)->paginate(10);
+      }
+      else{
         $caracterizaciones = Caracterizacion::all();
-        $user = Auth::user();
-        if($user->rol_id < 3){
-          foreach ($caracterizaciones as $caracterizacion){
-            if($caracterizacion->viabilidad_caracterizacion == 'Consultar con jefatura servicio médico y SST'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$viable_trabajo_presencial;
-            }
-            if($caracterizacion->viabilidad_caracterizacion == 'Viable trabajo presencial'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$consultar_jefatura_servicio_médico_sst;
-            }
-            if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa y consultar a telemedicina'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa_consultar_telemedicina;
-            }
-            if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa;
-            }
-            if($caracterizacion->viabilidad_caracterizacion == 'Sin clasificación'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$sin_clasificación;
-            }
-          }
-          $caracterizaciones  = $caracterizaciones->filter(function ($caracterizacion, $key){
+      }
+      $caracterizaciones = $this->agregarColorEstado($caracterizaciones); //TODO: agregar al modelo como helper
+        if(Auth::user()->rol_id < 3){
+          $caracterizaciones  = $caracterizaciones->filter(function ($caracterizacion){
             $user = Auth::user();
             return $caracterizacion->user->unidad_id == $user->unidad_id;
           });
         }
-
-        foreach ($caracterizaciones as $caracterizacion){
-          if($caracterizacion->viabilidad_caracterizacion == 'Consultar con jefatura servicio médico y SST'){
-            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$viable_trabajo_presencial;
-          }
-          if($caracterizacion->viabilidad_caracterizacion == 'Viable trabajo presencial'){
-            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$consultar_jefatura_servicio_médico_sst;
-          }
-          if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa y consultar a telemedicina'){
-            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa_consultar_telemedicina;
-          }
-          if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa'){
-            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa;
-          }
-          if($caracterizacion->viabilidad_caracterizacion == 'Sin clasificación'){
-            $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$sin_clasificación;
-          }
-        }
-        return view('caracterizacion.index', compact('buscar', 'resultado_caracterizacion'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
+        return view('caracterizacion.index', compact('buscar', 'unidades'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
     }
 
     /**
@@ -98,11 +59,33 @@ class CaracterizacionController extends Controller
         $user = User::where('id','=',$user_id)->first();
         $sendingUser = User::where('rol_id','=',2)->get();
         $unidades = Unidad::all();
-
-        return view('caracterizacion.create', compact('user', 'unidades','sendingUser'));
+        $caracterizacion = new Caracterizacion();
+        return view('caracterizacion.create', compact('caracterizacion','user','unidad',  'unidades','sendingUser'));
     }
 
-
+    public function agregarColorEstado( $caracterizaciones )
+    {
+      $caracterizaciones = $caracterizaciones->each(function($caracterizacion, $key){
+        switch ( $caracterizacion->viabilidad_caracterizacion ) {
+          case 'Consultar con jefatura servicio médico y SST':
+            $caracterizacion->estadoColor = "warning";
+            break;
+          case 'Viable trabajo presencial':
+            $caracterizacion->estadoColor = "success";
+            break;
+          case 'Trabajo en casa y consultar a telemedicina':
+            $caracterizacion->estadoColor = "danger";
+            break;
+          case 'Sin clasificación':
+            $caracterizacion->estadoColor = "black";
+            break;
+          default:
+            break;
+        }
+        return $caracterizacion;
+      });
+      return $caracterizaciones;
+    }
 
 
     /**
@@ -113,19 +96,28 @@ class CaracterizacionController extends Controller
      */
     public function store(Request $request, Caracterizacion $model )
     {
+      if (Auth::user()->rol_id == 2){
+          $validatedData = $request->validate([
+            'email' => 'required|unique:users|max:255',
+            'documento' => 'required|unique:users|max:255',
+        ]);
+
+        //dd(Auth::user()->rol_id );
+
+      }
         $user = User::Where('email','=',$request->email)->first();
+
+        $user->estado_id = 1;
         $user->name = $request->nombre;
-        $user->apellido = $request->nombre;
+        $user->apellido = $request->apellido;
         $user->tipo_doc = $request->tipo_doc ;
         $user->celular = $request->celular ;
         $user->documento = $request->documento;
         $user->cargo = $request->cargo;
-        $user->email = $request->email;
         $user->tipo_contrato = $request->tipo_contrato ;
         $user->direccion = $request->direccion ;
         $user->direccion2 = $request->direccionb.",".$request->direccionl;
         $user->unidad_id = $request->unidad_id ;
-        $user->password = Hash::make('caracterizacion');
         $user->save();
 
         if($request->indispensable_presencial == null){
@@ -137,7 +129,6 @@ class CaracterizacionController extends Controller
         if($request->envio_de_consentimiento == null){
             $request->envio_de_consentimiento = "No";
         }
-
         $caracterizacion = new Caracterizacion;
         $caracterizacion->user_id = $user->id ;
         $caracterizacion->dependencia = $request->dependencia ;
@@ -158,18 +149,21 @@ class CaracterizacionController extends Controller
     }
 
 
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Model\Caracterizacion\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Caracterizacion $caracterizacion)
+    public function edit($caracterizacion_id)
     {
-        $unidades = Unidad::all();
-        $sendingUser = User::where('rol_id','=',2)->get();
-        $user = User::where('id','=',$caracterizacion->user->id)->first();
-        return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'user' ,'sendingUser'));
+      //TODO: revisar parametro de entrada
+      $unidades = Unidad::all();
+      $sendingUser = User::where('rol_id','=',2)->get();
+      $user = User::where('id','=',$caracterizacion_id)->first();
+      $caracterizacion = $user->caracterizacion;
+      return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'user' ,'sendingUser'));
     }
 
     /**

@@ -14,11 +14,6 @@ class UnidadesTableSeeder extends Seeder
     {
 
       DB::table('unidades')->insert([
-          'nombre_unidad'=> 'FACULTADES',
-          'created_at' => now(),
-          'updated_at' => now()
-      ]);
-      DB::table('unidades')->insert([
           'nombre_unidad'=> 'AUDITORÍA INTERNA',
           'created_at' => now(),
           'updated_at' => now()

@@ -26,11 +26,14 @@ class UserController extends Controller
     public function index(Request $request,User $model)
     {
 
-        $buscar = $request->get('buscarpor');
+        if (Auth::user()->rol_id >= 2){
+            $unidad = $request->get('unidad');
+            $rol = $request->get('rol');
+            $estado = $request->get('estado');
+    
+            $users = User::buscarpor( $unidad, $rol )->paginate(10);
 
-        $tipo = $request->get('tipo');
-
-        $users = User::buscarpor($tipo, $buscar)->paginate(10);
+        }
 
         $unidades = Unidad::all();
 
@@ -77,7 +80,7 @@ class UserController extends Controller
         $user = DB::table('users')
         //->where('users.rol_id', [2,3,4,5,6])
         ->get();
-        $sendingUser = User::where('rol_id','=',2)->get();
+        $sendingUser = User::where('rol_id','=',4)->get();
         $unidades = Unidad::all();
         return view('caracterizacion.createwithuser', compact('user', 'unidades','sendingUser', 'userCaracterizacion'));
     }
@@ -119,6 +122,7 @@ class UserController extends Controller
         $estados = Estado::all();
         return view('users.edit', compact('user', 'unidades', 'estados'), ['roles' => $model->all()], ['unidades' => $model->all()]);
     }
+
 
     /**
      * Update the specified user in storage

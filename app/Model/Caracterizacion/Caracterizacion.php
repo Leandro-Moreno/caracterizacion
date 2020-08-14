@@ -37,4 +37,24 @@ class Caracterizacion extends Model implements Searchable
     		return $query->where($tipo,'like',"%$buscar%");
     	}
     }
+    public function colores(){
+      $colorEstado;
+      switch ( $this->viabilidad_caracterizacion ) {
+        case 'Consultar con jefatura servicio médico y SST':
+          $colorEstado = "warning";
+          break;
+        case 'Viable trabajo presencial':
+          $colorEstado = "success";
+          break;
+        case 'Trabajo en casa y consultar a telemedicina':
+          $colorEstado = "danger";
+          break;
+        case 'Sin clasificación':
+          $colorEstado = "black";
+          break;
+        default:
+          break;
+      }
+      return $colorEstado;
+    }
 }
