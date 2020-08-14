@@ -27,13 +27,30 @@ class CaracterizacionController extends Controller
 
     public function index(Request $request)
     {
-      $buscar = "";
       $unidades = Unidad::all();
       if( null !==  $request->get('estado') ){
-        $estado = $request->get('estado');
-        $role = $request->get('role');
-        $unidad = $request->get('unidad');
-        $caracterizaciones = Caracterizacion::buscarpor($estado, $role, $unidad)->paginate(10);
+        if (Auth::user()->rol_id >= 2){
+
+          $viabilidad_obtenida = $request->get('viabilidad');
+          $unidad_obtenida = $request->get('unidad');
+          $rol_obtenido = $request->get('rol');
+          $estado_obtenido = $request->get('estado');
+          $users = User::first();
+          if($unidad_obtenida != ""){
+              $users = $users->where('unidad_id', '=', $unidad_obtenida);
+          }
+          if($rol != ""){
+              $users = $users->where('rol_id', '=', $rol);
+           
+          }
+          if($estado != ""){
+              $users = $users->where('estado_id', '=', $estado); 
+          }
+          if($viabilidad != ""){
+            $users = $users->where('viabiliad_caracterizacion', '=', $viabilidad_obtenida); 
+        }
+          $users = $users->paginate(10);
+      }
       }
       else{
         $caracterizaciones = Caracterizacion::all();
@@ -45,7 +62,7 @@ class CaracterizacionController extends Controller
             return $caracterizacion->user->unidad_id == $user->unidad_id;
           });
         }
-        return view('caracterizacion.index', compact('buscar', 'unidades'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
+        return view('caracterizacion.index', compact('unidades'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
     }
 
     /**

@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $ultimos_usuarios = User::whereIn('rol_id', [1,2] )->get();
+        $ultimos_usuarios = User::whereIn('rol_id', [1] )->get();
         $envio_consentimiento = Caracterizacion::where('envio_de_consentimiento' , '=' , 'No')->get();
         return view('dashboard', compact('ultimos_usuarios', 'envio_consentimiento'), ['ultimos_usuarios' => $ultimos_usuarios->paginate(3)]);
     }

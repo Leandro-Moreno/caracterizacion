@@ -24,10 +24,6 @@
                     <div class="input-group">
                       <buscar-component></buscar-component>
                       <span class="input-group-btn">
-                      @if($buscar!="")
-                        <a class="btn btn-danger" href="" type="submit"><i class="fa fa-times"></i></a>
-                        @endif
-
                         <button class="btn btn-primary" style="background:#2e91a9" type="button" data-toggle="collapse" data-target="#busqueda-avanzada" aria-expanded="false" aria-controls="collapseExample">
                          Búsqueda Avanzada
                         </button>
@@ -37,7 +33,7 @@
                       <div id="busqueda-avanzada" name="busqueda-avanzada" class=" row collapse" style="padding-top:5px;padding-bottom:35px">
                         <div class="row">
                           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
-                            <label style="color:#505c61"> Filtrar por Facultad </label><br>
+                            <label style="color:#505c61"> Filtrar por Facultad / Unidad </label><br>
                             <select id="unidad" name="unidad" class="form-control" data-placeholder=" ">
                             <option  value="" selected disabled>Seleccione...</option>
                               @foreach($unidades as $unidad )
@@ -56,7 +52,18 @@
                             <label style="color:#505c61"> Filtrar por Estado </label><br>
                             <select id="estado" name="estado" class="form-control" data-placeholder=" ">
                               <option  value="" selected disabled>Seleccione...</option>
-                              '<option value="1">Activo</option><option value="2">Inactivo</option>'
+                              <option value="1">Activo</option><option value="2">Inactivo</option>
+                            </select>
+                          </div>
+                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
+                            <label style="color:#505c61"> Filtrar por Viabilidad</label><br>
+                            <select id="estado" name="estado" class="form-control" data-placeholder=" ">
+                              <option value="{{ old('viabilidad') }}" disabled selected>Seleccionar</option>
+                                                <option value="1">Consultar con jefatura servicio médico y SST</option>
+                                                <option value="2">Viable trabajo presencial</option>
+                                                <option value="3">Trabajo en casa y consultar a telemedicina</option>
+                                                <option value="4">Trabajo en casa</option>
+                                                <option value="5">Sin clasificación</option>
                             </select>
                           </div>
                         </div>

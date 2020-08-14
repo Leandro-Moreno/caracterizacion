@@ -27,17 +27,30 @@ class UserController extends Controller
     {
 
         if (Auth::user()->rol_id >= 2){
-            $unidad = $request->get('unidad');
-            $rol = $request->get('rol');
-            $estado = $request->get('estado');
-    
-            $users = User::buscarpor( $unidad, $rol )->paginate(10);
-
+            $unidad_obtenida = $request->get('unidad');
+            $estado_obtenido = $request->get('estado');
+            $rol_obtenido = $request->get('rol');
+            $users = User::first();
+            if($unidad_obtenida != ""){
+                $users = $users->where('unidad_id', '=', $unidad_obtenida);
+            }
+            if($rol_obtenido != ""){
+                $users = $users->where('rol_id', '=', $rol_obtenido);
+             
+            }
+            if($estado_obtenido != ""){
+                $users = $users->where('estado_id', '=', $estado_obtenido); 
+            }
+            $users = $users->paginate(10);
+        
+            //$users = User::buscarpor($unidad_obtenida, $rol , $estado)->paginate(10);
         }
 
         $unidades = Unidad::all();
+        $roles = Rol::all();
+        $estados = Estado::all();
 
-        return view('users.index', compact('unidades', 'users'));
+        return view('users.index', compact('estados', 'roles', 'unidades', 'users', 'unidad_obtenida', 'estado_obtenido' , 'rol_obtenido'));
     }
 
     /**
