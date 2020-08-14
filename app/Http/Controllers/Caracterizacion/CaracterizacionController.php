@@ -59,7 +59,8 @@ class CaracterizacionController extends Controller
         $user = User::where('id','=',$user_id)->first();
         $sendingUser = User::where('rol_id','=',2)->get();
         $unidades = Unidad::all();
-        return view('caracterizacion.create', compact('user','unidad',  'unidades','sendingUser'));
+        $caracterizacion = new Caracterizacion();
+        return view('caracterizacion.create', compact('caracterizacion','user','unidad',  'unidades','sendingUser'));
     }
 
     public function agregarColorEstado( $caracterizaciones )
@@ -161,13 +162,13 @@ class CaracterizacionController extends Controller
      * @param  \App\Model\Caracterizacion\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function edit( $dato)
+    public function edit($caracterizacion_id)
     {
       $unidades = Unidad::all();
       $sendingUser = User::where('rol_id','=',2)->get();
-      $user = User::where('id','=',$dato)->first();
-      $caracterizacion = Caracterizacion::find($dato);
-        return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'user' ,'sendingUser'));
+      $user = User::where('id','=',$caracterizacion_id)->first();
+      $caracterizacion = $user->caracterizacion;
+      return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'user' ,'sendingUser'));
     }
 
     /**
