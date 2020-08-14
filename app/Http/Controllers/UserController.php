@@ -31,6 +31,8 @@ class UserController extends Controller
 
         $users = User::buscarpor($unidad, $rol, $estado)->paginate(10);
         
+        dd($users);
+
         $unidades = Unidad::all();
 
         return view('users.index', compact('unidades', 'users'));
@@ -76,7 +78,7 @@ class UserController extends Controller
         $user = DB::table('users')
         //->where('users.rol_id', [2,3,4,5,6])
         ->get();
-        $sendingUser = User::where('rol_id','=',2)->get();
+        $sendingUser = User::where('rol_id','=',4)->get();
         $unidades = Unidad::all();
         return view('caracterizacion.createwithuser', compact('user', 'unidades','sendingUser', 'userCaracterizacion'));
     }

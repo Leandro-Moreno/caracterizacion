@@ -65,7 +65,9 @@ class User extends Authenticatable implements Searchable
     }
 
     public function scopeBuscarpor($query, $unidad, $rol, $estado ) {
-        return $query  = DB::table('users')->select('unidad_id')->where('estado_id', '=', $estado)->get();
+        if (($unidad) &&  ($rol) && ($estado)){
+            return $query->where('estado_id', 'like', "%$estado%");
+        }
     }
 
     public function getSearchResult(): SearchResult
