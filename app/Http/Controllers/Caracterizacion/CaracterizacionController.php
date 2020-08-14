@@ -156,9 +156,9 @@ class CaracterizacionController extends Controller
      * @param  \App\Model\Caracterizacion\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit($caracterizacion_id)
     {
-      $user_id =array_key_first( $request->request->all() );
+      //TODO: revisar parametro de entrada
       $unidades = Unidad::all();
       $sendingUser = User::where('rol_id','=',2)->get();
       $user = User::where('id','=',$caracterizacion_id)->first();
