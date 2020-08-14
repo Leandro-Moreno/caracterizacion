@@ -21,7 +21,8 @@ class CaracterizacionController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Caracterizacion::class);
+       // $this->authorizeResource(Caracterizacion::class);
+        
     }
 
     public function index(Request $request)
@@ -113,9 +114,17 @@ class CaracterizacionController extends Controller
      */
     public function store(Request $request, Caracterizacion $model )
     {
-        $user = User::Where('email','=',$request->email)->first();
+
+          $validatedData = $request->validate([
+            'email' => 'required|unique:users|max:255',
+            'documento' => 'required|unique:users|max:255',
+        ]);
+        //$user = User::Where('email','=',$request->email)->first();
+        $user = new User;
+        $user->rol_id = 1;
+        $user->estado_id = 1;
         $user->name = $request->nombre;
-        $user->apellido = $request->nombre;
+        $user->apellido = $request->apellido;
         $user->tipo_doc = $request->tipo_doc ;
         $user->celular = $request->celular ;
         $user->documento = $request->documento;
@@ -158,18 +167,19 @@ class CaracterizacionController extends Controller
     }
 
 
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Model\Caracterizacion\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Caracterizacion $caracterizacion)
+    public function edit(Caracterizacion $caracterizacion, $dato )
     {
-      dd($caracterizacion);
-        $unidades = Unidad::all();
-        $sendingUser = User::where('rol_id','=',2)->get();
-        $user = User::where('id','=',$caracterizacion->user->id)->first();
+      $unidades = Unidad::all();
+      $sendingUser = User::where('rol_id','=',2)->get();
+      $user = User::where('id','=',$dato)->first();
+      $caracterizacion = User::find($dato);
         return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'user' ,'sendingUser'));
     }
 

@@ -25,22 +25,22 @@ class UserPolicy
     public function updateByRol(User $user)
     {    
         if($user->rol_id == 5 || $user->rol_id == 4){
-                Response::allow();
+               
                 return true;  
         }
-        Response::deny('You do not own this Caracterizacion.');
+        
         return false;
     }
 
-    public function viewbyRol(User $user, $userview)
+    public function viewbyRolUser(User $user, $userview)
     {    
         if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
             if($userview->unidad_id == $user->unidad_id || $user->rol_id == 5 ||  $user->rol_id == 4 || $user->rol_id == 3 ){
-                Response::allow();
+               
                 return true;  
             }
         }
-        Response::deny('You do not own this Caracterizacion.');
+        
         return false;
     }
 
@@ -54,7 +54,7 @@ class UserPolicy
     public function view(User $user)
     {
         if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
-            Response::allow();
+           
             return true;  
         }
         Response::deny('You do not own this post.');
@@ -79,18 +79,15 @@ class UserPolicy
      * @param  \App\User  $model
      * @return mixed
      */
-    public function update(User $user, $ultimousuario)
+    public function updateDashboard(User $user, $ultimousuario)
     {
         $ultimousuario = User::find($ultimousuario->id);
-        
-        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
-            if($ultimousuario->unidad_id == $user->unidad_id || $user->rol_id == 5 || $user->rol_id == 4 ){
-                Response::allow();
-                return false;  
+        if($user->rol_id >= 2){
+            if($ultimousuario->unidad_id == $user->unidad_id || $user->rol_id >= 2 ){
+                return true;
             }
         }
-        Response::deny('You do not own this Caracterizacion.');
-        return true;
+        return false;
     }
 
     /**
@@ -115,6 +112,24 @@ class UserPolicy
     public function restore(User $user, User $model)
     {
         return false;
+    }
+
+    /**
+     * Determine whether the user can view the caracterizacion.
+     *
+     * @param  \App\User  $user
+     * @param  \App\App\Model\Caracterizacion\Caracterizacion  $caracterizacion
+     * @return mixed
+     */
+    public function viewSidebarAdmin(User $user)
+    {
+
+        if($user->rol_id >= 3){
+            return true;
+        }
+        return false;
+
+
     }
 
     /**

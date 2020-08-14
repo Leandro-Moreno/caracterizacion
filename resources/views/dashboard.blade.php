@@ -9,7 +9,7 @@
 
       @can('view', App\Model\Caracterizacion\Caracterizacion::class)
         <div class="col-lg-4 col-md-6 col-sm-6">
-          <a class="" href="">
+          <a class="" href="caracterizacion">
           <div class="card card-stats">
             <div class="card-header card-header-primary card-header-icon">
               <div class="card-icon">
@@ -27,7 +27,7 @@
                   
                   <tr>
                   @foreach($envio_consentimiento as $envio)
-                    @can('update', $envio)
+                    @can('updateDashboard', $envio)
                       <tr>
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$envio->user->name}} {{$envio->user->apellido}}</td>
@@ -51,7 +51,7 @@
       @endcan
       @can('view', App\User::class)
         <div class="col-lg-4 col-md-6 col-sm-6">
-          <a class="" href="">
+          <a class="" href="user">
           <div class="card card-stats">
             <div class="card-header card-header-success card-header-icon">
               <div class="card-icon">
@@ -67,7 +67,7 @@
                   <table class="table">
                     <tbody>
                     @foreach($ultimos_usuarios as $ultimousuario)
-                    @can('update' , $ultimousuario)
+                    @can('updateDashboard' , $ultimousuario)
                       <tr>
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$ultimousuario->email}}</td>

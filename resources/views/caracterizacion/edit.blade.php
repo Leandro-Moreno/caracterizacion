@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <form method="put" action="{{ route('caracterizacion.update', $caracterizacion) }}" autocomplete="off" class="form-horizontal" enctype="multipart/form-data">
+          <form method="put" action="" autocomplete="off" class="form-horizontal" novalidate enctype="multipart/form-data">
             @csrf
             @method('put')
             <div class="card ">
@@ -17,12 +17,13 @@
                 <div class="card-body ">
                      <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#empleado" aria-controls="empleado" role="tab" data-toggle="tab" class="btn btn-sm btn-primary">Empleado</a></li>
-                        @can('editTab' , App\Model\Caracterizacion\Caracterizacion::class)<li role="presentation"><a href="#centro" aria-controls="centro" role="tab" data-toggle="tab" class="btn btn-sm btn-danger">Centro Medico</a></li>@endcan
-                        @can('editTab' , App\Model\Caracterizacion\Caracterizacion::class)<li role="presentation"><a href="#ghdo" aria-controls="ghdo" role="tab" data-toggle="tab" class="btn btn-sm btn-success" >GHDO</a></li>@endcan
+                        <li role="presentation"><a href="#centro" aria-controls="centro" role="tab" data-toggle="tab" class="btn btn-sm btn-danger">Centro Medico</a></li>
+                        <li role="presentation"><a href="#ghdo" aria-controls="ghdo" role="tab" data-toggle="tab" class="btn btn-sm btn-success" >GHDO</a></li>
+                      
                      </ul>
                      <div class="row">
                         <div class="col-md-12 text-right">
-                           <a href="{{ route('caracterizacion.index') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
+                           <a href="{{ route('caracterizacion') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
                         </div>
                      </div>
                      @if ($errors->any())
@@ -228,7 +229,7 @@
                                  <label class="col-sm-2 col-form-label">{{ __('Observación') }}</label>
                                  <div class="col-sm-4">
                                     <div class="form-group{{ $errors->has('observacion_cambios_de_estado') ? ' has-danger' : '' }}">
-                                       <textarea class="form-control{{ $errors->has('observacion_cambios_de_estado') ? ' is-invalid' : '' }}" name="observacion_cambios_de_estado" id="input-observacion_cambios_de_estado" type="" placeholder="{{ __('Observación') }}" value="{{ old('observacion_cambios_de_estado', $caracterizacion->observacion_cambios_de_estado) }}"  rows="3" required>{{ old('observacion_cambios_de_estado', $caracterizacion->observacion_cambios_de_estado) }}</textarea>
+                                       <textarea class="form-control{{ $errors->has('observacion_cambios_de_estado') ? ' is-invalid' : '' }}" name="observacion_cambios_de_estado" id="input-observacion_cambios_de_estado" type="" placeholder="{{ __('Observación') }}" value="{{ old('observacion_cambios_de_estado', $caracterizacion->observacion_cambios_de_estado) }}"  rows="3" autofocus="autofocus"   hidden>{{ old('observacion_cambios_de_estado', $caracterizacion->observacion_cambios_de_estado) }}</textarea>
                                        @if ($errors->has('observacion_cambios_de_estado'))
                                        <span id="observacion_cambios_de_estado-error" class="error text-danger" for="input-observacion_cambios_de_estado">{{ $errors->first('observacion_cambios_de_estado') }}</span>
                                        @endif
@@ -241,7 +242,7 @@
                                  <label class="col-sm-2 col-form-label">{{ __('Notas/Comentarios') }}</label>
                                     <div class="col-sm-4">
                                        <div class="form-group{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' has-danger' : '' }}">
-                                          <textarea class="form-control{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' is-invalid' : '' }}" name="notas_comentarios_ma_andrea_leyva" id="input-notas_comentarios_ma_andrea_leyva" type="" placeholder="{{ __('Notas / Comentarios') }}" value="{{ old('notas_comentarios_ma_andrea_leyva', $caracterizacion->notas_comentarios_ma_andrea_leyva)}}"  rows="3" required>{{ old('notas_comentarios_ma_andrea_leyva', $caracterizacion->notas_comentarios_ma_andrea_leyva)}}</textarea>
+                                          <textarea class="form-control{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' is-invalid' : '' }}" name="notas_comentarios_ma_andrea_leyva" id="input-notas_comentarios_ma_andrea_leyva" type="" placeholder="{{ __('Notas / Comentarios') }}" value="{{ old('notas_comentarios_ma_andrea_leyva', $caracterizacion->notas_comentarios_ma_andrea_leyva)}}"  rows="3" autofocus="autofocus"   hidden>{{ old('notas_comentarios_ma_andrea_leyva', $caracterizacion->notas_comentarios_ma_andrea_leyva)}}</textarea>
                                           @if ($errors->has('notas_comentarios_ma_andrea_leyva'))
                                           <span id="notas_comentarios_ma_andrea_leyva-error" class="error text-danger" for="input-notas_comentarios_ma_andrea_leyva">{{ $errors->first('notas_comentarios_ma_andrea_leyva') }}</span>
                                           @endif
@@ -269,7 +270,7 @@
                      </div>
                </div>
                <div class="card-footer ml-auto mr-auto">
-                  <button type="submit" class="btn btn-primary">{{ __('Guardar Caracterización') }}</button>
+                  <button type="button" class="btn btn-primary">{{ __('Guardar Caracterización') }}</button>
                </div>
          </div>
           </form>

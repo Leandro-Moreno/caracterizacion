@@ -10,7 +10,7 @@
 					</div>
 					<div class="card-body  text-center">
 
-    					<img style="width: 150px;" src="{{asset('caracterizacion/avatar.jpg')}}" alt="{{ $user->name }}" class="user-avatar">
+    					<img style="width: 150px;" src="/imagenescarcterizacion/avatar.jpg" alt="{{ $user->name }}" class="user-avatar">
 
 						<dl class="user-info">
 
@@ -37,19 +37,11 @@
 
 						</dl>
                   <div  class="col-12 text-center">
-                      <a href="{{ route('user.edit' , $user) }}" class="btn btn-sm btn-primary">{{ __('Editar  Pefil') }}</a>
+                      <a href="{{ route('profile.edit' , $user) }}" class="btn btn-sm btn-primary">{{ __('Editar  Pefil') }}</a>
                     </div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-@endsection
-
-@section('footer_scripts')
-
-	@if(config('settings.googleMapsAPIStatus'))
-		@include('scripts.google-maps-geocode-and-map')
-	@endif
-
 @endsection

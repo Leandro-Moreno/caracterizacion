@@ -9,17 +9,17 @@
       </li>
       @can('view', App\Model\Caracterizacion\Caracterizacion::class)
       <li class="nav-item {{ ( $activePage == 'user-management') ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#Eventos" aria-expanded="{{ (  $activePage == 'user-management') ? 'true' : 'false' }}">
+        <a class="nav-link" data-toggle="collapse" href="#Caracterizaciones" aria-expanded="{{ (  $activePage == 'user-management') ? 'true' : 'false' }}">
             <i class="material-icons">supervised_user_circle</i>
           <p>{{ __('Caracterización Usuarios') }}
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse {{ ($activePage == 'caracterizacion' ||  $activePage == 'user-management'|| $activePage == 'firmas') ? ' show' : '' }}" id="Eventos">
+        <div class="collapse {{ ($activePage == 'caracterizacion' ||  $activePage == 'user-management'|| $activePage == 'caracterizacion.importar' || $activePage == 'user-management') ? ' show' : '' }}" id="Caracterizaciones">
           <ul class="nav">
           @can('view', App\Model\Caracterizacion\Caracterizacion::class)
             <li class="nav-item{{ $activePage == 'caracterizacion' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('caracterizacion.index') }}">
+              <a class="nav-link" href="{{ route('caracterizacion') }}">
                 <i class="material-icons">next_week</i>
                   <p>{{ __('Caracterización') }}</p>
               </a>
@@ -72,7 +72,7 @@
               </a>
             </li>
 
-            @can('view', App\User::class)
+            @can('viewSidebarAdmin', App\User::class)
             <li class="nav-item{{ $activePage == 'admin-management' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('user.admin') }}">
                 <i class="material-icons">security</i>

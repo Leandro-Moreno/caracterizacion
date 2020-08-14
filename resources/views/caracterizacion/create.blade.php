@@ -20,7 +20,7 @@
                      </ul>
                      <div class="row">
                         <div class="col-md-12 text-right">
-                           <a href="{{ route('caracterizacion.index') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
+                           <a href="{{ route('caracterizacion') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
                         </div>
                      </div>
                      @if ($errors->any())
@@ -150,7 +150,7 @@
                                     <label class="col-sm-2 col-form-label">{{ __('Dirección') }}</label>
                                     <div class="col-sm-4">
                                       <div class="form-group{{ $errors->has('direccion') ? ' has-danger' : '' }}">
-                                          <textarea class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}" name="direccion" id="input-direccion" type="" placeholder="{{ __('Dirección') }}" value="{{ old('direccion') }}"  rows="1" required>{{ old('direccion') }}</textarea>
+                                          <textarea class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}" name="direccion" id="input-direccion" type="" placeholder="{{ __('Dirección') }}" value="{{ old('direccion') }}"  rows="1" >{{ old('direccion') }}</textarea>
                                           @if ($errors->has('direccion'))
                                           <span id="direccion-error" class="error text-danger" for="input-direccion">{{ $errors->first('direccion') }}</span>
                                           @endif
@@ -161,7 +161,7 @@
                                     <label class="col-sm-2 col-form-label">{{ __('Barrio') }}</label>
                                     <div class="col-sm-4">
                                       <div class="form-group{{ $errors->has('direccion2') ? ' has-danger' : '' }}">
-                                          <textarea class="form-control{{ $errors->has('direccion2') ? ' is-invalid' : '' }}" name="direccionb" id="input-direccion2" type="" placeholder="{{ __('Barrio') }}" value="{{ old('barrio') }}"  rows="1" required>{{ old('direccion2') }}</textarea>
+                                          <textarea class="form-control{{ $errors->has('direccion2') ? ' is-invalid' : '' }}" name="direccionb" id="input-direccion2" type="" placeholder="{{ __('Barrio') }}" value="{{ old('barrio') }}"  rows="1" >{{ old('direccion2') }}</textarea>
                                           @if ($errors->has('direccion2'))
                                           <span id="direccion2-error" class="error text-danger" for="input-direccion2">{{ $errors->first('direccion2') }}</span>
                                           @endif
@@ -199,7 +199,7 @@
                                  <label class="col-sm-2 col-form-label">{{ __('¿Por qué?') }}</label>
                                  <div class="col-sm-4">
                                     <div class="form-group{{ $errors->has('por_que') ? ' has-danger' : '' }}">
-                                       <textarea class="form-control{{ $errors->has('por_que') ? ' is-invalid' : '' }}" name="por_que" id="input-por_que" type="" placeholder="{{ __('¿Por qué?') }}" value="{{ old('por_que') }}"  rows="4" required>{{ old('por_que') }}</textarea>
+                                       <textarea class="form-control{{ $errors->has('por_que') ? ' is-invalid' : '' }}" name="por_que" id="input-por_que" type="" placeholder="{{ __('¿Por qué?') }}" value="{{ old('por_que') }}"  rows="4" >{{ old('por_que') }}</textarea>
                                        @if ($errors->has('por_que'))
                                        <span id="por_que-error" class="error text-danger" for="input-por_que">{{ $errors->first('por_que ') }}</span>
                                        @endif
@@ -260,7 +260,7 @@
                                  <label class="col-sm-2 col-form-label">{{ __('Observación') }}</label>
                                  <div class="col-sm-4">
                                     <div class="form-group{{ $errors->has('observacion_cambios_de_estado') ? ' has-danger' : '' }}">
-                                       <textarea class="form-control{{ $errors->has('observacion_cambios_de_estado') ? ' is-invalid' : '' }}" name="observacion_cambios_de_estado" id="input-observacion_cambios_de_estado" type="" placeholder="{{ __('Observación') }}" value="{{ old('observacion_cambios_de_estado') }}"  rows="3" required>{{ old('observacion_cambios_de_estado') }}</textarea>
+                                       <textarea class="form-control{{ $errors->has('observacion_cambios_de_estado') ? ' is-invalid' : '' }}" name="observacion_cambios_de_estado" id="input-observacion_cambios_de_estado" type="" placeholder="{{ __('Observación') }}" value="{{ old('observacion_cambios_de_estado') }}"  rows="3" >{{ old('observacion_cambios_de_estado') }}</textarea>
                                        @if ($errors->has('observacion_cambios_de_estado'))
                                        <span id="observacion_cambios_de_estado-error" class="error text-danger" for="input-observacion_cambios_de_estado">{{ $errors->first('observacion') }}</span>
                                        @endif
@@ -273,7 +273,7 @@
                                  <label class="col-sm-2 col-form-label">{{ __('Notas/Comentarios') }}</label>
                                  <div class="col-sm-4">
                                     <div class="form-group{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' has-danger' : '' }}">
-                                       <textarea class="form-control{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' is-invalid' : '' }}" name="notas_comentarios_ma_andrea_leyva" id="input-notas_comentarios_ma_andrea_leyva" type="" placeholder="{{ __('Notas/Comentarios') }}" value="{{ old('notas_comentarios_ma_andrea_leyva') }}"  rows="3" required>{{ old('notas_comentarios_ma_andrea_leyva') }}</textarea>
+                                       <textarea class="form-control{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' is-invalid' : '' }}" name="notas_comentarios_ma_andrea_leyva" id="input-notas_comentarios_ma_andrea_leyva" type="" placeholder="{{ __('Notas/Comentarios') }}" value="{{ old('notas_comentarios_ma_andrea_leyva') }}"  rows="3" >{{ old('notas_comentarios_ma_andrea_leyva') }}</textarea>
                                        @if ($errors->has('notas_comentarios_ma_andrea_leyva'))
                                        <span id="notas_comentarios_ma_andrea_leyva-error" class="error text-danger" for="input-notas_comentarios_ma_andrea_leyva">{{ $errors->first('notas_comentarios_ma_andrea_leyva') }}</span>
                                        @endif

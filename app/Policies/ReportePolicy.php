@@ -33,10 +33,8 @@ class ReportePolicy
     {
         
         if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 ){
-            Response::allow();
             return true;  
         }
-        Response::deny('You do not own this post.');
         return false; 
     }
 
@@ -60,7 +58,7 @@ class ReportePolicy
      */
     public function update(User $user, Reporte $reporte)
     {
-        return false; 
+        return true; 
     }
 
     /**

@@ -24,6 +24,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('111111'),
             'created_at' => now(),
+            
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
@@ -36,6 +37,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('casco'),
             'created_at' => now(),
+            
             'updated_at' => now()
         ]);
         #Empleado
@@ -56,6 +58,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('empleado'),
             'created_at' => now(),
+            
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
@@ -75,6 +78,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('empleado'),
             'created_at' => now(),
+            
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
@@ -94,6 +98,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('empleado'),
             'created_at' => now(),
+            
             'updated_at' => now()
         ]);
         #Facultad
@@ -114,6 +119,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('facultad'),
             'created_at' => now(),
+            
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
@@ -133,6 +139,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('facultad'),
             'created_at' => now(),
+            
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
@@ -152,9 +159,10 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('facultad'),
             'created_at' => now(),
+            
             'updated_at' => now()
         ]);
-        #Servicios Salud   
+        #ServiciosSalud   
         DB::table('users')->insert([
             'rol_id' => '3',
             'estado_id' => '1',
@@ -172,6 +180,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('serviciosalud'),
             'created_at' => now(),
+            
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
@@ -191,6 +200,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('serviciosalud'),
             'created_at' => now(),
+            
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
@@ -210,6 +220,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('serviciosalud'),
             'created_at' => now(),
+            
             'updated_at' => now()
         ]);
         #Servicios Campus
@@ -230,6 +241,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('serviciocampus'),
             'created_at' => now(),
+            
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
@@ -249,6 +261,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('serviciocampus'),
             'created_at' => now(),
+            
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
@@ -268,6 +281,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('serviciocampus'),
             'created_at' => now(),
+            
             'updated_at' => now()
         ]);
     }

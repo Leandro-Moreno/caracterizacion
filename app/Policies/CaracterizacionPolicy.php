@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Model\Caracterizacion\Caracterizacion;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Auth;
 
 class CaracterizacionPolicy
@@ -21,10 +20,8 @@ class CaracterizacionPolicy
     public function viewAny(User $user)
     {
         if($user->rol_id >= 2){
-            Response::allow();
             return true;
         }
-        Response::deny('You do not own this Caracterizacion.');
         return false;
     }
 
@@ -37,13 +34,15 @@ class CaracterizacionPolicy
      */
     public function view(User $user)
     {
-        if($user->rol_id >= 2){
-            return Response::allow();
-        }
-        return Response::deny('You do not own this Caracterizacion.');
 
+        if($user->rol_id >= 2){
+            return true;
+        }
+        return false;
 
     }
+
+    
 
     /**
      * Determine whether the user can create caracterizacions.
@@ -54,10 +53,9 @@ class CaracterizacionPolicy
     public function create(User $user)
     {
         if($user->rol_id >= 4 ||  $user->rol_id == 2){
-            Response::allow();
             return true;
         }
-        Response::deny('You do not own this Caracterizacion.');
+       
         return false;
     }
 
@@ -70,57 +68,57 @@ class CaracterizacionPolicy
      */
     public function update(User $user)
     {
-        $unidaduser = Auth::user();
-        if($unidaduser->rol_id >= 2){
-            if( ( $unidaduser->unidad_id == $user->unidad_id ) || ( $user->rol_id >= 3 ) ){
-                return Response::allow();
+        return true;
+    }
+    public function edit(User $user)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     *
+     * @param  \App\User  $user
+     * @param  \App\User  $model
+     * @return mixed
+     */
+    public function updateDashboard(User $user, $envio)
+    {
+        $envio = User::find($envio->id);
+        if($user->rol_id >= 2){
+            if($envio->unidad_id == $user->unidad_id || $user->rol_id >= 2 ){
+                return true;
             }
         }
-        return Response::deny('You do not own this Caracterizacion.');
-    }
-
-    public function viewByRole(User $user){
-        if($user->rol_id == 5 || $user->rol_id == 4 ){
-            Response::allow();
-            return true;  
-        }
-    Response::deny('You do not own this Caracterizacion.');
-    return false;
-
-    }
-
-    public function editTab(User $user)
-    {
-        if($user->rol_id >= 2 ){
-                Response::allow();
-                return true;
-
-        }
-        Response::deny('You do not own this Caracterizacion.');
         return false;
     }
+
+
+    public function viewByRoleCaracterizacion(User $user){
+        if($user->rol_id == 2 || $user->rol_id == 4 ){
+            return true;
+        }
+    return false ;
+    }
+
+
 
     public function createTab(User $user)
     {
         if($user->rol_id >= 3 ){
-                Response::allow();
                 return true;
 
         }
-        Response::deny('You do not own this Caracterizacion.');
         return false;
     }
 
 
-    public function updateu(User $user )
+    public function updateu(User $user)
     {
-
-        if($user->rol_id >= 4 ||  $user->rol_id == 2){
-            Response::allow();
-                return true;
+        if($user->rol_id <= 2){
+            return false;
         }
-        Response::deny('You do not own this Caracterizacion.');
-        return false;
+        return true;
     }
 
     /**
@@ -170,10 +168,8 @@ class CaracterizacionPolicy
     public function importar(User $user)
     {
         if($user->rol_id == 5 || $user->rol_id == 4){
-            Response::allow();
             return true;
         }
-        Response::deny('You do not own this Caracterizacion.');
         return false;
     }
 }

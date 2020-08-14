@@ -120,6 +120,7 @@ class UserController extends Controller
         return view('users.edit', compact('user', 'unidades', 'estados'), ['roles' => $model->all()], ['unidades' => $model->all()]);
     }
 
+
     /**
      * Update the specified user in storage
      *
