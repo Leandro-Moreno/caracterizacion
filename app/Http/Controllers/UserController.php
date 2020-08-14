@@ -25,13 +25,12 @@ class UserController extends Controller
      */
     public function index(Request $request,User $model)
     {
+        $unidad = $request->get('unidad');
+        $rol = $request->get('rol');
+        $estado = $request->get('estado');
 
-        $buscar = $request->get('buscarpor');
-
-        $tipo = $request->get('tipo');
-
-        $users = User::buscarpor($tipo, $buscar)->paginate(10);
-
+        $users = User::buscarpor($unidad, $rol, $estado)->paginate(10);
+        
         $unidades = Unidad::all();
 
         return view('users.index', compact('unidades', 'users'));
