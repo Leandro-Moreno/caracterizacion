@@ -36,6 +36,15 @@ Route::group(['middleware' => ['auth']], function () {
 	])->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
 
 
+  Route::resource('caracterizacion', 'Caracterizacion\CaracterizacionController')->names([
+    'create' => 'caracterizacion.create',
+    	'show' => 'caracterizacion.show',
+    	'edit' => 'caracterizacion.edit',
+      'store' => 'caracterizacion.store',
+    	'update' => 'caracterizacion.update',
+		'destroy' => 'caracterizacion.destroy',
+	])->middleware(['role:Superadmin,Servicios Campus,Servicios salud,Facultad']);
+
 	//Rutas para gestion de caracterizacion
 
     Route::get('caracterizacion', 'Caracterizacion\CaracterizacionController@index')->name('caracterizacion')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
@@ -69,12 +78,14 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::get('caracterizacion/chart','Caracterizacion\CaracterizacionController@chart')->middleware(['role:Superadmin,ServiciosCampus']);
 
-	Route::get('grafico','Reporte\ReporteController@grafico')->middleware(['role:Superadmin,ServiciosCampus'])->name('reporte.grafico');
-	
+	Route::get('grafico','Reporte\ReporteController@grafico')->middleware(['role:Superadmin,Servicios Campus'])->name('reporte.grafico');
+
 	Route::get('admin/profile', 'UserController@admin')->name('user.admin')->middleware('administrador');
 
 	Route::get('caracterizacion/{id}/crear', 'userController@createCaracterizacion')->name('caracterizacion.ucreate')->middleware('role:Superadmin');
 
+  Route::get('busqueda/caracterizacion', 'Caracterizacion\CaracterizacionController@busqueda')->name('buscarCaracterizacion');
+  Route::get('busqueda/usuario', 'UserController@busqueda')->name('buscarUsuario');
 });
 Route::group(['middleware' => 'auth'], function () {
 

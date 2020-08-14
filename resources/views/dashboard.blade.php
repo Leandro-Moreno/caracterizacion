@@ -89,7 +89,7 @@
         @endcan
         @can('view', App\Model\Reporte\Reporte::class)
         <div class="col-lg-4 col-md-6 col-sm-6">
-          <a class="nav-link" href="{{ route('home') }}">
+          <a class="nav-link" href="/reporte">
           <div class="card card-stats">
             <div class="card-header card-header-primary card-header-icon">
               <div class="card-icon">

@@ -102,6 +102,22 @@ class CaracterizacionPolicy
     }
 
 
+    public function editPestañaGHDO(User $user)
+    {
+        if($user->rol_id >= 4 ){
+                return true;
+
+        }
+        return false;
+    }
+    public function editPestañaSalud(User $user)
+    {
+        if($user->rol_id >= 3 ){
+                return true;
+
+        }
+        return false;
+    }
 
     public function createTab(User $user)
     {
