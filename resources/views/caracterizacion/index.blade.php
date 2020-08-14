@@ -52,7 +52,7 @@
                             </select>
                           </div>
                           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
-                            <label style="color:#505c61"> Filtrar por Estado </label><br>
+                            <label style="color:#505c61"> Filtrar por Estado de empleado </label><br>
                             <select id="estado" name="estado" class="form-control" data-placeholder=" ">
                               <option  value="" selected >Seleccione...</option>
                               @foreach($estados as $estado )

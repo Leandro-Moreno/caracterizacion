@@ -41,15 +41,15 @@ class CaracterizacionController extends Controller
           if($unidad_obtenida != ""){
               $caracterizaciones = $caracterizaciones->where('unidad_id', '=', $unidad_obtenida);
           }
-          if($rol != ""){
-              $users = $users->where('rol_id', '=', $rol);
-
+          if($rol_obtenido != ""){
+              $caracterizaciones = $caracterizaciones->where('rol_id', '=', $rol_obtenido);
+           
           }
-          if($estado != ""){
-              $users = $users->where('estado_id', '=', $estado);
+          if($estado_obtenido != ""){
+              $caracterizaciones = $caracterizaciones->where('estado_id', '=', $estado_obtenido); 
           }
-          if($viabilidad != ""){
-            $users = $users->where('viabiliad_caracterizacion', '=', $viabilidad_obtenida);
+          if($viabilidad_obtenida != ""){
+            $caracterizaciones = $caracterizaciones->where('viabilidad_caracterizacion', '=', $viabilidad_obtenida);
         }
           $caracterizaciones = $caracterizaciones->paginate(10);
       }
