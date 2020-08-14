@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Model\Caracterizacion\Unidad;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use App\Model\Estado;
+use App\Rol;
 use App\Imports\UsersImport;//TODO: cambiar users por caracterizacion
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -27,33 +28,35 @@ class CaracterizacionController extends Controller
 
     public function index(Request $request)
     {
+      $viabilidad_obtenida = $request->get('viabilidad');
+      $unidad_obtenida = $request->get('unidad');
+      $rol_obtenido = $request->get('rol');
+      $estado_obtenido = $request->get('estado');
+      $caracterizaciones = Caracterizacion::all();
       $unidades = Unidad::all();
-      if( null !==  $request->get('estado') ){
+      if( null !==  $request->get('estado') ||  null !==  $request->get('viabilidad')  ||  null !==  $request->get('unidad') ||  null !==  $request->get('rol')){
         if (Auth::user()->rol_id >= 2){
 
-          $viabilidad_obtenida = $request->get('viabilidad');
-          $unidad_obtenida = $request->get('unidad');
-          $rol_obtenido = $request->get('rol');
-          $estado_obtenido = $request->get('estado');
-          $users = User::first();
+          $caracterizaciones = Caracterizacion::first();
           if($unidad_obtenida != ""){
-              $users = $users->where('unidad_id', '=', $unidad_obtenida);
+              $caracterizaciones = $caracterizaciones->where('unidad_id', '=', $unidad_obtenida);
           }
-          if($rol != ""){
-              $users = $users->where('rol_id', '=', $rol);
+          if($rol_obtenido != ""){
+              $caracterizaciones = $caracterizaciones->where('rol_id', '=', $rol_obtenido);
            
           }
-          if($estado != ""){
-              $users = $users->where('estado_id', '=', $estado); 
+          if($estado_obtenido != ""){
+              $caracterizaciones = $caracterizaciones->where('estado_id', '=', $estado_obtenido); 
           }
-          if($viabilidad != ""){
-            $users = $users->where('viabiliad_caracterizacion', '=', $viabilidad_obtenida); 
+          if($viabilidad_obtenida != ""){
+            $caracterizaciones = $caracterizaciones->where('viabilidad_caracterizacion', '=', $viabilidad_obtenida);
         }
-          $users = $users->paginate(10);
+          $caracterizaciones = $caracterizaciones->paginate(10);
       }
       }
       else{
-        $caracterizaciones = Caracterizacion::all();
+        
+        $caracterizaciones = $caracterizaciones->paginate(10);
       }
       $caracterizaciones = $this->agregarColorEstado($caracterizaciones); //TODO: agregar al modelo como helper
         if(Auth::user()->rol_id < 3){
@@ -62,7 +65,10 @@ class CaracterizacionController extends Controller
             return $caracterizacion->user->unidad_id == $user->unidad_id;
           });
         }
-        return view('caracterizacion.index', compact('unidades'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
+        $unidades = Unidad::all();
+        $roles = Rol::all();
+        $estados = Estado::all();
+        return view('caracterizacion.index', compact('estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
     }
 
     /**
