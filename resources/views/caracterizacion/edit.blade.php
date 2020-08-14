@@ -53,7 +53,7 @@
                      </div>
                </div>
                <div class="card-footer ml-auto mr-auto">
-                  <button type="button" class="btn btn-primary">{{ __('Guardar Caracterización') }}</button>
+                  <button type="button" class="btn btn-primary">{{ __('Guardar Caracterización n') }}</button>
                </div>
          </div>
           </form>

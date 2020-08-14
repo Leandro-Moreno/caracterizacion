@@ -105,11 +105,8 @@ class CaracterizacionController extends Controller
         //dd(Auth::user()->rol_id );
 
       }
+        $user = User::Where('email','=',$request->email)->first();
 
-
-        //$user = User::Where('email','=',$request->email)->first();
-        $user = new User;
-        $user->rol_id = 1;
         $user->estado_id = 1;
         $user->name = $request->nombre;
         $user->apellido = $request->apellido;
@@ -117,12 +114,10 @@ class CaracterizacionController extends Controller
         $user->celular = $request->celular ;
         $user->documento = $request->documento;
         $user->cargo = $request->cargo;
-        $user->email = $request->email;
         $user->tipo_contrato = $request->tipo_contrato ;
         $user->direccion = $request->direccion ;
         $user->direccion2 = $request->direccionb.",".$request->direccionl;
         $user->unidad_id = $request->unidad_id ;
-        $user->password = Hash::make('caracterizacion');
         $user->save();
 
         if($request->indispensable_presencial == null){
@@ -134,7 +129,6 @@ class CaracterizacionController extends Controller
         if($request->envio_de_consentimiento == null){
             $request->envio_de_consentimiento = "No";
         }
-
         $caracterizacion = new Caracterizacion;
         $caracterizacion->user_id = $user->id ;
         $caracterizacion->dependencia = $request->dependencia ;
@@ -162,8 +156,9 @@ class CaracterizacionController extends Controller
      * @param  \App\Model\Caracterizacion\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function edit($caracterizacion_id)
+    public function edit(Request $request)
     {
+      $user_id =array_key_first( $request->request->all() );
       $unidades = Unidad::all();
       $sendingUser = User::where('rol_id','=',2)->get();
       $user = User::where('id','=',$caracterizacion_id)->first();
