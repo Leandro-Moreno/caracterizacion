@@ -50,7 +50,7 @@
                                        <option value="">Seleccionar</option>
                                     @if ($unidades)
                                             @foreach($unidades as $unidad)
-                                                <option value="{{ $unidad->id }}">{{ $unidad->nombre_unidad }}</option>
+                                                <option value="{{ $unidad->id }}"  >{{ $unidad->nombre_unidad }}</option>
                                             @endforeach
                                         @endif
                                     </select>

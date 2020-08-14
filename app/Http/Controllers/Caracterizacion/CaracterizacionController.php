@@ -99,8 +99,7 @@ class CaracterizacionController extends Controller
         $user = User::where('id','=',$user_id)->first();
         $sendingUser = User::where('rol_id','=',2)->get();
         $unidades = Unidad::all();
-
-        return view('caracterizacion.create', compact('user', 'unidades','sendingUser'));
+        return view('caracterizacion.create', compact('user','unidad',  'unidades','sendingUser'));
     }
 
 
@@ -114,11 +113,17 @@ class CaracterizacionController extends Controller
      */
     public function store(Request $request, Caracterizacion $model )
     {
-
+      if (Auth::user()->rol_id == 2){
           $validatedData = $request->validate([
             'email' => 'required|unique:users|max:255',
-            'documento' => 'required|unique:users|max:255',
+            'documento' => 'required|unique:users|max:255',   
         ]);
+
+        //dd(Auth::user()->rol_id );
+        
+      }
+
+         
         //$user = User::Where('email','=',$request->email)->first();
         $user = new User;
         $user->rol_id = 1;
