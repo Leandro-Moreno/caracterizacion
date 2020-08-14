@@ -41,13 +41,13 @@ class CaracterizacionController extends Controller
           }
           if($rol != ""){
               $users = $users->where('rol_id', '=', $rol);
-           
+
           }
           if($estado != ""){
-              $users = $users->where('estado_id', '=', $estado); 
+              $users = $users->where('estado_id', '=', $estado);
           }
           if($viabilidad != ""){
-            $users = $users->where('viabiliad_caracterizacion', '=', $viabilidad_obtenida); 
+            $users = $users->where('viabiliad_caracterizacion', '=', $viabilidad_obtenida);
         }
           $users = $users->paginate(10);
       }
@@ -77,7 +77,7 @@ class CaracterizacionController extends Controller
         $sendingUser = User::where('rol_id','=',2)->get();
         $unidades = Unidad::all();
         $caracterizacion = new Caracterizacion();
-        return view('caracterizacion.create', compact('caracterizacion','user','unidad',  'unidades','sendingUser'));
+        return view('caracterizacion.create', compact('caracterizacion','user', 'unidades','sendingUser'));
     }
 
     public function agregarColorEstado( $caracterizaciones )
