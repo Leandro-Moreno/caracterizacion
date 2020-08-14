@@ -273,21 +273,6 @@
                                     </div>
                                  </div>
                               </div>
-                              <div class="row">
-                                       <label class="col-sm-2 col-form-label">{{ __('Usuario que envía el consentimiento') }}</label>
-                                       <div class="col-sm-5">
-                                          <div class="form-group{{ $errors->has('userSender') ? ' has-danger' : '' }}">
-                                             <select class="form-control{{ $errors->has('userSender') ? ' is-invalid' : '' }}" id="input-userSender" required="true" aria-required="true" name="userSender">
-                                                <option value="">Seleccionar</option>
-                                                @if ($sendingUser)
-                                                   @foreach($sendingUser as $userSend)
-                                                         <option value="{{ $userSend->id }}">{{ $userSend->name }} {{ $userSend->name2 }} {{ $userSend->apellido }} {{ $userSend->apellido2 }}</option>
-                                                   @endforeach
-                                                 @endif
-                                             </select>
-                                          </div>
-                                       </div>
-                              </div>
                            </div>
                         </div>
                      </div>
