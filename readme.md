@@ -6,6 +6,12 @@
 </p>
 
 ## Acerca de Certificados de Seminarios Virtuales de Excelencia
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FLeandro-Moreno%2Fcaracterizacion.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FLeandro-Moreno%2Fcaracterizacion?ref=badge_shield)
+
 
 Es una aplicación desarrollada usando el framework Laravel 6, la cual se enfoca en administrar los certificados de Los Seminarios Virtuales de Excelencia.
 # caracterizacion
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FLeandro-Moreno%2Fcaracterizacion.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FLeandro-Moreno%2Fcaracterizacion?ref=badge_large)
