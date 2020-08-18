@@ -47,17 +47,17 @@ Route::group(['middleware' => ['auth']], function () {
 
 	//Rutas para gestion de caracterizacion
 
-    Route::get('caracterizacion', 'Caracterizacion\CaracterizacionController@index')->name('caracterizacion')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
-
-    Route::get('caracterizacion/create', 'Caracterizacion\CaracterizacionController@create')->name('caracterizacion.create')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
-
-    Route::post('caracterizacion/store', 'Caracterizacion\CaracterizacionController@store')->name('caracterizacion.store')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
-
-    Route::get('caracterizacion/{id}', 'Caracterizacion\CaracterizacionController@show')->name('caracterizacion.show')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
-
-    Route::get('caracterizacion/{id}/edit', 'Caracterizacion\CaracterizacionController@edit')->name('caracterizacion.edit')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
-
-	Route::put('caracterizacion/update', 'Caracterizacion\CaracterizacionController@update')->name('caracterizacion.update')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
+  //   Route::get('caracterizacion', 'Caracterizacion\CaracterizacionController@index')->name('caracterizacion')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
+  //
+  //   Route::get('caracterizacion/create', 'Caracterizacion\CaracterizacionController@create')->name('caracterizacion.create')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
+  //
+  //   Route::post('caracterizacion/store', 'Caracterizacion\CaracterizacionController@store')->name('caracterizacion.store')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
+  //
+  //   Route::get('caracterizacion/{id}', 'Caracterizacion\CaracterizacionController@show')->name('caracterizacion.show')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
+  //
+  //   Route::get('caracterizacion/{id}/edit', 'Caracterizacion\CaracterizacionController@edit')->name('caracterizacion.edit')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
+  //
+	// Route::put('caracterizacion/update', 'Caracterizacion\CaracterizacionController@update')->name('caracterizacion.update')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
 
 	Route::get('nuevo/usuario', 'UserController@storeUser')->name('createuser')->middleware('auth');
 

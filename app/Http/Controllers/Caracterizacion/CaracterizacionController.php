@@ -166,14 +166,11 @@ class CaracterizacionController extends Controller
      * @param  \App\Model\Caracterizacion\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function edit($caracterizacion_id)
+    public function edit(Caracterizacion $caracterizacion)
     {
-      //TODO: revisar parametro de entrada
       $unidades = Unidad::all();
-      $sendingUser = User::where('rol_id','=',2)->get();
-      $user = User::where('id','=',$caracterizacion_id)->first();
-      $caracterizacion = $user->caracterizacion;
-      return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'user' ,'sendingUser'));
+      $user = $caracterizacion->user;
+      return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'user'));
     }
 
     /**
