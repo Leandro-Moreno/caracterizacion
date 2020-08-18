@@ -26,47 +26,30 @@ class CaracterizacionController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\http\Response
+     */
     public function index(Request $request)
     {
-      $viabilidad_obtenida = $request->get('viabilidad');
-      $unidad_obtenida = $request->get('unidad');
-      $rol_obtenido = $request->get('rol');
-      $estado_obtenido = $request->get('estado');
-      $caracterizaciones = Caracterizacion::all();
-      $unidades = Unidad::all();
-      if( null !==  $request->get('estado') ||  null !==  $request->get('viabilidad')  ||  null !==  $request->get('unidad') ||  null !==  $request->get('rol')){
-        if (Auth::user()->rol_id >= 2){
-
-          $caracterizaciones = Caracterizacion::first();
-          if($unidad_obtenida != ""){
-              $caracterizaciones = $caracterizaciones->where('unidad_id', '=', $unidad_obtenida);
-          }
-          if($rol_obtenido != ""){
-              $caracterizaciones = $caracterizaciones->where('rol_id', '=', $rol_obtenido);
-           
-          }
-          if($estado_obtenido != ""){
-              $caracterizaciones = $caracterizaciones->where('estado_id', '=', $estado_obtenido); 
-          }
-          if($viabilidad_obtenida != ""){
-            $caracterizaciones = $caracterizaciones->where('viabilidad_caracterizacion', '=', $viabilidad_obtenida);
-        }
-          $caracterizaciones = $caracterizaciones->paginate(10);
-      }
-      }
-      else{
-        
-        $caracterizaciones = $caracterizaciones->paginate(10);
-      }
-      $caracterizaciones = $this->agregarColorEstado($caracterizaciones); //TODO: agregar al modelo como helper
-        if(Auth::user()->rol_id < 3){
-          $caracterizaciones  = $caracterizaciones->filter(function ($caracterizacion){
-            $user = Auth::user();
-            return $caracterizacion->user->unidad_id == $user->unidad_id;
-          });
-        }
+        $unidad_obtenida="";
+        $estado_obtenido="";
+        $rol_obtenido="";
+        $viabilidad_obtenida="";
+        $caracterizaciones = Caracterizacion::all();
         $unidades = Unidad::all();
         $roles = Rol::all();
+        $caracterizaciones = $this->agregarColorEstado($caracterizaciones); //TODO:   agregar al modelo como helper
+        if(Auth::user()->rol_id < 3){
+//            dd($caracterizaciones);
+          $caracterizaciones = $caracterizaciones->filter(function ($caracterizacion){
+              $user = Auth::user();
+              return $caracterizacion->user->unidad_id == $user->unidad_id;
+          });
+          $unidades = Unidad::where( 'id','=', Auth::user()->unidad_id )->get();
+          $roles = Rol::where( 'id','=', Auth::user()->rol_id )->get();
+        }
+        $caracterizaciones = $caracterizaciones->paginate(10);
         $estados = Estado::all();
         return view('caracterizacion.index', compact('estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
     }
@@ -86,7 +69,11 @@ class CaracterizacionController extends Controller
         return view('caracterizacion.create', compact('caracterizacion','user', 'unidades','sendingUser'));
     }
 
-    public function agregarColorEstado( $caracterizaciones )
+    /**
+     * @param Caracterizacion|Collection[] $caracterizaciones
+     * @return Caracterizacion|Collection[]
+     */
+    public function agregarColorEstado($caracterizaciones )
     {
       $caracterizaciones = $caracterizaciones->each(function($caracterizacion, $key){
         switch ( $caracterizacion->viabilidad_caracterizacion ) {
