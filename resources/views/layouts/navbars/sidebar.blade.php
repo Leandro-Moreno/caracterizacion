@@ -19,7 +19,7 @@
           <ul class="nav">
           @can('view', App\Model\Caracterizacion\Caracterizacion::class)
             <li class="nav-item{{ $activePage == 'caracterizacion' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('caracterizacion') }}">
+              <a class="nav-link" href="{{ route('caracterizacion.index') }}">
                 <i class="material-icons">next_week</i>
                   <p>{{ __('Caracterización') }}</p>
               </a>

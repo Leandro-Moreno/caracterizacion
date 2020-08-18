@@ -79,6 +79,6 @@ class User extends Authenticatable implements Searchable
     }
     public function caracterizacion()
     {
-        return $this->hasOne('App\Model\Caracterizacion\Caracterizacion');
+        return $this->hasOne('App\Model\Caracterizacion\Caracterizacion', 'user_id', 'id');
     }
 }

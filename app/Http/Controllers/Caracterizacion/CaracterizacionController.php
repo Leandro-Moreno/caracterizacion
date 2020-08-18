@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Model\Caracterizacion\Unidad;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use App\Model\Estado;
+use App\Rol;
 use App\Imports\UsersImport;//TODO: cambiar users por caracterizacion
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -21,48 +22,36 @@ class CaracterizacionController extends Controller
 {
     public function __construct()
     {
-       // $this->authorizeResource(Caracterizacion::class);
+       $this->authorizeResource(Caracterizacion::class);
 
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\http\Response
+     */
     public function index(Request $request)
     {
-      $unidades = Unidad::all();
-      if( null !==  $request->get('estado') ){
-        if (Auth::user()->rol_id >= 2){
-
-          $viabilidad_obtenida = $request->get('viabilidad');
-          $unidad_obtenida = $request->get('unidad');
-          $rol_obtenido = $request->get('rol');
-          $estado_obtenido = $request->get('estado');
-          $users = User::first();
-          if($unidad_obtenida != ""){
-              $users = $users->where('unidad_id', '=', $unidad_obtenida);
-          }
-          if($rol != ""){
-              $users = $users->where('rol_id', '=', $rol);
-
-          }
-          if($estado != ""){
-              $users = $users->where('estado_id', '=', $estado);
-          }
-          if($viabilidad != ""){
-            $users = $users->where('viabiliad_caracterizacion', '=', $viabilidad_obtenida);
-        }
-          $users = $users->paginate(10);
-      }
-      }
-      else{
+        $unidad_obtenida="";
+        $estado_obtenido="";
+        $rol_obtenido="";
+        $viabilidad_obtenida="";
         $caracterizaciones = Caracterizacion::all();
-      }
-      $caracterizaciones = $this->agregarColorEstado($caracterizaciones); //TODO: agregar al modelo como helper
+        $unidades = Unidad::all();
+        $roles = Rol::all();
+        $caracterizaciones = $this->agregarColorEstado($caracterizaciones); //TODO:   agregar al modelo como helper
         if(Auth::user()->rol_id < 3){
-          $caracterizaciones  = $caracterizaciones->filter(function ($caracterizacion){
-            $user = Auth::user();
-            return $caracterizacion->user->unidad_id == $user->unidad_id;
+//            dd($caracterizaciones);
+          $caracterizaciones = $caracterizaciones->filter(function ($caracterizacion){
+              $user = Auth::user();
+              return $caracterizacion->user->unidad_id == $user->unidad_id;
           });
+          $unidades = Unidad::where( 'id','=', Auth::user()->unidad_id )->get();
+          $roles = Rol::where( 'id','=', Auth::user()->rol_id )->get();
         }
-        return view('caracterizacion.index', compact('unidades'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
+        $caracterizaciones = $caracterizaciones->paginate(10);
+        $estados = Estado::all();
+        return view('caracterizacion.index', compact('estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
     }
 
     /**
@@ -80,7 +69,11 @@ class CaracterizacionController extends Controller
         return view('caracterizacion.create', compact('caracterizacion','user', 'unidades','sendingUser'));
     }
 
-    public function agregarColorEstado( $caracterizaciones )
+    /**
+     * @param Caracterizacion|Collection[] $caracterizaciones
+     * @return Caracterizacion|Collection[]
+     */
+    public function agregarColorEstado($caracterizaciones )
     {
       $caracterizaciones = $caracterizaciones->each(function($caracterizacion, $key){
         switch ( $caracterizacion->viabilidad_caracterizacion ) {
@@ -173,14 +166,11 @@ class CaracterizacionController extends Controller
      * @param  \App\Model\Caracterizacion\Evento  $evento
      * @return \Illuminate\Http\Response
      */
-    public function edit($caracterizacion_id)
+    public function edit(Caracterizacion $caracterizacion)
     {
-      //TODO: revisar parametro de entrada
       $unidades = Unidad::all();
-      $sendingUser = User::where('rol_id','=',2)->get();
-      $user = User::where('id','=',$caracterizacion_id)->first();
-      $caracterizacion = $user->caracterizacion;
-      return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'user' ,'sendingUser'));
+      $user = $caracterizacion->user;
+      return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'user'));
     }
 
     /**
