@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
       'store' => 'caracterizacion.store',
     	'update' => 'caracterizacion.update',
 		'destroy' => 'caracterizacion.destroy',
-	])->middleware(['role:Superadmin,Servicios Campus,Servicios salud,Facultad']);
+	]);
 
 	//Rutas para gestion de caracterizacion
 

@@ -34,7 +34,6 @@ class CaracterizacionPolicy
      */
     public function view(User $user)
     {
-
         if($user->rol_id >= 2){
             return true;
         }
@@ -42,7 +41,7 @@ class CaracterizacionPolicy
 
     }
 
-    
+
 
     /**
      * Determine whether the user can create caracterizacions.
@@ -55,7 +54,7 @@ class CaracterizacionPolicy
         if($user->rol_id >= 4 ||  $user->rol_id == 2){
             return true;
         }
-       
+
         return false;
     }
 
@@ -66,13 +65,31 @@ class CaracterizacionPolicy
      * @param  \App\App\Model\Caracterizacion\Caracterizacion  $caracterizacion
      * @return mixed
      */
-    public function update(User $user)
+    public function update(User $user, Caracterizacion $caracterizacion)
     {
+      if( $user->rol_id >=3){
         return true;
+      }
+      elseif ($user->rol_id == 2) {
+        if( $caracterizacion->user->unidad_id == $user->unidad_id ){
+          return true;
+        }
+      }
+
+      return false;
     }
-    public function edit(User $user)
+    public function edit(User $user, Caracterizacion $caracterizacion)
     {
+      if( $user->rol_id >=3){
         return true;
+      }
+      elseif ($user->rol_id == 2) {
+        if( $caracterizacion->user->unidad_id == $user->unidad_id ){
+          return true;
+        }
+      }
+
+      return false;
     }
 
     /**

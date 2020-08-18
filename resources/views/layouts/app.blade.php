@@ -28,7 +28,7 @@
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-M2H6RH7');</script>
+    })(window,document,'script','dataLayer','GTM');</script>
     <!-- End Google Tag Manager -->
     </head>
     <body class="{{ $class ?? '' }}">
@@ -84,47 +84,7 @@
         <script src="{{ asset('material') }}/js/plugins/chartist.min.js"></script>
         <!--  Notifications Plugin    -->
         <script src="{{ asset('material') }}/js/plugins/bootstrap-notify.js"></script>
-        <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="{{ asset('material') }}/js/material-dashboard.js?v=2.1.1" type="text/javascript"></script>
-        <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-        <script src="{{ asset('material') }}/demo/demo.js"></script>
-        <script src="{{ asset('material') }}/js/settings.js"></script>
         <script src="{{ asset('js') }}/app.js"></script>
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "CollegeOrUniversity",
-          "name": "Seminarios Virtuales de Excelencia",
-          "alternateName": "Universidad de los Andes",
-          "url": "https://seminariosvirtualesdeexcelencia.uniandes.edu.co",
-          "logo": "https://seminariosvirtualesdeexcelencia.uniandes.edu.co/excelencia/cabezote.jpg"
-        }
-        {
-          "@context": "https://schema.org/",
-          "@type": "BreadcrumbList",
-          "itemListElement": [{
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Inicio",
-            "item": "https://seminariosvirtualesdeexcelencia.uniandes.edu.co/"
-          },{
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Validar Certificado",
-            "item": "https://seminariosvirtualesdeexcelencia.uniandes.edu.co/certificados/publico"
-          },{
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Ingresar",
-            "item": "https://seminariosvirtualesdeexcelencia.uniandes.edu.co/login"
-          },{
-            "@type": "ListItem",
-            "position": 4,
-            "name": "Olvido la contraseña",
-            "item": "https://seminariosvirtualesdeexcelencia.uniandes.edu.co/password/reset"
-          }]
-        }
-        </script>
         @stack('js')
     </body>
 </html>

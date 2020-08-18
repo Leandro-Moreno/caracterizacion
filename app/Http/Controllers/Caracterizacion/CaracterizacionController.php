@@ -22,7 +22,7 @@ class CaracterizacionController extends Controller
 {
     public function __construct()
     {
-       // $this->authorizeResource(Caracterizacion::class);
+       $this->authorizeResource(Caracterizacion::class);
 
     }
 
