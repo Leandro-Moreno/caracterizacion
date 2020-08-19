@@ -15,7 +15,7 @@
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse {{ ($activePage == 'caracterizacion' ||  $activePage == 'user-management'|| $activePage == 'caracterizacion.importar' || $activePage == 'user-management') ? ' show' : '' }}" id="Caracterizaciones">
+        <div class="collapse {{ ($activePage == 'dashboard' || $activePage == 'caracterizacion' ||  $activePage == 'user-management'|| $activePage == 'caracterizacion.importar' || $activePage == 'user-management') ? ' show' : '' }}" id="Caracterizaciones">
           <ul class="nav">
           @can('view', App\Model\Caracterizacion\Caracterizacion::class)
             <li class="nav-item{{ $activePage == 'caracterizacion' ? ' active' : '' }}">
@@ -29,7 +29,7 @@
             <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('user.index') }}">
                 <i class="material-icons">supervisor_account</i>
-                  <p>{{ __('Administrar usuarios') }}</p>
+                  <p>{{ __('Usuarios') }}</p>
               </a>
             </li>
             @endcan
