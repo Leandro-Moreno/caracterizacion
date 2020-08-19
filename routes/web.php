@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     	'edit' => 'user.edit',
     	'update' => 'user.update',
 		'destroy' => 'user.destroy',
-	])->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
+	])->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']); //TODO: eliminar middlewares
 
 
   Route::resource('caracterizacion', 'Caracterizacion\CaracterizacionController')->names([
@@ -44,20 +44,6 @@ Route::group(['middleware' => ['auth']], function () {
     	'update' => 'caracterizacion.update',
 		'destroy' => 'caracterizacion.destroy',
 	]);
-
-	//Rutas para gestion de caracterizacion
-
-  //   Route::get('caracterizacion', 'Caracterizacion\CaracterizacionController@index')->name('caracterizacion')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
-  //
-  //   Route::get('caracterizacion/create', 'Caracterizacion\CaracterizacionController@create')->name('caracterizacion.create')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
-  //
-  //   Route::post('caracterizacion/store', 'Caracterizacion\CaracterizacionController@store')->name('caracterizacion.store')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
-  //
-  //   Route::get('caracterizacion/{id}', 'Caracterizacion\CaracterizacionController@show')->name('caracterizacion.show')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
-  //
-  //   Route::get('caracterizacion/{id}/edit', 'Caracterizacion\CaracterizacionController@edit')->name('caracterizacion.edit')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
-  //
-	// Route::put('caracterizacion/update', 'Caracterizacion\CaracterizacionController@update')->name('caracterizacion.update')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
 
 	Route::get('nuevo/usuario', 'UserController@storeUser')->name('createuser')->middleware('auth');
 
@@ -82,15 +68,12 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::get('admin/profile', 'UserController@admin')->name('user.admin')->middleware('administrador');
 
-	Route::get('caracterizacion/{id}/crear', 'userController@createCaracterizacion')->name('caracterizacion.ucreate')->middleware('role:Superadmin');
+	Route::get('caracterizacion/{id}/crear', 'userController@createCaracterizacion')->name('caracterizacion.ucreate')->middleware('role:Superadmin');//TODO:eliminar esta ruta
 
   Route::get('busqueda/caracterizacion', 'Caracterizacion\CaracterizacionController@busqueda')->name('buscarCaracterizacion');
   Route::get('busqueda/usuario', 'UserController@busqueda')->name('buscarUsuario');
 });
 Route::group(['middleware' => 'auth'], function () {
-
-	Route::get('busqueda/caracterizacion', 'Caracterizacion\CaracterizacionController@busqueda')->name('buscarCaracterizacion');
-	Route::get('busqueda/usuario', 'UserController@busqueda')->name('buscarUsuario');
 	Route::get('perfil/usuario', 'ProfileController@index')->name('profile.index');
 	Route::get('profile/{id}/edit', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
