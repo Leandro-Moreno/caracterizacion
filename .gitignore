@@ -1,9 +1,6 @@
 /node_modules
 /public/hot
 /public/storage
-/public/css/app.css
-/public/css/material-dashboard.css
-/public/js/app.js
 /storage/*.key
 /vendor
 .env

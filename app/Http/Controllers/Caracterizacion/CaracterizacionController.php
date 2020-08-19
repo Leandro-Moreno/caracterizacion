@@ -155,7 +155,7 @@ class CaracterizacionController extends Controller
         $caracterizacion->save();
 
 
-        return redirect()->route('caracterizacion')->withStatus(__('Caracterizacion creada con éxito.'));
+        return redirect()->route('caracterizacion.index')->withStatus(__('Caracterizacion creada con éxito.'));
     }
 
 
@@ -208,7 +208,7 @@ class CaracterizacionController extends Controller
         $caracterizacion->notas_comentarios_ma_andrea_leyva = $request->notas_comentarios_ma_andrea_leyva ;
         $caracterizacion->envio_de_consentimiento = $request->envio_de_consentimiento ;
         $caracterizacion->save();
-        return redirect()->route('caracterizacion')->withStatus(__('Usuario actualizado con éxito.'));
+        return redirect()->route('caracterizacion.index')->withStatus(__('Usuario actualizado con éxito.'));
     }
 
     /**
@@ -220,7 +220,7 @@ class CaracterizacionController extends Controller
     public function destroy(Caracterizacion $caracterizacion)
     {
         $caracterizacion->delete();
-        return redirect()->route('caracterizacion')->withStatus(__('Usuario actualizado con éxito.'));
+        return redirect()->route('caracterizacion.index')->withStatus(__('Usuario actualizado con éxito.'));
     }
     public function importar(){
       return view('caracterizacion.import');
