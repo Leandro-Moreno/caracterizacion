@@ -17,29 +17,7 @@ class UsersImport implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {
-        $usuario = User::where('email', $row['correo_electronico'])->first();
-
-        if (  ! $usuario  ) {
-          $unidad = Unidad::where('nombre_unidad',$row['facultad'])->first();
-          $usuario  = new User([
-              'rol_id'   => 1,
-              'name' => isset(  $row['nombre']  ) ? $row['nombre'] : '',
-              'apellido' => isset( $row['apellido']  )? $row['apellido']  : '',
-              'email' => $row['correo_electronico'],
-              'tipo_doc' => isset(  $row['tipo_de_identificacion']  ) ? $row['tipo_de_identificacion'] : '',
-              'documento' => isset(  $row['no_identificacion']  ) ? $row['no_identificacion'] : 0,
-              'dependencia' => isset(  $row['dependencia']  ) ? $row['dependencia'] : '',
-              'cargo' => isset(  $row['cargo']  ) ? $row['cargo'] : '',
-              'celular' => isset(  $row['celular']  ) ? $row['celular'] : 0,
-              'direccion' => isset(  $row['direccion_actual']  ) ? $row['direccion_actual'] : '',
-              'tipo_contrato' => isset(  $row['tipo_de_contrato']  ) ? $row['tipo_de_contrato'] : '',
-              'barrio' => isset(  $row['barrio']  ) ? $row['barrio'] : '',
-              'localidad' => isset(  $row['localidad']  ) ? $row['localidad'] : '',
-              'unidad_id' => $unidad->id,
-              'password' => ''
-          ]);
-        }
-        $usuario->save();
+        $usuario = $this->userRow(  $row );
 
         $caracterizacion = $usuario->caracterizacion;
 
@@ -63,6 +41,33 @@ class UsersImport implements ToModel, WithHeadingRow
 
         return $caracterizacion;
 
+    }
+    public function userRow (array $row)
+    {
+      $usuario = User::where('email', $row['correo_electronico'])->first();
+
+      if (  ! $usuario  ) {
+        $unidad = Unidad::where('nombre_unidad',$row['facultad'])->first();
+        $usuario  = new User([
+            'rol_id'   => 1,
+            'name' => isset(  $row['nombre']  ) ? $row['nombre'] : '',
+            'apellido' => isset( $row['apellido']  )? $row['apellido']  : '',
+            'email' => $row['correo_electronico'],
+            'tipo_doc' => isset(  $row['tipo_de_identificacion']  ) ? $row['tipo_de_identificacion'] : '',
+            'documento' => isset(  $row['no_identificacion']  ) ? $row['no_identificacion'] : 0,
+            'dependencia' => isset(  $row['dependencia']  ) ? $row['dependencia'] : '',
+            'cargo' => isset(  $row['cargo']  ) ? $row['cargo'] : '',
+            'celular' => isset(  $row['celular']  ) ? $row['celular'] : 0,
+            'direccion' => isset(  $row['direccion_actual']  ) ? $row['direccion_actual'] : '',
+            'tipo_contrato' => isset(  $row['tipo_de_contrato']  ) ? $row['tipo_de_contrato'] : '',
+            'barrio' => isset(  $row['barrio']  ) ? $row['barrio'] : '',
+            'localidad' => isset(  $row['localidad']  ) ? $row['localidad'] : '',
+            'unidad_id' => $unidad->id,
+            'password' => ''
+        ]);
+      }
+      $usuario->save();
+      return $usuario;
     }
     public function validaContenidoVacio( $campo  ){
       return isset( $campo  )  ? $campo  : '';
