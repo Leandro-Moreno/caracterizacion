@@ -17,29 +17,26 @@ class UsersImport implements ToModel, WithHeadingRow
 
     public function model(array $row)
     {
-      // dd($row);
-
         $usuario = User::where('email', $row['correo_electronico'])->first();
 
         if (  ! $usuario  ) {
           $unidad = Unidad::where('nombre_unidad',$row['facultad'])->first();
           $usuario  = new User([
-              'rol_id'   => 3,
-              'name' => $row['nombre'],
-              'apellido' => isset($row['apellido'])?$row['apellido']:'',
+              'rol_id'   => 1,
+              'name' => isset(  $row['nombre']  ) ? $row['nombre'] : '',
+              'apellido' => isset( $row['apellido']  )? $row['apellido']  : '',
               'email' => $row['correo_electronico'],
-              'tipo_doc' => isset($row['tipo_de_identificacion'])?$row['tipo_de_identificacion']:'',
-              'documento' => isset($row['no_identificacion'])?$row['no_identificacion']:0,
-              'dependencia' => $row['dependencia'],
-              'cargo' => $row['cargo'],
-              'celular' => isset($row['celular'])?$row['celular']:'',
-              'direccion' => $row['direccion_acual'],
-              'tipo_contrato' => $row['tipo_de_contrato'],
-              'barrio' => $row['barrio'],
-              'localidad' => $row['localidad'],
+              'tipo_doc' => isset(  $row['tipo_de_identificacion']  ) ? $row['tipo_de_identificacion'] : '',
+              'documento' => isset(  $row['no_identificacion']  ) ? $row['no_identificacion'] : 0,
+              'dependencia' => isset(  $row['dependencia']  ) ? $row['dependencia'] : '',
+              'cargo' => isset(  $row['cargo']  ) ? $row['cargo'] : '',
+              'celular' => isset(  $row['celular']  ) ? $row['celular'] : 0,
+              'direccion' => isset(  $row['direccion_actual']  ) ? $row['direccion_actual'] : '',
+              'tipo_contrato' => isset(  $row['tipo_de_contrato']  ) ? $row['tipo_de_contrato'] : '',
+              'barrio' => isset(  $row['barrio']  ) ? $row['barrio'] : '',
+              'localidad' => isset(  $row['localidad']  ) ? $row['localidad'] : '',
               'unidad_id' => $unidad->id,
-              'password' => 'x'
-
+              'password' => ''
           ]);
         }
         $usuario->save();
@@ -49,24 +46,26 @@ class UsersImport implements ToModel, WithHeadingRow
         if( is_null(  $caracterizacion ) )
         {
           $caracterizacion  = new Caracterizacion([
-            'user_id' => $usuario->id,
-            'indispensable_presencial' => $row['por_responsabilidades_es_indispensable_su_trabajo_presencial'],
-            'por_que' => $row['por_que'],
-            'horaEntrada' => $row['hora_de_entrada']*2400,
-            'horaSalida' => $row['hora_de_salida']*2400,
-            'trabajo_en_casa' => $row['trabajo_en_casa'],
-            'dias_laborales'  =>  $row['dias_laborales'],
-            'viabilidad_caracterizacion' => $row['viabilidad_por_caracterizacion'],
-            'revision1' => isset($row['revision1']) ? $row['revision1'] : '',
-            'revision2' => isset($row['revision2']) ? $row['revision2'] : '',
-            'observacion_cambios_de_estado' => $row['observacion_cambios_de_estado'],
-            'notas_comentarios_ma_andrea_leyva' => $row['notas_comentarios_ma_andrea_leyva'],
-            'envio_de_consentimiento' => $row['envio_de_consentimiento']
+            'user_id' => $usuario->id
           ]);
         }
+        $caracterizacion->indispensable_presencial =  isset(  $row['por_responsabilidades_es_indispensable_su_trabajo_presencial']  ) ? $row['por_responsabilidades_es_indispensable_su_trabajo_presencial'] : '';
+
+        $caracterizacion->por_que =  isset(  $row['por_que']  ) ? $row['por_que'] : '';
+        $caracterizacion->horaEntrada =  isset(  $row['hora_de_entrada'] ) ? $row['hora_de_entrada']* 2400 : 0;
+        $caracterizacion->horaSalida =  isset(  $row['hora_de_salida'] ) ? $row['hora_de_salida']* 2400 : 0;
+        $caracterizacion->trabajo_en_casa =  isset(  $row['trabajo_en_casa']  ) ? $row['trabajo_en_casa'] : '';
+        $caracterizacion->dias_laborales =  isset(  $row['dias_laborales']  ) ? $row['dias_laborales'] : '';
+        $caracterizacion->viabilidad_caracterizacion =  isset(  $row['viabilidad_por_caracterizacion']  ) ? $row['viabilidad_por_caracterizacion'] : '';
+        $caracterizacion->observacion_cambios_de_estado =  isset(  $row['observacion_cambios_de_estado']  ) ? $row['observacion_cambios_de_estado'] : '';
+        $caracterizacion->notas_comentarios_ma_andrea_leyva =  isset(  $row['notas_comentarios_ma_andrea_leyva']  ) ? $row['notas_comentarios_ma_andrea_leyva'] : '';
+        $caracterizacion->envio_de_consentimiento =  isset(  $row['envio_de_consentimiento']  ) ? $row['envio_de_consentimiento'] : '';
 
         return $caracterizacion;
 
+    }
+    public function validaContenidoVacio( $campo  ){
+      return isset( $campo  )  ? $campo  : '';
     }
 
     public function rules(): array
