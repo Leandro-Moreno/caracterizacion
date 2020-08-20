@@ -32,16 +32,16 @@ class CaracterizacionController extends Controller
      */
     public function index(Request $request)
     {
-        $unidad_obtenida="";
-        $estado_obtenido="";
-        $rol_obtenido="";
-        $viabilidad_obtenida="";
+        $viabilidad_obtenida = $request->get('viabilidad');	
+        $unidad_obtenida = $request->get('unidad');	
+        $rol_obtenido = $request->get('rol');	
+        $estado_obtenido = $request->get('estado');	
         $caracterizaciones = Caracterizacion::all();
         $unidades = Unidad::all();
         $roles = Rol::all();
-        $caracterizaciones = $this->agregarColorEstado($caracterizaciones); //TODO:   agregar al modelo como helper
+        $caracterizaciones = $this->busquedaAvanzada($request); 
+        $caracterizaciones = $this->agregarColorEstado($caracterizaciones); 
         if(Auth::user()->rol_id < 3){
-//            dd($caracterizaciones);
           $caracterizaciones = $caracterizaciones->filter(function ($caracterizacion){
               $user = Auth::user();
               return $caracterizacion->user->unidad_id == $user->unidad_id;
@@ -51,9 +51,44 @@ class CaracterizacionController extends Controller
         }
         $caracterizaciones = $caracterizaciones->paginate(10);
         $estados = Estado::all();
+        
         return view('caracterizacion.index', compact('estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
     }
 
+    public function busquedaAvanzada($request){
+
+      if( null !==  $request ){
+        
+          if (Auth::user()->rol_id >= 2){	        
+            $viabilidad_obtenida = $request->get('viabilidad');	
+            $unidad_obtenida = $request->get('unidad');	
+            $rol_obtenido = $request->get('rol');	
+            $estado_obtenido = $request->get('estado');	
+            $caracterizacion = Caracterizacion::first();
+            $caracterizacion = $caracterizacion->join('users', 'users.id', '=', 'caracterizacion.user_id');	
+            if($unidad_obtenida != ""){	
+                $caracterizacion = $caracterizacion->where('unidad_id', '=', $unidad_obtenida);	
+            }	
+            if($rol_obtenido != ""){	
+                $caracterizacion = $caracterizacion->where('rol_id', '=', $rol_obtenido);	
+
+            }	
+            if($estado_obtenido != ""){	
+                $caracterizacion = $caracterizacion->where('estado_id', '=', $estado_obtenido);	
+            }	
+            if($viabilidad_obtenida != ""){	
+              $caracterizacion = $caracterizacion->where('viabilidad_caracterizacion', '=', $viabilidad_obtenida);	
+
+          }	
+            $caracterizacion = $caracterizacion->paginate(10);	
+        }	
+      }	
+      else{	
+        $caracterizacion = Caracterizacion::all();
+      }
+
+        return $caracterizacion;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -69,6 +104,7 @@ class CaracterizacionController extends Controller
         return view('caracterizacion.create', compact('caracterizacion','user', 'unidades','sendingUser'));
     }
 
+    
     /**
      * @param Caracterizacion|Collection[] $caracterizaciones
      * @return Caracterizacion|Collection[]

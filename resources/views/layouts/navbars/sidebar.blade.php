@@ -9,24 +9,24 @@
       </li>
       @can('view', App\Model\Caracterizacion\Caracterizacion::class)
       <li class="nav-item {{ ( $activePage == 'user-management') ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#Caracterizaciones" aria-expanded="{{ (  $activePage == 'user-management') ? 'true' : 'false' }}">
+        <a class="nav-link" data-toggle="collapse" href="#Caracterizaciones" aria-expanded="{{ (  $activePage == 'viability-management') ? 'true' : 'false' }}">
             <i class="material-icons">supervised_user_circle</i>
           <p>{{ __('Caracterización Usuarios') }}
             <b class="caret"></b>
           </p>
         </a>
-        <div class="collapse {{ ($activePage == 'dashboard' || $activePage == 'caracterizacion' ||  $activePage == 'user-management'|| $activePage == 'caracterizacion.importar' || $activePage == 'user-management') ? ' show' : '' }}" id="Caracterizaciones">
+        <div class="collapse {{ ($activePage == 'dashboard' || $activePage == 'caracterizacion' ||  $activePage == 'viability-management'|| $activePage == 'caracterizacion.importar' || $activePage == 'viability-management') ? ' show' : '' }}" id="Caracterizaciones">
           <ul class="nav">
           @can('view', App\Model\Caracterizacion\Caracterizacion::class)
             <li class="nav-item{{ $activePage == 'caracterizacion' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('caracterizacion.index') }}">
+              <a class="nav-link" href="{{ route('caracterizacion') }}">
                 <i class="material-icons">next_week</i>
                   <p>{{ __('Caracterización') }}</p>
               </a>
             </li>
           @endcan
           @can('view', App\User::class)
-            <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
+            <li class="nav-item{{ $activePage == 'viability-management' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('user.index') }}">
                 <i class="material-icons">supervisor_account</i>
                   <p>{{ __('Usuarios') }}</p>
@@ -44,7 +44,7 @@
             @can('view', App\Model\Reporte\Reporte::class)
             <li class="nav-item{{ $activePage == 'reporte' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('reporte') }}">
-                <i class="material-icons">how_to_reg</i>
+                <i class="material-icons">analytics</i>
                   <p>{{ __('Reportes') }}</p>
               </a>
             </li>
@@ -54,7 +54,76 @@
       </li>
       @endcan
 
-
+      @can('view', App\Model\Caracterizacion\Caracterizacion::class)
+      <li class="nav-item {{ ( $activePage == 'user-viability') ? ' active' : '' }}">
+        <a class="nav-link" data-toggle="collapse" href="#viabilidades" aria-expanded="{{ (  $activePage == 'viability-management') ? 'true' : 'false' }}">
+            <i class="material-icons">timeline</i>
+          <p>{{ __('Viabilidad') }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        <div class="collapse {{ ($activePage == 'dashboard' || $activePage == 'viabilidad' ||  $activePage == 'viability-management'|| $activePage == 'caracterizacion.importar' || $activePage == 'viability-management') ? ' show' : '' }}" id="viabilidades">
+          <ul class="nav">
+          @can('view', App\Model\Caracterizacion\Caracterizacion::class)
+            <li class="nav-item{{ $activePage == 'management' ? ' active' : '' }}">
+              <a class="nav-link viabilidad-sst" href="caracterizacion?unidad=&rol=&estado=&viabilidad=Consultar+con+jefatura+servicio+médico+y+SST">
+                <i class="material-icons text-white">next_week</i>
+                  <p>{{ __('Constular con jefatura y servicio Medico SST') }}</p>
+              </a>
+            </li>
+          @endcan
+          @can('view', App\Model\Caracterizacion\Caracterizacion::class)
+            <li class="nav-item{{ $activePage == 'management' ? ' active' : '' }}">
+              <a class="nav-link viabilidad-tp" href="caracterizacion?unidad=&rol=&estado=&viabilidad=Viable+trabajo+presencial">
+                <i class="material-icons text-white">supervisor_account</i>
+                  <p>{{ __('Viable trabajo presencial') }}</p>
+              </a>
+            </li>
+            @endcan
+            @can('view', App\Model\Caracterizacion\Caracterizacion::class)
+            <li class="nav-item{{ $activePage == 'management' ? ' active' : '' }}">
+              <a class="nav-link viabilidad-tele" href="caracterizacion?unidad=&rol=&estado=&viabilidad=Trabajo+en+casa+y+consultar+a+telemedicina">
+                <i class="material-icons text-white">import_export</i>
+                  <p>{{ __('Trabajo en casa y consultar a telemedicina') }}</p>
+              </a>
+            </li>
+            @endcan
+            @can('view', App\Model\Caracterizacion\Caracterizacion::class)
+            <li class="nav-item{{ $activePage == 'management' ? ' active' : '' }}">
+              <a class="nav-link viabilidad-tec" href="caracterizacion?unidad=&rol=&estado=&viabilidad=Trabajo+en+casa">
+                <i class="material-icons text-white">how_to_reg</i>
+                  <p>{{ __('Trabajo en casa') }}</p>
+              </a>
+            </li>
+            @endcan
+            @can('view', App\Model\Caracterizacion\Caracterizacion::class)
+            <li class="nav-item{{ $activePage == 'management' ? ' active' : '' }}">
+              <a class="nav-link viabilidad-sin" href="caracterizacion?unidad=&rol=&estado=&viabilidad=Sin+clasificación">
+                <i class="material-icons text-black">import_export</i>
+                  <p>{{ __('Sin clasificación') }}</p>
+              </a>
+            </li>
+            @endcan
+            @can('view', App\Model\Caracterizacion\Caracterizacion::class)
+            <li class="nav-item{{ $activePage == 'management' ? ' active' : '' }}">
+              <a class="nav-link usuarios-activos" href="caracterizacion?unidad=&rol=&estado=1&viabilidad=">
+                <i class="material-icons text-black">import_export</i>
+                  <p>{{ __('Activo') }}</p>
+              </a>
+            </li>
+            @endcan
+            @can('view', App\Model\Caracterizacion\Caracterizacion::class)
+            <li class="nav-item{{ $activePage == 'management' ? ' active' : '' }}">
+              <a class="nav-link usuarios-inactivos" href="caracterizacion?unidad=&rol=&estado=2&viabilidad=">
+                <i class="material-icons text-black">import_export</i>
+                  <p>{{ __('Inactivos') }}</p>
+              </a>
+            </li>
+            @endcan
+          </ul>
+        </div>
+      </li>
+      @endcan
 
       <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'correo'|| $activePage == 'admin-management') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#Configuracion" aria-expanded="{{ ($activePage == 'profile' || $activePage == 'correo') ? 'true' : 'false' }}">

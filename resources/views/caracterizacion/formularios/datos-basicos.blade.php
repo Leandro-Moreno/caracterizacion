@@ -120,7 +120,7 @@
          <div class="form-group{{ $errors->has('indispensable_presencial') ? ' has-danger' : '' }}">
             <div class="togglebutton">
                <label>
-               <input name="indispensable_presencial" type="checkbox" checked="" value="1">{{ old('indispensable_presencial', 1) }}</input>
+               <input data-target="#toggle-indispensable" aria-expanded="false" aria-controls="collapse" data-toggle="collapse" name="indispensable_presencial" type="checkbox" checked="" value="">{{ old('indispensable_presencial', 1) }}</input>
                <span class="toggle"></span>
                </label>
             </div>
@@ -130,56 +130,54 @@
          </div>
       </div>
    </div>
-   <div class="row">
-      <label class="col-sm-2 col-form-label">{{ __('¿Por qué?') }}</label>
-      <div class="col-sm-4">
-         <div class="form-group{{ $errors->has('pregunta2') ? ' has-danger' : '' }}">
-            <textarea class="form-control{{ $errors->has('pregunta2') ? ' is-invalid' : '' }}" name="pregunta2" id="input-pregunta2" type="" placeholder="{{ __('¿Por qué?') }}" value="{{ old('pregunta2') }}"  rows="4" required>{{ old('pregunta2') }}</textarea>
-            @if ($errors->has('pregunta2'))
-            <span id="pregunta2-error" class="error text-danger" for="input-pregunta2">{{ $errors->first('pregunta2') }}</span>
-            @endif
+   <div id="toggle-indispensable" name="toggle-indispensable" class="row collapse">
+      <div class="row">
+         <label class="col-sm-2 col-form-label">{{ __('¿Por qué?') }}</label>
+         <div class="col-sm-4">
+            <div class="form-group{{ $errors->has('pregunta2') ? ' has-danger' : '' }}">
+               <textarea class="form-control{{ $errors->has('pregunta2') ? ' is-invalid' : '' }}" name="pregunta2" id="input-pregunta2" type="" placeholder="{{ __('¿Por qué?') }}" value="{{ old('pregunta2') }}"  rows="4" required>{{ old('pregunta2') }}</textarea>
+               @if ($errors->has('pregunta2'))
+               <span id="pregunta2-error" class="error text-danger" for="input-pregunta2">{{ $errors->first('pregunta2') }}</span>
+               @endif
+            </div>
          </div>
       </div>
-   </div>
-   <div class="row">
-      <label class="col-sm-2 col-form-label" for="input-hora">{{ __('Hora de Entrada') }}</label>
-      <div class="col-sm-4">
-         <div class="form-group">
-            <input class="form-control" name="hora_entrada" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora') }}"  />
+      <div class="row">
+         <label class="col-sm-2 col-form-label" for="input-hora">{{ __('Hora de Entrada') }}</label>
+         <div class="col-sm-4">
+            <div class="form-group">
+               <input class="form-control" name="hora_entrada" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora') }}"  />
+            </div>
          </div>
       </div>
-   </div>
-   <div class="row">
-      <label class="col-sm-2 col-form-label" for="input-hora">{{ __('Hora de Salida') }}</label>
-      <div class="col-sm-4">
-         <div class="form-group">
-            <input class="form-control" name="hora_salida" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora') }}"  />
+      <div class="row">
+         <label class="col-sm-2 col-form-label" for="input-hora">{{ __('Hora de Salida') }}</label>
+         <div class="col-sm-4">
+            <div class="form-group">
+               <input class="form-control" name="hora_salida" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora') }}"  />
+            </div>
          </div>
       </div>
-   </div>
-   <div class="row">
-      <label class="col-sm-2 col-form-label">{{ __('Días Laborales') }}</label>
-      <div class="col-sm-5">
-         <div class="form-group{{ $errors->has('dias_laborales') ? ' has-danger' : '' }}">
-            <select class="form-control{{ $errors->has('dias_laborales') ? ' is-invalid' : '' }}" id="input-dias_laborales" required="true" aria-required="true" rows="3" name="dias_laborales" multiple>
-               <option value="{{ old('dias_laborales') }}" disabled selected>Seleccionar</option>
-               <option value="1">Lunes </option>
-               <option value="2">Martes</option>
-               <option value="3">Miercoles</option>
-               <option value="4">Jueves</option>
-               <option value="5">Viernes</option>
-               <option value="5">Sabado</option>
-            </select>
+      <div class="row">
+         <label class="col-sm-2 col-form-label">{{ __('Días Laborales') }}</label>
+         <div class="col-sm-5">
+            <div class="form-group{{ $errors->has('dias_laborales') ? ' has-danger' : '' }}">
+               <select class="form-control{{ $errors->has('dias_laborales') ? ' is-invalid' : '' }}" id="input-dias_laborales" required="true" aria-required="true" rows="3" name="dias_laborales" multiple>
+                  <option value="{{ old('dias_laborales') }}" disabled selected>Seleccionar</option>
+                  <option value="1">Lunes </option>
+                  <option value="2">Martes</option>
+                  <option value="3">Miercoles</option>
+                  <option value="4">Jueves</option>
+                  <option value="5">Viernes</option>
+                  <option value="5">Sabado</option>
+               </select>
+            </div>
          </div>
       </div>
    </div>
 </div>
 @push('js')
 <script type="text/javascript">
-   $(".toggle").click(function(e){
-     if($("#indispensableTogg").prop( "checked" )){
-     }
-       $("#indispensableTogg").prop( "checked" )?$( "#toggContenido" ).text("No activo"):$( "#toggContenido" ).text("Activo");
-       });
+  
 </script>
 @endpush

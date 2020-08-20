@@ -25,6 +25,16 @@ class UserController extends Controller
      */
     public function index(Request $request,User $model)
     {
+        $unidad_obtenida = $request->get('unidad');
+        $estado_obtenido = $request->get('estado');
+        $rol_obtenido = $request->get('rol');
+        $users = $this->busquedaAvanzada($request);
+        $unidades = Unidad::all();
+        $roles = Rol::all();
+        $estados = Estado::all();
+        return view('users.index', compact('estados', 'roles', 'unidades', 'users', 'unidad_obtenida', 'estado_obtenido' , 'rol_obtenido'));
+    }
+    public function busquedaAvanzada($request){
 
         if (Auth::user()->rol_id >= 2){
             $unidad_obtenida = $request->get('unidad');
@@ -42,15 +52,8 @@ class UserController extends Controller
                 $users = $users->where('estado_id', '=', $estado_obtenido); 
             }
             $users = $users->paginate(10);
-        
-            //$users = User::buscarpor($unidad_obtenida, $rol , $estado)->paginate(10);
         }
-
-        $unidades = Unidad::all();
-        $roles = Rol::all();
-        $estados = Estado::all();
-
-        return view('users.index', compact('estados', 'roles', 'unidades', 'users', 'unidad_obtenida', 'estado_obtenido' , 'rol_obtenido'));
+        return $users;
     }
 
     /**

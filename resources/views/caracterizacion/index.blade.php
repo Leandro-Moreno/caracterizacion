@@ -12,13 +12,6 @@
                         </div>
                         <div class="card-body">
                             @can('create', App\Model\Caracterizacion\Caracterizacion::class)
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div  class="col-12 text-right">
-                                            <a href="{{ route('caracterizacion.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar Caracterizacion') }}</a>
-                                        </div>
-                                    </div>
-                                </div>
                                 @include('caracterizacion.busqueda')
                             @endcan
                             <div class="table-responsive">
