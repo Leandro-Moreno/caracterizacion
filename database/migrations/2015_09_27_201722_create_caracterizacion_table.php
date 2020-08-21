@@ -20,10 +20,10 @@ class CreateCaracterizacionTable extends Migration
             $table->string('dependencia')->nullable();
             $table->string('indispensable_presencial');
             $table->string('por_que')->nullable();
-            $table->time('horaEntrada');
-            $table->time('horaSalida');
-            $table->string('dias_laborales');
-            $table->string('trabajo_en_casa');
+            $table->time('horaEntrada')->nullable();
+            $table->time('horaSalida')->nullable();
+            $table->json('dias_laborales')->nullable();
+            $table->string('trabajo_en_casa')->nullable();
             $table->string('viabilidad_caracterizacion')->nullable();
             $table->string('observacion_cambios_de_estado')->nullable();
             $table->string('notas_comentarios_ma_andrea_leyva')->nullable();

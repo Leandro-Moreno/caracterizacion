@@ -38,7 +38,6 @@ Route::group(['middleware' => ['auth']], function () {
 
   Route::resource('caracterizacion', 'Caracterizacion\CaracterizacionController')->names([
 	'index' => 'caracterizacion',
-    'create' => 'caracterizacion.create',
     	'show' => 'caracterizacion.show',
     	'edit' => 'caracterizacion.edit',
       'store' => 'caracterizacion.store',

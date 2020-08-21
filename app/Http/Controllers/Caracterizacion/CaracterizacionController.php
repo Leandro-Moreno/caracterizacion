@@ -142,6 +142,9 @@ class CaracterizacionController extends Controller
      */
     public function store(Request $request, Caracterizacion $model )
     {
+      if(empty($request->diaslaborales)){
+        dd($request);
+      }
       if (Auth::user()->rol_id == 2){
           $validatedData = $request->validate([
             'email' => 'required|unique:users|max:255',
@@ -191,7 +194,7 @@ class CaracterizacionController extends Controller
         $caracterizacion->save();
 
 
-        return redirect()->route('caracterizacion.index')->withStatus(__('Caracterizacion creada con éxito.'));
+        return redirect()->route('caracterizacion')->withStatus(__('Caracterizacion creada con éxito.'));
     }
 
 
@@ -206,7 +209,9 @@ class CaracterizacionController extends Controller
     {
       $unidades = Unidad::all();
       $user = $caracterizacion->user;
-      return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'user'));
+      $semana_laboral = array("Lunes", "Martes", "Miercoles", "Jueves", "Viernes");
+      $dias_laborales = json_decode($caracterizacion->dias_laborales);
+      return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'user', 'dias_laborales', 'semana_laboral'));
     }
 
     /**
@@ -218,6 +223,10 @@ class CaracterizacionController extends Controller
      */
     public function update(Request $request, Caracterizacion $caracterizacion)
     {
+      
+      if(!is_null($request->dias_laborales )){
+        $jsonQuestions = json_encode($request->dias_laborales);
+      }
         if($request->indispensable_presencial == null){
             $request->indispensable_presencial = 'No' ;
         }
@@ -244,7 +253,7 @@ class CaracterizacionController extends Controller
         $caracterizacion->notas_comentarios_ma_andrea_leyva = $request->notas_comentarios_ma_andrea_leyva ;
         $caracterizacion->envio_de_consentimiento = $request->envio_de_consentimiento ;
         $caracterizacion->save();
-        return redirect()->route('caracterizacion.index')->withStatus(__('Usuario actualizado con éxito.'));
+        return redirect()->route('caracterizacion')->withStatus(__('Caracterización actualizada con éxito.'));
     }
 
     /**
