@@ -11,9 +11,14 @@
                             <p class="card-category"> {{ __('Aquí puedes gestionar tus caractizar tus usuarios') }}</p>
                         </div>
                         <div class="card-body">
-                            @can('create', App\Model\Caracterizacion\Caracterizacion::class)
-                                @include('caracterizacion.busqueda')
-                            @endcan
+                          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="text-align:center">
+                             <div class="input-group">
+                               <buscar-component></buscar-component>
+                                @can('create', App\Model\Caracterizacion\Caracterizacion::class)
+                                    @include('caracterizacion.busqueda')
+                                @endcan
+                              </div>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead class=" text-primary">
