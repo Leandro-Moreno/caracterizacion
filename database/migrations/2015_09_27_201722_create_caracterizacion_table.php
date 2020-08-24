@@ -22,7 +22,7 @@ class CreateCaracterizacionTable extends Migration
             $table->string('por_que')->nullable();
             $table->time('horaEntrada')->nullable();
             $table->time('horaSalida')->nullable();
-            $table->json('dias_laborales')->nullable();
+            $table->json('dias_laborales');
             $table->string('trabajo_en_casa')->nullable();
             $table->string('viabilidad_caracterizacion')->nullable();
             $table->string('observacion_cambios_de_estado')->nullable();
