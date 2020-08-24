@@ -32,7 +32,7 @@ class ReportePolicy
     public function view(User $user)
     {
         
-        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 ){
+        if($user->rol_id == 5 || $user->rol_id == 4  ){
             return true;  
         }
         return false; 

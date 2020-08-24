@@ -70,6 +70,21 @@ class CaracterizacionPolicy
         return false;
 
     }
+    /**
+     * Determine whether the user can view the caracterizacion.
+     *
+     * @param  \App\User  $user
+     * @param  \App\App\Model\Caracterizacion\Caracterizacion  $caracterizacion
+     * @return mixed
+     */
+    public function view_indispensable(User $user)
+    {
+        if($user->rol_id == 3){
+            return false;
+        }
+        return true;
+
+    }
 
     /**
      * Determine whether the user can create caracterizacions.
@@ -79,7 +94,7 @@ class CaracterizacionPolicy
      */
     public function create(User $user)
     {
-        if($user->rol_id >= 4 ||  $user->rol_id == 2){
+        if($user->rol_id >= 2){
             return true;
         }
 

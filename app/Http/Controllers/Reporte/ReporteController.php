@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Model\Caracterizacion\Caracterizacion;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\Model\Estado;
+use App\Rol;
 use App\Model\Caracterizacion\Unidad;
 
 class ReporteController extends Controller
@@ -16,61 +18,102 @@ class ReporteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $viable_trabajo_presencial = '|#A9D08E'; //
-        $consultar_jefatura_servicio_médico_sst = '|#FFFF99'; //
-        $trabajo_casa_consultar_telemedicina = '|#CC99FF'; //
-        $trabajo_casa = '|#9BC2E6'; //
-        $sin_clasificación = '|#FFFFFF';   //
-
+        
+        $viabilidad_obtenida = $request->get('viabilidad');	
+        $viabilidades = array("Consultar con jefatura servicio médico y SST", "Viable trabajo presencial", "Trabajo en casa y consultar a telemedicina", "Trabajo en casa", "Sin clasificación");
+        $unidad_obtenida = $request->get('unidad');	
+        $rol_obtenido = $request->get('rol');	
+        $estado_obtenido = $request->get('estado');
         $unidades = Unidad::all();
+        $roles = Rol::all();
         $caracterizaciones;
         $caracterizaciones = Caracterizacion::all();
         $user = Auth::user();
+        $caracterizaciones = $this->busquedaAvanzada($request); 
+        $caracterizaciones = $this->agregarColorEstado($caracterizaciones); 
         if($user->rol_id < 3){
           $caracterizaciones  = $caracterizaciones->filter(function ($caracterizacion, $key){
             $user = Auth::user();
-            foreach ($caracterizaciones as $caracterizacion){
-                if($caracterizacion->viabilidad_caracterizacion == 'Consultar con jefatura servicio médico y SST'){
-                  $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$viable_trabajo_presencial; 
-                }
-                if($caracterizacion->viabilidad_caracterizacion == 'Viable trabajo presencial'){
-                  $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$consultar_jefatura_servicio_médico_sst; 
-                }
-                if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa y consultar a telemedicina'){
-                  $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa_consultar_telemedicina; 
-                }
-                if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa'){
-                  $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa; 
-                }
-                if($caracterizacion->viabilidad_caracterizacion == 'Sin clasificación'){
-                  $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$sin_clasificación; 
-                }
-              }
             return $caracterizacion->user->unidad_id == $user->unidad_id;
           });
+          $unidades = Unidad::where( 'id','=', Auth::user()->unidad_id )->get();
+          $roles = Rol::where( 'id','=', Auth::user()->rol_id )->get();
         }
-        foreach ($caracterizaciones as $caracterizacion){
-            if($caracterizacion->viabilidad_caracterizacion == 'Consultar con jefatura servicio médico y SST'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$viable_trabajo_presencial; 
-            }
-            if($caracterizacion->viabilidad_caracterizacion == 'Viable trabajo presencial'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$consultar_jefatura_servicio_médico_sst; 
-            }
-            if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa y consultar a telemedicina'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa_consultar_telemedicina; 
-            }
-            if($caracterizacion->viabilidad_caracterizacion == 'Trabajo en casa'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$trabajo_casa; 
-            }
-            if($caracterizacion->viabilidad_caracterizacion == 'Sin clasificación'){
-              $caracterizacion->viabilidad_caracterizacion  = $caracterizacion->viabilidad_caracterizacion.$sin_clasificación; 
-            }
-          }
+        $caracterizaciones = $caracterizaciones->paginate(10);
+        $estados = Estado::all();
+        return view('reporte.index', compact('viabilidades','roles','unidades', 'estados' ,'unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida'), ['caracterizaciones' => $caracterizaciones->paginate(15)]);
+    }
+    /**
+     * @param Caracterizacion|Collection[] $caracterizaciones
+     * @return Caracterizacion|Collection[]
+     */
+    public function agregarColorEstado($caracterizaciones )
+    {
+      $caracterizaciones = $caracterizaciones->each(function($caracterizacion, $key){
+        switch ( $caracterizacion->viabilidad_caracterizacion ) {
+          case 'Consultar con jefatura servicio médico y SST':
+            $caracterizacion->estadoColor = "viabilidad-sst bold";
+            break;
+          case 'Viable trabajo presencial':
+            $caracterizacion->estadoColor = "viabilidad-tp bold";
+            break;
+          case 'Trabajo en casa y consultar a telemedicina':
+            $caracterizacion->estadoColor = "viabilidad-tele bold";
+            break;
+          case 'Trabajo en casa':
+            $caracterizacion->estadoColor = "viabilidad-tec  bold";
+            break;
+          case 'Sin clasificación':
+            $caracterizacion->estadoColor = "viabilidad-sin bold";
+            break;
+          default:
+            break;
+        }
+        return $caracterizacion;
+      });
+      return $caracterizaciones;
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Model\Reporte  $reporte
+     * @return \Illuminate\Http\Response
+     */
+    public function busquedaAvanzada($request){
 
-        return view('reporte.index', compact('unidades'), ['caracterizaciones' => $caracterizaciones->paginate(15)]);
+      if( null !==  $request ){
+        
+          if (Auth::user()->rol_id >= 2){	        
+            $viabilidad_obtenida = $request->get('viabilidad');	
+            $unidad_obtenida = $request->get('unidad');	
+            $rol_obtenido = $request->get('rol');	
+            $estado_obtenido = $request->get('estado');	
+            $caracterizacion = Caracterizacion::first();
+            $caracterizacion = $caracterizacion->join('users', 'users.id', '=', 'caracterizacion.user_id');	
+            if($unidad_obtenida != ""){	
+                $caracterizacion = $caracterizacion->where('unidad_id', '=', $unidad_obtenida);	
+            }	
+            if($rol_obtenido != ""){	
+                $caracterizacion = $caracterizacion->where('rol_id', '=', $rol_obtenido);	
+
+            }	
+            if($estado_obtenido != ""){	
+                $caracterizacion = $caracterizacion->where('estado_id', '=', $estado_obtenido);	
+            }	
+            if($viabilidad_obtenida != ""){	
+              $caracterizacion = $caracterizacion->where('viabilidad_caracterizacion', '=', $viabilidad_obtenida);	
+
+          }	
+            $caracterizacion = $caracterizacion->paginate(10);	
+        }	
+      }	
+      else{	
+        $caracterizacion = Caracterizacion::all();
+      }
+
+        return $caracterizacion;
     }
 
     /**
