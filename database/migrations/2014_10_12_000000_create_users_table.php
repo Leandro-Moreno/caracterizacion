@@ -26,15 +26,13 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('tipo_doc')->nullable();
-            $table->integer('documento')->nullable();
+            $table->biginteger('documento')->nullable();
             $table->string('cargo')->nullable();
             $table->string('tipo_contrato')->nullable();
             $table->string('celular')->nullable();
             $table->string('direccion')->nullable();
-            $table->string('direccion2')->nullable();
             $table->biginteger('unidad_id')->unsigned();
             $table->foreign('unidad_id')->references('id')->on('unidades');
-            $table->string('tipo_persona')->nullable();
             $table->string('barrio')->nullable();
             $table->string('localidad')->nullable();
             $table->rememberToken();

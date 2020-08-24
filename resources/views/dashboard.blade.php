@@ -4,9 +4,6 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
-        
-
-
       @can('view', App\Model\Caracterizacion\Caracterizacion::class)
         <div class="col-lg-4 col-md-6 col-sm-6">
           <a class="" href="caracterizacion">

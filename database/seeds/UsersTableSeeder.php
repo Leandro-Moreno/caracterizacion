@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'rol_id' => '5',
             'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '11',
             'name' => 'Leandro',
             'apellido' => 'Moreno',
@@ -24,26 +25,27 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('111111'),
             'created_at' => now(),
-            
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
             'rol_id' => '5',
             'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '11',
             'name' => 'Andres',
+            'cargo' => 'Ingeniero Sitios Web',
             'apellido' => 'Gonzalez',
             'email' => 'ca.gonzalezb1@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('casco'),
             'created_at' => now(),
-            
             'updated_at' => now()
         ]);
         #Empleado
         DB::table('users')->insert([
             'rol_id' => '1',
             'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '1',
             'name' => 'Daniela',
             'cargo' => 'Analista',
@@ -53,17 +55,18 @@ class UsersTableSeeder extends Seeder
             'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
-            'direccion2' => '##########',
+            'barrio' => '##########',
+            'localidad' => '##########',
             'email' => 'daniela@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('empleado'),
             'created_at' => now(),
-            
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
             'rol_id' => '1',
             'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '1',
             'name' => 'Camilo',
             'cargo' => 'Secretario',
@@ -73,7 +76,8 @@ class UsersTableSeeder extends Seeder
             'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
-            'direccion2' => '##########',
+            'barrio' => '##########',
+            'localidad' => '##########',
             'email' => 'camilo@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('empleado'),
@@ -84,6 +88,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'rol_id' => '1',
             'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '1',
             'name' => 'Fabian',
             'cargo' => 'Asistente',
@@ -93,7 +98,8 @@ class UsersTableSeeder extends Seeder
             'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
-            'direccion2' => '############',
+            'barrio' => '############',
+            'localidad'=> '############',
             'email' => 'fabian@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('empleado'),
@@ -105,6 +111,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'rol_id' => '2',
             'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '1',
             'name' => 'Decano Facultad',
             'cargo' => 'Decano',
@@ -114,17 +121,18 @@ class UsersTableSeeder extends Seeder
             'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
-            'direccion2' => '##########',
+            'barrio' => '##########',
+            'localidad' => '##########',
             'email' => 'facultad@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('facultad'),
             'created_at' => now(),
-            
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
             'rol_id' => '2',
             'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '1',
             'name' => 'Andres Facultad',
             'cargo' => 'Ingeniero',
@@ -134,7 +142,8 @@ class UsersTableSeeder extends Seeder
             'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
-            'direccion2' => '##########',
+            'barrio' => '##########',
+            'localidad' => '##########',
             'email' => 'andresf@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('facultad'),
@@ -145,6 +154,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'rol_id' => '2',
             'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '1',
             'name' => 'Daniela Facultad',
             'cargo' => 'Analista',
@@ -154,7 +164,8 @@ class UsersTableSeeder extends Seeder
             'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
-            'direccion2' => '##########',
+            'barrio' => '##########',
+            'localidad' => '##########',
             'email' => 'danielaf@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('facultad'),
@@ -166,6 +177,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'rol_id' => '3',
             'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '1',
             'name' => 'Camilo Servicio Salud',
             'cargo' => '',
@@ -175,7 +187,8 @@ class UsersTableSeeder extends Seeder
             'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
-            'direccion2' => '##########',
+            'barrio' => '##########',
+            'localidad' => '##########',
             'email' => 'camilos@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('serviciosalud'),
@@ -186,6 +199,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'rol_id' => '3',
             'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '15',
             'name' => 'Fabian Servicio Salud',
             'cargo' => 'Asistente',
@@ -195,7 +209,8 @@ class UsersTableSeeder extends Seeder
             'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
-            'direccion2' => '##########',
+            'barrio' => '##########',
+            'localidad' => '##########',
             'email' => 'fabianserviciosalud@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('serviciosalud'),
@@ -206,6 +221,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'rol_id' => '2',
             'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '1',
             'name' => 'Dil Servicio Salud',
             'cargo' => 'Enfermera',
@@ -215,7 +231,8 @@ class UsersTableSeeder extends Seeder
             'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
-            'direccion2' => '##########',
+            'barrio' => '##########',
+            'localidad' => '##########',
             'email' => 'dilserviciosalud@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('serviciosalud'),
@@ -227,6 +244,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'rol_id' => '4',
             'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '19',
             'name' => 'Andres Servicios Campus',
             'cargo' => 'Ingeniero',
@@ -236,7 +254,8 @@ class UsersTableSeeder extends Seeder
             'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
-            'direccion2' => '##########',
+            'barrio' => '##########',
+            'localidad' => '##########',
             'email' => 'andresserviciocampus@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('serviciocampus'),
@@ -247,6 +266,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'rol_id' => '4',
             'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '19',
             'name' => 'Daniela Servicios Campus',
             'cargo' => '',
@@ -256,7 +276,8 @@ class UsersTableSeeder extends Seeder
             'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
-            'direccion2' => '##########',
+            'barrio' => '##########',
+            'localidad' => '##########',
             'email' => 'danielaserviciocampus@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('serviciocampus'),
@@ -267,6 +288,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'rol_id' => '4',
             'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '19',
             'name' => 'Camilo Servicios Campus',
             'cargo' => '',
@@ -276,7 +298,8 @@ class UsersTableSeeder extends Seeder
             'documento' => '313546841',
             'celular' => '9999999',
             'direccion' => 'Cra 1 Nº 18A- 12',
-            'direccion2' => '##########',
+            'barrio' => '##########',
+            'localidad' => '##########',
             'email' => 'camiloserviciocampus@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('serviciocampus'),

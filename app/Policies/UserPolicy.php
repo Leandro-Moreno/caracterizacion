@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
-use Auth;
 
 class UserPolicy
 {
@@ -19,42 +18,38 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
-    }
-    public function update(User $usuarioLogueado, User $user){
-      if($usuarioLogueado->rol_id == 2){
-        if($usuarioLogueado->unidad_id == $user->unidad_id){
-          return true;
-        }
-      }
-      elseif($usuarioLogueado->rol_id >= 3){
-
-              return true;
-      }
-
-      return false;
+        return false;
     }
 
 
     public function updateByRol(User $user)
-    {
-        if($user->rol_id >= 4){
-
-                return true;
+    {    
+        if($user->rol_id == 5 || $user->rol_id == 4){
+               
+                return true;  
         }
-
+        
+        return false;
+    }
+    public function update_status(User $user)
+    {    
+        if($user->rol_id == 5 || $user->rol_id == 4){
+               
+                return true;  
+        }
+        
         return false;
     }
 
     public function viewbyRolUser(User $user, $userview)
-    {
+    {    
         if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
             if($userview->unidad_id == $user->unidad_id || $user->rol_id == 5 ||  $user->rol_id == 4 || $user->rol_id == 3 ){
-
-                return true;
+               
+                return true;  
             }
         }
-
+        
         return false;
     }
 
@@ -67,8 +62,9 @@ class UserPolicy
      */
     public function view(User $user)
     {
-        if($user->rol_id >= 2){
-            return true;
+        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
+           
+            return true;  
         }
         Response::deny('You do not own this post.');
         return false;
@@ -155,9 +151,5 @@ class UserPolicy
     public function forceDelete(User $user, User $model)
     {
         return false;
-    }
-    public function asignarRol(User $usuarioLogueado, User $user)
-    {
-      return true;
     }
 }

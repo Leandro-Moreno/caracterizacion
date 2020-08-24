@@ -95,10 +95,10 @@
    <div class="row">
       <label class="col-sm-2 col-form-label">{{ __('Barrio') }}</label>
       <div class="col-sm-4">
-         <div class="form-group{{ $errors->has('direccion2') ? ' has-danger' : '' }}">
-            <textarea class="form-control{{ $errors->has('direccion2') ? ' is-invalid' : '' }}" name="direccionb" id="input-direccion2" type="" placeholder="{{ __('Barrio') }}" value="{{ old('barrio' ,$user->direccion2) }}"  rows="1" >{{ old('direccion2',$user->direccion2) }}</textarea>
-            @if ($errors->has('direccion2'))
-            <span id="direccion2-error" class="error text-danger" for="input-direccion2">{{ $errors->first('direccion2') }}</span>
+         <div class="form-group{{ $errors->has('barrio') ? ' has-danger' : '' }}">
+            <textarea class="form-control{{ $errors->has('barrio') ? ' is-invalid' : '' }}" name="barrio" id="input-barrio" type="" placeholder="{{ __('Barrio') }}" value="{{ old('barrio' ,$user->barrio) }}"  rows="1" >{{ old('barrio',$user->barrio) }}</textarea>
+            @if ($errors->has('barrio'))
+            <span id="barrio-error" class="error text-danger" for="input-barrio">{{ $errors->first('barrio') }}</span>
             @endif
          </div>
       </div>
@@ -106,10 +106,10 @@
    <div class="row">
       <label class="col-sm-2 col-form-label">{{ __('Localidad') }}</label>
       <div class="col-sm-4">
-         <div class="form-group{{ $errors->has('direccion2') ? ' has-danger' : '' }}">
-            <textarea class="form-control{{ $errors->has('direccion2') ? ' is-invalid' : '' }}" name="direccionl" id="input-direccion2" type="" placeholder="{{ __('Localidad') }}" value="{{ old('direccion2',$user->direccion2) }}"  rows="1" >{{ old('direccion2' ,$user->direccion2) }}</textarea>
-            @if ($errors->has('direccion2'))
-            <span id="direccion2-error" class="error text-danger" for="input-direccion2">{{ $errors->first('direccion2') }}</span>
+         <div class="form-group{{ $errors->has('localidad') ? ' has-danger' : '' }}">
+            <textarea class="form-control{{ $errors->has('localidad') ? ' is-invalid' : '' }}" name="localidad" id="input-localidad" type="" placeholder="{{ __('Localidad') }}" value="{{ old('localidad',$user->localidad) }}"  rows="1" >{{ old('localidad' ,$user->localidad) }}</textarea>
+            @if ($errors->has('localidad'))
+            <span id="localidad-error" class="error text-danger" for="input-localidad">{{ $errors->first('localidad') }}</span>
             @endif
          </div>
       </div>
@@ -158,7 +158,6 @@
             </div>
          </div>
       </div>
-
       <div class="row">
          <label class="col-sm-2 col-form-label">{{ __('Días Laborales') }}</label>
          <div class="col-sm-5">

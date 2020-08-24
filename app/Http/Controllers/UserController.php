@@ -17,11 +17,6 @@ use Spatie\Searchable\Search;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-       $this->authorizeResource(User::class);
-
-    }
     /**
      * Display a listing of the users
      *
@@ -51,10 +46,10 @@ class UserController extends Controller
             }
             if($rol_obtenido != ""){
                 $users = $users->where('rol_id', '=', $rol_obtenido);
-
+             
             }
             if($estado_obtenido != ""){
-                $users = $users->where('estado_id', '=', $estado_obtenido);
+                $users = $users->where('estado_id', '=', $estado_obtenido); 
             }
             $users = $users->paginate(10);
         }
@@ -111,7 +106,7 @@ class UserController extends Controller
     }
     public function storeUser(Request $request)
     {
-
+      
         $user = new User;
         $user->rol_id = $request->rol;
         $user->estado_id = $request->estado;
@@ -128,7 +123,8 @@ class UserController extends Controller
         $user->tipo_contrato = $request->tipo_contrato ;
         $user->celular = $request->celular;
         $user->direccion = $request->direccion ;
-        $user->direccion2 = $request->barrio.','.$request->localidad;
+        $user->barrio = $request->barrio;
+        $user->localidad = $request->localidad;
         $user->unidad_id = $request->unidad ;
         $user->save();
 
@@ -158,7 +154,6 @@ class UserController extends Controller
      */
     public function update(Request $request, User  $user)
     {
-
         $user->update(
             $request->merge(['password' => Hash::make($request->get('password'))])
             ->except(

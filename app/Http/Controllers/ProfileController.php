@@ -38,7 +38,6 @@ class ProfileController extends Controller
         $tipo = $request->get('tipo');
 
         $user = Auth::user();
-        $users = User::buscarpor($tipo, $buscar)->paginate(10);
 
         $unidades = Unidad::all();
         return view('profile.index', compact('unidades', 'users', 'user'));
@@ -69,8 +68,12 @@ class ProfileController extends Controller
     public function update(ProfileRequest $request)
     {
         auth()->user()->update($request->all());
+        if (Auth::user()->rol_id > 2){
+            return redirect('user')->with('status','Usuario correctamente actualizado.');
+        }else{
+            return redirect('perfil/usuario')->with('status','Perfil correctamente actualizado.');
+        }
 
-        return back()->withStatus(__('Profile successfully updated.'));
     }
 
     /**

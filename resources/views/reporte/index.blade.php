@@ -18,18 +18,7 @@
                     <div class="col-6 text-right">
                       <buscar-component></buscar-component>
                     </div>
-                    <div class="col-12 text-right">
-                    <select id="field" class="form-control mr-sm-3" name="field">
-                        <option disabled selected >Seleccione...</option>
-                        <option value="0">Estado</option>
-                        <option value="1">Facultad</option>
-                        <option value="2">Rol</option>                      
-                    </select>
-                    <select id="operator" class="form-control mr-sm-3" name="operator">
-                    </select>
-                      <input name="buscarpor" class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre" aria-label="Search">
-                      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                    </div>
+
                   </div>
                   </form>
                     <div class="col-sm-12">

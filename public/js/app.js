@@ -50129,8 +50129,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\ca.gonzalezb1\Documents\caracterizacion\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\ca.gonzalezb1\Documents\caracterizacion\resources\sass\material-dashboard.scss */"./resources/sass/material-dashboard.scss");
+__webpack_require__(/*! C:\Users\ca.gonzalezb1\Desktop\caracterizacion\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\ca.gonzalezb1\Desktop\caracterizacion\resources\sass\material-dashboard.scss */"./resources/sass/material-dashboard.scss");
 
 
 /***/ })

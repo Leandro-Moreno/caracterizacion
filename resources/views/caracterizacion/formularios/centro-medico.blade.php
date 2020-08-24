@@ -5,11 +5,9 @@
               <div class="form-group{{ $errors->has('viabilidad') ? ' has-danger' : '' }}">
                  <select class="form-control{{ $errors->has('viabilidad') ? ' is-invalid' : '' }}" id="input-viabilidad" aria-required="true" name="viabilidad_caracterizacion">
                     <option value="{{ old('viabilidad') }}" disabled>Seleccionar</option>
-                    <option value="Consultar con jefatura servicio médico y SST">Consultar con jefatura servicio médico y SST</option>
-                    <option value="Viable trabajo presencial">Viable trabajo presencial</option>
-                    <option value="Trabajo en casa y consultar a telemedicina">Trabajo en casa y consultar a telemedicina</option>
-                    <option value="Trabajo en casa">Trabajo en casa</option>
-                    <option value="Sin clasificación">Sin clasificación</option>
+                     @foreach($viabilidades as $viabilidad)
+                     <option value="{{$viabilidad}}" @if($viabilidad == $caracterizacion->viabilidad_caracterizacion) selected @endif>{{$viabilidad}}</option>
+                     @endforeach
                  </select>
               </div>
            </div>

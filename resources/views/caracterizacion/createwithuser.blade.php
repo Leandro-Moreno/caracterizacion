@@ -141,10 +141,10 @@
                               <div class="row">
                                  <label class="col-sm-2 col-form-label">{{ __('Barrio') }}</label>
                                  <div class="col-sm-4">
-                                    <div class="form-group{{ $errors->has('direccion2') ? ' has-danger' : '' }}">
-                                       <textarea class="form-control{{ $errors->has('direccion2') ? ' is-invalid' : '' }}" name="direccionb" id="input-direccion2" type="" placeholder="{{ __('Barrio') }}" value="{{ old('barrio' ,$userCaracterizacion->direccion2) }}"  rows="1" required>{{ old('direccion2',$userCaracterizacion->direccion2) }}</textarea>
-                                       @if ($errors->has('direccion2'))
-                                       <span id="direccion2-error" class="error text-danger" for="input-direccion2">{{ $errors->first('direccion2') }}</span>
+                                    <div class="form-group{{ $errors->has('barrio') ? ' has-danger' : '' }}">
+                                       <textarea class="form-control{{ $errors->has('barrio') ? ' is-invalid' : '' }}" name="barrio" id="input-barrio" type="" placeholder="{{ __('Barrio') }}" value="{{ old('barrio' ,$userCaracterizacion->barrio) }}"  rows="1" required>{{ old('barrio',$userCaracterizacion->barrio) }}</textarea>
+                                       @if ($errors->has('barrio'))
+                                       <span id="barrio-error" class="error text-danger" for="input-barrio">{{ $errors->first('barrio') }}</span>
                                        @endif
                                     </div>
                                  </div>
@@ -152,10 +152,10 @@
                               <div class="row">
                                  <label class="col-sm-2 col-form-label">{{ __('Localidad') }}</label>
                                  <div class="col-sm-4">
-                                    <div class="form-group{{ $errors->has('direccion2') ? ' has-danger' : '' }}">
-                                       <textarea class="form-control{{ $errors->has('direccion2') ? ' is-invalid' : '' }}" name="direccionl" id="input-direccion2" type="" placeholder="{{ __('Localidad') }}" value="{{ old('direccion2',$userCaracterizacion->direccion2) }}"  rows="1" required>{{ old('direccion2' ,$userCaracterizacion->direccion2) }}</textarea>
-                                       @if ($errors->has('direccion2'))
-                                       <span id="direccion2-error" class="error text-danger" for="input-direccion2">{{ $errors->first('direccion2') }}</span>
+                                    <div class="form-group{{ $errors->has('localidad') ? ' has-danger' : '' }}">
+                                       <textarea class="form-control{{ $errors->has('localidad') ? ' is-invalid' : '' }}" name="localidad" id="input-localidad" type="" placeholder="{{ __('Localidad') }}" value="{{ old('localidad',$userCaracterizacion->localidad) }}"  rows="1" required>{{ old('localidad' ,$userCaracterizacion->localidad) }}</textarea>
+                                       @if ($errors->has('localidad'))
+                                       <span id="localidad-error" class="error text-danger" for="input-localidad">{{ $errors->first('localidad') }}</span>
                                        @endif
                                     </div>
                                  </div>
@@ -171,7 +171,7 @@
                                           </label>
                                        </div>
                                        @if ($errors->has('indispensable_presencial'))
-                                       <span id="indispensable_presencial-error" class="error text-danger" for="input-indispensable_presencial" >{{ $errors->first('pregunta1') }}</span>
+                                       <span id="indispensable_presencial-error" class="error text-danger" for="input-indispensable_presencial" >{{ $errors->first('indispensable_presencial') }}</span>
                                        @endif
                                     </div>
                                  </div>
@@ -230,11 +230,11 @@
                                     <div class="form-group{{ $errors->has('viabilidad') ? ' has-danger' : '' }}">
                                        <select class="form-control{{ $errors->has('viabilidad') ? ' is-invalid' : '' }}" id="input-viabilidad"  aria-required="true" name="viabilidad_caracterizacion">
                                           <option value="{{ old('viabilidad') }}">Seleccionar</option>
-                                          <option value="1">Consultar con jefatura servicio médico y SST</option>
-                                          <option value="2">Viable trabajo presencial</option>
-                                          <option value="3">Trabajo en casa y consultar a telemedicina</option>
-                                          <option value="4">Trabajo en casa</option>
-                                          <option value="5">Sin clasificación</option>
+                                          <option value="Consultar con jefatura servicio médico y SST">Consultar con jefatura servicio médico y SST</option>
+                                          <option value="Viable trabajo presencial">Viable trabajo presencial</option>
+                                          <option value="Trabajo en casa y consultar a telemedicina">Trabajo en casa y consultar a telemedicina</option>
+                                          <option value="Trabajo en casa">Trabajo en casa</option>
+                                          <option value="Sin clasificación">Sin clasificación</option>
                                        </select>
                                     </div>
                                  </div>

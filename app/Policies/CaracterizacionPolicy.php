@@ -40,8 +40,36 @@ class CaracterizacionPolicy
         return false;
 
     }
+    /**
+     * Determine whether the user can view the caracterizacion.
+     *
+     * @param  \App\User  $user
+     * @param  \App\App\Model\Caracterizacion\Caracterizacion  $caracterizacion
+     * @return mixed
+     */
+    public function view_viability(User $user)
+    {
+        if($user->rol_id >= 3){
+            return true;
+        }
+        return false;
 
+    }
+    /**
+     * Determine whether the user can view the caracterizacion.
+     *
+     * @param  \App\User  $user
+     * @param  \App\App\Model\Caracterizacion\Caracterizacion  $caracterizacion
+     * @return mixed
+     */
+    public function view_facultad(User $user)
+    {
+        if($user->rol_id >= 3){
+            return true;
+        }
+        return false;
 
+    }
 
     /**
      * Determine whether the user can create caracterizacions.
