@@ -68,7 +68,7 @@
             <li class="nav-item{{ $activePage == 'management' ? ' active' : '' }}">
               <a class="nav-link viabilidad-sst" href="caracterizacion?unidad=&rol=&estado=&viabilidad=Consultar+con+jefatura+servicio+médico+y+SST">
                 <i class="material-icons text-white">touch_app</i>
-                  <p>{{ __('Constular con jefatura y servicio Medico SST') }}</p>
+                  <p>{{ __('Consultar con jefatura y servicio Medico SST') }}</p>
               </a>
             </li>
           @endcan
