@@ -28,6 +28,7 @@
                                     <th id="facultad">
                                         {{ __('Facultad') }}
                                     </th>
+                                    @can('view_indispensable' , App\Model\Caracterizacion\Caracterizacion::class)
                                     <th id="trabajo_presencial" >
                                         {{ __('Indispensable trabajo presencial') }}
                                     </th>
@@ -40,6 +41,7 @@
                                     <th id="hora_Salida">
                                         {{ __('Hora de Salida') }}
                                     </th>
+                                    @endcan
                                     @can('view_facultad' , App\Model\Caracterizacion\Caracterizacion::class)
                                     <th id="viabilidad">
                                         {{ __('Viabilidad') }}
@@ -67,6 +69,7 @@
                                             <td>
                                                 {{ $dato->user->unidad->nombre_unidad }}
                                             </td>
+                                            @can('view_indispensable' , App\Model\Caracterizacion\Caracterizacion::class)
                                             <td class="text-center">
                                                 {{ $dato->indispensable_presencial }}
                                             </td>
@@ -79,6 +82,7 @@
                                             <td>
                                                 {{ $dato->horaSalida }}
                                             </td>
+                                            @endcan
                                             @can('view_facultad', $dato)
                                             <td class="{{$dato->estadoColor}}">
                                                 {{ $dato->viabilidad_caracterizacion }}
