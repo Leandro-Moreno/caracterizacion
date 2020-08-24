@@ -191,7 +191,7 @@ class CaracterizacionPolicy
 
     public function updateu(User $user)
     {
-        if($user->rol_id <= 2){
+        if($user->rol_id < 2){
             return false;
         }
         return true;
