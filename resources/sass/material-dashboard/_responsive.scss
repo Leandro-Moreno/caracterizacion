@@ -335,7 +335,7 @@
             .main-panel,
             .wrapper-full-page,
             .navbar-fixed > div{
-                @include transform-translate-x(260px);
+                @include transform-translate-x(369px);
             }
         }
 
@@ -343,7 +343,7 @@
         .off-canvas-sidebar{
             left: 0;
             right: auto;
-            @include transform-translate-x(-260px);
+            @include transform-translate-x(-369px);
         }
 
         .close-layer{
@@ -487,7 +487,7 @@
         .navbar .container .navbar-wrapper,
         .navbar .container{
             left: 0;
-            @include transform-translate-x(-260px);
+            @include transform-translate-x(-369px);
         }
 
         .sidebar{
@@ -551,7 +551,7 @@
         display: block;
         top: 0;
         height: 100vh;
-        width: 260px;
+        width: 369px;
         right: 0;
         left: auto;
         z-index: 1032;
@@ -563,7 +563,7 @@
         padding-right: 0px;
         padding-left: 0;
 
-        @include transform-translate-x(260px);
+        @include transform-translate-x(369px);
         @include transitions (0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
         > ul {
             position: relative;
@@ -787,7 +787,7 @@
         opacity: 0;
         top: 0;
         left: auto;
-        right: 260px;
+        right: 369px;
         content: "";
         z-index: 9999;
         overflow-x: hidden;

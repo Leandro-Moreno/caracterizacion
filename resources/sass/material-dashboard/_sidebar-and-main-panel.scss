@@ -10,7 +10,7 @@
     bottom: 0;
     left: 0;
     z-index: 2;
-    width: 260px;
+    width: 369px;
     background: $white-color;
     @include shadow-big();
 
@@ -34,7 +34,7 @@
         position: relative;
         height: calc(100vh);
         overflow: auto;
-        width: 260px;
+        width: 369px;
         z-index: 4;
         background-color: darken($brand-primary, 20%);
 
@@ -459,7 +459,7 @@
         }
 
         .sidebar:hover{
-            width: 260px;
+            width: 369px;
 
             .logo{
                 a.logo-normal{

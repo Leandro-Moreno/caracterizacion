@@ -21,5 +21,6 @@ $bottombar-x:          bottombar-x !default;
 $bottombar-back:       bottombar-back !default;
 
 // Sidebar variables
-$sidebar-width:              calc(100% - 260px) !default;
+
+$sidebar-width:              calc(100% - $sidebar-size) !default;
 $sidebar-mini-width:         calc(100% - 80px) !default;
