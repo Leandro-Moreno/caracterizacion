@@ -77,12 +77,18 @@ class LoginController extends Controller
          $user = User::where('email',$user->email)->first();
          if ($user) {
            Auth::login($user);
-           return redirect($this->redirectTo);
          }
          else{
-           session()->flash('message', 'Usuario no existe');
-           return redirect('login');
+           $usuario->create(array(
+                               'name' => $givenName[0],
+                               'name2' => $givenName[1],
+                               'apellido' => $surname[0],
+                               'apellido2' => $surname[1],
+                               'cargo' => $jobTitle,
+                             ));
+           Auth::login($usuario);
          }
+         return redirect($this->redirectTo);
      }
 
     /**
