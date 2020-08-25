@@ -144,16 +144,17 @@ class CaracterizacionController extends Controller
      */
     public function store(Request $request, Caracterizacion $model )
     {
-
       if (Auth::user()->rol_id == 2){
-          $validatedData = $request->validate([
-            'email' => 'required|unique:users|max:255',
-            'documento' => 'required|unique:users|max:255',
-        ]);
-
-      }
+        $validatedData = $request->validate([
+          'email' => 'required|unique:users|max:255',
+          'documento' => 'required|unique:users|max:255',
+          ]);
+          
+        }
+        if(!is_null($request->dias_laborales )){
+          $request->dias_laborales = json_encode($request->dias_laborales);
+        }
         $user = User::Where('email','=',$request->email)->first();
-
         $user->estado_id = 1;
         $user->name = $request->nombre;
         $user->apellido = $request->apellido;
@@ -178,6 +179,7 @@ class CaracterizacionController extends Controller
             $request->envio_de_consentimiento = "No";
         }
         $caracterizacion = new Caracterizacion;
+        $caracterizacion->id = $user->id ;
         $caracterizacion->user_id = $user->id ;
         $caracterizacion->dependencia = $request->dependencia ;
         $caracterizacion->indispensable_presencial = $request->indispensable_presencial ;
@@ -223,7 +225,6 @@ class CaracterizacionController extends Controller
      */
     public function update(Request $request, Caracterizacion $caracterizacion)
     {
-
       if (Auth::user()->rol_id == 2){
         $validatedData = $request->validate([
           'email' => 'required|email|max:255',
@@ -232,7 +233,7 @@ class CaracterizacionController extends Controller
 
     } 
       if(!is_null($request->dias_laborales )){
-        $jsonQuestions = json_encode($request->dias_laborales);
+        $request->dias_laborales = json_encode($request->dias_laborales);
       }
         if($request->indispensable_presencial == null){
             $request->indispensable_presencial = 'No' ;

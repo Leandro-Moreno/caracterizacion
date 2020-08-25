@@ -165,7 +165,7 @@
                <select class="form-control{{ $errors->has('dias_laborales') ? ' is-invalid' : '' }}" id="input_dias_laborales"  aria-required="true" rows="3" name="dias_laborales[]" multiple="multiple" >
                   <option value="Ninguno" selected disabled >Seleccionar</option>
                      @foreach($semana_laboral as $dia_laboral)
-                           <option value="{{$dia_laboral}}" @if(in_array($dia_laboral, $dias_laborales)) selected @endif>{{$dia_laboral}}</option>
+                           <option value="{{$dia_laboral}}" @if($dias_laborales != null && in_array($dia_laboral, $dias_laborales) ) selected @endif>{{$dia_laboral}}</option>
                      @endforeach
                </select>
             </div>

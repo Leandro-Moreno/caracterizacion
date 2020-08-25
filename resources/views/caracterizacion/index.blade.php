@@ -94,7 +94,7 @@
                                             </td>
                                             @endcan
                                             <td class="text-center">
-                                                {{ $dato->user->estado->nombre }}
+                                                {{ $dato->user->estado->nombre }}{{$dato->id}}
                                             </td>
                                             @can('create', App\Model\Caracterizacion\Caracterizacion::class)
                                                 <td class="td-actions text-right">

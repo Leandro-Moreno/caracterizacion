@@ -4,7 +4,7 @@
            <div class="col-sm-5">
               <div class="form-group{{ $errors->has('viabilidad') ? ' has-danger' : '' }}">
                  <select class="form-control{{ $errors->has('viabilidad') ? ' is-invalid' : '' }}" id="input-viabilidad" aria-required="true" name="viabilidad_caracterizacion">
-                    <option value="{{ old('viabilidad') }}" disabled>Seleccionar</option>
+                    <option value="{{ old('viabilidad') }}" disabled selected>Seleccionar</option>
                      @foreach($viabilidades as $viabilidad)
                      <option value="{{$viabilidad}}" @if($viabilidad == $caracterizacion->viabilidad_caracterizacion) selected @endif>{{$viabilidad}}</option>
                      @endforeach

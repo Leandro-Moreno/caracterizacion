@@ -166,7 +166,7 @@
                                     <div class="form-group{{ $errors->has('indispensable_presencial') ? ' has-danger' : '' }}">
                                        <div class="togglebutton">
                                           <label id="lb-indispensable">
-                                          <input data-target="#toggle-indispensable" aria-expanded="false" aria-controls="collapse" data-toggle="collapse" name="indispensable_presencial" type="checkbox" value="1" ></input>
+                                          <input data-target="#toggle-indispensable" aria-expanded="false" aria-controls="collapse" data-toggle="collapse" name="indispensable_presencial" type="checkbox" value="Si" ></input>
                                           <span class="toggle"></span>
                                           </label>
                                        </div>
@@ -212,7 +212,7 @@
                                              <option value="Ninguno" selected disabled >Seleccionar</option>
                                              <option value="Lunes">Lunes </option>
                                              <option value="Martes">Martes</option>
-                                             <option value="Miércoles">Miercoles</option>
+                                             <option value="Miercoles">Miercoles</option>
                                              <option value="Jueves">Jueves</option>
                                              <option value="Viernes">Viernes</option>
                                              <option value="Sabado">Sabado</option>
