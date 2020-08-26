@@ -37,13 +37,15 @@ Route::group(['middleware' => ['auth']], function () {
 
 
   Route::resource('caracterizacion', 'Caracterizacion\CaracterizacionController')->names([
-    'create' => 'caracterizacion.create',
+	'index' => 'caracterizacion',
     	'show' => 'caracterizacion.show',
     	'edit' => 'caracterizacion.edit',
       'store' => 'caracterizacion.store',
     	'update' => 'caracterizacion.update',
 		'destroy' => 'caracterizacion.destroy',
 	]);
+
+	Route::get('viabilidad', 'UserController@busquedaAvanzada')->name('viabilidad')->middleware('auth');
 
 	Route::get('nuevo/usuario', 'UserController@storeUser')->name('createuser')->middleware('auth');
 

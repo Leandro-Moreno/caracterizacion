@@ -20,7 +20,7 @@ class User extends Authenticatable implements Searchable
      * @var array
      */
     protected $fillable = [
-        'estado_id', 'rol_id', 'name', 'apellido', 'email', 'tipo_doc', 'documento', 'profesion', 'cargo', 'tipo_contrato','celular', 'direccion','direccion2', 'uso_datos', 'uso_imagen', 'password','unidad_id','barrio','localidad'
+        'estado_id', 'rol_id', 'name', 'apellido', 'email', 'tipo_doc', 'documento', 'profesion', 'cargo', 'tipo_contrato','celular', 'direccion', 'uso_datos', 'uso_imagen', 'password','unidad_id','barrio','localidad'
     ];
 
     /**
@@ -63,11 +63,6 @@ class User extends Authenticatable implements Searchable
 
       return $this::where('email', $correo)->first();
     }
-
-    public function scopeBuscarpor($query, $unidad, $rol, $estado ) {
-            return $query->where('estado_id', '=', $estado)->get();
-    }
-
     public function getSearchResult(): SearchResult
     {
       // $urlEdit = route('user.edit', $this->id);

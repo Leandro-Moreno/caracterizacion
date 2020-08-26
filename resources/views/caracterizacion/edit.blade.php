@@ -7,16 +7,7 @@
         <div class="col-md-12">
           <form method="post" action="{{ route('caracterizacion.update', $caracterizacion) }}" autocomplete="off" class="form-horizontal" enctype="multipart/form-data">
             @csrf
-            @method('put')
-              @if ($errors->any())
-              <div class="alert alert-danger">
-                  <ul>
-                      @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                      @endforeach
-                  </ul>
-              </div>
-              @endif
+            @method('put') 
             <div class="card ">
               <div class="card-header card-header-primary">
                 <h4 class="card-title">{{ __('Editar Caracterización de ') . $user->name . " " . $user->apellido }}</h4>
@@ -31,7 +22,7 @@
                      </ul>
                      <div class="row">
                         <div class="col-md-12 text-right">
-                           <a href="{{ route('caracterizacion.index') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
+                           <a href="{{ route('caracterizacion') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
                         </div>
                      </div>
                      @if ($errors->any())
@@ -62,7 +53,7 @@
                      </div>
                </div>
                <div class="card-footer ml-auto mr-auto">
-                  <button type="submit" class="btn btn-primary">{{ __('Guardar Caracterización n') }}</button>
+                  <button type="submit" class="btn btn-primary">{{ __('Guardar Caracterización') }}</button>
                </div>
          </div>
           </form>
@@ -74,7 +65,7 @@
   <script type="text/javascript">
 
   $(".toggle").click(function(e){
-      $("#repTogg").prop( "checked" )?$( "#toggContenidoinds" ).text("No Indispensable"):$( "#toggContenidoinds" ).text("Si");
+      
       $("#trabajo_en_casa").prop( "checked" )?$( "#toggTrabajo" ).text("No"):$( "#toggTrabajo" ).text("Si");
       $("#envio-consentimiento-togg").prop( "checked" )?$( "#toggEnvio" ).text("No Envío"):$( "#toggEnvio" ).text("Si Envío");
    });

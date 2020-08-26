@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\User;
+use App\Model\Estado;
 use App\Model\Caracterizacion\Unidad;
 use App\Model\Caracterizacion\Caracterizacion;
 use Illuminate\Validation\Rule;
@@ -18,56 +19,70 @@ class UsersImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         $usuario = $this->userRow(  $row );
-
         $caracterizacion = $usuario->caracterizacion;
 
-        if( is_null(  $caracterizacion ) )
+        $row['user_id'] = $usuario->id;
+        $row['indispensable_presencial'] = isset(  $row['por_responsabilidades_es_indispensable_su_trabajo_presencial']  ) ? $row['por_responsabilidades_es_indispensable_su_trabajo_presencial'] : '';
+        $row['dias_laborales'] = isset($row['dias_laborales'])?json_encode($this->diasSemana( $row['dias_laborales'] )):'';
+        $row['horaEntrada'] = isset(  $row['hora_de_entrada'] ) ? $row['hora_de_entrada']* 2400 : 0;
+        $row['horaSalida'] = isset(  $row['hora_de_salida'] ) ? $row['hora_de_salida']* 2400 : 0;
+        if( $caracterizacion )
         {
-          $caracterizacion  = new Caracterizacion([
-            'user_id' => $usuario->id
-          ]);
+          $caracterizacion->update($row);
         }
-        $caracterizacion->indispensable_presencial =  isset(  $row['por_responsabilidades_es_indispensable_su_trabajo_presencial']  ) ? $row['por_responsabilidades_es_indispensable_su_trabajo_presencial'] : '';
-
-        $caracterizacion->por_que =  isset(  $row['por_que']  ) ? $row['por_que'] : '';
-        $caracterizacion->horaEntrada =  isset(  $row['hora_de_entrada'] ) ? $row['hora_de_entrada']* 2400 : 0;
-        $caracterizacion->horaSalida =  isset(  $row['hora_de_salida'] ) ? $row['hora_de_salida']* 2400 : 0;
-        $caracterizacion->trabajo_en_casa =  isset(  $row['trabajo_en_casa']  ) ? $row['trabajo_en_casa'] : '';
-        $caracterizacion->dias_laborales =  isset(  $row['dias_laborales']  ) ? $row['dias_laborales'] : '';
-        $caracterizacion->viabilidad_caracterizacion =  isset(  $row['viabilidad_por_caracterizacion']  ) ? $row['viabilidad_por_caracterizacion'] : '';
-        $caracterizacion->observacion_cambios_de_estado =  isset(  $row['observacion_cambios_de_estado']  ) ? $row['observacion_cambios_de_estado'] : '';
-        $caracterizacion->notas_comentarios_ma_andrea_leyva =  isset(  $row['notas_comentarios_ma_andrea_leyva']  ) ? $row['notas_comentarios_ma_andrea_leyva'] : '';
-        $caracterizacion->envio_de_consentimiento =  isset(  $row['envio_de_consentimiento']  ) ? $row['envio_de_consentimiento'] : '';
-
+        else {
+          $caracterizacion = Caracterizacion::Create($row);
+        }
+        // dd($caracterizacion);
         return $caracterizacion;
 
     }
     public function userRow (array $row)
     {
       $usuario = User::where('email', $row['correo_electronico'])->first();
-
+      $row['direccion'] = isset($row['direccion_actual'])?$row['direccion_actual']:"";
+      if ( isset($row['estado']) ){
+         $estado = Estado::where('nombre','like',$row['estado'])->select('id')->first();
+         $row['estado_id'] = 2;
+      }
       if (  ! $usuario  ) {
         $unidad = Unidad::where('nombre_unidad',$row['facultad'])->first();
-        $usuario  = new User([
-            'rol_id'   => 1,
-            'name' => isset(  $row['nombre']  ) ? $row['nombre'] : '',
-            'apellido' => isset( $row['apellido']  )? $row['apellido']  : '',
-            'email' => $row['correo_electronico'],
-            'tipo_doc' => isset(  $row['tipo_de_identificacion']  ) ? $row['tipo_de_identificacion'] : '',
-            'documento' => isset(  $row['no_identificacion']  ) ? $row['no_identificacion'] : 0,
-            'dependencia' => isset(  $row['dependencia']  ) ? $row['dependencia'] : '',
-            'cargo' => isset(  $row['cargo']  ) ? $row['cargo'] : '',
-            'celular' => isset(  $row['celular']  ) ? $row['celular'] : 0,
-            'direccion' => isset(  $row['direccion_actual']  ) ? $row['direccion_actual'] : '',
-            'tipo_contrato' => isset(  $row['tipo_de_contrato']  ) ? $row['tipo_de_contrato'] : '',
-            'barrio' => isset(  $row['barrio']  ) ? $row['barrio'] : '',
-            'localidad' => isset(  $row['localidad']  ) ? $row['localidad'] : '',
-            'unidad_id' => $unidad->id,
-            'password' => ''
-        ]);
+        $row['email'] = $row['correo_electronico'];
+        $row['tipo_doc'] = isset($row['tipo_de_identificacion'])?$row['tipo_de_identificacion']:"";
+        $row['documento'] = isset($row['no_identificacion'])?$row['no_identificacion']:0;
+        $row['name'] = isset($row['nombre'])?$row['nombre']:"";
+        $row['unidad_id'] = $unidad->id;
+        $row['rol_id'] = 1;
+        $row['password'] = "";
+        $usuario = User::create( $row );
       }
-      $usuario->save();
+      else{
+        $usuario->save();
+      }
+
       return $usuario;
+    }
+    public function diasSemana( String $dias_laborales )
+    {
+      switch ($dias_laborales) {
+        case 'lunes a viernes':
+          return ["Lunes", "Martes", "Miercoles", "Jueves","Viernes"];
+          break;
+        case 'lunes a sabado':
+          return ["Lunes", "Martes", "Miercoles", "Jueves","Viernes","Sabado"];
+          break;
+        case 'lunes':
+        case 'martes':
+        case 'miercoles':
+        case 'jueves':
+        case 'viernes':
+        case 'sabado':
+          return array($dias_laborales);
+          break;
+        default:
+          return "";
+          break;
+      }
     }
     public function validaContenidoVacio( $campo  ){
       return isset( $campo  )  ? $campo  : '';

@@ -19,7 +19,7 @@ class ReportePolicy
      */
     public function viewAny(User $user)
     {
-        return false; 
+        return false;
     }
 
     /**
@@ -31,11 +31,11 @@ class ReportePolicy
      */
     public function view(User $user)
     {
-        
-        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 ){
-            return true;  
+
+        if($user->rol_id >= 4  ){
+            return true;
         }
-        return false; 
+        return false;
     }
 
     /**
@@ -46,7 +46,7 @@ class ReportePolicy
      */
     public function create(User $user)
     {
-        return false; 
+        return false;
     }
 
     /**
@@ -58,7 +58,7 @@ class ReportePolicy
      */
     public function update(User $user, Reporte $reporte)
     {
-        return true; 
+        return true;
     }
 
     /**
@@ -70,7 +70,7 @@ class ReportePolicy
      */
     public function delete(User $user, Reporte $reporte)
     {
-        return false; 
+        return false;
     }
 
     /**
@@ -82,7 +82,7 @@ class ReportePolicy
      */
     public function restore(User $user, Reporte $reporte)
     {
-        return false; 
+        return false;
     }
 
     /**
@@ -94,6 +94,6 @@ class ReportePolicy
      */
     public function forceDelete(User $user, Reporte $reporte)
     {
-        return false; 
+        return false;
     }
 }

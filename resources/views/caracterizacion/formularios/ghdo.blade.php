@@ -3,7 +3,7 @@
       <label class="col-sm-2 col-form-label">{{ __('Notas/Comentarios') }}</label>
       <div class="col-sm-4">
          <div class="form-group{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' has-danger' : '' }}">
-            <textarea class="form-control{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' is-invalid' : '' }}" name="notas_comentarios_ma_andrea_leyva" id="input-notas_comentarios_ma_andrea_leyva" type="" placeholder="{{ __('Notas/Comentarios') }}" value="{{ old('notas_comentarios_ma_andrea_leyva') }}"  rows="3" required>{{ $caracterizacion->notas_comentarios_ma_andrea_leyva }}</textarea>
+            <textarea class="form-control{{ $errors->has('notas_comentarios_ma_andrea_leyva') ? ' is-invalid' : '' }}" name="notas_comentarios_ma_andrea_leyva" id="input-notas_comentarios_ma_andrea_leyva" type="" placeholder="{{ __('Notas/Comentarios') }}" value="{{ old('notas_comentarios_ma_andrea_leyva') }}"  rows="3" >{{ $caracterizacion->notas_comentarios_ma_andrea_leyva }}</textarea>
             @if ($errors->has('notas_comentarios_ma_andrea_leyva'))
             <span id="notas_comentarios_ma_andrea_leyva-error" class="error text-danger" for="input-notas_comentarios_ma_andrea_leyva">{{ $errors->first('notas_comentarios_ma_andrea_leyva') }}</span>
             @endif

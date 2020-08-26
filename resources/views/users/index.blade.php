@@ -147,7 +147,7 @@
                           {{ $user->celular }}
                           </td>
                           <td>
-                          {{ $user->direccion }}{{ $user->direccion2 }}
+                          {{$user->localidad}}<br/>{{ $user->barrio }}<br/>{{ $user->direccion }} 
                           </td>
                           <td>
                           {{ $user->estado->nombre }}

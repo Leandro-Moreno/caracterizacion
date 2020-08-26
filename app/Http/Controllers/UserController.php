@@ -25,6 +25,16 @@ class UserController extends Controller
      */
     public function index(Request $request,User $model)
     {
+        $unidad_obtenida = $request->get('unidad');
+        $estado_obtenido = $request->get('estado');
+        $rol_obtenido = $request->get('rol');
+        $users = $this->busquedaAvanzada($request);
+        $unidades = Unidad::all();
+        $roles = Rol::all();
+        $estados = Estado::all();
+        return view('users.index', compact('estados', 'roles', 'unidades', 'users', 'unidad_obtenida', 'estado_obtenido' , 'rol_obtenido'));
+    }
+    public function busquedaAvanzada($request){
 
         if (Auth::user()->rol_id >= 2){
             $unidad_obtenida = $request->get('unidad');
@@ -42,15 +52,8 @@ class UserController extends Controller
                 $users = $users->where('estado_id', '=', $estado_obtenido); 
             }
             $users = $users->paginate(10);
-        
-            //$users = User::buscarpor($unidad_obtenida, $rol , $estado)->paginate(10);
         }
-
-        $unidades = Unidad::all();
-        $roles = Rol::all();
-        $estados = Estado::all();
-
-        return view('users.index', compact('estados', 'roles', 'unidades', 'users', 'unidad_obtenida', 'estado_obtenido' , 'rol_obtenido'));
+        return $users;
     }
 
     /**
@@ -95,6 +98,10 @@ class UserController extends Controller
         ->get();
         $sendingUser = User::where('rol_id','=',4)->get();
         $unidades = Unidad::all();
+        foreach($unidades as $unidad){
+           // dd($unidad->id);
+
+        }
         return view('caracterizacion.createwithuser', compact('user', 'unidades','sendingUser', 'userCaracterizacion'));
     }
     public function storeUser(Request $request)
@@ -116,7 +123,8 @@ class UserController extends Controller
         $user->tipo_contrato = $request->tipo_contrato ;
         $user->celular = $request->celular;
         $user->direccion = $request->direccion ;
-        $user->direccion2 = $request->barrio.','.$request->localidad;
+        $user->barrio = $request->barrio;
+        $user->localidad = $request->localidad;
         $user->unidad_id = $request->unidad ;
         $user->save();
 
@@ -146,7 +154,6 @@ class UserController extends Controller
      */
     public function update(Request $request, User  $user)
     {
-
         $user->update(
             $request->merge(['password' => Hash::make($request->get('password'))])
             ->except(

@@ -21,7 +21,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="row">
-                      <label class="col-md-3 col-form-label">{{ __('Primer nombre') }}</label>
+                      <label class="col-md-3 col-form-label">{{ __('Nombres') }}</label>
                       <div class="col-md-9">
                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                           <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" id="input-name" type="text" placeholder="{{ __('Primer nombre') }}" value="{{ old('name') }}" required="true" aria-required="true"/>
@@ -34,20 +34,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="row">
-                    <label class="col-md-3 col-form-label">{{ __('Segundo nombre') }}</label>
-                    <div class="col-md-9">
-                      <div class="form-group{{ $errors->has('name2') ? ' has-danger' : '' }}">
-                        <input class="form-control{{ $errors->has('name2') ? ' is-invalid' : '' }}" name="name2" id="input-name2" type="text" placeholder="{{ __('Segundo nombre') }}" value="{{ old('name2') }}" aria-required="true"/>
-                        @if ($errors->has('name2'))
-                          <span id="name2-error" class="error text-danger" for="input-name2">{{ $errors->first('name2') }}</span>
-                        @endif
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="row">
-                    <label class="col-md-3 col-form-label">{{ __('Primer apellido') }}</label>
+                    <label class="col-md-3 col-form-label">{{ __('Apellidos') }}</label>
                     <div class="col-md-9">
                       <div class="form-group{{ $errors->has('apellido') ? ' has-danger' : '' }}">
                         <input class="form-control{{ $errors->has('apellido') ? ' is-invalid' : '' }}" name="apellido" id="input-apellido" type="text" placeholder="{{ __('Primer apellido') }}" value="{{ old('apellido') }}" aria-required="true"/>
@@ -57,19 +44,6 @@
                       </div>
                     </div>
                   </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="row">
-                      <label class="col-md-3 col-form-label">{{ __('Segundo apellido') }}</label>
-                      <div class="col-md-9">
-                        <div class="form-group{{ $errors->has('apellido2') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('apellido2') ? ' is-invalid' : '' }}" name="apellido2" id="input-apellido2" type="text" placeholder="{{ __('Segundo apellido') }}" value="{{ old('apellido2') }}" aria-required="true"/>
-                          @if ($errors->has('apellido2'))
-                            <span id="apellido2-error" class="error text-danger" for="input-apellido2">{{ $errors->first('apellido2') }}</span>
-                          @endif
-                        </div>
-                      </div>
-                    </div>
                   </div>
                   <div class="col-md-6">
                     <div class="row">
@@ -183,10 +157,10 @@
                     <div class="row">
                       <label class="col-md-3 col-form-label">{{ __('Barrio') }}</label>
                       <div class="col-md-9">
-                        <div class="form-group{{ $errors->has('direccion2') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('direccion2') ? ' is-invalid' : '' }}" name="direccion2" id="input-direccion2" type="text" placeholder="{{ __('Direccion') }}" value="{{ old('direccion2') }}" aria-required="true"/>
-                          @if ($errors->has('direccion2'))
-                            <span id="direccion2-error" class="error text-danger" for="input-direccion2">{{ $errors->first('direccion2') }}</span>
+                        <div class="form-group{{ $errors->has('barrio') ? ' has-danger' : '' }}">
+                          <input class="form-control{{ $errors->has('barrio') ? ' is-invalid' : '' }}" name="barrio" id="input-barrio" type="text" placeholder="{{ __('Direccion') }}" value="{{ old('barrio') }}" aria-required="true"/>
+                          @if ($errors->has('barrio'))
+                            <span id="barrio-error" class="error text-danger" for="input-barrio">{{ $errors->first('barrio') }}</span>
                           @endif
                         </div>
                       </div>
@@ -196,10 +170,10 @@
                     <div class="row">
                       <label class="col-md-3 col-form-label">{{ __('Localidad') }}</label>
                       <div class="col-md-9">
-                        <div class="form-group{{ $errors->has('direccion2') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('direccion2') ? ' is-invalid' : '' }}" name="direccion2" id="input-direccion2" type="text" placeholder="{{ __('Direccion') }}" value="{{ old('direccion2') }}" aria-required="true"/>
-                          @if ($errors->has('direccion2'))
-                            <span id="direccion2-error" class="error text-danger" for="input-direccion2">{{ $errors->first('direccion2') }}</span>
+                        <div class="form-group{{ $errors->has('localidad') ? ' has-danger' : '' }}">
+                          <input class="form-control{{ $errors->has('localidad') ? ' is-invalid' : '' }}" name="localidad" id="input-localidad" type="text" placeholder="{{ __('Direccion') }}" value="{{ old('localidad') }}" aria-required="true"/>
+                          @if ($errors->has('localidad'))
+                            <span id="localidad-error" class="error text-danger" for="input-localidad">{{ $errors->first('localidad') }}</span>
                           @endif
                         </div>
                       </div>

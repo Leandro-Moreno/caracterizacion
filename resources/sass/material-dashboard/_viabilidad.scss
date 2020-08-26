@@ -1,0 +1,37 @@
+.viabilidad{
+  &-tp{
+    background: #47bb6b;
+    color: white !important;
+  }
+  &-sst{
+    background: #ccbc4b;
+    color: white !important;
+  }
+  &-tele{
+    background: #CC99FF;
+    color: white !important;
+  }
+  &-tec{
+    background: #2f8be0;
+    color: white !important;
+  }
+  &-sin{
+    background: $white-color;
+  }
+  i .material-icons{
+    width:26px;
+    height:26px;
+    border-radius: 13px;
+  }
+}
+
+a.nav-link.usuarios-activos {
+    background: $brand-success;
+    color: white !important;
+
+}
+a.nav-link.usuarios-inactivos {
+    background: $brand-danger;
+    color: white !important;
+
+}

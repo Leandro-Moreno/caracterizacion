@@ -32,16 +32,16 @@ class CaracterizacionController extends Controller
      */
     public function index(Request $request)
     {
-        $unidad_obtenida="";
-        $estado_obtenido="";
-        $rol_obtenido="";
-        $viabilidad_obtenida="";
+        $viabilidad_obtenida = $request->get('viabilidad');
+        $unidad_obtenida = $request->get('unidad');
+        $rol_obtenido = $request->get('rol');
+        $estado_obtenido = $request->get('estado');
         $caracterizaciones = Caracterizacion::all();
         $unidades = Unidad::all();
         $roles = Rol::all();
-        $caracterizaciones = $this->agregarColorEstado($caracterizaciones); //TODO:   agregar al modelo como helper
+        $caracterizaciones = $this->busquedaAvanzada($request);
+        $caracterizaciones = $this->agregarColorEstado($caracterizaciones);
         if(Auth::user()->rol_id < 3){
-//            dd($caracterizaciones);
           $caracterizaciones = $caracterizaciones->filter(function ($caracterizacion){
               $user = Auth::user();
               return $caracterizacion->user->unidad_id == $user->unidad_id;
@@ -54,6 +54,40 @@ class CaracterizacionController extends Controller
         return view('caracterizacion.index', compact('estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
     }
 
+    public function busquedaAvanzada($request){
+
+      if( null !==  $request ){
+
+          if (Auth::user()->rol_id >= 2){
+            $viabilidad_obtenida = $request->get('viabilidad');
+            $unidad_obtenida = $request->get('unidad');
+            $rol_obtenido = $request->get('rol');
+            $estado_obtenido = $request->get('estado');
+            $caracterizacion = Caracterizacion::first();
+            $caracterizacion = $caracterizacion->join('users', 'users.id', '=', 'caracterizacion.user_id');
+            if($unidad_obtenida != ""){
+                $caracterizacion = $caracterizacion->where('unidad_id', '=', $unidad_obtenida);
+            }
+            if($rol_obtenido != ""){
+                $caracterizacion = $caracterizacion->where('rol_id', '=', $rol_obtenido);
+
+            }
+            if($estado_obtenido != ""){
+                $caracterizacion = $caracterizacion->where('estado_id', '=', $estado_obtenido);
+            }
+            if($viabilidad_obtenida != ""){
+              $caracterizacion = $caracterizacion->where('viabilidad_caracterizacion', '=', $viabilidad_obtenida);
+
+          }
+            $caracterizacion = $caracterizacion->paginate(10);
+        }
+      }
+      else{
+        $caracterizacion = Caracterizacion::all();
+      }
+
+        return $caracterizacion;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -69,6 +103,7 @@ class CaracterizacionController extends Controller
         return view('caracterizacion.create', compact('caracterizacion','user', 'unidades','sendingUser'));
     }
 
+
     /**
      * @param Caracterizacion|Collection[] $caracterizaciones
      * @return Caracterizacion|Collection[]
@@ -78,16 +113,19 @@ class CaracterizacionController extends Controller
       $caracterizaciones = $caracterizaciones->each(function($caracterizacion, $key){
         switch ( $caracterizacion->viabilidad_caracterizacion ) {
           case 'Consultar con jefatura servicio médico y SST':
-            $caracterizacion->estadoColor = "warning";
+            $caracterizacion->estadoColor = "viabilidad-sst bold";
             break;
           case 'Viable trabajo presencial':
-            $caracterizacion->estadoColor = "success";
+            $caracterizacion->estadoColor = "viabilidad-tp bold";
             break;
           case 'Trabajo en casa y consultar a telemedicina':
-            $caracterizacion->estadoColor = "danger";
+            $caracterizacion->estadoColor = "viabilidad-tele bold";
+            break;
+          case 'Trabajo en casa':
+            $caracterizacion->estadoColor = "viabilidad-tec  bold";
             break;
           case 'Sin clasificación':
-            $caracterizacion->estadoColor = "black";
+            $caracterizacion->estadoColor = "viabilidad-sin bold";
             break;
           default:
             break;
@@ -107,16 +145,16 @@ class CaracterizacionController extends Controller
     public function store(Request $request, Caracterizacion $model )
     {
       if (Auth::user()->rol_id == 2){
-          $validatedData = $request->validate([
-            'email' => 'required|unique:users|max:255',
-            'documento' => 'required|unique:users|max:255',
-        ]);
+        $validatedData = $request->validate([
+          'email' => 'required|unique:users|max:255',
+          'documento' => 'required|unique:users|max:255',
+          ]);
 
-        //dd(Auth::user()->rol_id );
-
-      }
+        }
+        if(!is_null($request->dias_laborales )){
+          $request->dias_laborales = json_encode($request->dias_laborales);
+        }
         $user = User::Where('email','=',$request->email)->first();
-
         $user->estado_id = 1;
         $user->name = $request->nombre;
         $user->apellido = $request->apellido;
@@ -126,7 +164,8 @@ class CaracterizacionController extends Controller
         $user->cargo = $request->cargo;
         $user->tipo_contrato = $request->tipo_contrato ;
         $user->direccion = $request->direccion ;
-        $user->direccion2 = $request->direccionb.",".$request->direccionl;
+        $user->barrio = $request->barrio ;
+        $user->localidad = $request->localidad;
         $user->unidad_id = $request->unidad_id ;
         $user->save();
 
@@ -140,6 +179,7 @@ class CaracterizacionController extends Controller
             $request->envio_de_consentimiento = "No";
         }
         $caracterizacion = new Caracterizacion;
+        $caracterizacion->id = $user->id ;
         $caracterizacion->user_id = $user->id ;
         $caracterizacion->dependencia = $request->dependencia ;
         $caracterizacion->indispensable_presencial = $request->indispensable_presencial ;
@@ -155,7 +195,7 @@ class CaracterizacionController extends Controller
         $caracterizacion->save();
 
 
-        return redirect()->route('caracterizacion.index')->withStatus(__('Caracterizacion creada con éxito.'));
+        return redirect()->route('caracterizacion')->withStatus(__('Caracterizacion creada con éxito.'));
     }
 
 
@@ -170,9 +210,12 @@ class CaracterizacionController extends Controller
     {
       $unidades = Unidad::all();
       $user = $caracterizacion->user;
-      return view('caracterizacion.edit', compact('caracterizacion', 'unidades', 'user'));
+      $viabilidades = array("Consultar con jefatura servicio médico y SST", "Viable trabajo presencial", "Trabajo en casa y consultar a telemedicina", "Trabajo en casa", "Sin clasificación");
+      $semana_laboral = array("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
+      $dias_laborales = json_decode($caracterizacion->dias_laborales);
+      //dd($caracterizacion->viabilidad_caracterizacion);
+      return view('caracterizacion.edit', compact('viabilidades','caracterizacion', 'unidades', 'user', 'dias_laborales', 'semana_laboral'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -182,6 +225,16 @@ class CaracterizacionController extends Controller
      */
     public function update(Request $request, Caracterizacion $caracterizacion)
     {
+      if (Auth::user()->rol_id == 2){
+        $validatedData = $request->validate([
+          'email' => 'required|email|max:255',
+          'documento' => 'required|numeric',
+      ]);
+
+    }
+      if(!is_null($request->dias_laborales )){
+        $request->dias_laborales = json_encode($request->dias_laborales);
+      }
         if($request->indispensable_presencial == null){
             $request->indispensable_presencial = 'No' ;
         }
@@ -190,9 +243,11 @@ class CaracterizacionController extends Controller
         }
         $user = User::where('id','=',$caracterizacion->user_id)->first();
         $user->cargo = $request->cargo;
+        $user->documento = $request->documento;
         $user->direccion = $request->direccion ;
         $user->tipo_contrato = $request->tipo_contrato ;
-        $user->direccion2 = $request->direccionb.",".$request->direccionl;
+        $user->barrio = $request->barrio ;
+        $user->localidad = $request->localidad;
         $user->unidad_id = $request->unidad_id;
         $user->save();
 
@@ -208,28 +263,33 @@ class CaracterizacionController extends Controller
         $caracterizacion->notas_comentarios_ma_andrea_leyva = $request->notas_comentarios_ma_andrea_leyva ;
         $caracterizacion->envio_de_consentimiento = $request->envio_de_consentimiento ;
         $caracterizacion->save();
-        return redirect()->route('caracterizacion.index')->withStatus(__('Usuario actualizado con éxito.'));
+        return redirect('caracterizacion')->with('status', 'Caracterización actualizada con éxito.');
     }
-
     /**
-     * Remove the specified resource from storage.
+     * Import the specified resource from storage.
      *
      * @param  \App\Model\Caracterizacion\Caracterizacion  $caracterizacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Caracterizacion $caracterizacion)
-    {
-        $caracterizacion->delete();
-        return redirect()->route('caracterizacion.index')->withStatus(__('Usuario actualizado con éxito.'));
-    }
     public function importar(){
       return view('caracterizacion.import');
     }
+        /**
+     * Import the specified resource from storage.
+     *
+     * @param  \App\Model\Caracterizacion\Caracterizacion  $caracterizacion
+     * @return \Illuminate\Http\Response
+     */
     public function importarCrear(){
-      $caracterizacion = Excel::import(new UsersImport, request()->file('caracterizacion'));
-      // dd($caracterizacion);
+      $caracterizacion = Excel::import(new UsersImport, request()->file('caracterizacion') );
       return back();
     }
+        /**
+     * Advanced Search the specified resource from storage.
+     *
+     * @param  \App\Model\Caracterizacion\Caracterizacion  $caracterizacion
+     * @return \Illuminate\Http\Response
+     */
     public function busqueda(Request $request)
     {
       $results = (new Search())

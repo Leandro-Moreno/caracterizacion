@@ -39,14 +39,12 @@
             </div>
             <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
                <label style="color:#505c61"> Filtrar por Viabilidad</label><br>
-               <select id="viabilidad" name="viabilidad" class="form-control" data-placeholder=" ">
-                  <option  value="{{ old('viabilidad') }}"  selected>Seleccionar</option>
-                  <option  value="Consultar con jefatura servicio médico y SST">Consultar con jefatura servicio médico y SST</option>
-                  <option  value="Viable trabajo presencial">Viable trabajo presencial</option>
-                  <option  value="Trabajo en casa y consultar a telemedicina">Trabajo en casa y consultar a telemedicina</option>
-                  <option  value="Trabajo en casa">Trabajo en casa</option>
-                  <option  value="Sin clasificación">Sin clasificación</option>
-               </select>
+               <select class="form-control{{ $errors->has('viabilidad') ? ' is-invalid' : '' }}" id="input-viabilidad" aria-required="true" name="viabilidad">
+                    <option value="{{ old('viabilidad') }}" disabled>Seleccionar</option>
+                     @foreach($viabilidades as $viabilidad)
+                     <option value="{{$viabilidad}}" @if($viabilidad == $viabilidad_obtenida) selected @endif>{{$viabilidad}}</option>
+                     @endforeach
+                 </select>
             </div>
          </div>
          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 "  style="margin-top:30px;text-align:center">

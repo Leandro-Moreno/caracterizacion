@@ -31,12 +31,6 @@ class Caracterizacion extends Model implements Searchable
       return $this->belongsTo('App\User');
 
     }
-    public function scopeBuscarpor($query, $unidad, $role, $estado) {
-    	if ( ($unidad) && ($role) && ($estado) ) {
-        dd($query, $unidad);
-    		return $query->where($tipo,'like',"%$buscar%");
-    	}
-    }
     public function colores(){
       $colorEstado;
       switch ( $this->viabilidad_caracterizacion ) {
@@ -47,10 +41,13 @@ class Caracterizacion extends Model implements Searchable
           $colorEstado = "success";
           break;
         case 'Trabajo en casa y consultar a telemedicina':
-          $colorEstado = "danger";
+          $colorEstado = "purple";
+          break;
+        case 'Trabajo en casa':
+          $colorEstado = "success";
           break;
         case 'Sin clasificación':
-          $colorEstado = "black";
+          $colorEstado = "white";
           break;
         default:
           break;

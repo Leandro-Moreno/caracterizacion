@@ -18,23 +18,21 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->biginteger('rol_id')->unsigned(); //TODO: eliminar el rol_id... se debe mantener la relacion de roles_users
             $table->foreign('rol_id')->references('id')->on('roles');
-            $table->biginteger('estado_id')->unsigned()->default(1); 
-            $table->foreign('estado_id')->references('id')->on('estados');
+            $table->biginteger('estado_id')->unsigned()->default(1);
+            $table->foreign('estado_id')->references('id')->onUpdate('cascade')->on('estados');
             $table->string('name')->nullable();
             $table->string('apellido')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('tipo_doc')->nullable();
-            $table->integer('documento')->nullable();
+            $table->biginteger('documento')->nullable();
             $table->string('cargo')->nullable();
             $table->string('tipo_contrato')->nullable();
             $table->string('celular')->nullable();
             $table->string('direccion')->nullable();
-            $table->string('direccion2')->nullable();
             $table->biginteger('unidad_id')->unsigned();
             $table->foreign('unidad_id')->references('id')->on('unidades');
-            $table->string('tipo_persona')->nullable();
             $table->string('barrio')->nullable();
             $table->string('localidad')->nullable();
             $table->rememberToken();
