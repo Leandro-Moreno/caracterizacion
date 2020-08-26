@@ -17424,45 +17424,43 @@ label {
 }
 
 .viabilidad-tp {
-  background: #47bb6b !important;
+  background: #47bb6b;
   color: white !important;
-  font-weight: 500;
 }
 
 .viabilidad-sst {
-  background: #ccbc4b !important;
+  background: #ccbc4b;
   color: white !important;
-  font-weight: 500;
 }
 
 .viabilidad-tele {
-  background: #CC99FF !important;
+  background: #CC99FF;
   color: white !important;
-  font-weight: 500;
 }
 
 .viabilidad-tec {
-  background: #2f8be0 !important;
+  background: #2f8be0;
   color: white !important;
-  font-weight: 500;
 }
 
 .viabilidad-sin {
-  background: #FFFFFF !important;
-  color: black !important;
-  font-weight: 500;
+  background: #fff;
+}
+
+.viabilidad i .material-icons {
+  width: 26px;
+  height: 26px;
+  border-radius: 13px;
 }
 
 a.nav-link.usuarios-activos {
-  background: green !important;
+  background: #4caf50;
   color: white !important;
-  font-weight: 500;
 }
 
 a.nav-link.usuarios-inactivos {
-  background: red !important;
+  background: #f44336;
   color: white !important;
-  font-weight: 500;
 }
 
 .card {

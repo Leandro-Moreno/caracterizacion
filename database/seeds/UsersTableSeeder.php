@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
             'estado_id' => '1',
             'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '1',
-            'name' => 'Daniela',
+            'name' => 'Edel',
             'cargo' => 'Analista',
             'unidad_id' => '25',
             'tipo_contrato' => 'Temporal',
@@ -57,14 +57,14 @@ class UsersTableSeeder extends Seeder
             'direccion' => 'Cra 1 Nº 18A- 12',
             'barrio' => '##########',
             'localidad' => '##########',
-            'email' => 'daniela@uniandes.edu.co',
+            'email' => 'eamaya@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('empleado'),
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
-            'rol_id' => '1',
+            'rol_id' => '3',
             'estado_id' => '1',
             'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '1',
@@ -78,11 +78,11 @@ class UsersTableSeeder extends Seeder
             'direccion' => 'Cra 1 Nº 18A- 12',
             'barrio' => '##########',
             'localidad' => '##########',
-            'email' => 'camilo@uniandes.edu.co',
+            'email' => 'elasso@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('empleado'),
             'created_at' => now(),
-            
+
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
@@ -104,7 +104,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('empleado'),
             'created_at' => now(),
-            
+
             'updated_at' => now()
         ]);
         #Facultad
@@ -148,163 +148,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('facultad'),
             'created_at' => now(),
-            
-            'updated_at' => now()
-        ]);
-        DB::table('users')->insert([
-            'rol_id' => '2',
-            'estado_id' => '1',
-            'tipo_doc' => 'Cédula de ciudadanía',
-            'unidad_id' => '1',
-            'name' => 'Daniela Facultad',
-            'cargo' => 'Analista',
-            'unidad_id' => '25',
-            'tipo_contrato' => 'Temporal',
-            'apellido' => 'Reyes',
-            'documento' => '313546841',
-            'celular' => '9999999',
-            'direccion' => 'Cra 1 Nº 18A- 12',
-            'barrio' => '##########',
-            'localidad' => '##########',
-            'email' => 'danielaf@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('facultad'),
-            'created_at' => now(),
-            
-            'updated_at' => now()
-        ]);
-        #ServiciosSalud   
-        DB::table('users')->insert([
-            'rol_id' => '3',
-            'estado_id' => '1',
-            'tipo_doc' => 'Cédula de ciudadanía',
-            'unidad_id' => '1',
-            'name' => 'Camilo Servicio Salud',
-            'cargo' => '',
-            'unidad_id' => '25',
-            'tipo_contrato' => 'Temporal',
-            'apellido' => 'Reyes',
-            'documento' => '313546841',
-            'celular' => '9999999',
-            'direccion' => 'Cra 1 Nº 18A- 12',
-            'barrio' => '##########',
-            'localidad' => '##########',
-            'email' => 'camilos@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('serviciosalud'),
-            'created_at' => now(),
-            
-            'updated_at' => now()
-        ]);
-        DB::table('users')->insert([
-            'rol_id' => '3',
-            'estado_id' => '1',
-            'tipo_doc' => 'Cédula de ciudadanía',
-            'unidad_id' => '15',
-            'name' => 'Fabian Servicio Salud',
-            'cargo' => 'Asistente',
-            'unidad_id' => '25',
-            'tipo_contrato' => 'Planta',
-            'apellido' => 'Garcia',
-            'documento' => '313546841',
-            'celular' => '9999999',
-            'direccion' => 'Cra 1 Nº 18A- 12',
-            'barrio' => '##########',
-            'localidad' => '##########',
-            'email' => 'fabianserviciosalud@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('serviciosalud'),
-            'created_at' => now(),
-            
-            'updated_at' => now()
-        ]);
-        DB::table('users')->insert([
-            'rol_id' => '2',
-            'estado_id' => '1',
-            'tipo_doc' => 'Cédula de ciudadanía',
-            'unidad_id' => '1',
-            'name' => 'Dil Servicio Salud',
-            'cargo' => 'Enfermera',
-            'unidad_id' => '25',
-            'tipo_contrato' => 'Temporal',
-            'apellido' => 'Reyes',
-            'documento' => '313546841',
-            'celular' => '9999999',
-            'direccion' => 'Cra 1 Nº 18A- 12',
-            'barrio' => '##########',
-            'localidad' => '##########',
-            'email' => 'dilserviciosalud@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('serviciosalud'),
-            'created_at' => now(),
-            
-            'updated_at' => now()
-        ]);
-        #Servicios Campus
-        DB::table('users')->insert([
-            'rol_id' => '4',
-            'estado_id' => '1',
-            'tipo_doc' => 'Cédula de ciudadanía',
-            'unidad_id' => '19',
-            'name' => 'Andres Servicios Campus',
-            'cargo' => 'Ingeniero',
-            'unidad_id' => '25',
-            'tipo_contrato' => 'Planta',
-            'apellido' => 'Garcia',
-            'documento' => '313546841',
-            'celular' => '9999999',
-            'direccion' => 'Cra 1 Nº 18A- 12',
-            'barrio' => '##########',
-            'localidad' => '##########',
-            'email' => 'andresserviciocampus@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('serviciocampus'),
-            'created_at' => now(),
-            
-            'updated_at' => now()
-        ]);
-        DB::table('users')->insert([
-            'rol_id' => '4',
-            'estado_id' => '1',
-            'tipo_doc' => 'Cédula de ciudadanía',
-            'unidad_id' => '19',
-            'name' => 'Daniela Servicios Campus',
-            'cargo' => '',
-            'unidad_id' => '25',
-            'tipo_contrato' => 'Temporal',
-            'apellido' => 'Reyes',
-            'documento' => '313546841',
-            'celular' => '9999999',
-            'direccion' => 'Cra 1 Nº 18A- 12',
-            'barrio' => '##########',
-            'localidad' => '##########',
-            'email' => 'danielaserviciocampus@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('serviciocampus'),
-            'created_at' => now(),
-            
-            'updated_at' => now()
-        ]);
-        DB::table('users')->insert([
-            'rol_id' => '4',
-            'estado_id' => '1',
-            'tipo_doc' => 'Cédula de ciudadanía',
-            'unidad_id' => '19',
-            'name' => 'Camilo Servicios Campus',
-            'cargo' => '',
-            'unidad_id' => '25',
-            'tipo_contrato' => 'Temporal',
-            'apellido' => 'Reyes',
-            'documento' => '313546841',
-            'celular' => '9999999',
-            'direccion' => 'Cra 1 Nº 18A- 12',
-            'barrio' => '##########',
-            'localidad' => '##########',
-            'email' => 'camiloserviciocampus@uniandes.edu.co',
-            'email_verified_at' => now(),
-            'password' => Hash::make('serviciocampus'),
-            'created_at' => now(),
-            
+
             'updated_at' => now()
         ]);
     }

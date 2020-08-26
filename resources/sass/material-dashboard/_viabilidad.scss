@@ -1,36 +1,37 @@
-.viabilidad-tp {
-    background: #47bb6b !important;
+.viabilidad{
+  &-tp{
+    background: #47bb6b;
     color: white !important;
-    font-weight: 500;
+  }
+  &-sst{
+    background: #ccbc4b;
+    color: white !important;
+  }
+  &-tele{
+    background: #CC99FF;
+    color: white !important;
+  }
+  &-tec{
+    background: #2f8be0;
+    color: white !important;
+  }
+  &-sin{
+    background: $white-color;
+  }
+  i .material-icons{
+    width:26px;
+    height:26px;
+    border-radius: 13px;
+  }
 }
 
-.viabilidad-sst {
-    background: #ccbc4b !important;
-    color: white !important;
-    font-weight: 500;
-}
-.viabilidad-tele {
-    background: #CC99FF !important;
-    color: white !important;
-    font-weight: 500;
-}
-.viabilidad-tec {
-    background: #2f8be0 !important;
-    color: white !important;
-    font-weight: 500;
-}
-.viabilidad-sin {
-    background: #FFFFFF !important;
-    color: black !important;
-    font-weight: 500;
-}
 a.nav-link.usuarios-activos {
-    background: green !important;
+    background: $brand-success;
     color: white !important;
-    font-weight: 500;
+
 }
 a.nav-link.usuarios-inactivos {
-    background: red !important;
+    background: $brand-danger;
     color: white !important;
-    font-weight: 500;
+
 }

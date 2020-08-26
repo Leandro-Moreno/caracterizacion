@@ -20,20 +20,18 @@ class ReporteController extends Controller
      */
     public function index(Request $request)
     {
-        
-        $viabilidad_obtenida = $request->get('viabilidad');	
+        $viabilidad_obtenida = $request->get('viabilidad');
         $viabilidades = array("Consultar con jefatura servicio médico y SST", "Viable trabajo presencial", "Trabajo en casa y consultar a telemedicina", "Trabajo en casa", "Sin clasificación");
-        $unidad_obtenida = $request->get('unidad');	
-        $rol_obtenido = $request->get('rol');	
+        $unidad_obtenida = $request->get('unidad');
+        $rol_obtenido = $request->get('rol');
         $estado_obtenido = $request->get('estado');
         $unidades = Unidad::all();
         $roles = Rol::all();
-        $caracterizaciones;
-        $caracterizaciones = Caracterizacion::all();
         $user = Auth::user();
-        $caracterizaciones = $this->busquedaAvanzada($request); 
-        $caracterizaciones = $this->agregarColorEstado($caracterizaciones); 
-        if($user->rol_id < 3){
+        $estados = Estado::all();
+        $caracterizaciones = $this->busquedaAvanzada($request);
+        $caracterizaciones = $this->agregarColorEstado($caracterizaciones);
+        if($user->rol_id == 2){
           $caracterizaciones  = $caracterizaciones->filter(function ($caracterizacion, $key){
             $user = Auth::user();
             return $caracterizacion->user->unidad_id == $user->unidad_id;
@@ -42,7 +40,6 @@ class ReporteController extends Controller
           $roles = Rol::where( 'id','=', Auth::user()->rol_id )->get();
         }
         $caracterizaciones = $caracterizaciones->paginate(10);
-        $estados = Estado::all();
         return view('reporte.index', compact('viabilidades','roles','unidades', 'estados' ,'unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida'), ['caracterizaciones' => $caracterizaciones->paginate(15)]);
     }
     /**
@@ -54,19 +51,19 @@ class ReporteController extends Controller
       $caracterizaciones = $caracterizaciones->each(function($caracterizacion, $key){
         switch ( $caracterizacion->viabilidad_caracterizacion ) {
           case 'Consultar con jefatura servicio médico y SST':
-            $caracterizacion->estadoColor = "viabilidad-sst bold";
+            $caracterizacion->estadoColor = "viabilidad-sst";
             break;
           case 'Viable trabajo presencial':
-            $caracterizacion->estadoColor = "viabilidad-tp bold";
+            $caracterizacion->estadoColor = "viabilidad-tp";
             break;
           case 'Trabajo en casa y consultar a telemedicina':
-            $caracterizacion->estadoColor = "viabilidad-tele bold";
+            $caracterizacion->estadoColor = "viabilidad-tele";
             break;
           case 'Trabajo en casa':
-            $caracterizacion->estadoColor = "viabilidad-tec  bold";
+            $caracterizacion->estadoColor = "viabilidad-tec ";
             break;
           case 'Sin clasificación':
-            $caracterizacion->estadoColor = "viabilidad-sin bold";
+            $caracterizacion->estadoColor = "viabilidad-sin";
             break;
           default:
             break;
@@ -84,38 +81,43 @@ class ReporteController extends Controller
     public function busquedaAvanzada($request){
 
       if( null !==  $request ){
-        
-          if (Auth::user()->rol_id >= 2){	        
-            $viabilidad_obtenida = $request->get('viabilidad');	
-            $unidad_obtenida = $request->get('unidad');	
-            $rol_obtenido = $request->get('rol');	
-            $estado_obtenido = $request->get('estado');	
-            $caracterizacion = Caracterizacion::first();
-            $caracterizacion = $caracterizacion->join('users', 'users.id', '=', 'caracterizacion.user_id');	
-            if($unidad_obtenida != ""){	
-                $caracterizacion = $caracterizacion->where('unidad_id', '=', $unidad_obtenida);	
-            }	
-            if($rol_obtenido != ""){	
-                $caracterizacion = $caracterizacion->where('rol_id', '=', $rol_obtenido);	
+          $viabilidad_obtenida = $request->get('viabilidad');
+          $unidad_obtenida = $request->get('unidad');
+          $rol_obtenido = $request->get('rol');
+          $estado_obtenido = $request->get('estado');
+          $caracterizacion = Caracterizacion::first();
+          $caracterizacion = $caracterizacion->join('users', 'users.id', '=', 'caracterizacion.user_id');
+          if($unidad_obtenida != ""){
+              $caracterizacion = $caracterizacion->where('unidad_id', '=', $unidad_obtenida);
+          }
+          if($rol_obtenido != ""){
+              $caracterizacion = $caracterizacion->where('rol_id', '=', $rol_obtenido);
 
-            }	
-            if($estado_obtenido != ""){	
-                $caracterizacion = $caracterizacion->where('estado_id', '=', $estado_obtenido);	
-            }	
-            if($viabilidad_obtenida != ""){	
-              $caracterizacion = $caracterizacion->where('viabilidad_caracterizacion', '=', $viabilidad_obtenida);	
-
-          }	
-            $caracterizacion = $caracterizacion->paginate(10);	
-        }	
-      }	
-      else{	
+          }
+          if($estado_obtenido != ""){
+              $caracterizacion = $caracterizacion->where('estado_id', '=', $estado_obtenido);
+          }
+          if($viabilidad_obtenida != ""){
+            $caracterizacion = $caracterizacion->where('viabilidad_caracterizacion', '=', $viabilidad_obtenida);
+          }
+          $caracterizacion->get();
+      }
+      else{
         $caracterizacion = Caracterizacion::all();
       }
-
-        return $caracterizacion;
+        $caracterizacion = $this->filtrarDatosPorRol( $caracterizacion  );
+        return $caracterizacion->paginate(15);
     }
-
+    public function filtrarDatosPorRol( $caracterizaciones )
+    {
+      if(Auth::User()->rol_id == 2){
+        $caracterizaciones  = $caracterizaciones->filter(function ($caracterizacion, $key){
+          $user = Auth::user();
+          return $caracterizacion->user->unidad_id == $user->unidad_id;
+        });
+      }
+      return $caracterizaciones;
+    }
     /**
      * Display a listing of the resource graph.
      *
@@ -136,69 +138,4 @@ class ReporteController extends Controller
         return view('reporte.grafico', ['caracterizaciones' => $caracterizaciones->paginate(15)]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Model\Reporte  $reporte
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Reporte $reporte)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\Reporte  $reporte
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Reporte $reporte)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Reporte  $reporte
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Reporte $reporte)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Model\Reporte  $reporte
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Reporte $reporte)
-    {
-        //
-    }
 }

@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
+use Auth;
 
 class UserPolicy
 {
@@ -23,33 +24,33 @@ class UserPolicy
 
 
     public function updateByRol(User $user)
-    {    
-        if($user->rol_id == 5 || $user->rol_id == 4){
-               
-                return true;  
+    {
+        if($user->rol_id >= 4){
+
+                return true;
         }
-        
+
         return false;
     }
     public function update_status(User $user)
-    {    
-        if($user->rol_id == 5 || $user->rol_id == 4){
-               
-                return true;  
+    {
+        if($user->rol_id >= 4){
+
+                return true;
         }
-        
+
         return false;
     }
 
-    public function viewbyRolUser(User $user, $userview)
-    {    
-        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
-            if($userview->unidad_id == $user->unidad_id || $user->rol_id == 5 ||  $user->rol_id == 4 || $user->rol_id == 3 ){
-               
-                return true;  
+    public function viewbyRolUser(User $user, User $userview)
+    {
+        if($user->rol_id >= 2){
+            if($userview->unidad_id == $user->unidad_id || $user->rol_id >= 3 ){
+
+                return true;
             }
         }
-        
+
         return false;
     }
 
@@ -62,9 +63,9 @@ class UserPolicy
      */
     public function view(User $user)
     {
-        if($user->rol_id == 5 || $user->rol_id == 4 || $user->rol_id == 3 || $user->rol_id == 2){
-           
-            return true;  
+        if($user->rol_id >= 2){
+
+            return true;
         }
         Response::deny('You do not own this post.');
         return false;
@@ -90,7 +91,7 @@ class UserPolicy
      */
     public function updateDashboard(User $user, $ultimousuario)
     {
-        $ultimousuario = User::find($ultimousuario->id);
+        $ultimousuario = Auth::User();
         if($user->rol_id >= 2){
             if($ultimousuario->unidad_id == $user->unidad_id || $user->rol_id >= 2 ){
                 return true;
