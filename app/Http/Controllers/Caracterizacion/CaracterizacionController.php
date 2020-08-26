@@ -32,15 +32,15 @@ class CaracterizacionController extends Controller
      */
     public function index(Request $request)
     {
-        $viabilidad_obtenida = $request->get('viabilidad');	
-        $unidad_obtenida = $request->get('unidad');	
-        $rol_obtenido = $request->get('rol');	
-        $estado_obtenido = $request->get('estado');	
+        $viabilidad_obtenida = $request->get('viabilidad');
+        $unidad_obtenida = $request->get('unidad');
+        $rol_obtenido = $request->get('rol');
+        $estado_obtenido = $request->get('estado');
         $caracterizaciones = Caracterizacion::all();
         $unidades = Unidad::all();
         $roles = Rol::all();
-        $caracterizaciones = $this->busquedaAvanzada($request); 
-        $caracterizaciones = $this->agregarColorEstado($caracterizaciones); 
+        $caracterizaciones = $this->busquedaAvanzada($request);
+        $caracterizaciones = $this->agregarColorEstado($caracterizaciones);
         if(Auth::user()->rol_id < 3){
           $caracterizaciones = $caracterizaciones->filter(function ($caracterizacion){
               $user = Auth::user();
@@ -57,32 +57,32 @@ class CaracterizacionController extends Controller
     public function busquedaAvanzada($request){
 
       if( null !==  $request ){
-        
-          if (Auth::user()->rol_id >= 2){	        
-            $viabilidad_obtenida = $request->get('viabilidad');	
-            $unidad_obtenida = $request->get('unidad');	
-            $rol_obtenido = $request->get('rol');	
-            $estado_obtenido = $request->get('estado');	
+
+          if (Auth::user()->rol_id >= 2){
+            $viabilidad_obtenida = $request->get('viabilidad');
+            $unidad_obtenida = $request->get('unidad');
+            $rol_obtenido = $request->get('rol');
+            $estado_obtenido = $request->get('estado');
             $caracterizacion = Caracterizacion::first();
-            $caracterizacion = $caracterizacion->join('users', 'users.id', '=', 'caracterizacion.user_id');	
-            if($unidad_obtenida != ""){	
-                $caracterizacion = $caracterizacion->where('unidad_id', '=', $unidad_obtenida);	
-            }	
-            if($rol_obtenido != ""){	
-                $caracterizacion = $caracterizacion->where('rol_id', '=', $rol_obtenido);	
+            $caracterizacion = $caracterizacion->join('users', 'users.id', '=', 'caracterizacion.user_id');
+            if($unidad_obtenida != ""){
+                $caracterizacion = $caracterizacion->where('unidad_id', '=', $unidad_obtenida);
+            }
+            if($rol_obtenido != ""){
+                $caracterizacion = $caracterizacion->where('rol_id', '=', $rol_obtenido);
 
-            }	
-            if($estado_obtenido != ""){	
-                $caracterizacion = $caracterizacion->where('estado_id', '=', $estado_obtenido);	
-            }	
-            if($viabilidad_obtenida != ""){	
-              $caracterizacion = $caracterizacion->where('viabilidad_caracterizacion', '=', $viabilidad_obtenida);	
+            }
+            if($estado_obtenido != ""){
+                $caracterizacion = $caracterizacion->where('estado_id', '=', $estado_obtenido);
+            }
+            if($viabilidad_obtenida != ""){
+              $caracterizacion = $caracterizacion->where('viabilidad_caracterizacion', '=', $viabilidad_obtenida);
 
-          }	
-            $caracterizacion = $caracterizacion->paginate(10);	
-        }	
-      }	
-      else{	
+          }
+            $caracterizacion = $caracterizacion->paginate(10);
+        }
+      }
+      else{
         $caracterizacion = Caracterizacion::all();
       }
 
@@ -103,7 +103,7 @@ class CaracterizacionController extends Controller
         return view('caracterizacion.create', compact('caracterizacion','user', 'unidades','sendingUser'));
     }
 
-    
+
     /**
      * @param Caracterizacion|Collection[] $caracterizaciones
      * @return Caracterizacion|Collection[]
@@ -149,7 +149,7 @@ class CaracterizacionController extends Controller
           'email' => 'required|unique:users|max:255',
           'documento' => 'required|unique:users|max:255',
           ]);
-          
+
         }
         if(!is_null($request->dias_laborales )){
           $request->dias_laborales = json_encode($request->dias_laborales);
@@ -231,7 +231,7 @@ class CaracterizacionController extends Controller
           'documento' => 'required|numeric',
       ]);
 
-    } 
+    }
       if(!is_null($request->dias_laborales )){
         $request->dias_laborales = json_encode($request->dias_laborales);
       }
@@ -281,7 +281,7 @@ class CaracterizacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function importarCrear(){
-      $caracterizacion = Excel::import(new UsersImport, request()->file('caracterizacion'));
+      $caracterizacion = Excel::import(new UsersImport, request()->file('caracterizacion') );
       return back();
     }
         /**

@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->biginteger('rol_id')->unsigned(); //TODO: eliminar el rol_id... se debe mantener la relacion de roles_users
             $table->foreign('rol_id')->references('id')->on('roles');
-            $table->biginteger('estado_id')->unsigned()->default(1); 
-            $table->foreign('estado_id')->references('id')->on('estados');
+            $table->biginteger('estado_id')->unsigned()->default(1);
+            $table->foreign('estado_id')->references('id')->onUpdate('cascade')->on('estados');
             $table->string('name')->nullable();
             $table->string('apellido')->nullable();
             $table->string('email')->unique();
