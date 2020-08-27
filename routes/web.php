@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::get('viabilidad', 'UserController@busquedaAvanzada')->name('viabilidad')->middleware('auth');
 
-	Route::get('nuevo/usuario', 'UserController@storeUser')->name('createuser')->middleware('auth');
+	Route::post('nuevo/usuario', 'UserController@storeUser')->name('createuser')->middleware('auth');
 
 	Route::get('importar/caracterizacion', 'Caracterizacion\CaracterizacionController@importar')->name('caracterizacion.importar')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
 

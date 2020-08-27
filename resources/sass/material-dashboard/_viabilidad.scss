@@ -34,3 +34,17 @@ a.nav-link.usuarios-inactivos {
     color: white !important;
     font-weight: 500;
 }
+
+#ofBar{
+    background: #de2e2e;
+    text-align: justify;
+    z-index: 999999999;
+    font-size: 16px;
+    color: #fff;
+    padding: 18px 5%;
+    font-weight: 400;
+    display: block;
+    position: relative;
+    top: 0px;
+    box-shadow: 0 6px 13px -4px rgba(0, 0, 0, 0.25);
+}

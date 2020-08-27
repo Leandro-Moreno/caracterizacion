@@ -213,7 +213,6 @@ class CaracterizacionController extends Controller
       $viabilidades = array("Consultar con jefatura servicio médico y SST", "Viable trabajo presencial", "Trabajo en casa y consultar a telemedicina", "Trabajo en casa", "Sin clasificación");
       $semana_laboral = array("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
       $dias_laborales = json_decode($caracterizacion->dias_laborales);
-      //dd($caracterizacion->viabilidad_caracterizacion);
       return view('caracterizacion.edit', compact('viabilidades','caracterizacion', 'unidades', 'user', 'dias_laborales', 'semana_laboral'));
     }
     /**

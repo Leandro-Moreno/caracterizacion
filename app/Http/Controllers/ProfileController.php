@@ -33,14 +33,9 @@ class ProfileController extends Controller
     public function index(Request $request,User $model)
     {
 
-        $buscar = $request->get('buscarpor');
-
-        $tipo = $request->get('tipo');
-
         $user = Auth::user();
-
         $unidades = Unidad::all();
-        return view('profile.index', compact('unidades', 'users', 'user'));
+        return view('profile.index', compact('unidades', 'user'));
     }
 
 
