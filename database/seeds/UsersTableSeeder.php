@@ -100,7 +100,7 @@ class UsersTableSeeder extends Seeder
             'direccion' => 'Cra 1 Nº 18A- 12',
             'barrio' => '############',
             'localidad'=> '############',
-            'email' => 'fabian@uniandes.edu.co',
+            'email' => 'ka.babativa@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('empleado'),
             'created_at' => now(),
@@ -109,7 +109,7 @@ class UsersTableSeeder extends Seeder
         ]);
         #Facultad
         DB::table('users')->insert([
-            'rol_id' => '2',
+            'rol_id' => '3',
             'estado_id' => '1',
             'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '1',
@@ -123,14 +123,14 @@ class UsersTableSeeder extends Seeder
             'direccion' => 'Cra 1 Nº 18A- 12',
             'barrio' => '##########',
             'localidad' => '##########',
-            'email' => 'facultad@uniandes.edu.co',
+            'email' => 'yasanche@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('facultad'),
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
-            'rol_id' => '2',
+            'rol_id' => '5',
             'estado_id' => '1',
             'tipo_doc' => 'Cédula de ciudadanía',
             'unidad_id' => '1',
@@ -144,11 +144,53 @@ class UsersTableSeeder extends Seeder
             'direccion' => 'Cra 1 Nº 18A- 12',
             'barrio' => '##########',
             'localidad' => '##########',
-            'email' => 'andresf@uniandes.edu.co',
+            'email' => 'jf.copete@uniandes.edu.co',
             'email_verified_at' => now(),
             'password' => Hash::make('facultad'),
             'created_at' => now(),
 
+            'updated_at' => now()
+        ]);
+        DB::table('users')->insert([
+            'rol_id' => '5',
+            'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
+            'unidad_id' => '1',
+            'name' => 'Decano Facultad',
+            'cargo' => 'Decano',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Temporal',
+            'apellido' => 'Reyes',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'barrio' => '##########',
+            'localidad' => '##########',
+            'email' => 'jc.martinezh@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('facultad'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('users')->insert([
+            'rol_id' => '4',
+            'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
+            'unidad_id' => '1',
+            'name' => 'Decano Facultad',
+            'cargo' => 'Decano',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Temporal',
+            'apellido' => 'Reyes',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'barrio' => '##########',
+            'localidad' => '##########',
+            'email' => 'sacosta@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => Hash::make('facultad'),
+            'created_at' => now(),
             'updated_at' => now()
         ]);
     }
