@@ -120,12 +120,12 @@
          <div class="form-group{{ $errors->has('indispensable_presencial') ? ' has-danger' : '' }}">
             <div class="togglebutton">
                <label id="lb-indispensable">
-                  <input data-target="#toggle-indispensable" aria-expanded="false" aria-controls="collapse" data-toggle="collapse" name="indispensable_presencial" type="checkbox" value="{{$caracterizacion->indispensable_presencial}}" {{ $caracterizacion->indispensable_presencial ==  'Si' ? 'cheked="cheked"' : '' }}></input>
+                  <input data-target="#toggle-indispensable" aria-expanded="false" aria-controls="collapse" data-toggle="collapse" name="indispensable_presencial" type="checkbox" value="{{$caracterizacion->indispensable_presencial}}" {{ $caracterizacion->indispensable_presencial ==  "Si" ? 'cheked="cheked"' : '' }}></input>
                   <span class="toggle"></span>
                </label>
             </div>
             @if ($errors->has('indispensable_presencial'))
-            <span id="indispensable_presencial-error" class="error text-danger" for="input-indispensable_presencial" >{{ $errors->first('pregunta1') }}</span>
+            <span id="indispensable_presencial-error" class="error text-danger" for="input-indispensable_presencial" >{{ $errors->first('indispensable_presencial') }}</span>
             @endif
          </div>
       </div>
@@ -135,7 +135,7 @@
          <label class="col-sm-2 col-form-label">{{ __('¿Por qué?') }}</label>
          <div class="col-sm-4">
             <div class="form-group{{ $errors->has('por_que') ? ' has-danger' : '' }}">
-               <textarea class="form-control{{ $errors->has('por_que') ? ' is-invalid' : '' }}" name="por_que" id="input-por_que" type="" placeholder="{{ __('¿Por qué?') }}" value="{{ old('por_que') }}"  rows="4">{{ old('por_que') }}</textarea>
+               <textarea class="form-control{{ $errors->has('por_que') ? ' is-invalid' : '' }}" name="por_que" id="input-por_que" type="" placeholder="{{ __('¿Por qué?') }}" value="{{ old('por_que') }}"  rows="4">{{ old('por_que', $caracterizacion->por_que) }}</textarea>
                @if ($errors->has('por_que'))
                <span id="por_que-error" class="error text-danger" for="input-por_que">{{ $errors->first('por_que') }}</span>
                @endif
@@ -146,7 +146,7 @@
          <label class="col-sm-2 col-form-label" for="input-hora">{{ __('Hora de Entrada') }}</label>
          <div class="col-sm-4">
             <div class="form-group">
-               <input class="form-control" name="hora_entrada" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora') }}"  />
+               <input class="form-control" name="hora_entrada" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora', $caracterizacion->horaEntrada) }}"  />
             </div>
          </div>
       </div>
@@ -154,7 +154,7 @@
          <label class="col-sm-2 col-form-label" for="input-hora">{{ __('Hora de Salida') }}</label>
          <div class="col-sm-4">
             <div class="form-group">
-               <input class="form-control" name="hora_salida" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora') }}"  />
+               <input class="form-control" name="hora_salida" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora', $caracterizacion->horaSalida) }}"  />
             </div>
          </div>
       </div>

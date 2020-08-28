@@ -24,6 +24,20 @@ class CaracterizacionPolicy
         }
         return false;
     }
+     /**
+     * Determine whether the user can delete the caracterizacion.
+     *
+     * @param  \App\User  $user
+     * @param  \App\App\Model\Caracterizacion\Caracterizacion  $caracterizacion
+     * @return mixed
+     */
+    public function view_note(User $user)
+    {
+        if($user->rol_id == 2){
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Determine whether the user can view the caracterizacion.

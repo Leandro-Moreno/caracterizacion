@@ -119,19 +119,6 @@
                   </div>
                   <div class="col-md-6">
                     <div class="row">
-                      <label class="col-md-3 col-form-label">{{ __('Dependecia') }}</label>
-                      <div class="col-md-9">
-                        <div class="form-group{{ $errors->has('dependencia') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('dependencia') ? ' is-invalid' : '' }}" name="dependencia" id="input-dependencia" type="text" placeholder="{{ __('Dependencia') }}" value="{{ old('dependencia', $user->dependencia) }}" aria-required="true"/>
-                          @if ($errors->has('dependencia'))
-                            <span id="dependencia-error" class="error text-danger" for="input-dependencia">{{ $errors->first('dependencia') }}</span>
-                          @endif
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="row">
                       <label class="col-md-3 col-form-label">{{ __('Direccion') }}</label>
                       <div class="col-md-9">
                         <div class="form-group{{ $errors->has('direccion') ? ' has-danger' : '' }}">
