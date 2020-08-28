@@ -77,8 +77,7 @@ class UserController extends Controller
         $unidades = Unidad::all();
         $roles = Rol::all();
         $estados = Estado::all();
-        $unidad = Unidad::all();
-        return view('users.create', compact('unidad', 'unidades' , 'estados', 'roles'));
+        return view('users.create', compact( 'unidades' , 'estados', 'roles'));
     }
 
     /**
@@ -91,26 +90,35 @@ class UserController extends Controller
     public function createCaracterizacion($id)
     {
 
+        if(Auth::user()->rol->id == 2){
+            $unidades = Unidad::find(Auth::user()->unidad->id)->get();
+        }else{
+            $unidades = Unidad::all();
+        }
         //Cambiar la consulta según los estados y roles. COSULTA PRUEBA.
         $userCaracterizacion = User::find($id);
         $user = DB::table('users')
         //->where('users.rol_id', [2,3,4,5,6])
         ->get();
         $sendingUser = User::where('rol_id','=',4)->get();
-        $unidades = Unidad::all();
         return view('caracterizacion.createwithuser', compact('user', 'unidades','sendingUser', 'userCaracterizacion'));
     }
     public function storeUser(Request $request)
     {
-      
-        $user = new User;
-        $user->rol_id = $request->rol;
-        $user->estado_id = $request->estado;
+        $validatedData = $request->validate([
+            'email' => 'required|email|max:255',
+            'documento' => 'required|numeric',
+        ]);
+        $user = new User;   
+        if(Auth::user()->rol->id == 2){
+            $user->rol_id = 1;
+        }
+        else{
+            $user->rol_id = $request->rol_id;
+        }
+        $user->estado_id = $request->estado_id;
         $user->name = $request->name;
-        $user->name = $request->name  ;
-        $user->name2 = $request->name2;
         $user->apellido = $request->apellido;
-        $user->apellido2 = $request->apellido2 ;
         $user->email = $request->email;
         $user->tipo_doc = $request->tipo_doc ;
         $user->documento = $request->documento;
@@ -121,7 +129,7 @@ class UserController extends Controller
         $user->direccion = $request->direccion ;
         $user->barrio = $request->barrio;
         $user->localidad = $request->localidad;
-        $user->unidad_id = $request->unidad ;
+        $user->unidad_id = $request->unidad_id;
         $user->save();
 
         return redirect()->route('user.index')->withStatus(__('Usuario Creado correctamente.'));
@@ -135,9 +143,13 @@ class UserController extends Controller
      */
     public function edit(User $user, Rol $model )
     {
-        $unidades = Unidad::all();
+        if(Auth::user()->rol->id == 2){
+            $unidades = Unidad::where('unidad_id' , '=' , Auth::user()->unidad->id);
+        }else{
+            $unidades = Unidad::all();
+        }
         $estados = Estado::all();
-        return view('users.edit', compact('user', 'unidades', 'estados'), ['roles' => $model->all()], ['unidades' => $model->all()]);
+        return view('users.edit', compact('user', 'unidades', 'estados'), ['roles' => $model->all()]);
     }
 
 
@@ -150,6 +162,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User  $user)
     {
+        $validatedData = $request->validate([
+            'email' => 'required|email|max:255',
+            'documento' => 'required|numeric',
+        ]);
         $user->update(
             $request->merge(['password' => Hash::make($request->get('password'))])
             ->except(

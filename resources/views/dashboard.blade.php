@@ -36,7 +36,6 @@
                       </tr>
                     @endcan
                   @endforeach
-
                 </tbody>
               </table>
               </div>
@@ -107,5 +106,14 @@
         @endcan
       </div>
     </div>
+    @can('view_note', App\Model\Caracterizacion\Caracterizacion::class )
+    <div id="ofBar">
+      <b> Nota de confidencialidad:</b>
+        <br>  
+        La información personal de los empleados es reservada y confidencial. Por ninguna circunstancia esta información debe circularse. El uso de esta información es únicamente para tomar decisiones asociadas con el retorno gradual al campus y con el fin de cumplir con los protocolos de bioseguridad establecidos en la resolución 666 de 2020, expedida por el Ministerio de Salud y Protección Social.
+      </b><a id="close-bar">X</a>
+    </div>
+    @endcan
   </div>
 @endsection
+
