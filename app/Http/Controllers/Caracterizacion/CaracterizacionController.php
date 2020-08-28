@@ -49,6 +49,9 @@ class CaracterizacionController extends Controller
           $unidades = Unidad::where( 'id','=', Auth::user()->unidad_id )->get();
           $roles = Rol::where( 'id','=', Auth::user()->rol_id )->get();
         }
+        foreach($caracterizaciones as $caracterizacion){
+          $caracterizacion->dias_laborales = preg_replace("/[^a-zA-Z0-9]+/", " ", $caracterizacion->dias_laborales);        
+        }
         $caracterizaciones = $caracterizaciones->paginate(10);
         $estados = Estado::all();
         return view('caracterizacion.index', compact('estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
@@ -213,7 +216,6 @@ class CaracterizacionController extends Controller
       $viabilidades = array("Consultar con jefatura servicio médico y SST", "Viable trabajo presencial", "Trabajo en casa y consultar a telemedicina", "Trabajo en casa", "Sin clasificación");
       $semana_laboral = array("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
       $dias_laborales = json_decode($caracterizacion->dias_laborales);
-      //dd($caracterizacion->viabilidad_caracterizacion);
       return view('caracterizacion.edit', compact('viabilidades','caracterizacion', 'unidades', 'user', 'dias_laborales', 'semana_laboral'));
     }
     /**
@@ -259,7 +261,7 @@ class CaracterizacionController extends Controller
         $caracterizacion->trabajo_en_casa = $request->trabajo_en_casa ;
         $caracterizacion->dias_laborales = $request->dias_laborales ;
         $caracterizacion->viabilidad_caracterizacion = $request->viabilidad_caracterizacion ;
-        $caracterizacion->observacion_cambios_de_estado = $request->observacion_cambios_de_estado ;
+        $caracterizacion->observacion_cambios_de_estado = $request->observacion_cambios_de_estado;
         $caracterizacion->notas_comentarios_ma_andrea_leyva = $request->notas_comentarios_ma_andrea_leyva ;
         $caracterizacion->envio_de_consentimiento = $request->envio_de_consentimiento ;
         $caracterizacion->save();

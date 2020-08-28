@@ -49,7 +49,7 @@ class CaracterizacionPolicy
      */
     public function view_viability(User $user)
     {
-        if($user->rol_id >= 3){
+        if($user->rol_id >= 4){
             return true;
         }
         return false;

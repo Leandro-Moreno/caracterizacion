@@ -33,7 +33,6 @@ class UsersImport implements ToModel, WithHeadingRow
         else {
           $caracterizacion = Caracterizacion::Create($row);
         }
-        // dd($caracterizacion);
         return $caracterizacion;
 
     }

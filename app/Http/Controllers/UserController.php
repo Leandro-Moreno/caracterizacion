@@ -98,10 +98,6 @@ class UserController extends Controller
         ->get();
         $sendingUser = User::where('rol_id','=',4)->get();
         $unidades = Unidad::all();
-        foreach($unidades as $unidad){
-           // dd($unidad->id);
-
-        }
         return view('caracterizacion.createwithuser', compact('user', 'unidades','sendingUser', 'userCaracterizacion'));
     }
     public function storeUser(Request $request)

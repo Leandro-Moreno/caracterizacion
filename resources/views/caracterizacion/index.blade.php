@@ -7,7 +7,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title ">{{ __('Caracterización') }}</h4>
+                            <h4 class="card-title ">{{count($caracterizaciones)}} {{ __('Caracterizaciónes') }}</h4>
                             <p class="card-category"> {{ __('Aquí puedes gestionar tus caracterizar tus usuarios') }}</p>
                         </div>
                         @if (session('status'))
@@ -22,18 +22,35 @@
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead class=" text-primary">
-                                    <th id="nombre">
-                                        {{ __('Nombres') }}
+                                    <th id="number">
+                                        {{ __('#') }}
                                     </th>
                                     <th id="facultad">
                                         {{ __('Facultad') }}
                                     </th>
-                                    @can('view_indispensable' , App\Model\Caracterizacion\Caracterizacion::class)
-                                    <th id="trabajo_presencial" >
-                                        {{ __('Indispensable trabajo presencial') }}
+                                    <th id="dependencia">
+                                        {{ __('Dependencia') }}
                                     </th>
                                     <th id="cargo">
                                         {{ __('Cargo') }}
+                                    </th>
+                                    <th id="cedula">
+                                        {{ __('Cédula') }}
+                                    </th>
+                                    <th id="nombre">
+                                        {{ __('Nombres') }}
+                                    </th>
+                                    <th id="tipo_con" >
+                                        {{ __('Tipo de contrato') }}
+                                    </th>
+                                    <th id="estado">
+                                        {{ __('Estado Actual') }}
+                                    </th>
+                                    <th id="indispensable_presencial">
+                                        {{ __('Indispensable presencial') }}
+                                    </th>
+                                    <th id="por_que">
+                                        {{ __('¿Por qué?') }}
                                     </th>
                                     <th id="hora_entrada">
                                         {{ __('Hora de Entrada') }}
@@ -41,40 +58,72 @@
                                     <th id="hora_Salida">
                                         {{ __('Hora de Salida') }}
                                     </th>
-                                    @endcan
-                                    @can('view_facultad' , App\Model\Caracterizacion\Caracterizacion::class)
+                                    <th id="dias_laborales">
+                                        {{ __('Dias laborales') }}
+                                    </th>                
+                                    <th id="trabajo_en_casa">
+                                        {{ __('Trabajo en casa') }}
+                                    </th>    
                                     <th id="viabilidad">
                                         {{ __('Viabilidad') }}
                                     </th>
-                                    @endcan
-                                    @can('view_facultad' , App\Model\Caracterizacion\Caracterizacion::class)
-                                    <th id="observacion">
-                                        {{ __('Observación de cambios de estado') }}
+                                    @can('view_viability' , App\Model\Caracterizacion\Caracterizacion::class)
+                                    <th id="notas_comentarios">
+                                        {{ __('Carta de movilidad Ma Andrea Leyva') }}
+                                    </th>
+                                    <th id="envio_consentimiento">
+                                        {{ __('Envío de consentimiento (control Sandra)') }}
+                                    </th>
+                                    <th id="email">
+                                        {{ __('Correo Electrónico') }}
+                                    </th>
+                                    <th id="email">
+                                        {{ __('Dirección actual') }}
+                                    </th>
+                                    <th id="email">
+                                        {{ __('Barrio') }}
+                                    </th>
+                                    <th id="email">
+                                        {{ __('Localidad') }}
                                     </th>
                                     @endcan
-                                    <th id="estado">
-                                        {{ __('Estado') }}
-                                    </th>
+                                    
                                     <th id="acciones" class="text-right">
                                         {{ __('Accion') }}
                                     </th>
                                     </thead>
                                     <tbody>
                                     @foreach($caracterizaciones as $dato)
-
                                         <tr>
-                                            <td>
-                                                {{ $dato->user->name }} {{ $dato->user->apellido }}
+                                            <td style="font-weight:bold;">
+                                                {{$loop->iteration}}  
                                             </td>
                                             <td>
                                                 {{ $dato->user->unidad->nombre_unidad }}
                                             </td>
-                                            @can('view_indispensable' , App\Model\Caracterizacion\Caracterizacion::class)
+                                            <td>
+                                                {{ $dato->dependencia }}
+                                            </td>
+                                            <td>
+                                                {{ $dato->user->cargo }}
+                                            </td>
+                                            <td>
+                                                {{ $dato->user->documento }}
+                                            </td>
+                                            <td>
+                                                {{ $dato->user->name }} {{ $dato->user->apellido }}
+                                            </td>
+                                            <td>
+                                                {{ $dato->user->tipo_contrato }}
+                                            </td>
+                                            <td>
+                                                {{ $dato->user->estado->nombre}}
+                                            </td>
                                             <td class="text-center">
                                                 {{ $dato->indispensable_presencial }}
                                             </td>
                                             <td>
-                                                {{ $dato->user->cargo }}
+                                                {{ $dato->por_que }}
                                             </td>
                                             <td>
                                                 {{ $dato->horaEntrada }}
@@ -82,20 +131,35 @@
                                             <td>
                                                 {{ $dato->horaSalida }}
                                             </td>
-                                            @endcan
-                                            @can('view_facultad', $dato)
+                                            <td>
+                                                {{ $dato->dias_laborales}}
+                                            </td>
+                                            <td>
+                                                {{ $dato->trabajo_en_casa}}
+                                            </td>
                                             <td class="{{$dato->estadoColor}}">
                                                 {{ $dato->viabilidad_caracterizacion }}
                                             </td>
+                                            @can('view_viability' , $dato)
+                                                <td>
+                                                    {{ $dato->notas_comentarios_ma_andrea_leyva }}
+                                                </td>
+                                                <td>
+                                                    {{ $dato->envio_de_consentimiento }}
+                                                </td>
+                                                <td>
+                                                    {{ $dato->user->email }}
+                                                </td>
+                                                <td>
+                                                    {{ $dato->user->direccion }}
+                                                </td>
+                                                <td>
+                                                    {{ $dato->user->barrio }}
+                                                </td>
+                                                <td>
+                                                    {{ $dato->user->localidad }}
+                                                </td>
                                             @endcan
-                                            @can('view_facultad', $dato)
-                                            <td>
-                                                {{ $dato->observacion_cambios_de_estado }}
-                                            </td>
-                                            @endcan
-                                            <td class="text-center">
-                                                {{ $dato->user->estado->nombre }}{{$dato->id}}
-                                            </td>
                                             @can('create', App\Model\Caracterizacion\Caracterizacion::class)
                                                 <td class="td-actions text-right">
                                                     <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('caracterizacion.edit', $dato->id)}}" data-original-title="Editar Caracterizaciones" title="Editar Caracterizaciones">
@@ -107,6 +171,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                        
                             </div>
                         </div>
                     </div>

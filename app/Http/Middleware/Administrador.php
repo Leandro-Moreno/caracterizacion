@@ -19,7 +19,6 @@ class Administrador
 
 
         if (Auth::user()->rol_id < 2) {
-            dd(Auth::user()->rol_id);
             return redirect('home');
         }
         return $next($request);

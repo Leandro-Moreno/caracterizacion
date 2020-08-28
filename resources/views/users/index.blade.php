@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
               <div class="card-header card-header-primary">
-                <h4 class="card-title ">{{ __('Usuario') }}</h4>
+                <h4 class="card-title ">{{count($users)}} {{ __('Usuarios') }}</h4>
                 <p class="card-category"> {{ __('Aquí puedes administrar usuarios') }}</p>
               </div>
               <div class="card-body">
@@ -89,6 +89,9 @@
                 <div class="table-responsive">
                   <table class="table table-striped">
                     <thead class=" text-primary">
+                    <th>
+                    {{ __('#') }}
+                    </th>
                       <th>
                           {{ __('Nombre') }}
                       </th>
@@ -125,6 +128,9 @@
                     <?php $userview = $user;?>
                       @can('viewbyRolUser', $userview)
                         <tr>
+                          <td style="font-weight:bold;">
+                            {{$loop->iteration}}
+                          </td>
                           <td>
                             {{ $user->name }}  {{ $user->apellido }}
                           </td>
