@@ -48,6 +48,14 @@
                   <option  value="Sin clasificación">Sin clasificación</option>
                </select>
             </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
+               <label style="color:#505c61"> Filtrar por Envío Carta de Autorización </label><br>
+               <select id="envioCarta" name="envioCarta" class="form-control" data-placeholder=" ">
+                 <option  value="{{ old('viabilidad') }}"  selected>Seleccionar</option>
+                 <option  value="si">Si</option>
+                 <option  value="no">No</option>
+               </select>
+            </div>
          </div>
          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 "  style="margin-top:30px;text-align:center">
             <button class="btn btn-info buscar-asistentes"  type="submit">

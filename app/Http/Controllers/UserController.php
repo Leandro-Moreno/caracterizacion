@@ -46,10 +46,10 @@ class UserController extends Controller
             }
             if($rol_obtenido != ""){
                 $users = $users->where('rol_id', '=', $rol_obtenido);
-             
+
             }
             if($estado_obtenido != ""){
-                $users = $users->where('estado_id', '=', $estado_obtenido); 
+                $users = $users->where('estado_id', '=', $estado_obtenido);
             }
             $users = $users->paginate(10);
         }
@@ -109,7 +109,7 @@ class UserController extends Controller
             'email' => 'required|email|max:255',
             'documento' => 'required|numeric',
         ]);
-        $user = new User;   
+        $user = new User;
         if(Auth::user()->rol->id == 2){
             $user->rol_id = 1;
         }
@@ -197,7 +197,7 @@ class UserController extends Controller
     public function busqueda(Request $request)
     {
       $results = (new Search())
-    ->registerModel(User::class, ['name', 'apellido','documento','email'])
+    ->registerModel(User::class, ['name','documento','email'])
     ->search($request->input('query'));
       $user = Auth::user();
       if( $user->rol_id == 2){

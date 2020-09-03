@@ -51,7 +51,7 @@
                       @foreach($users as $user)
                         <tr>
                           <td>
-                            {{ $user->name }} {{ $user->name2 }} {{ $user->apellido }} {{ $user->apellido2 }}
+                            {{ $user->name }}
                           </td>
                           <td>
                             {{ $user->rol_id }}. {{ $user->rol->nombre }}

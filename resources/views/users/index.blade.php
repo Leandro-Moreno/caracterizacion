@@ -30,38 +30,38 @@
                       <buscar-component></buscar-component>
                       <span class="input-group-btn">
                         <button class="btn btn-primary" style="background:#2e91a9" type="button" data-toggle="collapse" data-target="#busqueda-avanzada" aria-expanded="false" aria-controls="collapseExample">
-                         Búsqueda Avanzada 
+                         Búsqueda Avanzada
                         </button>
-                      </span> 
+                      </span>
                     </div>
                     <form class="">
                     <div id="busqueda-avanzada" name="busqueda-avanzada" class=" row collapse" style="padding-top:5px;padding-bottom:35px">
-                      <div class="row"> 
+                      <div class="row">
                         <div class="col-lg-10 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
                           <label style="color:#505c61"> Filtrar por Facultad </label><br>
                           <select id="unidad" name="unidad" class="form-control" data-placeholder=" ">
                           <option  value="" selected >Seleccione...</option>
                           @foreach($unidades as $unidad )
                                   <option value="{{ $unidad->id }}" {{ $unidad->id  ==  $unidad_obtenida ? 'selected="selected"' : '' }}>{{ $unidad->nombre_unidad}}</option>
-                              @endforeach 
+                              @endforeach
                           </select>
                         </div>
                         <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
-                          <label style="color:#505c61"> Filtrar por Rol </label><br>  
+                          <label style="color:#505c61"> Filtrar por Rol </label><br>
                           <select id="role" name="role" class="form-control" style="min-width:inherit !important" data-placeholder=" ">
                             <option  value="" selected >Seleccione...</option>
                             @foreach($roles as $rol )
                                   <option value="{{ $rol->id }}" {{ $rol->id  ==  $rol_obtenido ? 'selected="selected"' : '' }}>{{ $rol->nombre}}</option>
-                              @endforeach 
+                              @endforeach
                           </select>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
-                          <label style="color:#505c61"> Filtrar por Estado </label><br>  
+                          <label style="color:#505c61"> Filtrar por Estado </label><br>
                           <select id="estado" name="estado" class="form-control" data-placeholder=" ">
                             <option  value="" selected >Seleccione...</option>
                             @foreach($estados as $estado )
                                   <option value="{{ $estado->id }}" {{ $estado->id  ==  $estado_obtenido ? 'selected="selected"' : '' }}>{{ $estado->nombre}}</option>
-                              @endforeach 
+                              @endforeach
                           </select>
                         </div>
                       </div>
@@ -132,7 +132,7 @@
                             {{$loop->iteration}}
                           </td>
                           <td>
-                            {{ $user->name }}  {{ $user->apellido }}
+                            {{ $user->name }}
                           </td>
                           <td>
                           {{ $user->email }}
@@ -153,7 +153,7 @@
                           {{ $user->celular }}
                           </td>
                           <td>
-                          {{$user->localidad}}<br/>{{ $user->barrio }}<br/>{{ $user->direccion }} 
+                          {{$user->localidad}}<br/>{{ $user->barrio }}<br/>{{ $user->direccion }}
                           </td>
                           <td>
                           {{ $user->estado->nombre }}
@@ -188,4 +188,3 @@
     </div>
   </div>
 @endsection
-

@@ -23,7 +23,9 @@ Route::get('auth/callback', 'Auth\LoginController@handleProviderCallback');
 Route::get('register', function () { return redirect('home'); });
 Route::post('register', function () { return redirect('home'); });
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-
+Route::get('dash', function () {
+    return view('dashboard');
+});
 ###################  Rutas para servicioscampus y super admin  ###################
 Route::group(['middleware' => ['auth']], function () {
 

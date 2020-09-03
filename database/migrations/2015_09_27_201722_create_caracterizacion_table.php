@@ -27,6 +27,7 @@ class CreateCaracterizacionTable extends Migration
             $table->string('viabilidad_caracterizacion')->nullable();
             $table->string('observacion_cambios_de_estado')->nullable();
             $table->string('notas_comentarios_ma_andrea_leyva')->nullable();
+            $table->string('envio_de_carta_autorizacion')->default('no');
             $table->string('envio_de_consentimiento')->nullable();
             $table->timestamps();
         });

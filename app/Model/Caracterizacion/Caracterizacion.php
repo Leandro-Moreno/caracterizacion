@@ -17,7 +17,11 @@ class Caracterizacion extends Model implements Searchable
      * @var array
      */
     protected $fillable = [
-        'user_id','dependencia', 'indispensable_presencial','por_que', 'horaEntrada', 'horaSalida', 'dias_laborales','trabajo_en_casa', 'viabilidad_caracterizacion', 'observacion_cambios_de_estado', 'notas_comentarios_ma_andrea_leyva', 'envio_de_consentimiento', 'envio'
+        'user_id','dependencia', 'indispensable_presencial','por_que',
+        'horaEntrada', 'horaSalida', 'dias_laborales','trabajo_en_casa',
+        'viabilidad_caracterizacion', 'observacion_cambios_de_estado',
+        'notas_comentarios_ma_andrea_leyva', 'envio_de_carta_autorizacion',
+        'envio_de_consentimiento', 'envio'
     ];
 
     public function getSearchResult(): SearchResult

@@ -37,7 +37,7 @@
                                     <th id="cedula">
                                         {{ __('Cédula') }}
                                     </th>
-                                    <th id="nombre">
+                                    <th id="nombre" style="max-width: 100px; word-break: break-all;">
                                         {{ __('Nombres') }}
                                     </th>
                                     <th id="tipo_con" >
@@ -60,16 +60,19 @@
                                     </th>
                                     <th id="dias_laborales">
                                         {{ __('Dias laborales') }}
-                                    </th>                
+                                    </th>
                                     <th id="trabajo_en_casa">
                                         {{ __('Trabajo en casa') }}
-                                    </th>    
+                                    </th>
                                     <th id="viabilidad">
                                         {{ __('Viabilidad') }}
                                     </th>
                                     @can('view_viability' , App\Model\Caracterizacion\Caracterizacion::class)
+                                    <th id="envio_carta">
+                                        {{ __('Envío Carta de Autoización') }}
+                                    </th>
                                     <th id="notas_comentarios">
-                                        {{ __('Carta de movilidad Ma Andrea Leyva') }}
+                                        {{ __('Notas Ma Andrea Leyva') }}
                                     </th>
                                     <th id="envio_consentimiento">
                                         {{ __('Envío de consentimiento (control Sandra)') }}
@@ -87,7 +90,7 @@
                                         {{ __('Localidad') }}
                                     </th>
                                     @endcan
-                                    
+
                                     <th id="acciones" class="text-right">
                                         {{ __('Accion') }}
                                     </th>
@@ -96,7 +99,7 @@
                                     @foreach($caracterizaciones as $dato)
                                         <tr>
                                             <td style="font-weight:bold;">
-                                                {{$loop->iteration}}  
+                                                {{$loop->iteration}}
                                             </td>
                                             <td>
                                                 {{ $dato->user->unidad->nombre_unidad }}
@@ -111,7 +114,7 @@
                                                 {{ $dato->user->documento }}
                                             </td>
                                             <td>
-                                                {{ $dato->user->name }} {{ $dato->user->apellido }}
+                                                {{ $dato->user->name }}
                                             </td>
                                             <td>
                                                 {{ $dato->user->tipo_contrato }}
@@ -142,6 +145,9 @@
                                             </td>
                                             @can('view_viability' , $dato)
                                                 <td>
+                                                    {{ $dato->envio_de_carta_autorizacion}}
+                                                </td>
+                                                <td>
                                                     {{ $dato->notas_comentarios_ma_andrea_leyva }}
                                                 </td>
                                                 <td>
@@ -171,7 +177,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                        
+
                             </div>
                         </div>
                     </div>
