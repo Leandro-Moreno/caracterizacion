@@ -57,7 +57,7 @@ class LoginController extends Controller
      */
      public function handleProviderCallback()
      {
-         $userDatos = Socialite::driver('azure')->user();
+         $user = Socialite::driver('azure')->user();
          echo $user->user["givenName"];
          dd($user->user["jobTitle"]);
          $jobTitle  = $user->user["jobTitle"];
