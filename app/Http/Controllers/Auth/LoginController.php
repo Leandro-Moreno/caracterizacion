@@ -58,7 +58,8 @@ class LoginController extends Controller
      public function handleProviderCallback()
      {
          $userDatos = Socialite::driver('azure')->user();
-         $user = $userDatos->user;
+         echo $user->user["givenName"]
+         dd($user->user["jobTitle"]);
          $jobTitle  = $user->user["jobTitle"];
          $usuario = User::where('email',$user->email)
                            ->first();
@@ -66,8 +67,9 @@ class LoginController extends Controller
            session()->flash('message', 'Usuario no existe');
            return redirect('login');
          }
+         $nombre = $user->user["givenName"] . " " . $user->user["surname"];
          $usuario->update(array(
-                             'name' => $user->user["givenName"] + " " + $user->user["surname"],
+                             'name' => $nombre,
                              'cargo' => $jobTitle,
                            ));
          $user = User::where('email',$user->email)->first();
