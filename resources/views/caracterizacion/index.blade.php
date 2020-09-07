@@ -59,7 +59,7 @@
                                         {{ __('Hora de Salida') }}
                                     </th>
                                     <th id="dias_laborales">
-                                        {{ __('Dias laborales') }}
+                                        {{ __('Días laborales') }}
                                     </th>
                                     <th id="trabajo_en_casa">
                                         {{ __('Trabajo en casa') }}
@@ -92,7 +92,7 @@
                                     @endcan
 
                                     <th id="acciones" class="text-right">
-                                        {{ __('Accion') }}
+                                        {{ __('Acción') }}
                                     </th>
                                     </thead>
                                     <tbody>
