@@ -11,7 +11,7 @@
       <li class="nav-item {{ ( $activePage == 'user-management') ? ' active' : '' }}">
         <a class="nav-link" data-toggle="collapse" href="#Caracterizaciones" aria-expanded="{{ (  $activePage == 'viability-management') ? 'true' : 'false' }}">
             <i class="material-icons">supervised_user_circle</i>
-          <p>{{ __('Caracterización Usuarios') }}
+          <p>{{ __('Caracterización Empleados') }}
             <b class="caret"></b>
           </p>
         </a>
@@ -29,7 +29,7 @@
             <li class="nav-item{{ $activePage == 'viability-management' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('user.index') }}">
                 <i class="material-icons">supervisor_account</i>
-                  <p>{{ __('Usuarios') }}</p>
+                  <p>{{ __('Empleados') }}</p>
               </a>
             </li>
             @endcan

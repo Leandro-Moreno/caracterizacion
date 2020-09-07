@@ -8,7 +8,7 @@
                     <div class="card">
                         <div class="card-header card-header-primary">
                             <h4 class="card-title ">{{count($caracterizaciones)}} {{ __('Caracterizaciónes') }}</h4>
-                            <p class="card-category"> {{ __('Aquí puedes gestionar tus caracterizar tus usuarios') }}</p>
+                            <p class="card-category"> {{ __('Aquí puedes caracterizar empleados') }}</p>
                         </div>
                         @if (session('status'))
                             <div class="alert alert-success">

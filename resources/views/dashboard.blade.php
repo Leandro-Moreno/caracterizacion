@@ -54,7 +54,7 @@
                 <i class="material-icons">supervisor_account</i>
               </div>
               <p class="card-category">{{ __('Administrar') }}</p>
-              <h4 class="card-title">{{ __('Usuarios') }}
+              <h4 class="card-title">{{ __('Empleados') }}
               </h4>
             </div>
             <div class="card-footer">

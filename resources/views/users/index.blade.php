@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('Gestión de usuarios')])
+@extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('Gestión de empleados')])
 
 @section('content')
   <div id="app" class="content">
@@ -7,8 +7,8 @@
         <div class="col-md-12">
             <div class="card">
               <div class="card-header card-header-primary">
-                <h4 class="card-title ">{{count($users)}} {{ __('Usuarios') }}</h4>
-                <p class="card-category"> {{ __('Aquí puedes administrar usuarios') }}</p>
+                <h4 class="card-title ">{{count($users)}} {{ __('Empleados') }}</h4>
+                <p class="card-category"> {{ __('Aquí puedes administrar empleados') }}</p>
               </div>
               <div class="card-body">
                 @if (session('status'))
@@ -80,7 +80,7 @@
                     </form>
                     @can('create' , App\Model\Caracterizacion\Caracterizacion::class)
                     <div  class="col-12 text-right">
-                      <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar usuario') }}</a>
+                      <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Agregar empleado') }}</a>
                     </div>
                     @endcan
                   </div>
@@ -161,7 +161,7 @@
                           <td class="td-actions text-right">
 
 
-                                  <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('user.edit', $user) }}" data-original-title="" title="Editar usuario">
+                                  <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('user.edit', $user) }}" data-original-title="" title="Editar empleado">
                                     <i class="material-icons">edit</i>
                                     <div class="ripple-container"></div>
                                   </a>

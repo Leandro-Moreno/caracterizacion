@@ -5,7 +5,7 @@
       <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
          <div style="margin-top: 150px;"  class="card">
             <div class="card-header card-header-primary">
-               <h4 class="card-title ">{{ __('Perfil de Usuario') }}</h4>
+               <h4 class="card-title ">{{ __('Perfil de Empleado') }}</h4>
             </div>
             @if (session('status'))
             <div class="alert alert-success">
@@ -16,7 +16,7 @@
                <img style="width: 150px;" src="/imagenescarcterizacion/avatar.jpg" alt="{{ $user->name }}" class="user-avatar">
                <dl class="user-info">
                   <dt>
-                     Nombre de Usuario 
+                     Nombre de Empleado 
                   </dt>
                   <dd>
                      {{ $user->name }}

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('Gestión de usuarios')])
+@extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('Gestión de empleados')])
 
 @section('content')
   <div class="content">
@@ -9,7 +9,7 @@
             @csrf
             <div class="card ">
               <div class="card-header card-header-primary">
-                <h4 class="card-title">{{ __('Crear usuario') }}</h4>
+                <h4 class="card-title">{{ __('Crear Empleado') }}</h4>
                 <p class="card-category"></p>
               </div>
               <div class="card-body">
