@@ -66,6 +66,7 @@ class CaracterizacionController extends Controller
             $rol_obtenido = $request->get('rol');
             $estado_obtenido = $request->get('estado');
             $envio_carta  = $request->get('envioCarta');
+            $indispensable_obtenida = $request->get('indispensable');
             $caracterizacion = Caracterizacion::first();
             $caracterizacion = $caracterizacion->join('users', 'users.id', '=', 'caracterizacion.user_id');
             if($unidad_obtenida != ""){
@@ -83,6 +84,9 @@ class CaracterizacionController extends Controller
             }
             if($envio_carta != ""){
               $caracterizacion = $caracterizacion->where('envio_de_carta_autorizacion', '=', $envio_carta);
+            }
+            if($indispensable_obtenida != ""){
+              $caracterizacion = $caracterizacion->where('indispensable_presencial', '=', $indispensable_obtenida);
             }
             $caracterizacion = $caracterizacion->get();
         }
