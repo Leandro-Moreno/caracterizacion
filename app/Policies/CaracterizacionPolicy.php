@@ -186,7 +186,7 @@ class CaracterizacionPolicy
     }
     public function editPestañaSalud(User $user)
     {
-        if($user->rol_id >= 3 ){
+        if($user->rol_id == 3 || $user->rol_id == 5){
                 return true;
 
         }
