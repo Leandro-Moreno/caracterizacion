@@ -70,24 +70,6 @@
                                     <th id="envio_carta">
                                         {{ __('Envío Carta de Autoización') }}
                                     </th>
-                                    <th id="notas_comentarios">
-                                        {{ __('Notas Ma Andrea Leyva') }}
-                                    </th>
-                                    <th id="envio_consentimiento">
-                                        {{ __('Envío de consentimiento (control Sandra)') }}
-                                    </th>
-                                    <th id="email">
-                                        {{ __('Correo Electrónico') }}
-                                    </th>
-                                    <th id="email">
-                                        {{ __('Dirección actual') }}
-                                    </th>
-                                    <th id="email">
-                                        {{ __('Barrio') }}
-                                    </th>
-                                    <th id="email">
-                                        {{ __('Localidad') }}
-                                    </th>
                                     @endcan
 
                                     <th id="acciones" class="text-right">
@@ -144,24 +126,6 @@
                                             @can('view_viability' , $dato)
                                                 <td>
                                                     {{ $dato->envio_de_carta_autorizacion}}
-                                                </td>
-                                                <td>
-                                                    {{ $dato->notas_comentarios_ma_andrea_leyva }}
-                                                </td>
-                                                <td>
-                                                    {{ $dato->envio_de_consentimiento }}
-                                                </td>
-                                                <td>
-                                                    {{ $dato->user->email }}
-                                                </td>
-                                                <td>
-                                                    {{ $dato->user->direccion }}
-                                                </td>
-                                                <td>
-                                                    {{ $dato->user->barrio }}
-                                                </td>
-                                                <td>
-                                                    {{ $dato->user->localidad }}
                                                 </td>
                                             @endcan
                                             @can('create', App\Model\Caracterizacion\Caracterizacion::class)
