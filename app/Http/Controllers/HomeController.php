@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $ultimos_usuarios = User::all();
+        $ultimos_usuarios = User::take(20)->get();
         $envio_consentimiento = Caracterizacion::where('envio_de_consentimiento' , '=' , 'No')->get();
         if(Auth::user()->rol_id < 3){
           $envio_consentimiento = $envio_consentimiento->filter(function ($caracterizacion){

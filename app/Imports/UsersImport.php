@@ -42,7 +42,7 @@ class UsersImport implements ToModel, WithHeadingRow
       $row['direccion'] = isset($row['direccion_actual'])?$row['direccion_actual']:"";
       if ( isset($row['estado']) ){
          $estado = Estado::where('nombre','like',$row['estado'])->select('id')->first();
-         $row['estado_id'] = 2;
+         $row['estado_id'] = $estado;
       }
       if (  ! $usuario  ) {
         $unidad = Unidad::where('nombre_unidad',$row['facultad'])->first();
