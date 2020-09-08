@@ -22,9 +22,6 @@
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead class=" text-primary">
-                                    <th id="number">
-                                        {{ __('#') }}
-                                    </th>
                                     <th id="facultad">
                                         {{ __('Facultad') }}
                                     </th>
@@ -98,9 +95,6 @@
                                     <tbody>
                                     @foreach($caracterizaciones as $dato)
                                         <tr>
-                                            <td style="font-weight:bold;">
-                                                {{$loop->iteration}}
-                                            </td>
                                             <td>
                                                 {{ $dato->user->unidad->nombre_unidad }}
                                             </td>

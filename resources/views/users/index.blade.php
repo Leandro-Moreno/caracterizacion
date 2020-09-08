@@ -89,9 +89,6 @@
                 <div class="table-responsive">
                   <table class="table table-striped">
                     <thead class=" text-primary">
-                    <th>
-                    {{ __('#') }}
-                    </th>
                       <th>
                           {{ __('Nombre') }}
                       </th>
@@ -128,9 +125,6 @@
                     <?php $userview = $user;?>
                       @can('viewbyRolUser', $userview)
                         <tr>
-                          <td style="font-weight:bold;">
-                            {{$loop->iteration}}
-                          </td>
                           <td>
                             {{ $user->name }}
                           </td>
