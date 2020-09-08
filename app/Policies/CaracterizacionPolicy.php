@@ -168,6 +168,14 @@ class CaracterizacionPolicy
     }
 
 
+    public function view_list_facultad(User $user)
+    {
+        if($user->rol_id  == 2){
+            return false;
+        }
+        return true;
+    }
+
     public function viewByRoleCaracterizacion(User $user){
         if($user->rol_id == 2 || $user->rol_id == 4 ){
             return true;

@@ -22,9 +22,11 @@
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead class=" text-primary">
+                                    @can('view_list_facultad' , App\Model\Caracterizacion\Caracterizacion::class)
                                     <th id="facultad">
                                         {{ __('Facultad') }}
                                     </th>
+                                    @endcan
                                     <th id="dependencia">
                                         {{ __('Dependencia') }}
                                     </th>
@@ -95,9 +97,11 @@
                                     <tbody>
                                     @foreach($caracterizaciones as $dato)
                                         <tr>
+                                        @can('view_list_facultad' , $dato)
                                             <td>
                                                 {{ $dato->user->unidad->nombre_unidad }}
                                             </td>
+                                        @endcan
                                             <td>
                                                 {{ $dato->dependencia }}
                                             </td>
