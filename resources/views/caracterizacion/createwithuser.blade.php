@@ -20,7 +20,7 @@
                         <li role="presentation"><a href="#centro" aria-controls="centro" role="tab" data-toggle="tab" class="btn btn-sm btn-danger">Centro Medico</a></li>
                         @endcan
                         @can('createTab' , App\Model\Caracterizacion\Caracterizacion::class)
-                        <li role="presentation"><a href="#ghdo" aria-controls="ghdo" role="tab" data-toggle="tab" class="btn btn-sm btn-success" >GHDO</a></li>
+                        <li role="presentation"><a href="#ghdo" aria-controls="ghdo" role="tab" data-toggle="tab" class="btn btn-sm btn-success" >Autorización ingreso</a></li>
                         @endcan
                      </ul>
                      <div class="row">
