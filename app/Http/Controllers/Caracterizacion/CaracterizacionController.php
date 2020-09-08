@@ -51,9 +51,9 @@ class CaracterizacionController extends Controller
         foreach($caracterizaciones as $caracterizacion){
           $caracterizacion->dias_laborales = preg_replace("/[^a-zA-Z0-9]+/", " ", $caracterizacion->dias_laborales);
         }
-        $caracterizaciones = $caracterizaciones->paginate(10);
+        $caracterizaciones = $caracterizaciones->paginate(1);
         $estados = Estado::all();
-        return view('caracterizacion.index', compact('estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
+        return view('caracterizacion.index', compact('estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida', 'caracterizaciones') );
     }
 
     public function busquedaAvanzada($request){
