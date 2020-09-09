@@ -202,3 +202,12 @@ thead.thead-inverse,
       padding: 5px !important;
   }
 }
+.tableFixHead          { overflow-y: auto; height: 70vh; }
+.tableFixHead thead th { position: sticky; top: 0; z-index:90;}
+th {
+  background-color: $white;
+  border-bottom: 1px solid black;
+}
+thead{
+
+}
