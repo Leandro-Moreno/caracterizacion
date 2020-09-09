@@ -279,9 +279,9 @@ class CaracterizacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function importarCrear(){
-      $caracterizacion = Excel::import(new UsersImport, request()->file('caracterizacion') );
-      dd($caracterizacion);
-      return back();
+      $import = new UsersImport;
+      Excel::import($import, request()->file('caracterizacion') );
+      return back()->with('alert','Se han importado datos de '.$import->getRowCount().' empleados exitosamente.');
     }
         /**
      * Advanced Search the specified resource from storage.

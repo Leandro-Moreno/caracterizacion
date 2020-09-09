@@ -15,13 +15,12 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class UsersImport implements ToModel, WithHeadingRow
 {
     use Importable;
-
+    public $count = 0;
     public function model(array $row)
     {
+        ++$this->count;
         $usuario = $this->userRow(  $row );
-        // dd($usuario);
         $caracterizacion = $usuario->caracterizacion;
-        // dd($row);
         $row['user_id'] = $usuario->id;
         $row['indispensable_presencial'] = isset(  $row['por_responsabilidades_es_indispensable_su_trabajo_presencial']  ) ? $row['por_responsabilidades_es_indispensable_su_trabajo_presencial'] : '';
         $row['dias_laborales'] = isset($row['dias_laborales'])?json_encode($this->diasSemana( $row['dias_laborales'] )):'';
@@ -36,7 +35,6 @@ class UsersImport implements ToModel, WithHeadingRow
         else {
           $caracterizacion = Caracterizacion::Create($row);
         }
-        // dd($caracterizacion);
         return $caracterizacion;
 
     }
@@ -110,5 +108,9 @@ class UsersImport implements ToModel, WithHeadingRow
             */
 
         ];
+    }
+    public function getRowCount(): int
+    {
+        return $this->count;
     }
 }
