@@ -15,10 +15,12 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class UsersImport implements ToModel, WithHeadingRow
 {
     use Importable;
-    public $count = 0;
+    public $usuarios_creado_cantidad = 0;
+    public $usuarios_actualizado_cantidad = 0;
+    public $caracterizacion_creada_cantidad = 0;
+    public $caracterizacion_actualizada_cantidad = 0;
     public function model(array $row)
     {
-        ++$this->count;
         $usuario = $this->userRow(  $row );
         $caracterizacion = $usuario->caracterizacion;
         $row['user_id'] = $usuario->id;
@@ -31,22 +33,25 @@ class UsersImport implements ToModel, WithHeadingRow
         if( $caracterizacion )
         {
           $caracterizacion->update($row);
+          ++$this->caracterizacion_actualizada_cantidad;
         }
         else {
           $caracterizacion = Caracterizacion::Create($row);
+          ++$this->caracterizacion_creada_cantidad;
         }
         return $caracterizacion;
 
     }
     public function userRow (array $row)
     {
-      $usuario = User::where('email', $row['correo_electronico'])->first();
       $row['direccion'] = isset($row['direccion_actual'])?$row['direccion_actual']:"";
       $row['tipo_contrato'] = isset($row['tipo_de_contrato'])?$row['tipo_de_contrato']:"";
       if ( isset($row['estado']) ){
          $estado = Estado::where('nombre','like',$row['estado'])->select('id')->first();
          $row['estado_id'] = $estado;
       }
+
+      $usuario = User::where('email', $row['correo_electronico'])->first();
       if (  ! $usuario  ) {
         $unidad = Unidad::where('nombre_unidad',$row['facultad'])->first();
         $row['email'] = $row['correo_electronico'];
@@ -57,11 +62,12 @@ class UsersImport implements ToModel, WithHeadingRow
         $row['rol_id'] = 1;
         $row['password'] = "";
         $usuario = User::create( $row );
+        ++$this->usuarios_creado_cantidad;
       }
       else{
-        $usuario->save();
+        $usuario->update($row);
+        ++$this->usuarios_actualizado_cantidad;
       }
-
       return $usuario;
     }
     public function diasSemana( String $dias_laborales )
@@ -109,8 +115,12 @@ class UsersImport implements ToModel, WithHeadingRow
 
         ];
     }
-    public function getRowCount(): int
+    public function getRowCount(): array
     {
-        return $this->count;
+        return array($this->caracterizacion_creada_cantidad,
+                    $this->caracterizacion_actualizada_cantidad,
+                    $this->usuarios_creado_cantidad,
+                    $this->usuarios_actualizado_cantidad
+        );
     }
 }

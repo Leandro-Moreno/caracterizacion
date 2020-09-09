@@ -281,7 +281,12 @@ class CaracterizacionController extends Controller
     public function importarCrear(){
       $import = new UsersImport;
       Excel::import($import, request()->file('caracterizacion') );
-      return back()->with('alert','Se han importado datos de '.$import->getRowCount().' empleados exitosamente.');
+      $cifras=$import->getRowCount();
+      return back()->with('alert','El proceso de importación fue exitoso. Se crearon '
+      .$cifras[2].' y se actualizaron '
+      .$cifras[3].' empleados. Además se crearon '
+      .$cifras[0].' y se actualizaron '
+      .$cifras[1].' caracterizaciones.');
     }
         /**
      * Advanced Search the specified resource from storage.
