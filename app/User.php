@@ -20,7 +20,9 @@ class User extends Authenticatable implements Searchable
      * @var array
      */
     protected $fillable = [
-        'estado_id', 'rol_id', 'name', 'email', 'tipo_doc', 'documento', 'profesion', 'cargo', 'tipo_contrato','celular', 'direccion', 'uso_datos', 'uso_imagen', 'password','unidad_id','barrio','localidad'
+        'estado_id', 'name', 'email', 'tipo_doc', 'documento', 'profesion',
+        'cargo', 'tipo_contrato','celular', 'direccion', 'uso_datos',
+        'uso_imagen', 'unidad_id','barrio','localidad'
     ];
 
     /**

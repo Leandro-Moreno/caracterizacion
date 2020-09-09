@@ -166,13 +166,18 @@ class UserController extends Controller
             'email' => 'required|email|max:255',
             'documento' => 'required|numeric',
         ]);
-        $user->update(
+
+        $user->fill(
             $request->merge(['password' => Hash::make($request->get('password'))])
             ->except(
                 [$request->get('password') ? '' : 'password']
                 )
             );
-
+        if(Auth::user()->rol_id>=4)
+        {
+          $user->rol_id = $request->get('rol_id');
+        }
+        $user->save();
 
         return redirect()->route('user.index')->withStatus(__('Usuario actualizado correctamente.'));
     }
