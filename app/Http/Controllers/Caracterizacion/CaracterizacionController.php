@@ -46,12 +46,12 @@ class CaracterizacionController extends Controller
               return $caracterizacion->user->unidad_id == $user->unidad_id;
           });
           $unidades = Unidad::where( 'id','=', Auth::user()->unidad_id )->get();
-          $roles = Rol::where( 'id','=', Auth::user()->rol_id )->get();
+          $roles = Rol::where( 'id', Auth::user()->rol_id )->get();
         }
         foreach($caracterizaciones as $caracterizacion){
           $caracterizacion->dias_laborales = preg_replace("/[^a-zA-Z0-9]+/", " ", $caracterizacion->dias_laborales);
         }
-        $caracterizaciones = $caracterizaciones->paginate(1);
+        $caracterizaciones = $caracterizaciones->paginate(15);
         $estados = Estado::all();
         return view('caracterizacion.index', compact('estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida', 'caracterizaciones') );
     }
@@ -280,6 +280,7 @@ class CaracterizacionController extends Controller
      */
     public function importarCrear(){
       $caracterizacion = Excel::import(new UsersImport, request()->file('caracterizacion') );
+      dd($caracterizacion);
       return back();
     }
         /**

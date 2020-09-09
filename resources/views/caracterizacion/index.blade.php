@@ -21,7 +21,10 @@
                             @endcan
                             <div class="table-responsive">
                                 <table class="table">
-                                    <thead class=" text-primary">
+                                    <thead class=" text-primary" style="position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;">
                                     @can('view_list_facultad' , App\Model\Caracterizacion\Caracterizacion::class)
                                     <th id="facultad">
                                         {{ __('Facultad') }}

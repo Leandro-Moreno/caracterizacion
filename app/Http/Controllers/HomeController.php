@@ -26,8 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $ultimos_usuarios = User::take(20)->get();
-        $envio_consentimiento = Caracterizacion::where('envio_de_consentimiento' , '=' , 'No')->get();
+        $ultimos_usuarios = User::take(10)->get();
+        $envio_consentimiento = Caracterizacion::where('envio_de_consentimiento' , 'No')->take(10)->get();
         if(Auth::user()->rol_id < 3){
           $envio_consentimiento = $envio_consentimiento->filter(function ($caracterizacion){
               $user = Auth::user();
@@ -38,6 +38,6 @@ class HomeController extends Controller
               return $usuarios->unidad_id == $user->unidad_id;
           });
         }
-        return view('dashboard', compact('ultimos_usuarios', 'envio_consentimiento'), ['ultimos_usuarios' => $ultimos_usuarios->paginate(3)]);
+        return view('dashboard', compact('ultimos_usuarios', 'envio_consentimiento'));
     }
 }

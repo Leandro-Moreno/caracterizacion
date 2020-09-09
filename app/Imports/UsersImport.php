@@ -19,13 +19,16 @@ class UsersImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         $usuario = $this->userRow(  $row );
+        // dd($usuario);
         $caracterizacion = $usuario->caracterizacion;
-
+        // dd($row);
         $row['user_id'] = $usuario->id;
         $row['indispensable_presencial'] = isset(  $row['por_responsabilidades_es_indispensable_su_trabajo_presencial']  ) ? $row['por_responsabilidades_es_indispensable_su_trabajo_presencial'] : '';
         $row['dias_laborales'] = isset($row['dias_laborales'])?json_encode($this->diasSemana( $row['dias_laborales'] )):'';
-        $row['horaEntrada'] = isset(  $row['hora_de_entrada'] ) ? $row['hora_de_entrada']* 2400 : 0;
-        $row['horaSalida'] = isset(  $row['hora_de_salida'] ) ? $row['hora_de_salida']* 2400 : 0;
+        $row['horaEntrada'] = isset(  $row['hora_de_entrada'] ) ? $row['hora_de_entrada']* 240000 : 0;
+        $row['horaSalida'] = isset(  $row['hora_de_salida'] ) ? $row['hora_de_salida']* 240000 : 0;
+
+        $row['viabilidad_caracterizacion'] = $row['viabilidad_por_caracterizacion'];
         if( $caracterizacion )
         {
           $caracterizacion->update($row);
@@ -33,6 +36,7 @@ class UsersImport implements ToModel, WithHeadingRow
         else {
           $caracterizacion = Caracterizacion::Create($row);
         }
+        // dd($caracterizacion);
         return $caracterizacion;
 
     }
@@ -40,6 +44,7 @@ class UsersImport implements ToModel, WithHeadingRow
     {
       $usuario = User::where('email', $row['correo_electronico'])->first();
       $row['direccion'] = isset($row['direccion_actual'])?$row['direccion_actual']:"";
+      $row['tipo_contrato'] = isset($row['tipo_de_contrato'])?$row['tipo_de_contrato']:"";
       if ( isset($row['estado']) ){
          $estado = Estado::where('nombre','like',$row['estado'])->select('id')->first();
          $row['estado_id'] = $estado;
