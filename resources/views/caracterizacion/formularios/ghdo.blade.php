@@ -11,7 +11,7 @@
       </div>
    </div>
 <div class="row mt-2 mb-4">
-         <label class="col-sm-2 col-form-label">{{ __('Envío de carta de Autorización (Ma Andrea Leyva)') }}</label>
+         <label class="col-sm-2 col-form-label">{{ __('Envío de carta de Autorización') }}</label>
          <div class="col-sm-4">
             <div class="form-group{{ $errors->has('envio_de_carta_autorizacion') ? ' has-danger' : '' }}">
                <div class="form-check">
@@ -30,7 +30,7 @@
 </div>
 
 <div class="row mt-2 mb-4">
-      <label class="col-sm-2 col-form-label">{{ __('Envío del consentimiento. Sandra Acosta') }}</label>
+      <label class="col-sm-2 col-form-label">{{ __('Envío del consentimiento') }}</label>
       <div class="col-sm-4">
          <div class="form-group{{ $errors->has('envio_de_consentimiento') ? ' has-danger' : '' }}">
             <div class="form-check">

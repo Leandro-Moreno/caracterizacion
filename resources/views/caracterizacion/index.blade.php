@@ -140,6 +140,7 @@
                                     </tbody>
                                 </table>
 
+                                {{ $caracterizaciones->links() }}
                             </div>
                         </div>
                     </div>
@@ -147,7 +148,6 @@
             </div>
         </div>
     </div>
-    {{ $caracterizaciones->links() }}
 @endsection
 @push('js')
     <script type="text/javascript">

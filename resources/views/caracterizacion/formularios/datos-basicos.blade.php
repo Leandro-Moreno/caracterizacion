@@ -118,10 +118,12 @@
       <label class="col-sm-2 col-form-label">{{ __('¿Por responsabilidades es indispensable su trabajo presencial?') }}</label>
       <div class="col-sm-4">
          <div class="form-group{{ $errors->has('indispensable_presencial') ? ' has-danger' : '' }}">
-            <div class="togglebutton">
-               <label id="lb-indispensable">
-                  <input data-target="#toggle-indispensable" aria-expanded="false" aria-controls="collapse" data-toggle="collapse" name="indispensable_presencial" type="checkbox" value="{{$caracterizacion->indispensable_presencial}}" {{ $caracterizacion->indispensable_presencial ==  "Si" ? 'cheked="cheked"' : '' }}></input>
-                  <span class="toggle"></span>
+            <div class="form-check">
+               <label class="form-check-label" id="lb-indispensable">
+                  <input  class="form-check-input" data-target="#toggle-indispensable" aria-expanded="false" aria-controls="collapse" data-toggle="collapse" name="indispensable_presencial" type="checkbox" value="{{$caracterizacion->indispensable_presencial}}" {{ $caracterizacion->indispensable_presencial ==  "Si" ? 'checked="checked"' : '' }}></input>
+                  <span class="form-check-sign">
+                        <span class="check"></span>
+                  </span>
                </label>
             </div>
             @if ($errors->has('indispensable_presencial'))
@@ -130,7 +132,7 @@
          </div>
       </div>
    </div>
-   <div id="toggle-indispensable" name="toggle-indispensable" class="collapse">
+   <div id="toggle-indispensable" name="toggle-indispensable" class="collapse {{ $caracterizacion->indispensable_presencial ==  "Si" ? 'show' : '' }}">
       <div class="row">
          <label class="col-sm-2 col-form-label">{{ __('¿Por qué?') }}</label>
          <div class="col-sm-4">

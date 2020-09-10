@@ -13,7 +13,7 @@
            </div>
   </div>
   <div class="row">
-     <label class="col-sm-2 col-form-label">{{ __('Observación') }}</label>
+     <label class="col-sm-2 col-form-label">{{ __('Observación Dir. Servicios Campus') }}</label>
      <div class="col-sm-4">
         <div class="form-group{{ $errors->has('observacion_cambios_de_estado') ? ' has-danger' : '' }}">
            <textarea class="form-control{{ $errors->has('observacion_cambios_de_estado') ? ' is-invalid' : '' }}" name="observacion_cambios_de_estado" id="input-observacion_cambios_de_estado" type="" placeholder="{{ __('Observación') }}" value="{{ old('observacion_cambios_de_estado') }}"  rows="3" >{{old('observacion_cambios_de_estado', $caracterizacion->observacion_cambios_de_estado) }}</textarea>
