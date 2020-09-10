@@ -252,7 +252,8 @@ class CaracterizacionController extends Controller
     public function update(Request $request, Caracterizacion $caracterizacion)
     {
         $datos = $request->all();
-        if(!isset($datos['dias_laborales']) ){
+        // dd(isset($datos['dias_laborales']));
+        if(isset($datos['dias_laborales']) ){
           $datos['dias_laborales'] = json_encode($request->dias_laborales);
         }
         if(!isset( $datos['indispensable_presencial'] )){
