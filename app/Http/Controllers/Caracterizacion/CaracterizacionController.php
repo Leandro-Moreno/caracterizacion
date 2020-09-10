@@ -35,6 +35,7 @@ class CaracterizacionController extends Controller
         $unidades = Unidad::all();
         $roles = Rol::all();
         $viabilidad_obtenida = $request->get('viabilidad');
+        $dependencia_obtenida = $request->get('dependencia');
         $unidad_obtenida = $request->get('unidad');
         $rol_obtenido = $request->get('rol');
         $estado_obtenido = $request->get('estado');
@@ -53,7 +54,7 @@ class CaracterizacionController extends Controller
         }
         $caracterizaciones = $caracterizaciones->paginate(15);
         $estados = Estado::all();
-        return view('caracterizacion.index', compact('estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida', 'caracterizaciones') );
+        return view('caracterizacion.index', compact('dependencia_obtenida','estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida', 'caracterizaciones') );
     }
 
     public function busquedaAvanzada($request){
@@ -62,6 +63,7 @@ class CaracterizacionController extends Controller
 
           if (Auth::user()->rol_id >= 2){
             $viabilidad_obtenida = $request->get('viabilidad');
+            $dependencia_obtenida = $request->get('dependencia');
             $unidad_obtenida = $request->get('unidad');
             $rol_obtenido = $request->get('rol');
             $estado_obtenido = $request->get('estado');
@@ -87,6 +89,9 @@ class CaracterizacionController extends Controller
             }
             if($indispensable_obtenida != ""){
               $caracterizacion = $caracterizacion->where('indispensable_presencial', '=', $indispensable_obtenida);
+            }
+            if($dependencia_obtenida != ""){
+              $caracterizacion = $caracterizacion->where('dependencia', '=', $dependencia_obtenida);
             }
             $caracterizacion = $caracterizacion->get();
         }

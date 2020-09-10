@@ -77,9 +77,4 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('busqueda/caracterizacion', 'Caracterizacion\CaracterizacionController@busqueda')->name('buscarCaracterizacion')->middleware('administrador');
   Route::get('busqueda/usuario', 'UserController@busqueda')->name('buscarUsuario')->middleware('administrador');
 });
-Route::group(['middleware' => 'auth'], function () {
-	Route::get('perfil/usuario', 'ProfileController@index')->name('profile.index');
-	Route::get('profile/{id}/edit', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
-	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
-});
+

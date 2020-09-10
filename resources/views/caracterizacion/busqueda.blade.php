@@ -64,9 +64,13 @@
                  <option  value="no">No</option>
                </select>
             </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
+               <label style="color:#505c61"> Filtrar por Dependencia </label><br>
+               <textarea class="form-control{{ $errors->has('dependencia') ? ' is-invalid' : '' }}" name="dependencia" id="input-dependencia" type="" placeholder="{{ __('Dependencia') }}" value="{{old('dependencia')}}" >{{old('dependencia')}}</textarea>
+            </div>
          </div>
          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 "  style="margin-top:30px;text-align:center">
-            <button class="btn btn-info buscar-asistentes"  type="submit">
+            <button class="btn btn-success buscar-asistentes"  type="submit">
             Buscar Asistentes de Manera Avanzada
             </button>
          </div>

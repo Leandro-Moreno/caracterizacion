@@ -134,12 +134,6 @@
         </a>
         <div class="collapse {{ ($activePage == 'profile' || $activePage == 'correo'|| $activePage == 'admin-management') ? ' show' : '' }}" id="Configuracion">
           <ul class="nav">
-            <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('profile.index') }}">
-                <i class="material-icons">person</i>
-                <p> {{ __('Perfil') }} </p>
-              </a>
-            </li>
 
             @can('viewSidebarAdmin', App\User::class)
             <li class="nav-item{{ $activePage == 'admin-management' ? ' active' : '' }}">
