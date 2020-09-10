@@ -182,8 +182,28 @@ class CaracterizacionPolicy
         }
     return false ;
     }
+    /*
+    * Police de permisos de edición de Datos Básicos
+    */
+    public function editDatosBasicos(User $user)
+    {
+        if($user->rol_id >= 4 ){
+                return true;
 
+        }
+        return false;
+    }
+    /*
+    * Police de permisos de edición de solicitud de trabajo Presencial por la Facultad
+    */
+    public function editDatosTrabajoPresencial(User $user)
+    {
+        if($user->rol_id == 2 ){
+                return true;
 
+        }
+        return false;
+    }
     public function editPestañaGHDO(User $user)
     {
         if($user->rol_id >= 4 ){

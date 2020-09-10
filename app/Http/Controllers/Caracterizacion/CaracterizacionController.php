@@ -155,7 +155,6 @@ class CaracterizacionController extends Controller
     {
       if (Auth::user()->rol_id == 2){
         $validatedData = $request->validate([
-          'email' => 'required|unique:users|max:255',
           'documento' => 'required|unique:users|max:255',
           ]);
 
@@ -233,13 +232,6 @@ class CaracterizacionController extends Controller
      */
     public function update(Request $request, Caracterizacion $caracterizacion)
     {
-      if (Auth::user()->rol_id == 2){
-        $validatedData = $request->validate([
-          'email' => 'required|email|max:255',
-          'documento' => 'required|numeric',
-      ]);
-
-    }
         $datos = $request->all();
         if(!is_null($datos['dias_laborales']) ){
           $datos['dias_laborales'] = json_encode($request->dias_laborales);
