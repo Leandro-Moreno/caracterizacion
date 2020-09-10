@@ -86,7 +86,7 @@
                   </div>
                   </form>
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive tableFixHead">
                   <table class="table table-striped">
                     <thead class=" text-primary">
                       <th>

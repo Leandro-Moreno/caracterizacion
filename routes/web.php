@@ -74,8 +74,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::get('caracterizacion/{id}/crear', 'userController@createCaracterizacion')->name('caracterizacion.ucreate')->middleware('role:Superadmin');//TODO:eliminar esta ruta
 
-  Route::get('busqueda/caracterizacion', 'Caracterizacion\CaracterizacionController@busqueda')->name('buscarCaracterizacion');
-  Route::get('busqueda/usuario', 'UserController@busqueda')->name('buscarUsuario');
+  Route::get('busqueda/caracterizacion', 'Caracterizacion\CaracterizacionController@busqueda')->name('buscarCaracterizacion')->middleware('administrador');
+  Route::get('busqueda/usuario', 'UserController@busqueda')->name('buscarUsuario')->middleware('administrador');
 });
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('perfil/usuario', 'ProfileController@index')->name('profile.index');

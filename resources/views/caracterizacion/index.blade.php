@@ -19,8 +19,8 @@
                             @can('create', App\Model\Caracterizacion\Caracterizacion::class)
                                 @include('caracterizacion.busqueda')
                             @endcan
-                            <div class="table-responsive">
-                                <table class="table">
+                            <div class="table-responsive tableFixHead">
+                                <table class="table table-striped">
                                     <thead class=" text-primary">
                                     @can('view_list_facultad' , App\Model\Caracterizacion\Caracterizacion::class)
                                     <th id="facultad">
@@ -68,7 +68,7 @@
                                     </th>
                                     @can('view_viability' , App\Model\Caracterizacion\Caracterizacion::class)
                                     <th id="envio_carta">
-                                        {{ __('Envío Carta de Autoización') }}
+                                        {{ __('Envío Carta de Autorización') }}
                                     </th>
                                     @endcan
 

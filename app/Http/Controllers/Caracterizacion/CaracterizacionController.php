@@ -46,12 +46,12 @@ class CaracterizacionController extends Controller
               return $caracterizacion->user->unidad_id == $user->unidad_id;
           });
           $unidades = Unidad::where( 'id','=', Auth::user()->unidad_id )->get();
-          $roles = Rol::where( 'id','=', Auth::user()->rol_id )->get();
+          $roles = Rol::where( 'id', Auth::user()->rol_id )->get();
         }
         foreach($caracterizaciones as $caracterizacion){
           $caracterizacion->dias_laborales = preg_replace("/[^a-zA-Z0-9]+/", " ", $caracterizacion->dias_laborales);
         }
-        $caracterizaciones = $caracterizaciones->paginate(1);
+        $caracterizaciones = $caracterizaciones->paginate(15);
         $estados = Estado::all();
         return view('caracterizacion.index', compact('estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida', 'caracterizaciones') );
     }
@@ -155,7 +155,6 @@ class CaracterizacionController extends Controller
     {
       if (Auth::user()->rol_id == 2){
         $validatedData = $request->validate([
-          'email' => 'required|unique:users|max:255',
           'documento' => 'required|unique:users|max:255',
           ]);
 
@@ -233,13 +232,6 @@ class CaracterizacionController extends Controller
      */
     public function update(Request $request, Caracterizacion $caracterizacion)
     {
-      if (Auth::user()->rol_id == 2){
-        $validatedData = $request->validate([
-          'email' => 'required|email|max:255',
-          'documento' => 'required|numeric',
-      ]);
-
-    }
         $datos = $request->all();
         if(!is_null($datos['dias_laborales']) ){
           $datos['dias_laborales'] = json_encode($request->dias_laborales);
@@ -279,8 +271,14 @@ class CaracterizacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function importarCrear(){
-      $caracterizacion = Excel::import(new UsersImport, request()->file('caracterizacion') );
-      return back();
+      $import = new UsersImport;
+      Excel::import($import, request()->file('caracterizacion') );
+      $cifras=$import->getRowCount();
+      return back()->with('alert','El proceso de importación fue exitoso. Se crearon '
+      .$cifras[2].' y se actualizaron '
+      .$cifras[3].' empleados. Además se crearon '
+      .$cifras[0].' y se actualizaron '
+      .$cifras[1].' caracterizaciones.');
     }
         /**
      * Advanced Search the specified resource from storage.
