@@ -6,7 +6,6 @@
       Búsqueda Avanzada
       </button>
       </span>
-   </div>
    <form class="">
       <div id="busqueda-avanzada" name="busqueda-avanzada" class=" row collapse" style="padding-top:5px;padding-bottom:35px">
          <div class="row">
@@ -31,7 +30,7 @@
                </select>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
-               <label style="color:#505c61">Filtrar por Indispesable trabajo presencial</label><br>
+               <label style="color:#505c61">Filtrar por Indispensable trabajo presencial</label><br>
                <select id="indispensable" name="indispensable" class="form-control" data-placeholder=" ">
                   <option  value="{{ old('indispensable') }}"  selected>Seleccionar</option>
                   <option  value="Si">Si</option>
@@ -47,15 +46,6 @@
                   @endforeach
                </select>
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
-               <label style="color:#505c61"> Filtrar por Rol </label><br>
-               <select id="rol" name="rol" class="form-control" style="min-width:inherit !important" data-placeholder=" ">
-                  <option  value="" selected >Seleccione...</option>
-                  @foreach($roles as $rol )
-                  <option value="{{ $rol->id }}" {{ $rol->id  ==  $rol_obtenido ? 'selected="selected"' : '' }}>{{ $rol->nombre}}</option>
-                  @endforeach
-               </select>
-            </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
                <label style="color:#505c61"> Filtrar por Envío Carta de Autorización </label><br>
                <select id="envioCarta" name="envioCarta" class="form-control" data-placeholder=" ">
@@ -66,7 +56,13 @@
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
                <label style="color:#505c61"> Filtrar por Dependencia </label><br>
-               <textarea class="form-control{{ $errors->has('dependencia') ? ' is-invalid' : '' }}" name="dependencia" id="input-dependencia" type="" placeholder="{{ __('Dependencia') }}" value="{{old('dependencia')}}" >{{old('dependencia')}}</textarea>
+               <select id="filtroDependencia" name="filtroDependencia" class="form-control" data-placeholder=" ">
+                 <option  value="{{ old('filtroDependencia') }}"  selected>Seleccionar</option>
+
+                 @foreach($listado_dependencias as $dependencia)
+                 <option value="{{ $dependencia['dependencia'] }}" >{{$dependencia['dependencia']}}</option>
+                 @endforeach
+               </select>
             </div>
          </div>
          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 "  style="margin-top:30px;text-align:center">
