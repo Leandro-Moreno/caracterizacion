@@ -14,7 +14,8 @@ use App\Model\Estado;
 use App\Rol;
 use App\Imports\UsersImport;//TODO: cambiar users por caracterizacion
 use Maatwebsite\Excel\Facades\Excel;
-
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\EstadoSaludModificado;
 
 use Spatie\Searchable\Search;
 
@@ -273,7 +274,18 @@ class CaracterizacionController extends Controller
         $user->save();
         $caracterizacion->fill($datos);
         $caracterizacion->save();
+        if(isset($datos['viabilidad_caracterizacion']))
+        {
+          $this->notificarCambiosSalud($user, $datos['viabilidad_caracterizacion']);
+        }
         return redirect('caracterizacion')->with('status', 'Caracterización actualizada con éxito.');
+    }
+    public function notificarCambiosSalud(User $empleado, String $cambios = "")
+    {
+      $usuarios_facultad = User::where('rol_id',2)->where('unidad_id',$empleado->unidad_id)->get();
+      foreach ($usuarios_facultad as $usuario_a_notificar) {
+        $usuario_a_notificar->notify( new EstadoSaludModificado( $empleado, $cambios ) );
+      }
     }
     /**
      * Import the specified resource from storage.
