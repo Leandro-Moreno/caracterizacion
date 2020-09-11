@@ -243,6 +243,16 @@ class CaracterizacionController extends Controller
       $dias_laborales = json_decode($caracterizacion->dias_laborales);
       return view('caracterizacion.edit', compact('viabilidades','caracterizacion', 'unidades', 'user', 'dias_laborales', 'semana_laboral'));
     }
+    public function ajustarHoras(String $hora)
+    {
+        $temporal = explode(':', $hora);
+        if(!isset($temporal[2])){
+          return $hora . ":00";
+        }
+        else {
+          return $hora;
+        }
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -253,12 +263,15 @@ class CaracterizacionController extends Controller
     public function update(Request $request, Caracterizacion $caracterizacion)
     {
         $datos = $request->all();
-
         if(isset($datos['dias_laborales']) ){
           $datos['dias_laborales'] = json_encode($request->dias_laborales);
         }
         if(!isset( $datos['indispensable_presencial'] )){
             $datos['indispensable_presencial'] = 'No' ;
+        }
+        else {
+          $datos['horaEntrada'] = $this->ajustarHoras($datos['horaEntrada']);
+          $datos['horaSalida'] = $this->ajustarHoras($datos['horaSalida']);
         }
         if(!isset($datos['trabajo_en_casa'] )){
             $datos['trabajo_en_casa'] = 'No' ;
