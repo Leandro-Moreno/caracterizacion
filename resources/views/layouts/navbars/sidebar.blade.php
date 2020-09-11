@@ -126,12 +126,6 @@
       @endcan
 
       <li class="nav-item {{ ($activePage == 'profile' || $activePage == 'correo'|| $activePage == 'admin-management') ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#Configuracion" aria-expanded="{{ ($activePage == 'profile' || $activePage == 'correo') ? 'true' : 'false' }}">
-            <i class="material-icons">settings_applications</i>
-          <p>{{ __('Configuración') }}
-            <b class="caret"></b>
-          </p>
-        </a>
         <div class="collapse {{ ($activePage == 'profile' || $activePage == 'correo'|| $activePage == 'admin-management') ? ' show' : '' }}" id="Configuracion">
           <ul class="nav">
 
