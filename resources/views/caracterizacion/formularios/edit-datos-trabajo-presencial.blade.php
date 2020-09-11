@@ -4,7 +4,7 @@
          <div class="form-group{{ $errors->has('indispensable_presencial') ? ' has-danger' : '' }}">
             <div class="form-check">
                <label class="form-check-label" id="lb-indispensable">
-                  <input  class="form-check-input" data-target="#toggle-indispensable" aria-expanded="false" aria-controls="collapse" data-toggle="collapse" name="indispensable_presencial" type="checkbox" value="{{$caracterizacion->indispensable_presencial}}" {{ $caracterizacion->indispensable_presencial ==  "Si" ? 'checked="checked"' : '' }}></input>
+                  <input  class="form-check-input" data-target="#toggle-indispensable" aria-expanded="false" aria-controls="collapse" data-toggle="collapse" name="indispensable_presencial" type="checkbox" value="{{$caracterizacion->indispensable_presencial}}" {{ $caracterizacion->indispensable_presencial ==  "Si" ? 'checked' : '' }}></input>
                   <span class="form-check-sign">
                         <span class="check"></span>
                   </span>
