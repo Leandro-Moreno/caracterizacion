@@ -64,7 +64,7 @@
                      </div>
                </div>
                <div class="card-footer ml-auto mr-auto">
-                  <button type="submit" class="btn btn-primary">{{ __('Guardar Caracterización') }}</button>
+                  <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>
                </div>
          </div>
           </form>
