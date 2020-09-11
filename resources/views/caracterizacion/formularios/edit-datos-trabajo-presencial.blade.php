@@ -4,7 +4,7 @@
          <div class="form-group{{ $errors->has('indispensable_presencial') ? ' has-danger' : '' }}">
             <div class="form-check">
                <label class="form-check-label" id="lb-indispensable">
-                  <input  class="form-check-input" data-target="#toggle-indispensable" aria-expanded="false" aria-controls="collapse" data-toggle="collapse" name="indispensable_presencial" type="checkbox" value="{{$caracterizacion->indispensable_presencial}}" {{ $caracterizacion->indispensable_presencial ==  "Si" ? 'checked' : '' }}></input>
+                  <input  class="form-check-input" data-target="#toggle-indispensable" aria-expanded="false" aria-controls="collapse" data-toggle="collapse" name="indispensable_presencial" type="checkbox" value="Si" {{ $caracterizacion->indispensable_presencial ==  "Si" ? 'checked' : '' }}></input>
                   <span class="form-check-sign">
                         <span class="check"></span>
                   </span>
@@ -32,7 +32,7 @@
       <label class="col-sm-2 col-form-label" for="input-hora">{{ __('Hora de Entrada') }}</label>
       <div class="col-sm-4">
          <div class="form-group">
-            <input class="form-control" name="hora_entrada" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora', $caracterizacion->horaEntrada) }}"  />
+            <input class="form-control" name="horaEntrada" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora', $caracterizacion->horaEntrada) }}"  />
          </div>
       </div>
    </div>
@@ -40,7 +40,7 @@
       <label class="col-sm-2 col-form-label" for="input-hora">{{ __('Hora de Salida') }}</label>
       <div class="col-sm-4">
          <div class="form-group">
-            <input class="form-control" name="hora_salida" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora', $caracterizacion->horaSalida) }}"  />
+            <input class="form-control" name="horaSalida" id="input-hora" type="time" placeholder="{{ __('Hora') }}" value="{{ old('hora', $caracterizacion->horaSalida) }}"  />
          </div>
       </div>
    </div>
