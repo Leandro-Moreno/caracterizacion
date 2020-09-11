@@ -41,6 +41,7 @@ class CaracterizacionController extends Controller
         $estado_obtenido = $request->get('estado');
         $caracterizaciones = $this->busquedaAvanzada($request);
         $caracterizaciones = $this->agregarColorEstado($caracterizaciones);
+        $listado_dependencias = $this->listadoDependencias();
         if(Auth::user()->rol_id < 3){
           $caracterizaciones = $caracterizaciones->filter(function ($caracterizacion){
               $user = Auth::user();
@@ -54,16 +55,29 @@ class CaracterizacionController extends Controller
         }
         $caracterizaciones = $caracterizaciones->paginate(15);
         $estados = Estado::all();
-        return view('caracterizacion.index', compact('dependencia_obtenida','estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida', 'caracterizaciones') );
+        return view('caracterizacion.index', compact('dependencia_obtenida','listado_dependencias','estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida', 'caracterizaciones') );
     }
-
+    public function listadoDependencias()
+    {
+      $usuario_actual = Auth::user();
+      if($usuario_actual->rol_id >= 2){
+        $todos_los_usuarios = Caracterizacion::all('dependencia');
+      }
+      else{
+        $todos_los_usuarios = DB::table('caracterizacion')
+        ->join('users', 'caracterizacion.user_id', '=','users.id')
+        ->select('dependencia')
+        ->get();
+      }
+      return $todos_los_usuarios->unique('dependencia')->toArray();
+    }
     public function busquedaAvanzada($request){
 
       if( null !==  $request ){
 
           if (Auth::user()->rol_id >= 2){
             $viabilidad_obtenida = $request->get('viabilidad');
-            $dependencia_obtenida = $request->get('dependencia');
+            $dependencia_obtenida = $request->get('filtroDependencia');
             $unidad_obtenida = $request->get('unidad');
             $rol_obtenido = $request->get('rol');
             $estado_obtenido = $request->get('estado');
@@ -238,7 +252,8 @@ class CaracterizacionController extends Controller
     public function update(Request $request, Caracterizacion $caracterizacion)
     {
         $datos = $request->all();
-        if(!is_null($datos['dias_laborales']) ){
+        // dd(isset($datos['dias_laborales']));
+        if(isset($datos['dias_laborales']) ){
           $datos['dias_laborales'] = json_encode($request->dias_laborales);
         }
         if(!isset( $datos['indispensable_presencial'] )){
