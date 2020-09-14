@@ -60,17 +60,12 @@
                                     <th id="dias_laborales">
                                         {{ __('Días laborales') }}
                                     </th>
-                                    <th id="trabajo_en_casa">
-                                        {{ __('Trabajo en casa') }}
+                                    <th id="envio_carta">
+                                        {{ __('Envío Carta de Autorización') }}
                                     </th>
                                     <th id="viabilidad">
                                         {{ __('Viabilidad') }}
                                     </th>
-                                    @can('view_viability' , App\Model\Caracterizacion\Caracterizacion::class)
-                                    <th id="envio_carta">
-                                        {{ __('Envío Carta de Autorización') }}
-                                    </th>
-                                    @endcan
 
                                     <th id="acciones" class="text-right">
                                         {{ __('Acción') }}
@@ -118,16 +113,11 @@
                                                 {{ $dato->dias_laborales}}
                                             </td>
                                             <td>
-                                                {{ $dato->trabajo_en_casa}}
+                                                {{ $dato->envio_de_carta_autorizacion}}
                                             </td>
                                             <td class="{{$dato->estadoColor}}">
                                                 {{ $dato->viabilidad_caracterizacion }}
                                             </td>
-                                            @can('view_viability' , $dato)
-                                                <td>
-                                                    {{ $dato->envio_de_carta_autorizacion}}
-                                                </td>
-                                            @endcan
                                             @can('create', App\Model\Caracterizacion\Caracterizacion::class)
                                                 <td class="td-actions text-right">
                                                     <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('caracterizacion.edit', $dato->id)}}" data-original-title="Editar Caracterizaciones" title="Editar Caracterizaciones">
