@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('home');
+    return redirect('caracterizacion');
 });
 
 Auth::routes();
@@ -77,4 +77,3 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('busqueda/caracterizacion', 'Caracterizacion\CaracterizacionController@busqueda')->name('buscarCaracterizacion')->middleware('administrador');
   Route::get('busqueda/usuario', 'UserController@busqueda')->name('buscarUsuario')->middleware('administrador');
 });
-

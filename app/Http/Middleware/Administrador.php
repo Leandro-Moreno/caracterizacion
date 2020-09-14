@@ -19,7 +19,7 @@ class Administrador
 
 
         if (Auth::user()->rol_id < 2) {
-            return redirect('home');
+            return redirect('caracterizacion');
         }
         return $next($request);
     }
