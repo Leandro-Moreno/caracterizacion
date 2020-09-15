@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('importar/caracterizacion', 'Caracterizacion\CaracterizacionController@importarCrear')->name('caracterizacion.importarCrear')->middleware(['role:Superadmin,ServiciosCampus,ServiciosSalud,Facultad']);
 
 	Route::get('exportar/usuario', 'Caracterizacion\CaracterizacionController@To.do')->middleware('auth')->name('user.export');
+	Route::get('exportar/viabilidad', 'Reporte\ReporteController@exportarViabilidad')->middleware('auth')->name('viabilidad.export');
 
 	Route::resource('reporte', 'Reporte\ReporteController')->names([
 		'index' => 'reporte',

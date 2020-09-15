@@ -10,6 +10,11 @@ use Auth;
 use App\Model\Estado;
 use App\Rol;
 use App\Model\Caracterizacion\Unidad;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CaracterizacionExport;
+
+
 
 class ReporteController extends Controller
 {
@@ -123,19 +128,64 @@ class ReporteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function grafico()
+    public function grafico(Request $request)
     {
-        $caracterizaciones;
-        $caracterizaciones = Caracterizacion::all();
+        $unidades = Unidad::all();
+        $roles = Rol::all();
         $user = Auth::user();
-        if($user->rol_id < 3){
-          $caracterizaciones  = $caracterizaciones->filter(function ($caracterizacion, $key){
-            $user = Auth::user();
-            return $caracterizacion->user->unidad_id == $user->unidad_id;
-          });
+        $estados = Estado::all();
+        $unidad_obtenida = $request->get('unidad');
+        $rol_obtenido = $request->get('rol');
+        $estado_obtenido = $request->get('estado');
+        $viabilidad_obtenida = $request->get('viabilidad');
+        $viabilidades = Caracterizacion::select('viabilidad_caracterizacion', DB::raw('count(viabilidad_caracterizacion) as viabilidad'))->join('users', 'users.id', '=', 'caracterizacion.user_id');
+        if($request->unidad != '')
+        {
+          $viabilidades = $viabilidades->where('unidad_id','=',$request->unidad);
         }
-
-        return view('reporte.grafico', ['caracterizaciones' => $caracterizaciones->paginate(15)]);
+        if($request->rol != '')
+        {
+          $viabilidades = $viabilidades->where('rol_id','=',$request->rol);
+        }
+        if($request->estado != '')
+        {
+          $viabilidades = $viabilidades->where('estado_id','=',$request->estado);
+        }
+        $viabilidades = $viabilidades->groupBy('viabilidad_caracterizacion')->get();
+        return view('reporte.grafico', compact('viabilidad_obtenida','estado_obtenido','viabilidades','roles','unidades', 'estados','unidad_obtenida','rol_obtenido'));
     }
+
+    public function exportarViabilidad(Request $request)
+    {
+      
+        $unidades = Unidad::all();
+        $roles = Rol::all();
+        $user = Auth::user();
+        $estados = Estado::all();
+        $unidad_obtenida = $request->get('unidad');
+        $rol_obtenido = $request->get('rol');
+        $estado_obtenido = $request->get('estado');
+        $viabilidad_obtenida = $request->get('viabilidad');
+        $viabilidades = Caracterizacion::select('users.name', 'users.email', 'unidades.nombre_unidad','caracterizacion.indispensable_presencial','caracterizacion.horaEntrada', 'caracterizacion.horaSalida', 'caracterizacion.viabilidad_caracterizacion')->join('users', 'users.id', '=', 'caracterizacion.user_id')->join('unidades', 'unidades.id', '=', 'users.unidad_id');
+        if($request->viabilidad != '')
+        {
+          $viabilidades = $viabilidades->where('viabilidad_caracterizacion','=',$request->viabilidad);
+        }
+        if($request->unidad != '')
+        {
+          $viabilidades = $viabilidades->where('unidad_id','=',$request->unidad);
+        }
+        if($request->rol != '')
+        {
+          $viabilidades = $viabilidades->where('rol_id','=',$request->rol);
+        }
+        if($request->estado != '')
+        {
+          $viabilidades = $viabilidades->where('estado_id','=',$request->estado);
+        }
+        $viabilidades = $viabilidades->get();
+        $excel = new CaracterizacionExport($viabilidades);
+        return Excel::download($excel, 'caracterizacion.xlsx');
+  }
 
 }
