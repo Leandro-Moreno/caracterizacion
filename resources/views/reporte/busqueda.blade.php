@@ -7,7 +7,6 @@
       </button>
       </span>
    </div>
-   <form class="">
       <div id="busqueda-avanzada" name="busqueda-avanzada" class=" row collapse" style="padding-top:5px;padding-bottom:35px">
          <div class="row">
             <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
@@ -53,5 +52,4 @@
             </button>
          </div>
       </div>
-   </form>
 </div>
