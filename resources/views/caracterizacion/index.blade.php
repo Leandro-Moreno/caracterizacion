@@ -8,7 +8,14 @@
                     <div class="card">
                         <div class="card-header card-header-primary">
                             <h4 class="card-title ">{{count($caracterizaciones)}} {{ __('Caracterizaciónes') }}</h4>
-                            <p class="card-category"> {{ __('Aquí puedes caracterizar empleados') }}</p>
+                            @can('view_note', App\Model\Caracterizacion\Caracterizacion::class )
+                            <div id="ofBar">
+                              <b> Nota de confidencialidad:</b>
+                                <br>  
+                                La información personal de los empleados es reservada y confidencial. Por ninguna circunstancia esta información debe circularse. El uso de esta información es únicamente para tomar decisiones asociadas con el retorno gradual al campus y con el fin de cumplir con los protocolos de bioseguridad establecidos en la resolución 666 de 2020, expedida por el Ministerio de Salud y Protección Social.
+                              </b>
+                            </div>
+                            @endcan
                         </div>
                         @if (session('status'))
                             <div class="alert alert-success">
