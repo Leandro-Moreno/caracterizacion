@@ -39,7 +39,7 @@
             <div class="col-lg-6 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
                <label style="color:#505c61"> Filtrar por Viabilidad</label><br>
                <select class="form-control{{ $errors->has('viabilidad') ? ' is-invalid' : '' }}" id="input-viabilidad" aria-required="true" name="viabilidad">
-                    <option value="{{ old('viabilidad') }}" disabled>Seleccionar</option>
+                    <option value="{{ old('viabilidad') }}" >Seleccionar</option>
                      @foreach($viabilidades as $viabilidad)
                      <option value="{{$viabilidad}}" @if($viabilidad == $viabilidad_obtenida) selected @endif>{{$viabilidad}}</option>
                      @endforeach
