@@ -1,12 +1,6 @@
 <div class="sidebar" data-color="orange" data-background-color="white" data-image="{{ asset('material') }}/img/sidebar-1.jpg">
   <div class="sidebar-wrapper">
     <ul class="nav">
-      <li class="nav-item{{ $activePage == 'dashboard' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('home') }}">
-          <i class="material-icons">dashboard</i>
-            <p>{{ __('Inicio') }}</p>
-        </a>
-      </li>
       @can('view', App\Model\Caracterizacion\Caracterizacion::class)
       <li class="nav-item active">
         <div class="collapse show {{ ($activePage == 'dashboard' || $activePage == 'caracterizacion' ||  $activePage == 'viability-management'|| $activePage == 'caracterizacion.importar' || $activePage == 'viability-management') ? ' show' : '' }}" id="Caracterizaciones">
