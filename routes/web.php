@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth']], function () {
 		'edit' => 'reporte.edit',
 		'update' => 'reporte.update',
 		'destroy' => 'reporte.destroy',
-	])->middleware('role:Superadmin');
+	])->middleware('role:Superadmin,ServiciosCampus');
 
 	Route::get('caracterizacion/chart','Caracterizacion\CaracterizacionController@chart')->middleware(['role:Superadmin,ServiciosCampus']);
 
