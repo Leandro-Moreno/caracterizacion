@@ -60,14 +60,14 @@
                  <option  value="{{ old('filtroDependencia') }}"  selected>Seleccionar</option>
 
                  @foreach($listado_dependencias as $dependencia)
-                 <option value="{{ $dependencia['dependencia'] }}" >{{$dependencia['dependencia']}}</option>
+                 <option value="{{ $dependencia['dependencia'] }}" {{ $dependencia['dependencia'] ==  $dependencia_obtenida ? 'selected="selected"' : '' }}>{{$dependencia['dependencia']}}</option>
                  @endforeach
                </select>
             </div>
          </div>
          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 "  style="margin-top:30px;text-align:center">
             <button class="btn btn-success buscar-asistentes"  type="submit">
-            Buscar Asistentes de Manera Avanzada
+            Buscar
             </button>
          </div>
       </div>

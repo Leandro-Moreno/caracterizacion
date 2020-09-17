@@ -62,8 +62,8 @@
                         </div>
                      </div>
                      <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 "  style="margin-top:30px;text-align:center">
-                        <button id="verId" class="btn btn-info buscar-asistentes"  type="submit">
-                        Buscar Asistentes de Manera Avanzada
+                        <button id="verId" class="btn btn-success buscar-asistentes"  type="submit">
+                        Buscar
                         </button>
                      </div>
                   </div>

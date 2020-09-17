@@ -36,7 +36,7 @@ class CaracterizacionController extends Controller
         $unidades = Unidad::all();
         $roles = Rol::all();
         $viabilidad_obtenida = $request->get('viabilidad');
-        $dependencia_obtenida = $request->get('dependencia');
+        $dependencia_obtenida = $request->get('filtroDependencia');
         $unidad_obtenida = $request->get('unidad');
         $rol_obtenido = $request->get('rol');
         $estado_obtenido = $request->get('estado');
