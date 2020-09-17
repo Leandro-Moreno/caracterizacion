@@ -63,7 +63,7 @@ class UserPolicy
      */
     public function view(User $user)
     {
-        if($user->rol_id >= 2){
+        if($user->rol_id > 4){
 
             return true;
         }
