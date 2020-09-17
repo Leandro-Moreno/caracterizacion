@@ -8,14 +8,8 @@
         </a>
       </li>
       @can('view', App\Model\Caracterizacion\Caracterizacion::class)
-      <li class="nav-item {{ ( $activePage == 'user-management') ? ' active' : '' }}">
-        <a class="nav-link" data-toggle="collapse" href="#Caracterizaciones" aria-expanded="{{ (  $activePage == 'viability-management') ? 'true' : 'false' }}">
-            <i class="material-icons">supervised_user_circle</i>
-          <p>{{ __('Caracterización Empleados') }}
-            <b class="caret"></b>
-          </p>
-        </a>
-        <div class="collapse {{ ($activePage == 'dashboard' || $activePage == 'caracterizacion' ||  $activePage == 'viability-management'|| $activePage == 'caracterizacion.importar' || $activePage == 'viability-management') ? ' show' : '' }}" id="Caracterizaciones">
+      <li class="nav-item active">
+        <div class="collapse show {{ ($activePage == 'dashboard' || $activePage == 'caracterizacion' ||  $activePage == 'viability-management'|| $activePage == 'caracterizacion.importar' || $activePage == 'viability-management') ? ' show' : '' }}" id="Caracterizaciones">
           <ul class="nav">
           @can('view', App\Model\Caracterizacion\Caracterizacion::class)
             <li class="nav-item{{ $activePage == 'caracterizacion' ? ' active' : '' }}">
@@ -26,7 +20,7 @@
             </li>
           @endcan
           @can('view', App\User::class)
-            <li class="nav-item{{ $activePage == 'viability-management' ? ' active' : '' }}">
+            <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
               <a class="nav-link" href="{{ route('user.index') }}">
                 <i class="material-icons">supervisor_account</i>
                   <p>{{ __('Empleados') }}</p>
