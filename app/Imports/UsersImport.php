@@ -55,23 +55,30 @@ class UsersImport implements ToModel, WithHeadingRow
 
       $usuario = User::where('email', $row['correo_electronico'])->first();
       if (  ! $usuario  ) {
-        $unidad = Unidad::where('nombre_unidad',$row['facultad'])->first();
+        $row['unidad_id'] = $this->darFacultadIdConNombre( $row['facultad']  );
         $row['email'] = $row['correo_electronico'];
         $row['tipo_doc'] = isset($row['tipo_de_identificacion'])?$row['tipo_de_identificacion']:"";
         $row['documento'] = isset($row['no_identificacion'])?$row['no_identificacion']:0;
         $row['name'] = isset($row['nombre'])?$row['nombre']:"";
-        $row['unidad_id'] = $unidad->id;
         $row['rol_id'] = 1;
         $row['password'] = "";
         $usuario = User::create( $row );
         ++$this->usuarios_creado_cantidad;
       }
       else{
+        if(isset($row['facultad'])){
+          $row['unidad_id'] = $this->darFacultadIdConNombre( $row['facultad']  );
+        }
         $usuario->fill($row);
         $usuario->save();
         ++$this->usuarios_actualizado_cantidad;
       }
       return $usuario;
+    }
+    public function darFacultadIdConNombre(String $nombreFacultad)
+    {
+      $unidad = Unidad::where('nombre_unidad',$nombreFacultad)->first();
+      return $unidad->id;
     }
     public function diasSemana( String $dias_laborales )
     {
