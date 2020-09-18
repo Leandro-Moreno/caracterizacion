@@ -33,6 +33,7 @@ class CaracterizacionController extends Controller
      */
     public function index(Request $request)
     {
+        $user = Auth::user();
         $unidades = Unidad::all();
         $roles = Rol::all();
         $viabilidad_obtenida = $request->get('viabilidad');
@@ -40,7 +41,13 @@ class CaracterizacionController extends Controller
         $unidad_obtenida = $request->get('unidad');
         $rol_obtenido = $request->get('rol');
         $estado_obtenido = $request->get('estado');
-        $caracterizaciones = $this->busquedaAvanzada($request);
+        if( isset($request->request->parameters )) {
+            $caracterizaciones = $this->busquedaAvanzada($request);
+          }
+        else{
+          $caracterizaciones = Caracterizacion::join('users', 'users.id', '=', 'caracterizacion.user_id')->get();
+          // $caracterizaciones = $caracterizaciones->where('unidad_id',$user->unidad_id);
+        }
         $caracterizaciones = $this->agregarColorEstado($caracterizaciones);
         $listado_dependencias = $this->listadoDependencias();
         if(Auth::user()->rol_id < 3){
@@ -74,9 +81,6 @@ class CaracterizacionController extends Controller
     }
     public function busquedaAvanzada($request){
 
-      if( null !==  $request ){
-
-          if (Auth::user()->rol_id >= 2){
             $viabilidad_obtenida = $request->get('viabilidad');
             $dependencia_obtenida = $request->get('filtroDependencia');
             $unidad_obtenida = $request->get('unidad');
@@ -86,6 +90,7 @@ class CaracterizacionController extends Controller
             $indispensable_obtenida = $request->get('indispensable');
             $caracterizacion = Caracterizacion::first();
             $caracterizacion = $caracterizacion->join('users', 'users.id', '=', 'caracterizacion.user_id');
+            $caracterizacion = $caracterizacion->where('estado_id',1);
             if($unidad_obtenida != ""){
                 $caracterizacion = $caracterizacion->where('unidad_id', '=', $unidad_obtenida);
             }
@@ -109,12 +114,6 @@ class CaracterizacionController extends Controller
               $caracterizacion = $caracterizacion->where('dependencia', '=', $dependencia_obtenida);
             }
             $caracterizacion = $caracterizacion->get();
-        }
-      }
-      else{
-        $caracterizacion = Caracterizacion::all();
-      }
-
         return $caracterizacion;
     }
     /**

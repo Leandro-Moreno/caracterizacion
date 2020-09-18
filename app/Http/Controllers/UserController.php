@@ -123,7 +123,7 @@ class UserController extends Controller
         $user->tipo_doc = $request->tipo_doc ;
         $user->documento = $request->documento;
         $user->cargo = $request->cargo;
-        $user->password = Hash::make($request->documento);
+        $user->password = "x";
         $user->tipo_contrato = $request->tipo_contrato ;
         $user->celular = $request->celular;
         $user->direccion = $request->direccion ;
@@ -209,6 +209,11 @@ class UserController extends Controller
         $results = $results->filter(function( $value, $key){
           $user = Auth::user();
           return $value->searchable->unidad_id == $user->unidad_id;
+        });
+      }
+      if( $user->rol_id < 5){
+        $results = $results->filter(function($user){
+          return $user->searchable->estado_id == 1;
         });
       }
     return response()->json($results);

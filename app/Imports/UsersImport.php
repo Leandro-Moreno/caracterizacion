@@ -28,11 +28,13 @@ class UsersImport implements ToModel, WithHeadingRow
         $row['dias_laborales'] = isset($row['dias_laborales'])?json_encode($this->diasSemana( $row['dias_laborales'] )):'';
         $row['horaEntrada'] = isset(  $row['hora_de_entrada'] ) ? $row['hora_de_entrada']* 240000 : 0;
         $row['horaSalida'] = isset(  $row['hora_de_salida'] ) ? $row['hora_de_salida']* 240000 : 0;
-
-        $row['viabilidad_caracterizacion'] = $row['viabilidad_por_caracterizacion'];
+        if(isset($row['viabilidad_por_caracterizacion'])){
+          $row['viabilidad_caracterizacion'] = $row['viabilidad_por_caracterizacion'];
+        }
         if( $caracterizacion )
         {
-          $caracterizacion->update($row);
+          $caracterizacion->fill($row);
+          $caracterizacion->save();
           ++$this->caracterizacion_actualizada_cantidad;
         }
         else {
@@ -46,9 +48,9 @@ class UsersImport implements ToModel, WithHeadingRow
     {
       $row['direccion'] = isset($row['direccion_actual'])?$row['direccion_actual']:"";
       $row['tipo_contrato'] = isset($row['tipo_de_contrato'])?$row['tipo_de_contrato']:"";
-      if ( isset($row['estado']) ){
-         $estado = Estado::where('nombre','like',$row['estado'])->select('id')->first();
-         $row['estado_id'] = $estado;
+      if ( isset($row['estado_actual']) ){
+         $estado = Estado::where('nombre','like',$row['estado_actual'])->select('id')->first();
+         $row['estado_id'] = $estado->id;
       }
 
       $usuario = User::where('email', $row['correo_electronico'])->first();
@@ -65,7 +67,8 @@ class UsersImport implements ToModel, WithHeadingRow
         ++$this->usuarios_creado_cantidad;
       }
       else{
-        $usuario->update($row);
+        $usuario->fill($row);
+        $usuario->save();
         ++$this->usuarios_actualizado_cantidad;
       }
       return $usuario;
