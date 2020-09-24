@@ -60,11 +60,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::resource('reporte', 'Reporte\ReporteController')->names([
 		'index' => 'reporte',
-		'create' => 'reporte.create',
-		'show' => 'reporte.show',
-		'edit' => 'reporte.edit',
-		'update' => 'reporte.update',
-		'destroy' => 'reporte.destroy',
 	])->middleware('role:Superadmin,ServiciosCampus');//TODO: eliminar middlewares
 
 	Route::get('caracterizacion/chart','Caracterizacion\CaracterizacionController@chart')->middleware(['role:Superadmin,ServiciosCampus']);

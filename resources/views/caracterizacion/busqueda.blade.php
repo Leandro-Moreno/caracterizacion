@@ -9,7 +9,17 @@
    <form class="">
       <div id="busqueda-avanzada" name="busqueda-avanzada" class=" row collapse" style="padding-top:5px;padding-bottom:35px">
          <div class="row">
-            <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
+           <div class="col-md-4" style="text-align:center;margin-top:20px">
+              <label style="color:#505c61"> Filtrar por Dependencia </label><br>
+              <select id="filtroDependencia" name="filtroDependencia" class="form-control" data-placeholder=" ">
+                <option  value="{{ old('filtroDependencia') }}"  selected>Seleccionar</option>
+
+                @foreach($listado_dependencias as $dependencia)
+                <option value="{{ $dependencia['dependencia'] }}" {{ $dependencia['dependencia'] ==  $dependencia_obtenida ? 'selected="selected"' : '' }}>{{$dependencia['dependencia']}}</option>
+                @endforeach
+              </select>
+           </div>
+            <div class="col-md-4" style="text-align:center;margin-top:20px">
                <label style="color:#505c61"> Filtrar por Facultad / Unidad </label><br>
                <select id="unidad" name="unidad" class="form-control" data-placeholder=" ">
                   <option  value="" selected >Seleccione...</option>
@@ -18,7 +28,7 @@
                   @endforeach
                </select>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
+            <div class="col-md-4" style="text-align:center;margin-top:20px">
                <label style="color:#505c61"> Filtrar por Viabilidad</label><br>
                <select id="viabilidad" name="viabilidad" class="form-control" data-placeholder=" ">
                   <option  value="{{ old('viabilidad') }}"  selected>Seleccionar</option>
@@ -29,7 +39,7 @@
                   <option  value="Sin clasificación">Sin clasificación</option>
                </select>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
+            <div class="col-md-4" style="text-align:center;margin-top:20px">
                <label style="color:#505c61">Filtrar por Indispensable trabajo presencial</label><br>
                <select id="indispensable" name="indispensable" class="form-control" data-placeholder=" ">
                   <option  value="{{ old('indispensable') }}"  selected>Seleccionar</option>
@@ -37,7 +47,7 @@
                   <option  value="No">No</option>
                </select>
             </div>
-            <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
+            <div class="col-md-4" style="text-align:center;margin-top:20px">
                <label style="color:#505c61"> Filtrar por Estado de empleado </label><br>
                <select id="estado" name="estado" class="form-control" data-placeholder=" ">
                   <option  value="" selected >Seleccione...</option>
@@ -46,7 +56,7 @@
                   @endforeach
                </select>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
+            <div class="col-md-4" style="text-align:center;margin-top:20px">
                <label style="color:#505c61"> Filtrar por Envío Carta de Autorización </label><br>
                <select id="envioCarta" name="envioCarta" class="form-control" data-placeholder=" ">
                  <option  value="{{ old('viabilidad') }}"  selected>Seleccionar</option>
@@ -54,16 +64,7 @@
                  <option  value="no">No</option>
                </select>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="text-align:center;margin-top:20px">
-               <label style="color:#505c61"> Filtrar por Dependencia </label><br>
-               <select id="filtroDependencia" name="filtroDependencia" class="form-control" data-placeholder=" ">
-                 <option  value="{{ old('filtroDependencia') }}"  selected>Seleccionar</option>
 
-                 @foreach($listado_dependencias as $dependencia)
-                 <option value="{{ $dependencia['dependencia'] }}" {{ $dependencia['dependencia'] ==  $dependencia_obtenida ? 'selected="selected"' : '' }}>{{$dependencia['dependencia']}}</option>
-                 @endforeach
-               </select>
-            </div>
          </div>
          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 "  style="margin-top:30px;text-align:center">
             <button class="btn btn-success buscar-asistentes"  type="submit">

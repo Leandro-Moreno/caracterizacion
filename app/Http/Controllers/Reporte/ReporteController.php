@@ -157,34 +157,8 @@ class ReporteController extends Controller
 
     public function exportarViabilidad(Request $request)
     {
-      
-        $unidades = Unidad::all();
-        $roles = Rol::all();
-        $user = Auth::user();
-        $estados = Estado::all();
-        $unidad_obtenida = $request->get('unidad');
-        $rol_obtenido = $request->get('rol');
-        $estado_obtenido = $request->get('estado');
-        $viabilidad_obtenida = $request->get('viabilidad');
-        $viabilidades = Caracterizacion::select('users.name', 'users.email', 'unidades.nombre_unidad','caracterizacion.indispensable_presencial','caracterizacion.horaEntrada', 'caracterizacion.horaSalida', 'caracterizacion.viabilidad_caracterizacion')->join('users', 'users.id', '=', 'caracterizacion.user_id')->join('unidades', 'unidades.id', '=', 'users.unidad_id');
-        if($request->viabilidad != '')
-        {
-          $viabilidades = $viabilidades->where('viabilidad_caracterizacion','=',$request->viabilidad);
-        }
-        if($request->unidad != '')
-        {
-          $viabilidades = $viabilidades->where('unidad_id','=',$request->unidad);
-        }
-        if($request->rol != '')
-        {
-          $viabilidades = $viabilidades->where('rol_id','=',$request->rol);
-        }
-        if($request->estado != '')
-        {
-          $viabilidades = $viabilidades->where('estado_id','=',$request->estado);
-        }
-        $viabilidades = $viabilidades->get();
-        $excel = new CaracterizacionExport($viabilidades);
+        $caracterizacion = Caracterizacion::with('user')->get();
+        $excel = new CaracterizacionExport($caracterizacion);
         return Excel::download($excel, 'caracterizacion.xlsx');
   }
 

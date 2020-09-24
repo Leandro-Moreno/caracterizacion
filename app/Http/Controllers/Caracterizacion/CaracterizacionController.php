@@ -41,7 +41,7 @@ class CaracterizacionController extends Controller
         $unidad_obtenida = $request->get('unidad');
         $rol_obtenido = $request->get('rol');
         $estado_obtenido = $request->get('estado');
-        if( isset($request->request->parameters )) {
+        if( !empty($request->all()) ) {
             $caracterizaciones = $this->busquedaAvanzada($request);
           }
         else{

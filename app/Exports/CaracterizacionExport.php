@@ -6,27 +6,28 @@ use App\Model\Caracterizacion\Caracterizacion;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class CaracterizacionExport implements FromView
+class CaracterizacionExport implements FromView, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
 
-    protected $viabilidades;
+    protected $caracterizacion;
 
-    public function __construct($viabilidades)
+    public function __construct($caracterizacion)
     {
-       $this->viabilidades = $viabilidades;
+       $this->caracterizacion = $caracterizacion;
     }
     public function view(): View
     {
         return view('reporte.excel',[
-            'viabilidades' => $this->viabilidades
+            'caracterizacion' => $this->caracterizacion
         ]);
     }
     public function collection()
     {
-        return $this->viabilidades;
+        return $this->caracterizacion;
     }
 }

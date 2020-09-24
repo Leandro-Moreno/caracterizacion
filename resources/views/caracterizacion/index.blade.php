@@ -7,11 +7,11 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title ">{{count($caracterizaciones)}} {{ __('Caracterizaciónes') }}</h4>
+                            <h4 class="card-title ">{{ __('Caracterizaciones Covid de empleados en Uniandes') }}</h4>
                             @can('view_note', App\Model\Caracterizacion\Caracterizacion::class )
                             <div id="ofBar">
                               <b> Nota de confidencialidad:</b>
-                                <br>  
+                                <br>
                                 La información personal de los empleados es reservada y confidencial. Por ninguna circunstancia esta información debe circularse. El uso de esta información es únicamente para tomar decisiones asociadas con el retorno gradual al campus y con el fin de cumplir con los protocolos de bioseguridad establecidos en la resolución 666 de 2020, expedida por el Ministerio de Salud y Protección Social.
                               </b>
                             </div>
@@ -27,50 +27,50 @@
                                 @include('caracterizacion.busqueda')
                             @endcan
                             <div class="table-responsive tableFixHead">
-                                <table class="table table-striped">
+                                <table id="tablaCaracterizacion" class="table table-striped table-sm">
                                     <thead class=" text-primary">
                                     @can('view_list_facultad' , App\Model\Caracterizacion\Caracterizacion::class)
-                                    <th id="facultad">
+                                    <th id="facultad" class="th-sm">
                                         {{ __('Facultad') }}
                                     </th>
                                     @endcan
-                                    <th id="dependencia">
+                                    <th id="dependencia" class="th-sm">
                                         {{ __('Dependencia') }}
                                     </th>
-                                    <th id="cargo">
+                                    <th id="cargo" class="th-sm">
                                         {{ __('Cargo') }}
                                     </th>
-                                    <th id="cedula">
+                                    <th id="cedula" class="th-sm">
                                         {{ __('Cédula') }}
                                     </th>
-                                    <th id="nombre" style="max-width: 100px; word-break: break-all;">
+                                    <th id="nombre" class="th-sm" style="max-width: 100px; word-break: break-all;">
                                         {{ __('Nombres') }}
                                     </th>
-                                    <th id="tipo_con" >
+                                    <th id="tipo_con"  class="th-sm">
                                         {{ __('Tipo de contrato') }}
                                     </th>
-                                    <th id="estado">
+                                    <th id="estado" class="th-sm">
                                         {{ __('Estado Actual') }}
                                     </th>
-                                    <th id="indispensable_presencial">
+                                    <th id="indispensable_presencial" class="th-sm">
                                         {{ __('Indispensable presencial') }}
                                     </th>
-                                    <th id="por_que">
+                                    <th id="por_que" class="th-sm">
                                         {{ __('¿Por qué?') }}
                                     </th>
-                                    <th id="hora_entrada">
+                                    <th id="hora_entrada" class="th-sm">
                                         {{ __('Hora de Entrada') }}
                                     </th>
-                                    <th id="hora_Salida">
+                                    <th id="hora_Salida" class="th-sm">
                                         {{ __('Hora de Salida') }}
                                     </th>
-                                    <th id="dias_laborales">
+                                    <th id="dias_laborales" class="th-sm">
                                         {{ __('Días laborales') }}
                                     </th>
-                                    <th id="envio_carta">
+                                    <th id="envio_carta" class="th-sm">
                                         {{ __('Envío Carta de Autorización') }}
                                     </th>
-                                    <th id="viabilidad">
+                                    <th id="viabilidad" class="th-sm">
                                         {{ __('Viabilidad') }}
                                     </th>
 
@@ -154,5 +154,9 @@
             $("#trabajo_en_casa").prop( "checked" )?$( "#toggTrabajo" ).text("No"):$( "#toggTrabajo" ).text("Si");
             $("#envio-consentimiento-togg").prop( "checked" )?$( "#toggEnvio" ).text("No Envío"):$( "#toggEnvio" ).text("Si Envío");
         });
+        // $(document).ready( function () {
+        //     $('#tablaCaracterizacion').DataTable();
+        // } );
+        //
     </script>
 @endpush
