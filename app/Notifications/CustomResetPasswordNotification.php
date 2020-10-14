@@ -53,7 +53,6 @@ class CustomResetPasswordNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        // dd($this);
         return (new MailMessage)
                 ->subject('Recuperar contraseña ')
                 ->greeting('Cordial Saludo')

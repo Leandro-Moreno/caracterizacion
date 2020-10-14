@@ -14,7 +14,8 @@ use App\Model\Estado;
 use App\Rol;
 use App\Imports\UsersImport;//TODO: cambiar users por caracterizacion
 use Maatwebsite\Excel\Facades\Excel;
-
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\EstadoSaludModificado;
 
 use Spatie\Searchable\Search;
 
@@ -32,39 +33,64 @@ class CaracterizacionController extends Controller
      */
     public function index(Request $request)
     {
+        $user = Auth::user();
+        $unidades = Unidad::all();
+        $roles = Rol::all();
         $viabilidad_obtenida = $request->get('viabilidad');
+        $dependencia_obtenida = $request->get('filtroDependencia');
         $unidad_obtenida = $request->get('unidad');
         $rol_obtenido = $request->get('rol');
         $estado_obtenido = $request->get('estado');
-        $caracterizaciones = Caracterizacion::all();
-        $unidades = Unidad::all();
-        $roles = Rol::all();
-        $caracterizaciones = $this->busquedaAvanzada($request);
+        if( !empty($request->all()) ) {
+            $caracterizaciones = $this->busquedaAvanzada($request);
+          }
+        else{
+          $caracterizaciones = Caracterizacion::join('users', 'users.id', '=', 'caracterizacion.user_id')->get();
+          // $caracterizaciones = $caracterizaciones->where('unidad_id',$user->unidad_id);
+        }
         $caracterizaciones = $this->agregarColorEstado($caracterizaciones);
+        $listado_dependencias = $this->listadoDependencias();
         if(Auth::user()->rol_id < 3){
           $caracterizaciones = $caracterizaciones->filter(function ($caracterizacion){
               $user = Auth::user();
               return $caracterizacion->user->unidad_id == $user->unidad_id;
           });
           $unidades = Unidad::where( 'id','=', Auth::user()->unidad_id )->get();
-          $roles = Rol::where( 'id','=', Auth::user()->rol_id )->get();
+          $roles = Rol::where( 'id', Auth::user()->rol_id )->get();
         }
-        $caracterizaciones = $caracterizaciones->paginate(10);
+        foreach($caracterizaciones as $caracterizacion){
+          $caracterizacion->dias_laborales = preg_replace("/[^a-zA-Z0-9]+/", " ", $caracterizacion->dias_laborales);
+        }
+        $caracterizaciones = $caracterizaciones->paginate(15);
         $estados = Estado::all();
-        return view('caracterizacion.index', compact('estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida'),  ['caracterizaciones' => $caracterizaciones->paginate(15)] );
+        return view('caracterizacion.index', compact('dependencia_obtenida','listado_dependencias','estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida', 'caracterizaciones') );
     }
-
+    public function listadoDependencias()
+    {
+      $usuario_actual = Auth::user();
+      if($usuario_actual->rol_id >= 2){
+        $todos_los_usuarios = Caracterizacion::all('dependencia');
+      }
+      else{
+        $todos_los_usuarios = DB::table('caracterizacion')
+        ->join('users', 'caracterizacion.user_id', '=','users.id')
+        ->select('dependencia')
+        ->get();
+      }
+      return $todos_los_usuarios->unique('dependencia')->toArray();
+    }
     public function busquedaAvanzada($request){
 
-      if( null !==  $request ){
-
-          if (Auth::user()->rol_id >= 2){
             $viabilidad_obtenida = $request->get('viabilidad');
+            $dependencia_obtenida = $request->get('filtroDependencia');
             $unidad_obtenida = $request->get('unidad');
             $rol_obtenido = $request->get('rol');
             $estado_obtenido = $request->get('estado');
+            $envio_carta  = $request->get('envioCarta');
+            $indispensable_obtenida = $request->get('indispensable');
             $caracterizacion = Caracterizacion::first();
             $caracterizacion = $caracterizacion->join('users', 'users.id', '=', 'caracterizacion.user_id');
+            $caracterizacion = $caracterizacion->where('estado_id',1);
             if($unidad_obtenida != ""){
                 $caracterizacion = $caracterizacion->where('unidad_id', '=', $unidad_obtenida);
             }
@@ -77,15 +103,17 @@ class CaracterizacionController extends Controller
             }
             if($viabilidad_obtenida != ""){
               $caracterizacion = $caracterizacion->where('viabilidad_caracterizacion', '=', $viabilidad_obtenida);
-
-          }
-            $caracterizacion = $caracterizacion->paginate(10);
-        }
-      }
-      else{
-        $caracterizacion = Caracterizacion::all();
-      }
-
+            }
+            if($envio_carta != ""){
+              $caracterizacion = $caracterizacion->where('envio_de_carta_autorizacion', '=', $envio_carta);
+            }
+            if($indispensable_obtenida != ""){
+              $caracterizacion = $caracterizacion->where('indispensable_presencial', '=', $indispensable_obtenida);
+            }
+            if($dependencia_obtenida != ""){
+              $caracterizacion = $caracterizacion->where('dependencia', '=', $dependencia_obtenida);
+            }
+            $caracterizacion = $caracterizacion->get();
         return $caracterizacion;
     }
     /**
@@ -146,7 +174,6 @@ class CaracterizacionController extends Controller
     {
       if (Auth::user()->rol_id == 2){
         $validatedData = $request->validate([
-          'email' => 'required|unique:users|max:255',
           'documento' => 'required|unique:users|max:255',
           ]);
 
@@ -213,8 +240,17 @@ class CaracterizacionController extends Controller
       $viabilidades = array("Consultar con jefatura servicio médico y SST", "Viable trabajo presencial", "Trabajo en casa y consultar a telemedicina", "Trabajo en casa", "Sin clasificación");
       $semana_laboral = array("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
       $dias_laborales = json_decode($caracterizacion->dias_laborales);
-      //dd($caracterizacion->viabilidad_caracterizacion);
       return view('caracterizacion.edit', compact('viabilidades','caracterizacion', 'unidades', 'user', 'dias_laborales', 'semana_laboral'));
+    }
+    public function ajustarHoras(String $hora)
+    {
+        $temporal = explode(':', $hora);
+        if(!isset($temporal[2])){
+          return $hora . ":00";
+        }
+        else {
+          return $hora;
+        }
     }
     /**
      * Update the specified resource in storage.
@@ -225,45 +261,43 @@ class CaracterizacionController extends Controller
      */
     public function update(Request $request, Caracterizacion $caracterizacion)
     {
-      if (Auth::user()->rol_id == 2){
-        $validatedData = $request->validate([
-          'email' => 'required|email|max:255',
-          'documento' => 'required|numeric',
-      ]);
-
-    }
-      if(!is_null($request->dias_laborales )){
-        $request->dias_laborales = json_encode($request->dias_laborales);
-      }
-        if($request->indispensable_presencial == null){
-            $request->indispensable_presencial = 'No' ;
+        $datos = $request->all();
+        if(isset($datos['dias_laborales']) ){
+          $datos['dias_laborales'] = json_encode($request->dias_laborales);
         }
-        if($request->trabajo_en_casa == null){
-            $request->trabajo_en_casa = 'No' ;
+        if(!isset( $datos['indispensable_presencial'] )){
+            $datos['indispensable_presencial'] = 'No' ;
         }
-        $user = User::where('id','=',$caracterizacion->user_id)->first();
-        $user->cargo = $request->cargo;
-        $user->documento = $request->documento;
-        $user->direccion = $request->direccion ;
-        $user->tipo_contrato = $request->tipo_contrato ;
-        $user->barrio = $request->barrio ;
-        $user->localidad = $request->localidad;
-        $user->unidad_id = $request->unidad_id;
+        else {
+          $datos['horaEntrada'] = $this->ajustarHoras($datos['horaEntrada']);
+          $datos['horaSalida'] = $this->ajustarHoras($datos['horaSalida']);
+        }
+        if(!isset($datos['trabajo_en_casa'] )){
+            $datos['trabajo_en_casa'] = 'No' ;
+        }
+        if(!isset($datos['envio_de_carta_autorizacion'] )){
+            $datos['envio_de_carta_autorizacion'] = 'No' ;
+        }
+        if(!isset($datos['envio_de_consentimiento'] )){
+            $datos['envio_de_consentimiento'] = 'No' ;
+        }
+        $user = $caracterizacion->user()->first();
+        $user->fill($datos);
         $user->save();
-
-        $caracterizacion->dependencia = $request->dependencia ;
-        $caracterizacion->indispensable_presencial = $request->indispensable_presencial ;
-        $caracterizacion->por_que = $request->por_que ;
-        $caracterizacion->horaEntrada = $request->hora_entrada ;
-        $caracterizacion->horaSalida = $request->hora_salida ;
-        $caracterizacion->trabajo_en_casa = $request->trabajo_en_casa ;
-        $caracterizacion->dias_laborales = $request->dias_laborales ;
-        $caracterizacion->viabilidad_caracterizacion = $request->viabilidad_caracterizacion ;
-        $caracterizacion->observacion_cambios_de_estado = $request->observacion_cambios_de_estado ;
-        $caracterizacion->notas_comentarios_ma_andrea_leyva = $request->notas_comentarios_ma_andrea_leyva ;
-        $caracterizacion->envio_de_consentimiento = $request->envio_de_consentimiento ;
+        $caracterizacion->fill($datos);
         $caracterizacion->save();
+        if(isset($datos['viabilidad_caracterizacion']))
+        {
+          $this->notificarCambiosSalud($user, $datos['viabilidad_caracterizacion']);
+        }
         return redirect('caracterizacion')->with('status', 'Caracterización actualizada con éxito.');
+    }
+    public function notificarCambiosSalud(User $empleado, String $cambios = "")
+    {
+      $usuarios_facultad = User::where('rol_id',2)->where('unidad_id',$empleado->unidad_id)->get();
+      foreach ($usuarios_facultad as $usuario_a_notificar) {
+        $usuario_a_notificar->notify( new EstadoSaludModificado( $empleado, $cambios ) );
+      }
     }
     /**
      * Import the specified resource from storage.
@@ -281,8 +315,14 @@ class CaracterizacionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function importarCrear(){
-      $caracterizacion = Excel::import(new UsersImport, request()->file('caracterizacion') );
-      return back();
+      $import = new UsersImport;
+      Excel::import($import, request()->file('caracterizacion') );
+      $cifras=$import->getRowCount();
+      return back()->with('alert','El proceso de importación fue exitoso. Se crearon '
+      .$cifras[2].' y se actualizaron '
+      .$cifras[3].' empleados. Además se crearon '
+      .$cifras[0].' y se actualizaron '
+      .$cifras[1].' caracterizaciones.');
     }
         /**
      * Advanced Search the specified resource from storage.
@@ -293,7 +333,7 @@ class CaracterizacionController extends Controller
     public function busqueda(Request $request)
     {
       $results = (new Search())
-              ->registerModel(User::class, ['name', 'apellido','documento','email'])
+              ->registerModel(User::class, ['name','documento','email'])
               ->search($request->input('query'));
       return response()->json($results);
     }

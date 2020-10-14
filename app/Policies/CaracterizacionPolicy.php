@@ -24,6 +24,20 @@ class CaracterizacionPolicy
         }
         return false;
     }
+     /**
+     * Determine whether the user can delete the caracterizacion.
+     *
+     * @param  \App\User  $user
+     * @param  \App\App\Model\Caracterizacion\Caracterizacion  $caracterizacion
+     * @return mixed
+     */
+    public function view_note(User $user)
+    {
+        if($user->rol_id == 2){
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Determine whether the user can view the caracterizacion.
@@ -49,7 +63,7 @@ class CaracterizacionPolicy
      */
     public function view_viability(User $user)
     {
-        if($user->rol_id >= 3){
+        if($user->rol_id >= 4){
             return true;
         }
         return false;
@@ -154,14 +168,42 @@ class CaracterizacionPolicy
     }
 
 
+    public function view_list_facultad(User $user)
+    {
+        if($user->rol_id  == 2){
+            return false;
+        }
+        return true;
+    }
+
     public function viewByRoleCaracterizacion(User $user){
         if($user->rol_id == 2 || $user->rol_id == 4 ){
             return true;
         }
     return false ;
     }
+    /*
+    * Police de permisos de edición de Datos Básicos
+    */
+    public function editDatosBasicos(User $user)
+    {
+        if($user->rol_id >= 4 ){
+                return true;
 
+        }
+        return false;
+    }
+    /*
+    * Police de permisos de edición de solicitud de trabajo Presencial por la Facultad
+    */
+    public function editDatosTrabajoPresencial(User $user)
+    {
+        if($user->rol_id == 2 ){
+                return true;
 
+        }
+        return false;
+    }
     public function editPestañaGHDO(User $user)
     {
         if($user->rol_id >= 4 ){
@@ -172,7 +214,7 @@ class CaracterizacionPolicy
     }
     public function editPestañaSalud(User $user)
     {
-        if($user->rol_id >= 3 ){
+        if($user->rol_id == 3 || $user->rol_id == 5){
                 return true;
 
         }

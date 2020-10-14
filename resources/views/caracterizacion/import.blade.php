@@ -1,8 +1,12 @@
-@extends('layouts.app', ['activePage' => 'users-management', 'titlePage' => __('Gestión de Masiva usuarios')])
-
+@extends('layouts.app', ['activePage' => 'users-management', 'titlePage' => __('Gestión de Masiva Empleados')])
 @section('content')
   <div class="content">
     <div class="container-fluid">
+      @if (session('alert'))
+          <div class="alert alert-success">
+              {{ session('alert') }}
+          </div>
+      @endif
       <div class="row">
         <div class="col-md-12">
           <form method="post" action="{{ route('caracterizacion.importarCrear') }}" autocomplete="off" class="form-horizontal" enctype="multipart/form-data">

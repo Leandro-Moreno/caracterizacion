@@ -26,18 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $ultimos_usuarios = User::all();
-        $envio_consentimiento = Caracterizacion::where('envio_de_consentimiento' , '=' , 'No')->get();
-        if(Auth::user()->rol_id < 3){
-          $envio_consentimiento = $envio_consentimiento->filter(function ($caracterizacion){
-              $user = Auth::user();
-              return $caracterizacion->user->unidad_id == $user->unidad_id;
-          });
-          $ultimos_usuarios = $ultimos_usuarios->filter(function ($usuarios){
-              $user = Auth::user();
-              return $usuarios->unidad_id == $user->unidad_id;
-          });
-        }
-        return view('dashboard', compact('ultimos_usuarios', 'envio_consentimiento'), ['ultimos_usuarios' => $ultimos_usuarios->paginate(3)]);
+        return redirect()->route('caracterizacion');
     }
 }

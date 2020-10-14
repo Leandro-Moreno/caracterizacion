@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('Gestión de usuarios')])
+@extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('Gestión de empleados')])
 
 @section('content')
   <div class="content">
@@ -9,7 +9,7 @@
             @csrf
             <div class="card ">
               <div class="card-header card-header-primary">
-                <h4 class="card-title">{{ __('Crear usuario') }}</h4>
+                <h4 class="card-title">{{ __('Crear Empleado') }}</h4>
                 <p class="card-category"></p>
               </div>
               <div class="card-body">
@@ -107,22 +107,9 @@
                         <div class="form-group{{ $errors->has('unidad_id') ? ' has-danger' : '' }}">
                           <select class="form-control{{ $errors->has('unidad_id') ? ' is-invalid' : '' }}" id="input-rol" required="true" aria-required="true" name="unidad_id">
                             @foreach($unidades as $unidad)
-                              <option value="{{ $unidad->id }}">{{ $unidad->nombre_unidad }}</option>
+                              <option value="{{ $unidad->id }}" >{{ $unidad->nombre_unidad }}</option>
                             @endforeach
                           </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="row">
-                      <label class="col-md-3 col-form-label">{{ __('Dependecia') }}</label>
-                      <div class="col-md-9">
-                        <div class="form-group{{ $errors->has('dependencia') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('dependencia') ? ' is-invalid' : '' }}" name="dependencia" id="input-dependencia" type="text" placeholder="{{ __('Dependencia') }}" value="{{ old('dependencia') }}" aria-required="true"/>
-                          @if ($errors->has('dependencia'))
-                            <span id="dependencia-error" class="error text-danger" for="input-dependencia">{{ $errors->first('dependencia') }}</span>
-                          @endif
                         </div>
                       </div>
                     </div>
@@ -158,7 +145,7 @@
                       <label class="col-md-3 col-form-label">{{ __('Barrio') }}</label>
                       <div class="col-md-9">
                         <div class="form-group{{ $errors->has('barrio') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('barrio') ? ' is-invalid' : '' }}" name="barrio" id="input-barrio" type="text" placeholder="{{ __('Direccion') }}" value="{{ old('barrio') }}" aria-required="true"/>
+                          <input class="form-control{{ $errors->has('barrio') ? ' is-invalid' : '' }}" name="barrio" id="input-barrio" type="text" placeholder="{{ __('Barrio') }}" value="{{ old('barrio') }}" aria-required="true"/>
                           @if ($errors->has('barrio'))
                             <span id="barrio-error" class="error text-danger" for="input-barrio">{{ $errors->first('barrio') }}</span>
                           @endif
@@ -171,7 +158,7 @@
                       <label class="col-md-3 col-form-label">{{ __('Localidad') }}</label>
                       <div class="col-md-9">
                         <div class="form-group{{ $errors->has('localidad') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('localidad') ? ' is-invalid' : '' }}" name="localidad" id="input-localidad" type="text" placeholder="{{ __('Direccion') }}" value="{{ old('localidad') }}" aria-required="true"/>
+                          <input class="form-control{{ $errors->has('localidad') ? ' is-invalid' : '' }}" name="localidad" id="input-localidad" type="text" placeholder="{{ __('Localidad') }}" value="{{ old('localidad') }}" aria-required="true"/>
                           @if ($errors->has('localidad'))
                             <span id="localidad-error" class="error text-danger" for="input-localidad">{{ $errors->first('localidad') }}</span>
                           @endif

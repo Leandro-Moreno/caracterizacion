@@ -12,4 +12,15 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/material-dashboard.scss', 'public/css');
+    .sass('resources/sass/material-dashboard.scss', 'public/css')
+    .options({
+        autoprefixer: {
+            options: {
+                browsers: [
+                    'last 10 versions',
+                ]
+            }
+        }
+   })
+    .version();
+mix.browserSync('cara.test');

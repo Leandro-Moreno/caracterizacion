@@ -46,10 +46,10 @@ class UserController extends Controller
             }
             if($rol_obtenido != ""){
                 $users = $users->where('rol_id', '=', $rol_obtenido);
-             
+
             }
             if($estado_obtenido != ""){
-                $users = $users->where('estado_id', '=', $estado_obtenido); 
+                $users = $users->where('estado_id', '=', $estado_obtenido);
             }
             $users = $users->paginate(10);
         }
@@ -77,8 +77,7 @@ class UserController extends Controller
         $unidades = Unidad::all();
         $roles = Rol::all();
         $estados = Estado::all();
-        $unidad = Unidad::all();
-        return view('users.create', compact('unidad', 'unidades' , 'estados', 'roles'));
+        return view('users.create', compact( 'unidades' , 'estados', 'roles'));
     }
 
     /**
@@ -91,41 +90,46 @@ class UserController extends Controller
     public function createCaracterizacion($id)
     {
 
+        if(Auth::user()->rol->id == 2){
+            $unidades = Unidad::find(Auth::user()->unidad->id)->get();
+        }else{
+            $unidades = Unidad::all();
+        }
         //Cambiar la consulta según los estados y roles. COSULTA PRUEBA.
         $userCaracterizacion = User::find($id);
         $user = DB::table('users')
         //->where('users.rol_id', [2,3,4,5,6])
         ->get();
         $sendingUser = User::where('rol_id','=',4)->get();
-        $unidades = Unidad::all();
-        foreach($unidades as $unidad){
-           // dd($unidad->id);
-
-        }
         return view('caracterizacion.createwithuser', compact('user', 'unidades','sendingUser', 'userCaracterizacion'));
     }
     public function storeUser(Request $request)
     {
-      
+        $validatedData = $request->validate([
+            'email' => 'required|email|max:255',
+            'documento' => 'required|numeric',
+        ]);
         $user = new User;
-        $user->rol_id = $request->rol;
-        $user->estado_id = $request->estado;
+        if(Auth::user()->rol->id == 2){
+            $user->rol_id = 1;
+        }
+        else{
+            $user->rol_id = $request->rol_id;
+        }
+        $user->estado_id = $request->estado_id;
         $user->name = $request->name;
-        $user->name = $request->name  ;
-        $user->name2 = $request->name2;
         $user->apellido = $request->apellido;
-        $user->apellido2 = $request->apellido2 ;
         $user->email = $request->email;
         $user->tipo_doc = $request->tipo_doc ;
         $user->documento = $request->documento;
         $user->cargo = $request->cargo;
-        $user->password = Hash::make($request->documento);
+        $user->password = "x";
         $user->tipo_contrato = $request->tipo_contrato ;
         $user->celular = $request->celular;
         $user->direccion = $request->direccion ;
         $user->barrio = $request->barrio;
         $user->localidad = $request->localidad;
-        $user->unidad_id = $request->unidad ;
+        $user->unidad_id = $request->unidad_id;
         $user->save();
 
         return redirect()->route('user.index')->withStatus(__('Usuario Creado correctamente.'));
@@ -139,9 +143,13 @@ class UserController extends Controller
      */
     public function edit(User $user, Rol $model )
     {
-        $unidades = Unidad::all();
+        if(Auth::user()->rol->id == 2){
+            $unidades = Unidad::where('unidad_id' , '=' , Auth::user()->unidad->id);
+        }else{
+            $unidades = Unidad::all();
+        }
         $estados = Estado::all();
-        return view('users.edit', compact('user', 'unidades', 'estados'), ['roles' => $model->all()], ['unidades' => $model->all()]);
+        return view('users.edit', compact('user', 'unidades', 'estados'), ['roles' => $model->all()]);
     }
 
 
@@ -154,13 +162,22 @@ class UserController extends Controller
      */
     public function update(Request $request, User  $user)
     {
-        $user->update(
+        $validatedData = $request->validate([
+            'email' => 'required|email|max:255',
+            'documento' => 'required|numeric',
+        ]);
+
+        $user->fill(
             $request->merge(['password' => Hash::make($request->get('password'))])
             ->except(
                 [$request->get('password') ? '' : 'password']
                 )
             );
-
+        if(Auth::user()->rol_id>=4)
+        {
+          $user->rol_id = $request->get('rol_id');
+        }
+        $user->save();
 
         return redirect()->route('user.index')->withStatus(__('Usuario actualizado correctamente.'));
     }
@@ -185,13 +202,18 @@ class UserController extends Controller
     public function busqueda(Request $request)
     {
       $results = (new Search())
-    ->registerModel(User::class, ['name', 'apellido','documento','email'])
+    ->registerModel(User::class, ['name','documento','email'])
     ->search($request->input('query'));
       $user = Auth::user();
       if( $user->rol_id == 2){
         $results = $results->filter(function( $value, $key){
           $user = Auth::user();
           return $value->searchable->unidad_id == $user->unidad_id;
+        });
+      }
+      if( $user->rol_id < 5){
+        $results = $results->filter(function($user){
+          return $user->searchable->estado_id == 1;
         });
       }
     return response()->json($results);

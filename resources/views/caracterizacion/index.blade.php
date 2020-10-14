@@ -7,8 +7,15 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-primary">
-                            <h4 class="card-title ">{{ __('Caracterización') }}</h4>
-                            <p class="card-category"> {{ __('Aquí puedes gestionar tus caracterizar tus usuarios') }}</p>
+                            <h4 class="card-title ">{{ __('Caracterizaciones Covid de empleados en Uniandes') }}</h4>
+                            @can('view_note', App\Model\Caracterizacion\Caracterizacion::class )
+                            <div id="ofBar">
+                              <b> Nota de confidencialidad:</b>
+                                <br>
+                                La información personal de los empleados es reservada y confidencial. Por ninguna circunstancia esta información debe circularse. El uso de esta información es únicamente para tomar decisiones asociadas con el retorno gradual al campus y con el fin de cumplir con los protocolos de bioseguridad establecidos en la resolución 666 de 2020, expedida por el Ministerio de Salud y Protección Social.
+                              </b>
+                            </div>
+                            @endcan
                         </div>
                         @if (session('status'))
                             <div class="alert alert-success">
@@ -19,62 +26,89 @@
                             @can('create', App\Model\Caracterizacion\Caracterizacion::class)
                                 @include('caracterizacion.busqueda')
                             @endcan
-                            <div class="table-responsive">
-                                <table class="table">
+                            <div class="table-responsive tableFixHead">
+                                <table id="tablaCaracterizacion" class="table table-striped table-sm">
                                     <thead class=" text-primary">
-                                    <th id="nombre">
-                                        {{ __('Nombres') }}
-                                    </th>
-                                    <th id="facultad">
+                                    @can('view_list_facultad' , App\Model\Caracterizacion\Caracterizacion::class)
+                                    <th id="facultad" class="th-sm">
                                         {{ __('Facultad') }}
                                     </th>
-                                    @can('view_indispensable' , App\Model\Caracterizacion\Caracterizacion::class)
-                                    <th id="trabajo_presencial" >
-                                        {{ __('Indispensable trabajo presencial') }}
+                                    @endcan
+                                    <th id="dependencia" class="th-sm">
+                                        {{ __('Dependencia') }}
                                     </th>
-                                    <th id="cargo">
+                                    <th id="cargo" class="th-sm">
                                         {{ __('Cargo') }}
                                     </th>
-                                    <th id="hora_entrada">
+                                    <th id="cedula" class="th-sm">
+                                        {{ __('Cédula') }}
+                                    </th>
+                                    <th id="nombre" class="th-sm" style="max-width: 100px; word-break: break-all;">
+                                        {{ __('Nombres') }}
+                                    </th>
+                                    <th id="tipo_con"  class="th-sm">
+                                        {{ __('Tipo de contrato') }}
+                                    </th>
+                                    <th id="estado" class="th-sm">
+                                        {{ __('Estado Actual') }}
+                                    </th>
+                                    <th id="indispensable_presencial" class="th-sm">
+                                        {{ __('Indispensable presencial') }}
+                                    </th>
+                                    <th id="por_que" class="th-sm">
+                                        {{ __('¿Por qué?') }}
+                                    </th>
+                                    <th id="hora_entrada" class="th-sm">
                                         {{ __('Hora de Entrada') }}
                                     </th>
-                                    <th id="hora_Salida">
+                                    <th id="hora_Salida" class="th-sm">
                                         {{ __('Hora de Salida') }}
                                     </th>
-                                    @endcan
-                                    @can('view_facultad' , App\Model\Caracterizacion\Caracterizacion::class)
-                                    <th id="viabilidad">
+                                    <th id="dias_laborales" class="th-sm">
+                                        {{ __('Días laborales') }}
+                                    </th>
+                                    <th id="envio_carta" class="th-sm">
+                                        {{ __('Envío del consentimiento') }}
+                                    </th>
+                                    <th id="viabilidad" class="th-sm">
                                         {{ __('Viabilidad') }}
                                     </th>
-                                    @endcan
-                                    @can('view_facultad' , App\Model\Caracterizacion\Caracterizacion::class)
-                                    <th id="observacion">
-                                        {{ __('Observación de cambios de estado') }}
-                                    </th>
-                                    @endcan
-                                    <th id="estado">
-                                        {{ __('Estado') }}
-                                    </th>
+
                                     <th id="acciones" class="text-right">
-                                        {{ __('Accion') }}
+                                        {{ __('Acción') }}
                                     </th>
                                     </thead>
                                     <tbody>
                                     @foreach($caracterizaciones as $dato)
-
                                         <tr>
-                                            <td>
-                                                {{ $dato->user->name }} {{ $dato->user->apellido }}
-                                            </td>
+                                        @can('view_list_facultad' , $dato)
                                             <td>
                                                 {{ $dato->user->unidad->nombre_unidad }}
                                             </td>
-                                            @can('view_indispensable' , App\Model\Caracterizacion\Caracterizacion::class)
+                                        @endcan
+                                            <td>
+                                                {{ $dato->dependencia }}
+                                            </td>
+                                            <td>
+                                                {{ $dato->user->cargo }}
+                                            </td>
+                                            <td>
+                                                {{ $dato->user->documento }}
+                                            </td>
+                                            <td>
+                                                {{ $dato->user->name }}
+                                            </td>
+                                            <td>
+                                                {{ $dato->user->tipo_contrato }}
+                                            </td>
+                                            <td>
+                                                {{ $dato->user->estado->nombre}}
+                                            </td>
                                             <td class="text-center">
                                                 {{ $dato->indispensable_presencial }}
                                             </td>
                                             <td>
-                                                {{ $dato->user->cargo }}
+                                                {{ $dato->por_que }}
                                             </td>
                                             <td>
                                                 {{ $dato->horaEntrada }}
@@ -82,19 +116,14 @@
                                             <td>
                                                 {{ $dato->horaSalida }}
                                             </td>
-                                            @endcan
-                                            @can('view_facultad', $dato)
+                                            <td>
+                                                {{ $dato->dias_laborales}}
+                                            </td>
+                                            <td>
+                                                {{ $dato->envio_de_consentimiento}}
+                                            </td>
                                             <td class="{{$dato->estadoColor}}">
                                                 {{ $dato->viabilidad_caracterizacion }}
-                                            </td>
-                                            @endcan
-                                            @can('view_facultad', $dato)
-                                            <td>
-                                                {{ $dato->observacion_cambios_de_estado }}
-                                            </td>
-                                            @endcan
-                                            <td class="text-center">
-                                                {{ $dato->user->estado->nombre }}{{$dato->id}}
                                             </td>
                                             @can('create', App\Model\Caracterizacion\Caracterizacion::class)
                                                 <td class="td-actions text-right">
@@ -107,6 +136,8 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+
+                                {{ $caracterizaciones->links() }}
                             </div>
                         </div>
                     </div>
@@ -114,7 +145,6 @@
             </div>
         </div>
     </div>
-    {{ $caracterizaciones->links() }}
 @endsection
 @push('js')
     <script type="text/javascript">
@@ -124,18 +154,9 @@
             $("#trabajo_en_casa").prop( "checked" )?$( "#toggTrabajo" ).text("No"):$( "#toggTrabajo" ).text("Si");
             $("#envio-consentimiento-togg").prop( "checked" )?$( "#toggEnvio" ).text("No Envío"):$( "#toggEnvio" ).text("Si Envío");
         });
-        $(document).ready(function() {
-
-            $("#field").change(function() {
-                var val = $(this).val();
-                $("#operator").html(options[val]);
-            });
-            var options = [
-
-                '<option value="1">Activo</option><option value="2">Inactivo</option>',
-                '<option value="1">FACULTADES</option><option value="2">AUDITORÍA INTERNA</option><option value="3">CENTRO DE ÉTICA</option><option value="4">CIDER</option><option value="5">CONECTA-TE</option><option value="6">DECANATURA DE ESTUDIANTES</option><option value="7">DIR GESTIÓN HUMANA Y ORGANIZACIONAL</option><option value="8">DIRECCIÓN CAMPUS SOSTENIBLE</option><option value="9">DIRECCIÓN DE ADMISIONES Y REGISTRO</option><option value="10">DIRECCIÓN DE EDUCACIÓN CONTINUA</option><option value="11">DIRECCIÓN DE PLANEACIÓN Y EVALUACIÓN</option><option value="12">DIRECCIÓN DE SERVICIOS DE INFORMACIÓN Y TECNOLOGÍA</option><option value="13">DIRECCIÓN FINANCIERA</option><option value="14">DIRECCIÓN SERVICIOS ADMINISTRATIVOS</option><option value="15">DIRECCIÓN SERVICIOS CAMPUS</option><option value="16">ESCUELA DE GOBIERNO</option><option value="17">FACULTAD DE ADMINISTRACIÓN</option><option value="18">FACULTAD DE ARQUITECTURA Y DISEÑO</option><option value="19">FACULTAD DE ARTES Y HUMANIDADES</option><option value="20">FACULTAD DE CIENCIAS</option><option value="21">FACULTAD DE CIENCIAS SOCIALES</option><option value="22">FACULTAD DE DERECHO</option><option value="23">FACULTAD DE ECONOMÍA</option><option value="24">FACULTAD DE EDUCACIÓN</option><option value="25">FACULTAD DE INGENIERÍA</option><option value="26">FACULTAD DE MEDICINA</option><option value="27">RECTORÍA</option><option value="28">SECRETARÍA GENERAL</option><option value="29">SISTEMA DE BIBLIOTECAS</option><option value="30">VICERRECTORÍA ACADÉMICA</option><option value="31">VICERRECTORÍA DE DESARROLLO Y EGRESADOS</option><option value="32">VICERRECTORÍA INVESTIGACIÓN Y CREACIÓN</option><option value="33">VICERRECTORÍA SERVICIOS Y SOSTENIBILIDAD</option>',
-                '<option value="1">Empleado</option><option value="2">Facultad</option><option value="3">Servicios Salud</option><option value="4">Servicios Campus</option><option value="4">Servicios Campus</option>'
-            ];
-        });
+        // $(document).ready( function () {
+        //     $('#tablaCaracterizacion').DataTable();
+        // } );
+        //
     </script>
 @endpush

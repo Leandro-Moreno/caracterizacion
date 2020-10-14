@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('Gestión de usuarios')])
+@extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('Gestión de empleados')])
 
 @section('content')
   <div class="content">
@@ -11,7 +11,7 @@
 
             <div class="card ">
               <div class="card-header card-header-primary">
-                <h4 class="card-title">{{ __('Editar usuario') }}</h4>
+                <h4 class="card-title">{{ __('Editar empleado') }}</h4>
                 <p class="card-category"></p>
               </div>
               <div class="card-body">
@@ -26,26 +26,13 @@
                       <label class="col-md-3 col-form-label">{{ __('Nombres') }}</label>
                       <div class="col-md-9">
                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" id="input-name" type="text" placeholder="{{ __('Primer nombre') }}" value="{{ old('name', $user->name) }}" required="true" aria-required="true"/>
+                          <input class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" id="input-name" type="text" placeholder="{{ __('Nombres y Apellidos') }}" value="{{ old('name', $user->name) }}" required="true" aria-required="true"/>
                           @if ($errors->has('name'))
                             <span id="name-error" class="error text-danger" for="input-name">{{ $errors->first('name') }}</span>
                           @endif
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="row">
-                    <label class="col-md-3 col-form-label">{{ __('Apellidos') }}</label>
-                    <div class="col-md-9">
-                      <div class="form-group{{ $errors->has('apellido') ? ' has-danger' : '' }}">
-                        <input class="form-control{{ $errors->has('apellido') ? ' is-invalid' : '' }}" name="apellido" id="input-apellido" type="text" placeholder="{{ __('Primer apellido') }}" value="{{ old('apellido', $user->apellido) }}" aria-required="true"/>
-                        @if ($errors->has('apellido'))
-                          <span id="apellido-error" class="error text-danger" for="input-apellido">{{ $errors->first('apellido') }}</span>
-                        @endif
-                      </div>
-                    </div>
-                  </div>
                   </div>
                   <div class="col-md-6">
                     <div class="row">
@@ -119,19 +106,6 @@
                   </div>
                   <div class="col-md-6">
                     <div class="row">
-                      <label class="col-md-3 col-form-label">{{ __('Dependecia') }}</label>
-                      <div class="col-md-9">
-                        <div class="form-group{{ $errors->has('dependencia') ? ' has-danger' : '' }}">
-                          <input class="form-control{{ $errors->has('dependencia') ? ' is-invalid' : '' }}" name="dependencia" id="input-dependencia" type="text" placeholder="{{ __('Dependencia') }}" value="{{ old('dependencia', $user->dependencia) }}" aria-required="true"/>
-                          @if ($errors->has('dependencia'))
-                            <span id="dependencia-error" class="error text-danger" for="input-dependencia">{{ $errors->first('dependencia') }}</span>
-                          @endif
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="row">
                       <label class="col-md-3 col-form-label">{{ __('Direccion') }}</label>
                       <div class="col-md-9">
                         <div class="form-group{{ $errors->has('direccion') ? ' has-danger' : '' }}">
@@ -194,7 +168,7 @@
                         </div>
                       </div>
                     </div>
-                  </div> 
+                  </div>
                   <div class="col-md-6">
                         <div class="row">
                               <label class="col-sm-3 col-form-label">{{ __('Estado') }}</label>
@@ -205,11 +179,11 @@
                                     @foreach($estados as $estado)
                                       <option value="{{ $estado->id }}">{{ $estado->nombre }}</option>
                                     @endforeach
-                                </select>     
+                                </select>
                               </div>
                             </div>
                         </div>
-                    </div>         
+                    </div>
                     @can('updateByRol', App\User::class)
                       <div class="col-md-6">
                           <div class="row">
@@ -221,12 +195,12 @@
                                             @foreach($roles as $rol)
                                          <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
                                             @endforeach
-                                  </select>   
+                                  </select>
                               </div>
                           </div>
                       </div>
                     @endcan
-                    
+
               </div>
               <div class="card-footer ml-auto mr-auto">
                 <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>

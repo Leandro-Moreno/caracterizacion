@@ -1,7 +1,11 @@
 <tr>
-    <td class="header">
-        <a href="{{ $url }}">
-          <img src="{{ url('/excelencia/cabezote.jpg') }}" width="500px" alt="{{ $slot }}" />            
-        </a>
-    </td>
+<td class="header">
+<a href="{{ $url }}" style="display: inline-block;">
+@if (trim($slot) === 'Laravel')
+<img src="{{asset('img/logo-uniandes.png')}}" width="200px" alt="Logo Uniandes">
+@else
+{{ $slot }}
+@endif
+</a>
+</td>
 </tr>
