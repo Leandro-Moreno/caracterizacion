@@ -68,7 +68,7 @@
                                         {{ __('Días laborales') }}
                                     </th>
                                     <th id="envio_carta" class="th-sm">
-                                        {{ __('Envío Carta de Autorización') }}
+                                        {{ __('Envío del consentimiento') }}
                                     </th>
                                     <th id="viabilidad" class="th-sm">
                                         {{ __('Viabilidad') }}
@@ -120,7 +120,7 @@
                                                 {{ $dato->dias_laborales}}
                                             </td>
                                             <td>
-                                                {{ $dato->envio_de_carta_autorizacion}}
+                                                {{ $dato->envio_de_consentimiento}}
                                             </td>
                                             <td class="{{$dato->estadoColor}}">
                                                 {{ $dato->viabilidad_caracterizacion }}
