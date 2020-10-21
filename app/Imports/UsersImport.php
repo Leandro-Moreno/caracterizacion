@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithValidation;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Carbon\Carbon;
 
 class UsersImport implements ToModel, WithHeadingRow
 {
@@ -26,10 +27,23 @@ class UsersImport implements ToModel, WithHeadingRow
         $row['user_id'] = $usuario->id;
         $row['indispensable_presencial'] = isset(  $row['por_responsabilidades_es_indispensable_su_trabajo_presencial']  ) ? $row['por_responsabilidades_es_indispensable_su_trabajo_presencial'] : '';
         $row['dias_laborales'] = isset($row['dias_laborales'])?json_encode($this->diasSemana( $row['dias_laborales'] )):'';
-        $row['horaEntrada'] = isset(  $row['hora_de_entrada'] ) ? $row['hora_de_entrada']* 240000 : 0;
-        $row['horaSalida'] = isset(  $row['hora_de_salida'] ) ? $row['hora_de_salida']* 240000 : 0;
+
         if(isset($row['viabilidad_por_caracterizacion'])){
           $row['viabilidad_caracterizacion'] = $row['viabilidad_por_caracterizacion'];
+        }
+        if(isset(  $row['hora_de_salida'] )){
+          $UD = ($row["hora_de_salida"]-25569)*86400;
+          $row['horaSalida'] = gmdate("H:i:s",$UD);
+        }
+        else{
+          $row['horaSalida'] = gmdate("H:i:s",0);
+        }
+        if(isset(  $row['hora_de_entrada'] )){
+          $UD = ($row["hora_de_entrada"]-25569)*86400;
+          $row['horaEntrada'] = gmdate("H:i:s",$UD);
+        }
+        else{
+          $row['horaEntrada'] = gmdate("H:i:s",0);
         }
         if( $caracterizacion )
         {
