@@ -22,6 +22,8 @@ class UsersImport implements ToModel, WithHeadingRow
     public $caracterizacion_actualizada_cantidad = 0;
     public function model(array $row)
     {
+      if(!is_null($row[""]))
+      {
         $usuario = $this->userRow(  $row );
         $caracterizacion = $usuario->caracterizacion;
         $row['user_id'] = $usuario->id;
@@ -56,7 +58,7 @@ class UsersImport implements ToModel, WithHeadingRow
           ++$this->caracterizacion_creada_cantidad;
         }
         return $caracterizacion;
-
+      }
     }
     public function userRow (array $row)
     {
