@@ -62,7 +62,6 @@ class UsersImport implements ToModel, WithHeadingRow
     }
     public function userRow (array $row)
     {
-      $row['direccion'] = isset($row['direccion_actual'])?$row['direccion_actual']:"";
       $row['tipo_contrato'] = isset($row['tipo_de_contrato'])?$row['tipo_de_contrato']:"";
       if ( isset($row['estado_actual']) ){
          $estado = Estado::where('nombre','like',$row['estado_actual'])->select('id')->first();
