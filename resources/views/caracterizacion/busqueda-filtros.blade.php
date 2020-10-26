@@ -5,6 +5,7 @@
       <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#busqueda-avanzada" aria-expanded="false" aria-controls="collapseExample">
       Búsqueda Avanzada
       </button>
+      <a class="btn btn-info" href="{{route('caracterizacion')}}">Limpiar Filtros de Búsqueda</a>
       </span>
    <form method="get" class="" action="{{ route('avanzada') }}">
       <div id="busqueda-avanzada" name="busqueda-avanzada" class=" row collapse" style="padding-top:5px;padding-bottom:35px">
@@ -14,8 +15,8 @@
               <select id="filtroDependencia" name="filtroDependencia" class="form-control" data-placeholder=" ">
                 <option  value="{{ old('filtroDependencia') }}"  selected>Seleccionar</option>
 
-                @foreach($listado_dependencias as $dependencia)
-                <option value="{{ $dependencia }}">{{$dependencia}}</option>
+                @foreach($listado_dependencias as $key => $dependencia)
+                  <option value="{{ $dependencia }}" {{ $dependencia ==  $request['filtroDependencia'] ? 'selected="selected"' : '' }}>{{$dependencia}}</option>
                 @endforeach
               </select>
            </div>
@@ -24,7 +25,7 @@
                <select id="unidad" name="unidad" class="form-control" data-placeholder=" ">
                   <option  value="" selected >Seleccione...</option>
                   @foreach($unidades as $unidad )
-                  <option value="{{ $unidad->id }}">{{ $unidad->nombre_unidad }}</option>
+                  <option value="{{ $unidad->id }}" {{ $unidad->id  ==  $request['unidad'] ? 'selected="selected"' : '' }}>{{ $unidad->nombre_unidad }}</option>
                   @endforeach
                </select>
             </div>
@@ -50,9 +51,8 @@
             <div class="col-md-4" style="text-align:center;margin-top:20px">
                <label style="color:#505c61"> Filtrar por Estado de empleado </label><br>
                <select id="estado" name="estado" class="form-control" data-placeholder=" ">
-                  <option  value="" selected >Seleccione...</option>
                   @foreach($estados as $estado )
-                  <option value="{{ $estado->id }}">{{$estado->nombre}}</option>
+                  <option value="{{ $estado->id }}" {{ $estado->id  ==  $request['estado'] ? 'selected="selected"' : '' }}>{{ $estado->nombre}}</option>
                   @endforeach
                </select>
             </div>

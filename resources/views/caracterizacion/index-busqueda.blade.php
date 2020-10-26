@@ -1,6 +1,7 @@
 @extends('layouts.app', ['activePage' => 'caracterizacion', 'titlePage' => __('Caracterización')])
 
 @section('content')
+
     <div id="app" class="content">
         <div class="container-fluid">
             <div class="row">
@@ -24,7 +25,7 @@
                         @endif
                         <div class="card-body">
                             @can('create', App\Model\Caracterizacion\Caracterizacion::class)
-                                @include('caracterizacion.busqueda')
+                                @include('caracterizacion.busqueda-filtros')
                             @endcan
                             <div class="table-responsive tableFixHead">
                                 <table id="tablaCaracterizacion" class="table table-striped table-sm">
@@ -137,7 +138,7 @@
                                     </tbody>
                                 </table>
 
-                                {{ $caracterizaciones->appends(request()->input())->links() }}
+                                {{ $caracterizaciones->links() }}
                             </div>
                         </div>
                     </div>
