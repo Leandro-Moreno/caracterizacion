@@ -4,6 +4,7 @@ namespace App\Model\Caracterizacion;
 
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
+use App\User;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,23 +40,36 @@ class Caracterizacion extends Model implements Searchable
       $colorEstado;
       switch ( $this->viabilidad_caracterizacion ) {
         case 'Consultar con jefatura servicio médico y SST':
-          $colorEstado = "warning";
+          $colorEstado = "viabilidad-sst bold";
           break;
         case 'Viable trabajo presencial':
-          $colorEstado = "success";
+          $colorEstado = "viabilidad-tp bold";
           break;
         case 'Trabajo en casa y consultar a telemedicina':
-          $colorEstado = "purple";
+          $colorEstado = "viabilidad-tele bold";
           break;
         case 'Trabajo en casa':
-          $colorEstado = "success";
-          break;
-        case 'Sin clasificación':
-          $colorEstado = "white";
+          $colorEstado = "viabilidad-tec  bold";
           break;
         default:
+        case 'Sin clasificación':
+          $colorEstado = "viabilidad-sin bold";
           break;
       }
       return $colorEstado;
     }
+    public function diasLaborales(){
+      return preg_replace("/[^a-zA-Z0-9]+/", " ", $this->dias_laborales);
+    }
+    public function scopeByUser($query, User $user)
+    {
+      if($user->rol_id < 3){
+        $unidad_usuario = $user->unidad_id;
+        return $query->whereHas('user', function($q) use ($unidad_usuario){
+          $q->where('unidad_id', $unidad_usuario);
+        });
+      }
+      return $query;
+    }
+
 }

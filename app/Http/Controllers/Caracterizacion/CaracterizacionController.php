@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Caracterizacion;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Model\Caracterizacion\Caracterizacion;
 use App\User;
-use Illuminate\Support\Facades\Hash;
+use App\Rol;
+use App\Model\Estado;
 use App\Model\Caracterizacion\Unidad;
+use App\Model\Caracterizacion\Caracterizacion;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Model\Estado;
-use App\Rol;
-use App\Imports\UsersImport;//TODO: cambiar users por caracterizacion
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\EstadoSaludModificado;
+use App\Imports\UsersImport;//TODO: cambiar users por caracterizacion
+use App\Http\Controllers\Controller;
 
 use Spatie\Searchable\Search;
 
@@ -24,98 +24,39 @@ class CaracterizacionController extends Controller
     public function __construct()
     {
        $this->authorizeResource(Caracterizacion::class);
-
     }
 
     /**
      * @param Request $request
      * @return \Illuminate\http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $user = Auth::user();
-        $unidades = Unidad::all();
-        $roles = Rol::all();
-        $viabilidad_obtenida = $request->get('viabilidad');
-        $dependencia_obtenida = $request->get('filtroDependencia');
-        $unidad_obtenida = $request->get('unidad');
-        $rol_obtenido = $request->get('rol');
-        $estado_obtenido = $request->get('estado');
-        if( !empty($request->all()) ) {
-            $caracterizaciones = $this->busquedaAvanzada($request);
-          }
-        else{
-          $caracterizaciones = Caracterizacion::join('users', 'users.id', '=', 'caracterizacion.user_id')->get();
-          // $caracterizaciones = $caracterizaciones->where('unidad_id',$user->unidad_id);
-        }
-        $caracterizaciones = $this->agregarColorEstado($caracterizaciones);
-        $listado_dependencias = $this->listadoDependencias();
-        if(Auth::user()->rol_id < 3){
-          $caracterizaciones = $caracterizaciones->filter(function ($caracterizacion){
-              $user = Auth::user();
-              return $caracterizacion->user->unidad_id == $user->unidad_id;
-          });
-          $unidades = Unidad::where( 'id','=', Auth::user()->unidad_id )->get();
-          $roles = Rol::where( 'id', Auth::user()->rol_id )->get();
-        }
-        foreach($caracterizaciones as $caracterizacion){
-          $caracterizacion->dias_laborales = preg_replace("/[^a-zA-Z0-9]+/", " ", $caracterizacion->dias_laborales);
-        }
-        $caracterizaciones = $caracterizaciones->paginate(15);
+        $caracterizaciones = Caracterizacion::byUser($user)->paginate(15);
         $estados = Estado::all();
-        return view('caracterizacion.index', compact('dependencia_obtenida','listado_dependencias','estados', 'roles', 'unidades','unidad_obtenida', 'estado_obtenido' , 'rol_obtenido' , 'viabilidad_obtenida', 'caracterizaciones') );
+        $listado_dependencias = $this->listadoDependencias($caracterizaciones);
+        switch ($user->rol_id) {
+          default:
+          case 1:
+          case 2:
+            $unidades = Unidad::where( 'id','=', Auth::user()->unidad_id )->get();
+            $roles = Rol::where( 'id', Auth::user()->rol_id )->get();
+            break;
+          case 3:
+          case 4:
+          case 5:
+            $unidades = Unidad::all();
+            $roles = Rol::all();
+          break;
+        }
+        return view('caracterizacion.index', compact('listado_dependencias','estados', 'roles', 'unidades', 'caracterizaciones') );
     }
-    public function listadoDependencias()
+    public function listadoDependencias($caracterizaciones)
     {
-      $usuario_actual = Auth::user();
-      if($usuario_actual->rol_id >= 2){
-        $todos_los_usuarios = Caracterizacion::all('dependencia');
-      }
-      else{
-        $todos_los_usuarios = DB::table('caracterizacion')
-        ->join('users', 'caracterizacion.user_id', '=','users.id')
-        ->select('dependencia')
-        ->get();
-      }
-      return $todos_los_usuarios->unique('dependencia')->toArray();
+      return $caracterizaciones->load('user')->unique('dependencia')->pluck('dependencia')->toArray();
     }
-    public function busquedaAvanzada($request){
 
-            $viabilidad_obtenida = $request->get('viabilidad');
-            $dependencia_obtenida = $request->get('filtroDependencia');
-            $unidad_obtenida = $request->get('unidad');
-            $rol_obtenido = $request->get('rol');
-            $estado_obtenido = $request->get('estado');
-            $envio_carta  = $request->get('envioCarta');
-            $indispensable_obtenida = $request->get('indispensable');
-            $caracterizacion = Caracterizacion::first();
-            $caracterizacion = $caracterizacion->join('users', 'users.id', '=', 'caracterizacion.user_id');
-            $caracterizacion = $caracterizacion->where('estado_id',1);
-            if($unidad_obtenida != ""){
-                $caracterizacion = $caracterizacion->where('unidad_id', '=', $unidad_obtenida);
-            }
-            if($rol_obtenido != ""){
-                $caracterizacion = $caracterizacion->where('rol_id', '=', $rol_obtenido);
-
-            }
-            if($estado_obtenido != ""){
-                $caracterizacion = $caracterizacion->where('estado_id', '=', $estado_obtenido);
-            }
-            if($viabilidad_obtenida != ""){
-              $caracterizacion = $caracterizacion->where('viabilidad_caracterizacion', '=', $viabilidad_obtenida);
-            }
-            if($envio_carta != ""){
-              $caracterizacion = $caracterizacion->where('envio_de_carta_autorizacion', '=', $envio_carta);
-            }
-            if($indispensable_obtenida != ""){
-              $caracterizacion = $caracterizacion->where('indispensable_presencial', '=', $indispensable_obtenida);
-            }
-            if($dependencia_obtenida != ""){
-              $caracterizacion = $caracterizacion->where('dependencia', '=', $dependencia_obtenida);
-            }
-            $caracterizacion = $caracterizacion->get();
-        return $caracterizacion;
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -129,38 +70,6 @@ class CaracterizacionController extends Controller
         $unidades = Unidad::all();
         $caracterizacion = new Caracterizacion();
         return view('caracterizacion.create', compact('caracterizacion','user', 'unidades','sendingUser'));
-    }
-
-
-    /**
-     * @param Caracterizacion|Collection[] $caracterizaciones
-     * @return Caracterizacion|Collection[]
-     */
-    public function agregarColorEstado($caracterizaciones )
-    {
-      $caracterizaciones = $caracterizaciones->each(function($caracterizacion, $key){
-        switch ( $caracterizacion->viabilidad_caracterizacion ) {
-          case 'Consultar con jefatura servicio médico y SST':
-            $caracterizacion->estadoColor = "viabilidad-sst bold";
-            break;
-          case 'Viable trabajo presencial':
-            $caracterizacion->estadoColor = "viabilidad-tp bold";
-            break;
-          case 'Trabajo en casa y consultar a telemedicina':
-            $caracterizacion->estadoColor = "viabilidad-tele bold";
-            break;
-          case 'Trabajo en casa':
-            $caracterizacion->estadoColor = "viabilidad-tec  bold";
-            break;
-          case 'Sin clasificación':
-            $caracterizacion->estadoColor = "viabilidad-sin bold";
-            break;
-          default:
-            break;
-        }
-        return $caracterizacion;
-      });
-      return $caracterizaciones;
     }
 
 
@@ -336,5 +245,69 @@ class CaracterizacionController extends Controller
               ->registerModel(User::class, ['name','documento','email'])
               ->search($request->input('query'));
       return response()->json($results);
+    }
+    public function avanzada(Request $request){
+      $user = Auth::user();
+      $request = $request->all();
+      $datos = array_filter(  $request );
+      $caracterizaciones = $this->busquedaAvanzada($datos)->paginate(15);
+      $estados = Estado::all();
+      $listado_dependencias = $this->listadoDependencias(Caracterizacion::byUser($user)->get('dependencia'));
+      switch ($user->rol_id) {
+        default:
+        case 1:
+        case 2:
+          $unidades = Unidad::where( 'id','=', Auth::user()->unidad_id )->get();
+          $roles = Rol::where( 'id', Auth::user()->rol_id )->get();
+          break;
+        case 3:
+        case 4:
+        case 5:
+          $unidades = Unidad::all();
+          $roles = Rol::all();
+        break;
+      }
+
+      return view('caracterizacion.index-busqueda', compact('listado_dependencias','estados', 'roles', 'unidades', 'caracterizaciones', 'request') );
+    }
+    public function busquedaAvanzada(Array $datos){
+      $user = Auth::user();
+      $caracterizacion = Caracterizacion::byUser($user);
+      foreach ($datos as $key => $value) {
+        switch ($key) {
+          case 'viabilidad':
+            $caracterizacion = $caracterizacion->where('viabilidad_caracterizacion', $value);
+            break;
+          case 'filtroDependencia':
+            $caracterizacion = $caracterizacion->where('dependencia', $value);
+            break;
+          case 'unidad':
+            $caracterizacion = $caracterizacion->whereHas('user', function($q) use($value){
+              return $q->where('unidad_id', $value);
+            });
+            break;
+          case 'rol':
+            $caracterizacion = $caracterizacion->whereHas('user', function($q) use($value){
+              return $q->where('rol_id', $value);
+            });
+            break;
+          case 'estado':
+            $caracterizacion->whereHas('user', function($q) use($value){
+              return $q->where('estado_id', $value);
+            });
+            break;
+          case 'envioCarta':
+            $caracterizacion = $caracterizacion->where('envio_de_carta_autorizacion', $value);
+            break;
+          case 'indispensable':
+            $caracterizacion = $caracterizacion->where('indispensable_presencial', $value);
+            break;
+
+          default:
+            $caracterizacion = $caracterizacion;
+            break;
+        }
+      }
+      return $caracterizacion;
     }
 }
