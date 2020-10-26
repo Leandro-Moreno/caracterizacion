@@ -11,7 +11,7 @@
                             <h4 class="card-title ">{{ __('Caracterizaciones Covid de empleados en Uniandes') }}</h4>
                             @can('view_note', App\Model\Caracterizacion\Caracterizacion::class )
                             <div id="ofBar">
-                              <b> Nota de confidencialidad:</b>
+                              <strong> Nota de confidencialidad:</strong>
                                 <br>
                                 La información personal de los empleados es reservada y confidencial. Por ninguna circunstancia esta información debe circularse. El uso de esta información es únicamente para tomar decisiones asociadas con el retorno gradual al campus y con el fin de cumplir con los protocolos de bioseguridad establecidos en la resolución 666 de 2020, expedida por el Ministerio de Salud y Protección Social.
                               </b>
@@ -28,7 +28,7 @@
                                 @include('caracterizacion.busqueda-filtros')
                             @endcan
                             <div class="table-responsive tableFixHead">
-                                <table id="tablaCaracterizacion" class="table table-striped table-sm">
+                                <table id="tablaCaracterizacion" class="table table-striped table-sm" aria-describedby="Resultados de búsqueda avanzada">
                                     <thead class=" text-primary">
                                     @can('view_list_facultad' , App\Model\Caracterizacion\Caracterizacion::class)
                                     <th id="facultad" class="th-sm">
@@ -129,7 +129,7 @@
                                             @can('create', App\Model\Caracterizacion\Caracterizacion::class)
                                                 <td class="td-actions text-right">
                                                     <a rel="tooltip" class="btn btn-success btn-link" href="{{ route('caracterizacion.edit', $dato->id)}}" data-original-title="Editar Caracterizaciones" title="Editar Caracterizaciones">
-                                                        <i class="material-icons">edit</i>
+                                                        <en class="material-icons">edit</em>
                                                         <div class="ripple-container"></div>
                                                 </td>
                                             @endcan

@@ -302,10 +302,6 @@ class CaracterizacionController extends Controller
           case 'indispensable':
             $caracterizacion = $caracterizacion->where('indispensable_presencial', $value);
             break;
-
-          default:
-            $caracterizacion = $caracterizacion;
-            break;
         }
       }
       return $caracterizacion;
