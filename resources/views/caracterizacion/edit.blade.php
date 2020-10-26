@@ -22,6 +22,9 @@
                      </ul>
                      <div class="row">
                         <div class="col-md-12 text-right">
+                          @can('importar', App\Model\Caracterizacion\Caracterizacion::class)
+                            <a href="{{ route('user.edit', $user) }}" class="btn btn-sm btn-success">{{ __('Editar datos de Usuario') }}</a>
+                          @endcan
                            <a href="{{ route('caracterizacion') }}" class="btn btn-sm btn-primary">{{ __('Volver a la lista') }}</a>
                         </div>
                      </div>
@@ -47,7 +50,7 @@
                               @include('caracterizacion.formularios.edit-datos-basicos')
                             @else
                             @include('caracterizacion.formularios.index-datos-basicos')
-                            @endif                          
+                            @endif
                           @if(auth()->user()->can('editDatosTrabajoPresencial', App\Model\Caracterizacion\Caracterizacion::class))
                             @include('caracterizacion.formularios.edit-datos-trabajo-presencial')
                           @else
