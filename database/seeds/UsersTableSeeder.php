@@ -149,5 +149,25 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('users')->insert([
+            'rol_id' => '4',
+            'estado_id' => '1',
+            'tipo_doc' => 'Cédula de ciudadanía',
+            'unidad_id' => '1',
+            'name' => 'Decano Facultad',
+            'cargo' => 'Decano',
+            'unidad_id' => '25',
+            'tipo_contrato' => 'Temporal',
+            'documento' => '313546841',
+            'celular' => '9999999',
+            'direccion' => 'Cra 1 Nº 18A- 12',
+            'barrio' => '##########',
+            'localidad' => '##########',
+            'email' => 'j.alvarado1@uniandes.edu.co',
+            'email_verified_at' => now(),
+            'password' => 'x',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }
